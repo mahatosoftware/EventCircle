@@ -30,7 +30,20 @@ mixin _$ExpenseModel {
   ExpenseStatus get status => throw _privateConstructorUsedError;
   String? get createdBy => throw _privateConstructorUsedError;
   String? get approvedBy => throw _privateConstructorUsedError;
-  String? get receiptUrl => throw _privateConstructorUsedError;
+  DateTime? get approvedAt => throw _privateConstructorUsedError;
+  String? get receiptUrl =>
+      throw _privateConstructorUsedError; // Reimbursement Fields
+  PaidByType get paidByType => throw _privateConstructorUsedError;
+  String? get paidByUserId =>
+      throw _privateConstructorUsedError; // ID of the volunteer/member who paid
+  bool get isReimbursable => throw _privateConstructorUsedError;
+  ReimbursementStatus get reimbursementStatus =>
+      throw _privateConstructorUsedError;
+  DateTime? get paidAt => throw _privateConstructorUsedError;
+  String? get paymentMode =>
+      throw _privateConstructorUsedError; // UPI, Bank Transfer, Cash
+  String? get transactionRef => throw _privateConstructorUsedError;
+  String? get rejectionReason => throw _privateConstructorUsedError;
 
   /// Serializes this ExpenseModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -59,7 +72,16 @@ abstract class $ExpenseModelCopyWith<$Res> {
     ExpenseStatus status,
     String? createdBy,
     String? approvedBy,
+    DateTime? approvedAt,
     String? receiptUrl,
+    PaidByType paidByType,
+    String? paidByUserId,
+    bool isReimbursable,
+    ReimbursementStatus reimbursementStatus,
+    DateTime? paidAt,
+    String? paymentMode,
+    String? transactionRef,
+    String? rejectionReason,
   });
 }
 
@@ -87,7 +109,16 @@ class _$ExpenseModelCopyWithImpl<$Res, $Val extends ExpenseModel>
     Object? status = null,
     Object? createdBy = freezed,
     Object? approvedBy = freezed,
+    Object? approvedAt = freezed,
     Object? receiptUrl = freezed,
+    Object? paidByType = null,
+    Object? paidByUserId = freezed,
+    Object? isReimbursable = null,
+    Object? reimbursementStatus = null,
+    Object? paidAt = freezed,
+    Object? paymentMode = freezed,
+    Object? transactionRef = freezed,
+    Object? rejectionReason = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -127,9 +158,45 @@ class _$ExpenseModelCopyWithImpl<$Res, $Val extends ExpenseModel>
                 ? _value.approvedBy
                 : approvedBy // ignore: cast_nullable_to_non_nullable
                       as String?,
+            approvedAt: freezed == approvedAt
+                ? _value.approvedAt
+                : approvedAt // ignore: cast_nullable_to_non_nullable
+                      as DateTime?,
             receiptUrl: freezed == receiptUrl
                 ? _value.receiptUrl
                 : receiptUrl // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            paidByType: null == paidByType
+                ? _value.paidByType
+                : paidByType // ignore: cast_nullable_to_non_nullable
+                      as PaidByType,
+            paidByUserId: freezed == paidByUserId
+                ? _value.paidByUserId
+                : paidByUserId // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            isReimbursable: null == isReimbursable
+                ? _value.isReimbursable
+                : isReimbursable // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            reimbursementStatus: null == reimbursementStatus
+                ? _value.reimbursementStatus
+                : reimbursementStatus // ignore: cast_nullable_to_non_nullable
+                      as ReimbursementStatus,
+            paidAt: freezed == paidAt
+                ? _value.paidAt
+                : paidAt // ignore: cast_nullable_to_non_nullable
+                      as DateTime?,
+            paymentMode: freezed == paymentMode
+                ? _value.paymentMode
+                : paymentMode // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            transactionRef: freezed == transactionRef
+                ? _value.transactionRef
+                : transactionRef // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            rejectionReason: freezed == rejectionReason
+                ? _value.rejectionReason
+                : rejectionReason // ignore: cast_nullable_to_non_nullable
                       as String?,
           )
           as $Val,
@@ -156,7 +223,16 @@ abstract class _$$ExpenseModelImplCopyWith<$Res>
     ExpenseStatus status,
     String? createdBy,
     String? approvedBy,
+    DateTime? approvedAt,
     String? receiptUrl,
+    PaidByType paidByType,
+    String? paidByUserId,
+    bool isReimbursable,
+    ReimbursementStatus reimbursementStatus,
+    DateTime? paidAt,
+    String? paymentMode,
+    String? transactionRef,
+    String? rejectionReason,
   });
 }
 
@@ -183,7 +259,16 @@ class __$$ExpenseModelImplCopyWithImpl<$Res>
     Object? status = null,
     Object? createdBy = freezed,
     Object? approvedBy = freezed,
+    Object? approvedAt = freezed,
     Object? receiptUrl = freezed,
+    Object? paidByType = null,
+    Object? paidByUserId = freezed,
+    Object? isReimbursable = null,
+    Object? reimbursementStatus = null,
+    Object? paidAt = freezed,
+    Object? paymentMode = freezed,
+    Object? transactionRef = freezed,
+    Object? rejectionReason = freezed,
   }) {
     return _then(
       _$ExpenseModelImpl(
@@ -223,9 +308,45 @@ class __$$ExpenseModelImplCopyWithImpl<$Res>
             ? _value.approvedBy
             : approvedBy // ignore: cast_nullable_to_non_nullable
                   as String?,
+        approvedAt: freezed == approvedAt
+            ? _value.approvedAt
+            : approvedAt // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
         receiptUrl: freezed == receiptUrl
             ? _value.receiptUrl
             : receiptUrl // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        paidByType: null == paidByType
+            ? _value.paidByType
+            : paidByType // ignore: cast_nullable_to_non_nullable
+                  as PaidByType,
+        paidByUserId: freezed == paidByUserId
+            ? _value.paidByUserId
+            : paidByUserId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        isReimbursable: null == isReimbursable
+            ? _value.isReimbursable
+            : isReimbursable // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        reimbursementStatus: null == reimbursementStatus
+            ? _value.reimbursementStatus
+            : reimbursementStatus // ignore: cast_nullable_to_non_nullable
+                  as ReimbursementStatus,
+        paidAt: freezed == paidAt
+            ? _value.paidAt
+            : paidAt // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        paymentMode: freezed == paymentMode
+            ? _value.paymentMode
+            : paymentMode // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        transactionRef: freezed == transactionRef
+            ? _value.transactionRef
+            : transactionRef // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        rejectionReason: freezed == rejectionReason
+            ? _value.rejectionReason
+            : rejectionReason // ignore: cast_nullable_to_non_nullable
                   as String?,
       ),
     );
@@ -245,7 +366,16 @@ class _$ExpenseModelImpl implements _ExpenseModel {
     this.status = ExpenseStatus.pending,
     this.createdBy,
     this.approvedBy,
+    this.approvedAt,
     this.receiptUrl,
+    this.paidByType = PaidByType.organizer,
+    this.paidByUserId,
+    this.isReimbursable = false,
+    this.reimbursementStatus = ReimbursementStatus.none,
+    this.paidAt,
+    this.paymentMode,
+    this.transactionRef,
+    this.rejectionReason,
   });
 
   factory _$ExpenseModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -271,11 +401,35 @@ class _$ExpenseModelImpl implements _ExpenseModel {
   @override
   final String? approvedBy;
   @override
+  final DateTime? approvedAt;
+  @override
   final String? receiptUrl;
+  // Reimbursement Fields
+  @override
+  @JsonKey()
+  final PaidByType paidByType;
+  @override
+  final String? paidByUserId;
+  // ID of the volunteer/member who paid
+  @override
+  @JsonKey()
+  final bool isReimbursable;
+  @override
+  @JsonKey()
+  final ReimbursementStatus reimbursementStatus;
+  @override
+  final DateTime? paidAt;
+  @override
+  final String? paymentMode;
+  // UPI, Bank Transfer, Cash
+  @override
+  final String? transactionRef;
+  @override
+  final String? rejectionReason;
 
   @override
   String toString() {
-    return 'ExpenseModel(id: $id, eventId: $eventId, title: $title, amount: $amount, category: $category, createdAt: $createdAt, status: $status, createdBy: $createdBy, approvedBy: $approvedBy, receiptUrl: $receiptUrl)';
+    return 'ExpenseModel(id: $id, eventId: $eventId, title: $title, amount: $amount, category: $category, createdAt: $createdAt, status: $status, createdBy: $createdBy, approvedBy: $approvedBy, approvedAt: $approvedAt, receiptUrl: $receiptUrl, paidByType: $paidByType, paidByUserId: $paidByUserId, isReimbursable: $isReimbursable, reimbursementStatus: $reimbursementStatus, paidAt: $paidAt, paymentMode: $paymentMode, transactionRef: $transactionRef, rejectionReason: $rejectionReason)';
   }
 
   @override
@@ -296,13 +450,30 @@ class _$ExpenseModelImpl implements _ExpenseModel {
                 other.createdBy == createdBy) &&
             (identical(other.approvedBy, approvedBy) ||
                 other.approvedBy == approvedBy) &&
+            (identical(other.approvedAt, approvedAt) ||
+                other.approvedAt == approvedAt) &&
             (identical(other.receiptUrl, receiptUrl) ||
-                other.receiptUrl == receiptUrl));
+                other.receiptUrl == receiptUrl) &&
+            (identical(other.paidByType, paidByType) ||
+                other.paidByType == paidByType) &&
+            (identical(other.paidByUserId, paidByUserId) ||
+                other.paidByUserId == paidByUserId) &&
+            (identical(other.isReimbursable, isReimbursable) ||
+                other.isReimbursable == isReimbursable) &&
+            (identical(other.reimbursementStatus, reimbursementStatus) ||
+                other.reimbursementStatus == reimbursementStatus) &&
+            (identical(other.paidAt, paidAt) || other.paidAt == paidAt) &&
+            (identical(other.paymentMode, paymentMode) ||
+                other.paymentMode == paymentMode) &&
+            (identical(other.transactionRef, transactionRef) ||
+                other.transactionRef == transactionRef) &&
+            (identical(other.rejectionReason, rejectionReason) ||
+                other.rejectionReason == rejectionReason));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
+  int get hashCode => Object.hashAll([
     runtimeType,
     id,
     eventId,
@@ -313,8 +484,17 @@ class _$ExpenseModelImpl implements _ExpenseModel {
     status,
     createdBy,
     approvedBy,
+    approvedAt,
     receiptUrl,
-  );
+    paidByType,
+    paidByUserId,
+    isReimbursable,
+    reimbursementStatus,
+    paidAt,
+    paymentMode,
+    transactionRef,
+    rejectionReason,
+  ]);
 
   /// Create a copy of ExpenseModel
   /// with the given fields replaced by the non-null parameter values.
@@ -341,7 +521,16 @@ abstract class _ExpenseModel implements ExpenseModel {
     final ExpenseStatus status,
     final String? createdBy,
     final String? approvedBy,
+    final DateTime? approvedAt,
     final String? receiptUrl,
+    final PaidByType paidByType,
+    final String? paidByUserId,
+    final bool isReimbursable,
+    final ReimbursementStatus reimbursementStatus,
+    final DateTime? paidAt,
+    final String? paymentMode,
+    final String? transactionRef,
+    final String? rejectionReason,
   }) = _$ExpenseModelImpl;
 
   factory _ExpenseModel.fromJson(Map<String, dynamic> json) =
@@ -366,7 +555,25 @@ abstract class _ExpenseModel implements ExpenseModel {
   @override
   String? get approvedBy;
   @override
-  String? get receiptUrl;
+  DateTime? get approvedAt;
+  @override
+  String? get receiptUrl; // Reimbursement Fields
+  @override
+  PaidByType get paidByType;
+  @override
+  String? get paidByUserId; // ID of the volunteer/member who paid
+  @override
+  bool get isReimbursable;
+  @override
+  ReimbursementStatus get reimbursementStatus;
+  @override
+  DateTime? get paidAt;
+  @override
+  String? get paymentMode; // UPI, Bank Transfer, Cash
+  @override
+  String? get transactionRef;
+  @override
+  String? get rejectionReason;
 
   /// Create a copy of ExpenseModel
   /// with the given fields replaced by the non-null parameter values.

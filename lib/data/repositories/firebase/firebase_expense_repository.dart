@@ -11,10 +11,10 @@ class FirebaseExpenseRepository implements ExpenseRepository {
     return _firestore
         .collection(_collection)
         .where('eventId', isEqualTo: eventId)
-        .orderBy('date', descending: true)
+        .orderBy('createdAt', descending: true)
         .snapshots()
         .map((snapshot) {
-      return snapshot.docs.map((doc) => ExpenseModel.fromJson(doc.data())).toList();
+      return snapshot.docs.map((doc) => ExpenseModel.fromJson({...doc.data(), 'id': doc.id})).toList();
     });
   }
 
@@ -29,7 +29,7 @@ class FirebaseExpenseRepository implements ExpenseRepository {
   }
 
   @override
-  Future<void> deleteExpense(String id) async {
+  Future<void> deleteExpense(String eventId, String id, {String? reason, Map<String, dynamic>? prevData}) async {
     await _firestore.collection(_collection).doc(id).delete();
   }
 }

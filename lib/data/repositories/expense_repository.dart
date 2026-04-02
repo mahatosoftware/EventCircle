@@ -4,5 +4,5 @@ abstract class ExpenseRepository {
   Stream<List<ExpenseModel>> getExpenses(String eventId);
   Future<void> addExpense(ExpenseModel expense);
   Future<void> updateExpense(ExpenseModel expense);
-  Future<void> deleteExpense(String id);
+  Future<void> deleteExpense(String eventId, String id, {String? reason, Map<String, dynamic>? prevData});
 }

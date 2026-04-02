@@ -37,9 +37,12 @@ class FirebaseBudgetRepository implements BudgetRepository {
   }
 
   @override
-  Future<void> deleteBudgetItem(String id) {
-    // Note: This requires knowing the eventId. Alternatively, use a collectionGroup or add eventId to the call.
-    // For now, assume this is handled at the UI layer or improved later.
-    throw UnimplementedError('Delete requires eventId context');
+  Future<void> deleteBudgetItem(String eventId, String id, {String? reason, Map<String, dynamic>? prevData}) {
+    return _db
+        .collection('events')
+        .doc(eventId)
+        .collection('budget')
+        .doc(id)
+        .delete();
   }
 }

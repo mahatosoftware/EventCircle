@@ -5,5 +5,5 @@ abstract class BudgetRepository {
   Stream<List<BudgetItemModel>> getBudgetItems(String eventId);
   Future<void> addBudgetItem(BudgetItemModel item);
   Future<void> updateBudgetItem(BudgetItemModel item);
-  Future<void> deleteBudgetItem(String id);
+  Future<void> deleteBudgetItem(String eventId, String id, {String? reason, Map<String, dynamic>? prevData});
 }

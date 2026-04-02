@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import '../../providers/event_provider.dart';
-import '../../providers/member_provider.dart';
-import '../../providers/payment_provider.dart';
-import '../../providers/expense_provider.dart';
+import '../../providers/public_dashboard_provider.dart';
 import '../../data/models/event_model.dart';
-import '../../data/models/member_model.dart';
-import '../../data/models/payment_model.dart';
 import '../widgets/summary_cards.dart';
 
 class PublicDashboardScreen extends ConsumerWidget {
@@ -16,10 +11,7 @@ class PublicDashboardScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final eventAsync = ref.watch(eventByIdStreamProvider(eventId));
-    final membersAsync = ref.watch(membersForEventStreamProvider(eventId));
-    final paymentsAsync = ref.watch(paymentsForEventStreamProvider(eventId));
-    final expensesAsync = ref.watch(expensesForEventStreamProvider(eventId));
+    final dashboardAsync = ref.watch(publicDashboardDataProvider(eventId));
 
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
@@ -28,14 +20,15 @@ class PublicDashboardScreen extends ConsumerWidget {
         backgroundColor: Colors.white,
         centerTitle: true,
       ),
-      body: eventAsync.when(
-        data: (event) {
-          if (event == null) return const Center(child: Text('Event not found'));
-
-          final totalCollected = _calculateTotal(paymentsAsync);
-          final memberCount = membersAsync.value?.length ?? 1;
-          final paidCount = paymentsAsync.value?.where((p) => p.status == PaymentStatus.success).length ?? 0;
-          final progress = paidCount / (memberCount == 0 ? 1 : memberCount);
+      body: dashboardAsync.when(
+        data: (dashboard) {
+          final event = dashboard.event;
+          final totalCollected = dashboard.totalCollected;
+          final totalSpent = dashboard.totalExpenses;
+          
+          final memberCount = dashboard.members.length;
+          final paidCount = dashboard.memberPaymentMap.length;
+          final progress = memberCount == 0 ? 0.0 : paidCount / memberCount;
 
           return SingleChildScrollView(
             padding: const EdgeInsets.all(20.0),
@@ -46,12 +39,12 @@ class PublicDashboardScreen extends ConsumerWidget {
                 const SizedBox(height: 24),
                 SummaryCards(
                   totalCollected: totalCollected,
-                  totalExpenses: _calculateTotal(expensesAsync),
+                  totalExpenses: totalSpent,
                 ),
                 const SizedBox(height: 24),
                 Text('Member Payment List', style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 12),
-                _buildMemberList(context, membersAsync, paymentsAsync),
+                _buildMemberList(context, dashboard),
               ],
             ),
           );
@@ -102,7 +95,7 @@ class PublicDashboardScreen extends ConsumerWidget {
               children: [
                 Column(
                   children: [
-                    Text('Total Collected', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                    const Text('Total Collected', style: TextStyle(fontSize: 12, color: Colors.grey)),
                     Text('₹$total', style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).primaryColor,
@@ -144,69 +137,55 @@ class PublicDashboardScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildMemberList(BuildContext context, AsyncValue<List<MemberModel>> membersAsync, AsyncValue<List<PaymentModel>> paymentsAsync) {
-    return membersAsync.when(
-      data: (members) {
-        final payments = paymentsAsync.value ?? [];
-        return ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: members.length,
-          itemBuilder: (context, index) {
-            final member = members[index];
-            final p = payments.where((p) => p.memberId == member.id).lastOrNull;
-            final isPaid = p?.status == PaymentStatus.success;
+  Widget _buildMemberList(BuildContext context, PublicDashboardData dashboard) {
+    final members = dashboard.members;
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: members.length,
+      itemBuilder: (context, index) {
+        final member = members[index];
+        final isPaid = dashboard.memberPaymentMap.containsKey(member.id);
 
-            return Container(
-              margin: const EdgeInsets.only(bottom: 8),
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
+        return Container(
+          margin: const EdgeInsets.only(bottom: 8),
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Row(
+            children: [
+              CircleAvatar(radius: 18, child: Text(member.name[0])),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(member.name, style: const TextStyle(fontWeight: FontWeight.w600)),
+                    Text(member.identifier, style: const TextStyle(fontSize: 10, color: Colors.grey)),
+                  ],
+                ),
               ),
-              child: Row(
-                children: [
-                  CircleAvatar(radius: 18, child: Text(member.name[0])),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(member.name, style: const TextStyle(fontWeight: FontWeight.w600)),
-                        Text(member.identifier, style: const TextStyle(fontSize: 10, color: Colors.grey)),
-                      ],
-                    ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: isPaid ? Colors.green.withAlpha(25) : Colors.orange.withAlpha(25),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Text(
+                  isPaid ? 'PAID' : 'PENDING',
+                  style: TextStyle(
+                    fontSize: 9,
+                    fontWeight: FontWeight.bold,
+                    color: isPaid ? Colors.green : Colors.orange,
                   ),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                    decoration: BoxDecoration(
-                      color: isPaid ? Colors.green.withAlpha(25) : Colors.orange.withAlpha(25),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Text(
-                      isPaid ? 'PAID' : 'PENDING',
-                      style: TextStyle(
-                        fontSize: 9,
-                        fontWeight: FontWeight.bold,
-                        color: isPaid ? Colors.green : Colors.orange,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
-            );
-          },
+            ],
+          ),
         );
       },
-      loading: () => const Center(child: CircularProgressIndicator()),
-      error: (e, s) => Center(child: Text('Error: $e')),
-    );
-  }
-
-  double _calculateTotal(AsyncValue<List<dynamic>> list) {
-    return list.maybeWhen(
-      data: (items) => items.fold(0.0, (sum, i) => sum + i.amount),
-      orElse: () => 0.0,
     );
   }
 }

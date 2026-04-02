@@ -14,7 +14,7 @@ part 'template_model.g.dart';
 
 enum TemplateModule {
   task('TASK'),
-  budget('BUDGET'),
+  budget('BUDGET & EXPENSE TRACKING'),
   contribution('CONTRIBUTION'),
   userManagement('USER MANAGEMENT'),
   guestManagement('GUEST MANAGEMENT'),

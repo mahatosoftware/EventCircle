@@ -71,10 +71,10 @@ class AuditLogScreen extends ConsumerWidget {
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 8),
-                          if (log.newData != null) ...[
+                          if (log.newData != null || log.previousData != null) ...[
                             const Text('Details:', style: TextStyle(fontSize: 11, color: Colors.grey, fontWeight: FontWeight.bold)),
                             const SizedBox(height: 4),
-                            _buildDataSummary(log.newData!),
+                            _buildDataSummary(log.newData ?? log.previousData!),
                           ],
                           if (log.reason != null) ...[
                             const SizedBox(height: 8),
@@ -105,7 +105,21 @@ class AuditLogScreen extends ConsumerWidget {
   }
 
   Widget _buildDataSummary(Map<String, dynamic> data) {
-    final amount = data['amount'];
+    if (data.containsKey('amount')) {
+      // Expense
+      return Text(
+        'Amount: ₹${data['amount']} • Category: ${data['category'] ?? "N/A"}',
+        style: const TextStyle(fontSize: 11),
+      );
+    } else if (data.containsKey('estimatedCost')) {
+      // Budget Item
+      return Text(
+        'Estimated: ₹${data['estimatedCost']} • ${data['isMandatory'] == true ? "Mandatory" : "Optional"} • Category: ${data['category'] ?? "N/A"}',
+        style: const TextStyle(fontSize: 11),
+      );
+    }
+    
+    final amount = data['amount']; // Fallback
     final method = data['paymentMethod'];
     final ref = data['referenceNumber'];
 

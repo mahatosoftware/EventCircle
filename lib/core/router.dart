@@ -6,6 +6,7 @@ import '../presentation/screens/login_screen.dart';
 import '../presentation/screens/home_screen.dart';
 import '../presentation/screens/create_event_screen.dart';
 import '../presentation/screens/event_dashboard_screen.dart';
+import '../presentation/screens/edit_event_screen.dart';
 import '../presentation/screens/members_screen.dart';
 import '../presentation/screens/payments_screen.dart';
 import '../presentation/screens/expenses_screen.dart';
@@ -127,6 +128,13 @@ final routerProvider = Provider<GoRouter>((ref) {
               final extra = state.extra;
               final initialEvent = extra is EventModel ? extra : null;
               return EventDashboardScreen(eventId: eventId, initialEvent: initialEvent);
+            },
+          ),
+          GoRoute(
+            path: '/event/:eventId/edit',
+            builder: (context, state) {
+              final eventId = state.pathParameters['eventId']!;
+              return EditEventScreen(eventId: eventId);
             },
           ),
           GoRoute(

@@ -58,6 +58,17 @@ class EventUsersScreen extends ConsumerWidget {
               final active = eventUsers.where((u) => u.status == EventUserStatus.active).toList();
               final removed = eventUsers.where((u) => u.status == EventUserStatus.removed).toList();
 
+              // Ensure the owner is always in the active list
+              final ownerId = event.organizerId;
+              if (!active.any((u) => u.id == ownerId)) {
+                active.insert(0, EventUserModel(
+                  id: ownerId, 
+                  eventId: eventId, 
+                  status: EventUserStatus.active,
+                  addedAt: event.createdAt,
+                ));
+              }
+
               if (active.isEmpty) {
                 return const Center(child: Text('No users added to this event yet.'));
               }

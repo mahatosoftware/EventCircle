@@ -116,20 +116,29 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
                   border: Border.all(color: Colors.grey.shade200),
                 ),
                 child: Column(
-                  children: TemplateModule.values.map((module) {
-                    final isLast = module == TemplateModule.values.last;
+                  children: TemplateModule.values.where((m) => m != TemplateModule.expenses).map((module) {
+                    final isLast = module == TemplateModule.ticketing; // Ticketing is usually near the end, but let's be safe.
+                    // Actually, let's just find the last visible one.
+                    final visible = TemplateModule.values.where((m) => m != TemplateModule.expenses).toList();
+                    final isReallyLast = module == visible.last;
+                    
                     return Column(
                       children: [
                         CheckboxListTile(
                           title: Text(module.displayName, style: const TextStyle(fontWeight: FontWeight.w600)),
                           secondary: Icon(_getModuleIcon(module), color: _selectedModules[module]! ? Colors.blue.shade700 : Colors.grey),
                           value: _selectedModules[module],
-                          onChanged: (val) => setState(() => _selectedModules[module] = val!),
+                          onChanged: (val) => setState(() {
+                            _selectedModules[module] = val!;
+                            if (module == TemplateModule.budget) {
+                              _selectedModules[TemplateModule.expenses] = val;
+                            }
+                          }),
                           contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
                           controlAffinity: ListTileControlAffinity.trailing,
                           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                         ),
-                        if (!isLast) Divider(height: 1, indent: 64, color: Colors.grey.shade200),
+                        if (!isReallyLast) Divider(height: 1, indent: 64, color: Colors.grey.shade200),
                       ],
                     );
                   }).toList(),
@@ -279,7 +288,8 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
   IconData _getModuleIcon(TemplateModule module) {
     switch (module) {
       case TemplateModule.task: return Icons.check_circle_outline;
-      case TemplateModule.budget: return Icons.account_balance_wallet_outlined;
+      case TemplateModule.budget:
+      case TemplateModule.expenses: return Icons.receipt_long_outlined;
       case TemplateModule.contribution: return Icons.payments_outlined;
       case TemplateModule.userManagement: return Icons.manage_accounts_outlined;
       case TemplateModule.guestManagement: return Icons.people_outline;
@@ -288,7 +298,6 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
       case TemplateModule.inventory: return Icons.inventory_2_outlined;
       case TemplateModule.communication: return Icons.chat_bubble_outline;
       case TemplateModule.roles: return Icons.badge_outlined;
-      case TemplateModule.expenses: return Icons.receipt_long_outlined;
       case TemplateModule.location: return Icons.location_on_outlined;
       case TemplateModule.ticketing: return Icons.confirmation_number_outlined;
       case TemplateModule.customFields: return Icons.edit_note_outlined;
@@ -415,7 +424,7 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
   String _moduleLabel(String module) {
     switch (module) {
       case EventModules.budget:
-        return 'Budget';
+        return 'Budget & Expense Tracking';
       case EventModules.contribution:
         return 'Contribution';
       case EventModules.tasks:

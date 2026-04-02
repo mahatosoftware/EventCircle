@@ -5,6 +5,10 @@ import '../data/repositories/firebase/firebase_expense_repository.dart';
 import 'event_provider.dart';
 import 'access_control_provider.dart';
 import '../data/models/event_role_model.dart';
+import 'auth_provider.dart';
+import '../data/models/audit_log_model.dart';
+import 'audit_log_provider.dart';
+import 'package:uuid/uuid.dart';
 
 final expenseRepositoryProvider = Provider<ExpenseRepository>((ref) {
   return _GuardedExpenseRepository(ref, FirebaseExpenseRepository());
@@ -33,24 +37,46 @@ class _GuardedExpenseRepository implements ExpenseRepository {
     }
   }
 
+  Future<void> _log(String eventId, String action, String entityId, {Map<String, dynamic>? prev, Map<String, dynamic>? next, String? reason}) async {
+    final user = _ref.read(currentUserProvider);
+    if (user == null) return;
+
+    final log = AuditLogModel(
+      id: const Uuid().v4(),
+      eventId: eventId,
+      userId: user.id,
+      action: action,
+      entityType: 'expense',
+      entityId: entityId,
+      timestamp: DateTime.now(),
+      previousData: prev,
+      newData: next,
+      reason: reason,
+    );
+    await _ref.read(auditLogRepositoryProvider).logAction(log);
+  }
+
   @override
   Stream<List<ExpenseModel>> getExpenses(String eventId) => _delegate.getExpenses(eventId);
 
   @override
   Future<void> addExpense(ExpenseModel expense) async {
     await _requireEdit(expense.eventId);
-    return _delegate.addExpense(expense);
+    await _delegate.addExpense(expense);
+    await _log(expense.eventId, 'create', expense.id, next: expense.toJson());
   }
 
   @override
   Future<void> updateExpense(ExpenseModel expense) async {
     await _requireEdit(expense.eventId);
-    return _delegate.updateExpense(expense);
+    await _delegate.updateExpense(expense);
+    await _log(expense.eventId, 'update', expense.id, next: expense.toJson());
   }
 
   @override
-  Future<void> deleteExpense(String id) {
-    // Best-effort: delete is treated as edit since the repository API doesn't carry eventId here.
-    return _delegate.deleteExpense(id);
+  Future<void> deleteExpense(String eventId, String id, {String? reason, Map<String, dynamic>? prevData}) async {
+    await _requireEdit(eventId);
+    await _delegate.deleteExpense(eventId, id, reason: reason, prevData: prevData);
+    await _log(eventId, 'delete', id, reason: reason, prev: prevData);
   }
 }

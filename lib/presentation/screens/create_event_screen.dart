@@ -743,7 +743,20 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
   }
 
   Widget _buildModulesGrid() {
-    final modules = _selectedTemplate!.enabledModules;
+    final rawModules = _selectedTemplate!.enabledModules;
+    final modules = <TemplateModule>[];
+    bool financeAdded = false;
+    
+    for (final m in rawModules) {
+      if (m == TemplateModule.budget || m == TemplateModule.expenses) {
+        if (!financeAdded) {
+          modules.add(TemplateModule.budget);
+          financeAdded = true;
+        }
+      } else {
+        modules.add(m);
+      }
+    }
     
     return GridView.builder(
       shrinkWrap: true,
@@ -798,7 +811,8 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
   IconData _getModuleIcon(TemplateModule module) {
     switch (module) {
       case TemplateModule.task: return Icons.check_circle_outline;
-      case TemplateModule.budget: return Icons.account_balance_wallet_outlined;
+      case TemplateModule.budget:
+      case TemplateModule.expenses: return Icons.receipt_long_outlined;
       case TemplateModule.contribution: return Icons.payments_outlined;
       case TemplateModule.userManagement: return Icons.manage_accounts_outlined;
       case TemplateModule.guestManagement: return Icons.people_outline;
@@ -807,7 +821,6 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
       case TemplateModule.inventory: return Icons.inventory_2_outlined;
       case TemplateModule.communication: return Icons.chat_bubble_outline;
       case TemplateModule.roles: return Icons.badge_outlined;
-      case TemplateModule.expenses: return Icons.receipt_long_outlined;
       case TemplateModule.location: return Icons.location_on_outlined;
       case TemplateModule.ticketing: return Icons.confirmation_number_outlined;
       case TemplateModule.customFields: return Icons.edit_note_outlined;
@@ -818,7 +831,8 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
   String _getModuleSummary(TemplateModule module) {
     switch (module) {
       case TemplateModule.task: return '${_selectedTemplate!.taskBlueprints.length} tasks pre-filled';
-      case TemplateModule.budget: return '${_selectedTemplate!.budgetBlueprints.length} budget items';
+      case TemplateModule.budget:
+      case TemplateModule.expenses: return 'Budget items & Expense workflow';
       case TemplateModule.contribution: return 'Auto-configured targets';
       case TemplateModule.userManagement: return 'Team members can be added';
       case TemplateModule.guestManagement: return 'RSVP & Categories active';
@@ -827,7 +841,6 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
       case TemplateModule.inventory: return '${_selectedTemplate!.inventoryBlueprints.length} items';
       case TemplateModule.communication: return 'Group messaging enabled';
       case TemplateModule.roles: return 'Team hierarchy set';
-      case TemplateModule.expenses: return 'Approval workflow ready';
       case TemplateModule.location: return 'Venue ground blueprints';
       case TemplateModule.ticketing: return 'Standard ticket tiers';
       case TemplateModule.customFields: return 'Metadata fields active';

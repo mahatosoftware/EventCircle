@@ -4,16 +4,13 @@ import 'package:intl/intl.dart';
 import 'package:go_router/go_router.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:share_plus/share_plus.dart';
+import '../../providers/auth_provider.dart';
 import '../../providers/event_provider.dart';
-import '../../providers/member_provider.dart';
-import '../../providers/payment_provider.dart';
-import '../../providers/expense_provider.dart';
-import '../../providers/access_control_provider.dart';
 import '../widgets/summary_cards.dart';
+import '../../providers/dashboard_provider.dart';
 import '../../data/models/event_model.dart';
 import '../../data/models/template_model.dart';
 import '../../data/models/payment_model.dart';
-import '../../data/models/expense_model.dart';
 import '../../data/models/event_role_model.dart';
 
 class EventDashboardScreen extends ConsumerStatefulWidget {
@@ -41,24 +38,15 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final eventAsync = ref.watch(eventByIdStreamProvider(widget.eventId));
-    final membersAsync = ref.watch(membersForEventStreamProvider(widget.eventId));
-    final paymentsAsync = ref.watch(paymentsForEventStreamProvider(widget.eventId));
-    final expensesAsync = ref.watch(expensesForEventStreamProvider(widget.eventId));
+    final user = ref.watch(currentUserProvider);
+    final dashboardAsync = ref.watch(dashboardDataProvider(widget.eventId));
 
-    final streamEvent = eventAsync.asData?.value;
-    final event = streamEvent ?? widget.initialEvent;
+    // Priority 1: Show the stream data if available.
+    // Priority 2: Show initialEvent if we are still loading (prevents empty screens).
+    final dashboard = dashboardAsync.value;
+    final event = dashboard?.event ?? widget.initialEvent;
 
-    if (!_loggedFirstEvent && streamEvent != null) {
-      _loggedFirstEvent = true;
-      _firstLoadStopwatch.stop();
-      assert(() {
-        debugPrint('[EventDashboard] First event snapshot for ${widget.eventId} in ${_firstLoadStopwatch.elapsedMilliseconds}ms');
-        return true;
-      }());
-    }
-
-    if (eventAsync.hasError && event == null) {
+    if (dashboardAsync.hasError && event == null) {
       return Scaffold(
         body: Center(
           child: Column(
@@ -66,9 +54,9 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
             children: [
               const Icon(Icons.cloud_off, size: 64, color: Colors.red),
               const SizedBox(height: 16),
-              Text('Error loading event circle: ${eventAsync.error}'),
+              Text('Error loading dashboard: ${dashboardAsync.error}'),
               ElevatedButton(
-                onPressed: () => ref.refresh(eventByIdStreamProvider(widget.eventId)),
+                onPressed: () => ref.refresh(dashboardDataProvider(widget.eventId)),
                 child: const Text('Retry'),
               ),
             ],
@@ -78,7 +66,6 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
     }
 
     if (event == null) {
-      // No cached event available yet; keep the lightweight syncing state.
       return const Scaffold(
         body: Center(
           child: Column(
@@ -86,29 +73,18 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
             children: [
               CircularProgressIndicator(),
               SizedBox(height: 16),
-              Text('Syncing event circle...', style: TextStyle(color: Colors.grey)),
+              Text('Syncing event dashboard...', style: TextStyle(color: Colors.grey)),
             ],
           ),
         ),
       );
     }
 
-    // If Firestore reports "not found" explicitly, surface that even if we had an initialEvent.
-    if (!eventAsync.isLoading && streamEvent == null) {
-      return Scaffold(
-        appBar: AppBar(title: const Text('Event Not Found')),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(Icons.error_outline, size: 64, color: Colors.grey),
-              const SizedBox(height: 16),
-              const Text('The event circle could not be found.'),
-              TextButton(onPressed: () => context.go('/home'), child: const Text('Return Home')),
-            ],
-          ),
-        ),
-      );
+    // Performance trace logging
+    if (!_loggedFirstEvent && dashboard != null) {
+      _loggedFirstEvent = true;
+      _firstLoadStopwatch.stop();
+      debugPrint('[EventDashboard] Loaded in ${_firstLoadStopwatch.elapsedMilliseconds}ms');
     }
 
     final enabledModules = _getEnabledModules(event);
@@ -123,7 +99,7 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
             children: [
               Text(event.title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               Text(event.category.displayName, style: TextStyle(fontSize: 11, color: Theme.of(context).primaryColor)),
-              if (eventAsync.isLoading) ...[
+              if (dashboardAsync.isLoading) ...[
                 const SizedBox(height: 6),
                 const SizedBox(height: 2, child: LinearProgressIndicator(minHeight: 2)),
               ],
@@ -136,6 +112,12 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
                 Share.share('Check out our event collection transparency: https://eventcircle.com/public/${widget.eventId}');
               },
             ),
+            if (user != null && user.id == event.organizerId)
+              IconButton(
+                icon: const Icon(Icons.edit_outlined, size: 20),
+                tooltip: 'Edit Event',
+                onPressed: () => context.push('/event/${widget.eventId}/edit'),
+              ),
             IconButton(
               icon: const Icon(Icons.auto_awesome_motion_outlined, size: 20),
               tooltip: 'Save as Blueprint',
@@ -159,9 +141,9 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
         ),
         body: TabBarView(
           children: [
-            _buildOverviewTab(context, event, paymentsAsync, expensesAsync, membersAsync),
-            _buildLogisticsTab(context, enabledModules),
-            _buildTransparencyTab(context, event, membersAsync, paymentsAsync, expensesAsync),
+            _buildOverviewTab(context, event, dashboard),
+            _buildLogisticsTab(context, enabledModules, dashboard),
+            _buildTransparencyTab(context, event, dashboard),
           ],
         ),
       ),
@@ -171,27 +153,25 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
   Widget _buildOverviewTab(
     BuildContext context, 
     EventModel event, 
-    AsyncValue<List<dynamic>> payments, 
-    AsyncValue<List<dynamic>> expenses,
-    AsyncValue<List<dynamic>> members,
+    DashboardData? dashboard,
   ) {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildQuickStats(context, payments, expenses, members),
+          _buildQuickStats(context, dashboard),
           const SizedBox(height: 24),
           _buildInfoCard(context, event),
           const SizedBox(height: 24),
           _buildRecentActivityHeader(context),
-          _buildRecentActivity(context, payments, members),
+          _buildRecentActivity(context, dashboard),
         ],
       ),
     );
   }
 
-  Widget _buildLogisticsTab(BuildContext context, List<TemplateModule> enabledModules) {
+  Widget _buildLogisticsTab(BuildContext context, List<TemplateModule> enabledModules, DashboardData? dashboard) {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20.0),
       child: Column(
@@ -199,7 +179,7 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
         children: [
           Text('ACTIVE MODULES', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: Colors.grey.shade600, letterSpacing: 1.2)),
           const SizedBox(height: 20),
-          _buildModuleGrid(context, enabledModules),
+          _buildModuleGrid(context, enabledModules, dashboard),
         ],
       ),
     );
@@ -208,39 +188,133 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
   Widget _buildTransparencyTab(
     BuildContext context, 
     EventModel event, 
-    AsyncValue<List<dynamic>> members, 
-    AsyncValue<List<dynamic>> payments,
-    AsyncValue<List<dynamic>> expenses,
+    DashboardData? dashboard,
   ) {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildTransparencySection(context, members, payments),
+          _buildTransparencySection(context, dashboard),
           const SizedBox(height: 24),
           if (event.contributionType == ContributionType.itemBased && event.itemTargets != null) ...[
             _buildItemBasedSection(context, event),
             const SizedBox(height: 24),
           ],
           SummaryCards(
-            totalCollected: _calculateTotalCollected(payments),
-            totalExpenses: _calculateTotalExpenses(expenses),
+            totalCollected: dashboard?.totalCollected ?? 0.0,
+            totalExpenses: dashboard?.totalExpenses ?? 0.0,
           ),
+          if (dashboard != null && (dashboard.totalPendingReimbursement > 0 || dashboard.totalPaidReimbursement > 0)) ...[
+            const SizedBox(height: 16),
+            _buildReimbursementLiabilityCard(context, dashboard),
+          ],
+          const SizedBox(height: 24),
+          _buildAuditLogsCard(context),
         ],
+      ),
+    );
+  }
+
+  Widget _buildReimbursementLiabilityCard(BuildContext context, DashboardData dashboard) {
+    return InkWell(
+      onTap: () => context.push('/event/${widget.eventId}/expenses'),
+      borderRadius: BorderRadius.circular(24),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Colors.amber.shade50,
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: Colors.amber.shade200),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                const Icon(Icons.volunteer_activism_outlined, size: 16, color: Colors.amber),
+                const SizedBox(width: 8),
+                Text('REIMBURSEMENT SUMMARY', style: TextStyle(fontSize: 10, fontWeight: FontWeight.w800, color: Colors.amber.shade900, letterSpacing: 1)),
+                const Spacer(),
+                const Icon(Icons.chevron_right, size: 16, color: Colors.amber),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('₹${dashboard.totalPendingReimbursement}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: Colors.amber)),
+                      const Text('Pending Liability', style: TextStyle(fontSize: 11, color: Colors.grey, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ),
+                Container(width: 1, height: 40, color: Colors.amber.shade200),
+                const SizedBox(width: 24),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('₹${dashboard.totalPaidReimbursement}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: Colors.blue)),
+                      const Text('Already Reimbursed', style: TextStyle(fontSize: 11, color: Colors.grey, fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAuditLogsCard(BuildContext context) {
+    return InkWell(
+      onTap: () => context.push('/event/${widget.eventId}/audit-logs'),
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade50,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.grey.shade200),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.blue.withAlpha(20),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(Icons.history_edu_outlined, color: Colors.blue, size: 20),
+            ),
+            const SizedBox(width: 16),
+            const Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Audit Log', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15)),
+                  Text('View full history of all changes', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                ],
+              ),
+            ),
+            const Icon(Icons.chevron_right, color: Colors.grey, size: 20),
+          ],
+        ),
       ),
     );
   }
 
   Widget _buildQuickStats(
     BuildContext context, 
-    AsyncValue<List<dynamic>> payments, 
-    AsyncValue<List<dynamic>> expenses,
-    AsyncValue<List<dynamic>> members,
+    DashboardData? dashboard,
   ) {
-    final collected = _calculateTotalCollected(payments);
-    final spent = _calculateTotalExpenses(expenses);
-    final count = members.value?.length ?? 0;
+    final collected = dashboard?.totalCollected ?? 0.0;
+    final spent = dashboard?.totalExpenses ?? 0.0;
+    final count = dashboard?.members.length ?? 0;
 
     return Row(
       children: [
@@ -276,6 +350,15 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
   }
 
   Widget _buildInfoCard(BuildContext context, dynamic event) {
+    final dateText = () {
+      final DateTime? start = event.startDate;
+      final DateTime? end = event.endDate;
+      if (start == null || end == null) return 'TBD';
+      final s = DateFormat('MMM dd').format(start);
+      final e = DateFormat('MMM dd').format(end);
+      return s == e ? s : '$s - $e';
+    }();
+
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(20),
@@ -299,7 +382,7 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
           const SizedBox(height: 20),
           Row(
             children: [
-              _buildDetailCapsule(Icons.calendar_today_rounded, event.startDate != null ? DateFormat('MMM dd').format(event.startDate!) : 'TBD'),
+              _buildDetailCapsule(Icons.calendar_today_rounded, dateText),
               const SizedBox(width: 12),
               _buildDetailCapsule(Icons.location_on_rounded, event.location?.split(',').first ?? 'Remote'),
             ],
@@ -328,10 +411,17 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
     );
   }
 
-  Widget _buildModuleGrid(BuildContext context, List<TemplateModule> enabledModules) {
+  Widget _buildModuleGrid(BuildContext context, List<TemplateModule> enabledModules, DashboardData? dashboard) {
     final eventId = widget.eventId;
     final modules = enabledModules.isEmpty ? TemplateModule.values : enabledModules;
-    final visibleModules = modules.where((m) => _isModuleVisibleForUser(eventId, m)).toList();
+    
+    // Performance: Filter modules once per build outside of the itemBuilder.
+    final visibleModules = modules.where((m) {
+      final key = _eventModuleKey(m);
+      if (key == null) return true;
+      final access = dashboard?.moduleAccess[key] ?? ModuleAccessLevel.none;
+      return access != ModuleAccessLevel.none;
+    }).toList();
 
     return GridView.builder(
       shrinkWrap: true,
@@ -390,13 +480,6 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
     );
   }
 
-  bool _isModuleVisibleForUser(String eventId, TemplateModule module) {
-    final key = _eventModuleKey(module);
-    if (key == null) return true;
-    final access = ref.watch(moduleAccessForEventProvider((eventId: eventId, module: key)));
-    return access != ModuleAccessLevel.none;
-  }
-
   String? _eventModuleKey(TemplateModule module) {
     switch (module) {
       case TemplateModule.budget:
@@ -426,14 +509,13 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text('RECENT ACTIVITY', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Colors.grey.shade600, letterSpacing: 1)),
-          TextButton(onPressed: () {}, child: const Text('View All', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold))),
+          TextButton(
+            onPressed: () => context.push('/event/${widget.eventId}/payments'), 
+            child: const Text('View All', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold))
+          ),
         ],
       ),
     );
-  }
-
-  Widget _buildHeader(BuildContext context, dynamic event) {
-     return const SizedBox.shrink(); // Replaced by Tab Header
   }
 
   Widget _buildItemBasedSection(BuildContext context, EventModel event) {
@@ -483,11 +565,23 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
     if (raw is! List) return const [];
 
     final modules = <TemplateModule>{};
+    bool financeAdded = false;
+    
     for (final v in raw) {
       if (v is! String) continue;
       final m = _templateModuleFromJsonValue(v);
-      if (m != null) modules.add(m);
+      if (m == null) continue;
+      
+      if (m == TemplateModule.budget || m == TemplateModule.expenses) {
+        if (!financeAdded) {
+          modules.add(TemplateModule.budget); // Use budget as the representative
+          financeAdded = true;
+        }
+      } else {
+        modules.add(m);
+      }
     }
+    
     final order = {for (var i = 0; i < TemplateModule.values.length; i++) TemplateModule.values[i]: i};
     final list = modules.toList()..sort((a, b) => (order[a] ?? 0).compareTo(order[b] ?? 0));
     return list;
@@ -500,12 +594,8 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
     return null;
   }
 
-  String _moduleLabel(TemplateModule module) {
-    final base = module.displayName.trim();
-    return base.toUpperCase().endsWith('MODULE') ? base : '$base MODULE';
-  }
-
   String _moduleCardTitle(TemplateModule module) {
+    if (module == TemplateModule.budget || module == TemplateModule.expenses) return 'BUDGET & EXPENSE TRACKING';
     if (module == TemplateModule.guestManagement) return 'ATTENDEES';
     return module.displayName.toUpperCase().replaceAll('MANAGEMENT', '').trim();
   }
@@ -513,7 +603,8 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
   IconData _getModuleIcon(TemplateModule module) {
     switch (module) {
       case TemplateModule.task: return Icons.check_circle_outline;
-      case TemplateModule.budget: return Icons.account_balance_wallet_outlined;
+      case TemplateModule.budget:
+      case TemplateModule.expenses: return Icons.receipt_long_outlined;
       case TemplateModule.contribution: return Icons.payments_outlined;
       case TemplateModule.userManagement: return Icons.manage_accounts_outlined;
       case TemplateModule.guestManagement: return Icons.people_outline;
@@ -522,7 +613,6 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
       case TemplateModule.inventory: return Icons.inventory_2_outlined;
       case TemplateModule.communication: return Icons.chat_bubble_outline;
       case TemplateModule.roles: return Icons.badge_outlined;
-      case TemplateModule.expenses: return Icons.receipt_long_outlined;
       case TemplateModule.location: return Icons.location_on_outlined;
       case TemplateModule.ticketing: return Icons.confirmation_number_outlined;
       case TemplateModule.customFields: return Icons.edit_note_outlined;
@@ -531,10 +621,10 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
   }
 
   Widget _buildTransparencySection(
-      BuildContext context, AsyncValue<List<dynamic>> members, AsyncValue<List<dynamic>> payments) {
-    final totalCollected = _calculateTotalCollected(payments);
-    final memberCount = members.value?.length ?? 0;
-    final paidCount = payments.value?.length ?? 0;
+      BuildContext context, DashboardData? dashboard) {
+    final totalCollected = dashboard?.totalCollected ?? 0.0;
+    final memberCount = dashboard?.members.length ?? 0;
+    final paidCount = dashboard?.payments.where((p) => p.status == PaymentStatus.success).length ?? 0;
     final progress = memberCount == 0 ? 0.0 : paidCount / memberCount;
 
     return Container(
@@ -579,73 +669,6 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
     );
   }
 
-  double _calculateTotalCollected(AsyncValue<List<dynamic>> payments) {
-    return payments.maybeWhen(
-      data: (list) {
-        double sum = 0.0;
-        for (final p in list) {
-          final status = _paymentStatusValue(p);
-          if (status != PaymentStatus.success.name) continue;
-          sum += _numValue(_fieldValue(p, 'amount'));
-        }
-        return sum;
-      },
-      orElse: () => 0.0,
-    );
-  }
-
-  double _calculateTotalExpenses(AsyncValue<List<dynamic>> expenses) {
-    return expenses.maybeWhen(
-      data: (list) {
-        double sum = 0.0;
-        for (final e in list) {
-          sum += _numValue(_fieldValue(e, 'amount'));
-        }
-        return sum;
-      },
-      orElse: () => 0.0,
-    );
-  }
-
-  Object? _fieldValue(dynamic obj, String key) {
-    if (obj is Map) return obj[key];
-    if (obj is PaymentModel) {
-      switch (key) {
-        case 'status':
-          return obj.status.name;
-        case 'amount':
-          return obj.amount;
-      }
-    }
-    if (obj is ExpenseModel) {
-      switch (key) {
-        case 'amount':
-          return obj.amount;
-      }
-    }
-    // Best-effort: some screens used dynamic lists; fall back to property access if present.
-    try {
-      // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
-      return (obj as dynamic)[key];
-    } catch (_) {
-      return null;
-    }
-  }
-
-  String _paymentStatusValue(dynamic payment) {
-    if (payment is PaymentModel) return payment.status.name;
-    final raw = _fieldValue(payment, 'status');
-    if (raw is PaymentStatus) return raw.name;
-    if (raw is String) return raw;
-    return '';
-  }
-
-  double _numValue(Object? v) {
-    if (v is num) return v.toDouble();
-    if (v is String) return double.tryParse(v) ?? 0.0;
-    return 0.0;
-  }
-
   String? _moduleLaunchTarget(String eventId, TemplateModule module) {
     switch (module) {
       case TemplateModule.task: return '/event/$eventId/tasks';
@@ -668,103 +691,87 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
 
   Widget _buildRecentActivity(
     BuildContext context,
-    AsyncValue<List<dynamic>> paymentsAsync,
-    AsyncValue<List<dynamic>> membersAsync,
+    DashboardData? dashboard,
   ) {
-    return paymentsAsync.when(
-      data: (payments) {
-        if (payments.isEmpty) {
-          return Container(
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              color: Colors.grey.shade50,
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: Colors.grey.shade100),
-            ),
-            child: const Center(
-              child: Column(
-                children: [
-                  Icon(Icons.history, color: Colors.grey, size: 32),
-                  SizedBox(height: 8),
-                  Text('No recent activity yet', style: TextStyle(color: Colors.grey, fontSize: 12)),
-                ],
-              ),
-            ),
-          );
-        }
-
-        // Sort by timestamp if available
-        final sortedPayments = [...payments];
-        sortedPayments.sort((a, b) {
-          final tA = _fieldValue(a, 'timestamp') as DateTime?;
-          final tB = _fieldValue(b, 'timestamp') as DateTime?;
-          if (tA == null || tB == null) return 0;
-          return tB.compareTo(tA);
-        });
-
-        return ListView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          itemCount: sortedPayments.length > 5 ? 5 : sortedPayments.length,
-          itemBuilder: (context, index) {
-            final payment = sortedPayments[index];
-            final amount = _numValue(_fieldValue(payment, 'amount'));
-            final statusStr = _paymentStatusValue(payment);
-            final memberId = _fieldValue(payment, 'memberId') as String?;
-            final timestamp = _fieldValue(payment, 'timestamp') as DateTime?;
-            
-            // Try to find member name
-            String memberName = 'Unknown Member';
-            if (membersAsync.hasValue) {
-               final member = membersAsync.value!.where((m) => m.id == memberId).firstOrNull;
-               if (member != null) memberName = member.name;
-            }
-
-            final isSuccess = statusStr == PaymentStatus.success.name;
-
-            return Container(
-              margin: const EdgeInsets.only(bottom: 12),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.grey.shade100),
-              ),
-              child: ListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-                leading: CircleAvatar(
-                  backgroundColor: Theme.of(context).primaryColor.withAlpha(20),
-                  child: Icon(
-                    isSuccess ? Icons.payments_outlined : Icons.history,
-                    size: 20, 
-                    color: Theme.of(context).primaryColor
-                  ),
-                ),
-                title: Text(memberName, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
-                subtitle: Text(
-                  '${isSuccess ? "Contributed" : "Attempted"} ₹$amount ${timestamp != null ? "• ${DateFormat('MMM dd, HH:mm').format(timestamp)}" : ""}',
-                  style: const TextStyle(fontSize: 11),
-                ),
-                trailing: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: (isSuccess ? Colors.green : Colors.orange).withAlpha(20),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    isSuccess ? 'Success' : 'Pending', 
-                    style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: isSuccess ? Colors.green : Colors.orange)
-                  ),
-                ),
-              ),
-            );
-          },
-        );
-      },
-      loading: () => const Center(child: Padding(
+    if (dashboard == null) {
+      return const Center(child: Padding(
         padding: EdgeInsets.all(20.0),
         child: CircularProgressIndicator(strokeWidth: 2),
-      )),
-      error: (err, _) => Text('Critical feed error: $err', style: const TextStyle(fontSize: 10, color: Colors.red)),
+      ));
+    }
+
+    final recentPayments = dashboard.recentActivities;
+    if (recentPayments.isEmpty) {
+      return Container(
+        padding: const EdgeInsets.all(24),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade50,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.grey.shade100),
+        ),
+        child: const Center(
+          child: Column(
+            children: [
+              Icon(Icons.history, color: Colors.grey, size: 32),
+              SizedBox(height: 8),
+              Text('No recent activity yet', style: TextStyle(color: Colors.grey, fontSize: 12)),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: recentPayments.length,
+      itemBuilder: (context, index) {
+        final payment = recentPayments[index];
+        final amount = payment.amount;
+        final status = payment.status;
+        final memberId = payment.memberId;
+        final timestamp = payment.timestamp;
+        
+        // Performance: O(1) lookup in the pre-built memberMap
+        final memberName = dashboard.memberMap[memberId]?.name ?? 'Unknown Member';
+        final isSuccess = status == PaymentStatus.success;
+
+        return Container(
+          margin: const EdgeInsets.only(bottom: 12),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: Colors.grey.shade100),
+          ),
+          child: ListTile(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+            leading: CircleAvatar(
+              backgroundColor: Theme.of(context).primaryColor.withAlpha(20),
+              child: Icon(
+                isSuccess ? Icons.payments_outlined : Icons.history,
+                size: 20, 
+                color: Theme.of(context).primaryColor
+              ),
+            ),
+            title: Text(memberName, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+            subtitle: Text(
+              '${isSuccess ? "Contributed" : "Attempted"} ₹$amount • ${DateFormat('MMM dd, HH:mm').format(timestamp)}',
+              style: const TextStyle(fontSize: 11),
+            ),
+            trailing: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              decoration: BoxDecoration(
+                color: (isSuccess ? Colors.green : Colors.orange).withAlpha(20),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Text(
+                isSuccess ? 'Success' : 'Pending', 
+                style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: isSuccess ? Colors.green : Colors.orange)
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 
