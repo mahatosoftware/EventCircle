@@ -11,7 +11,7 @@ class FirebaseTaskRepository implements TaskRepository {
     return _firestore
         .collection(_collection)
         .where('eventId', isEqualTo: eventId)
-        .orderBy('dueDate')
+        .orderBy('title')
         .snapshots()
         .map((snapshot) {
       return snapshot.docs.map((doc) => TaskModel.fromJson(doc.data())).toList();

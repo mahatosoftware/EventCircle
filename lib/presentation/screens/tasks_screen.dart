@@ -18,21 +18,6 @@ class TasksScreen extends ConsumerStatefulWidget {
 }
 
 class _TasksScreenState extends ConsumerState<TasksScreen> {
-  Future<void> _loadSuggestedTasks(EventModel event) async {
-    final suggestions = EventTemplateService.getSuggestedTasks(widget.eventId, event.category);
-    final repo = ref.read(taskRepositoryProvider);
-    
-    // Add each suggestion to the repo
-    for (var task in suggestions) {
-      await repo.addTask(task);
-    }
-    
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Added ${suggestions.length} suggested tasks for ${event.category.displayName}')),
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,17 +35,6 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Event Task Management'),
-          actions: [
-            eventAsync.when(
-              data: (event) => IconButton(
-                icon: const Icon(Icons.tips_and_updates_outlined),
-                tooltip: 'Load Suggestions',
-                onPressed: (event == null || !canEditTasks) ? null : () => _loadSuggestedTasks(event),
-              ),
-              loading: () => const SizedBox.shrink(),
-              error: (err, st) => const SizedBox.shrink(),
-            ),
-          ],
           bottom: TabBar(
             isScrollable: false,
             tabs: TaskPhase.values.map((phase) => Tab(text: phase.displayName)).toList(),
@@ -80,18 +54,6 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                         const SizedBox(height: 16),
                         Text('No ${phase.displayName} tasks yet.', style: const TextStyle(color: Colors.grey)),
                         const SizedBox(height: 24),
-                        eventAsync.maybeWhen(
-                          data: (event) => event != null ? ElevatedButton.icon(
-                            onPressed: () => _loadSuggestedTasks(event),
-                            icon: const Icon(Icons.auto_fix_high),
-                            label: const Text('Load Suggested Tasks'),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.blue[50],
-                              foregroundColor: Colors.blue[700],
-                            ),
-                          ) : const SizedBox.shrink(),
-                          orElse: () => const SizedBox.shrink(),
-                        ),
                       ],
                     ),
                   );
@@ -180,7 +142,7 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                     Text('Assignee: ${task.assignedMemberName ?? 'Unassigned'}', 
                       style: const TextStyle(fontSize: 12, fontStyle: FontStyle.italic)),
                     TextButton.icon(
-                      onPressed: canUpdateTasks ? () {} : null,
+                      onPressed: canUpdateTasks ? () => _showEditTaskDialog(context, ref, task) : null,
                       icon: const Icon(Icons.edit, size: 14),
                       label: const Text('Edit', style: TextStyle(fontSize: 12)),
                     ),
@@ -271,6 +233,110 @@ class _TasksScreenState extends ConsumerState<TasksScreen> {
                     if (context.mounted) Navigator.pop(context);
                   },
                   child: const Text('Add Task'),
+                ),
+                const SizedBox(height: 24),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showEditTaskDialog(BuildContext context, WidgetRef ref, TaskModel task) {
+    final titleController = TextEditingController(text: task.title);
+    final descController = TextEditingController(text: task.description);
+    final roleController = TextEditingController(text: task.role);
+    final dueController = TextEditingController(text: task.dueOffset);
+    final assignedNameController = TextEditingController(text: task.assignedMemberName);
+    TaskPhase selectedPhase = task.phase;
+
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (context) => StatefulBuilder(
+        builder: (context, setDialogState) => Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+            top: 24, left: 24, right: 24,
+          ),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Edit Task', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                    IconButton(
+                      icon: const Icon(Icons.delete_outline, color: Colors.red),
+                      onPressed: () {
+                         ref.read(taskRepositoryProvider).deleteTask(task.id);
+                         Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20),
+                TextField(
+                  controller: titleController,
+                  decoration: const InputDecoration(labelText: 'Task Title', prefixIcon: Icon(Icons.title)),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  controller: descController,
+                  decoration: const InputDecoration(labelText: 'Description', prefixIcon: Icon(Icons.description_outlined)),
+                  maxLines: 2,
+                ),
+                const SizedBox(height: 16),
+                DropdownButtonFormField<TaskPhase>(
+                  value: selectedPhase,
+                  decoration: const InputDecoration(labelText: 'Event Phase', prefixIcon: Icon(Icons.category_outlined)),
+                  items: TaskPhase.values.map((p) => DropdownMenuItem(value: p, child: Text(p.displayName))).toList(),
+                  onChanged: (val) => setDialogState(() => selectedPhase = val!),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: roleController,
+                        decoration: const InputDecoration(labelText: 'Assigned Role', prefixIcon: Icon(Icons.person_pin_outlined)),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: TextField(
+                        controller: dueController,
+                        decoration: const InputDecoration(labelText: 'Due (e.g. T-7)', prefixIcon: Icon(Icons.timer_outlined)),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                   controller: assignedNameController,
+                   decoration: const InputDecoration(labelText: 'Assigned To (Member Name)', prefixIcon: Icon(Icons.person_outline)),
+                ),
+                const SizedBox(height: 32),
+                ElevatedButton(
+                  onPressed: () async {
+                    if (titleController.text.isEmpty) return;
+                    final updatedTask = task.copyWith(
+                      title: titleController.text,
+                      description: descController.text,
+                      status: task.status,
+                      phase: selectedPhase,
+                      role: roleController.text,
+                      dueOffset: dueController.text,
+                      assignedMemberName: assignedNameController.text.isEmpty ? null : assignedNameController.text,
+                    );
+                    await ref.read(taskRepositoryProvider).updateTask(updatedTask);
+                    if (context.mounted) Navigator.pop(context);
+                  },
+                  child: const Text('Update Task'),
                 ),
                 const SizedBox(height: 24),
               ],

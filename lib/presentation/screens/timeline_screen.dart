@@ -5,6 +5,8 @@ import '../../providers/event_provider.dart';
 import '../../data/models/timeline_model.dart';
 import '../../data/models/event_model.dart';
 import '../../data/services/event_template_service.dart';
+import '../../data/services/pdf_export_service.dart';
+import 'pdf_preview_screen.dart';
 import 'package:uuid/uuid.dart';
 
 class TimelineScreen extends ConsumerWidget {
@@ -16,41 +18,65 @@ class TimelineScreen extends ConsumerWidget {
     final timelineAsync = ref.watch(timelineStreamProvider);
     final eventAsync = ref.watch(currentEventProvider);
 
+    final event = eventAsync.value;
+    final totalDays = (event?.startDate != null && event?.endDate != null) 
+      ? event!.endDate!.difference(event.startDate!).inDays + 1 
+      : 1;
+
+    final tabs = [
+      const Tab(text: 'Pre-event'),
+      ...List.generate(totalDays, (i) => Tab(text: totalDays > 1 ? 'Day ${i + 1}' : 'Event Day')),
+      const Tab(text: 'Post-event'),
+    ];
+
     return DefaultTabController(
-      length: 3,
-      initialIndex: 1, // Start on Event Day
+      length: tabs.length,
+      initialIndex: 1, // Start on Day 1
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Event Timeline'),
-          bottom: const TabBar(
-            tabs: [
-              Tab(text: 'Pre-event'),
-              Tab(text: 'Event Day'),
-              Tab(text: 'Post-event'),
-            ],
+          actions: [
+            if (event != null)
+              timelineAsync.maybeWhen(
+                data: (items) => IconButton(
+                  icon: const Icon(Icons.picture_as_pdf_outlined),
+                  tooltip: 'Export PDF',
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PdfPreviewScreen(event: event, items: items),
+                    ),
+                  ),
+                ),
+                orElse: () => const SizedBox.shrink(),
+              ),
+          ],
+          bottom: TabBar(
+            isScrollable: tabs.length > 4,
+            tabs: tabs,
           ),
         ),
         body: timelineAsync.when(
           data: (items) => TabBarView(
             children: [
-              _buildPhaseTimeline(context, items, TimelinePhase.preEvent, ref),
-              _buildPhaseTimeline(context, items, TimelinePhase.eventDay, ref),
-              _buildPhaseTimeline(context, items, TimelinePhase.postEvent, ref),
+              _buildPhaseTimeline(context, items, TimelinePhase.preEvent, 1, ref),
+              ...List.generate(totalDays, (i) => _buildPhaseTimeline(context, items, TimelinePhase.eventDay, i + 1, ref)),
+              _buildPhaseTimeline(context, items, TimelinePhase.postEvent, 1, ref),
             ],
           ),
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (err, stack) => Center(child: Text('Error: $err')),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => _showAddTimelineDialog(context, ref),
+          onPressed: () => _showAddTimelineDialog(context, ref, totalDays),
           child: const Icon(Icons.add_task_outlined),
         ),
       ),
     );
   }
 
-  Widget _buildPhaseTimeline(BuildContext context, List<TimelineItemModel> items, TimelinePhase phase, WidgetRef ref) {
-    final phaseItems = items.where((i) => i.phase == phase).toList();
+  Widget _buildPhaseTimeline(BuildContext context, List<TimelineItemModel> items, TimelinePhase phase, int dayNumber, WidgetRef ref) {
+    final phaseItems = items.where((i) => i.phase == phase && (phase != TimelinePhase.eventDay || i.dayNumber == dayNumber)).toList();
     
     if (phaseItems.isEmpty) {
       return _buildEmptyState(context, phase, ref);
@@ -130,30 +156,18 @@ class TimelineScreen extends ConsumerWidget {
           const SizedBox(height: 16),
           Text('No ${phase.name} items scheduled'),
           const SizedBox(height: 24),
-          if (event != null) 
-            ElevatedButton.icon(
-              onPressed: () => _loadSuggestedTimeline(ref, event),
-              icon: const Icon(Icons.auto_awesome),
-              label: const Text('Load Suggested Timeline'),
-            ),
         ],
       ),
     );
   }
 
-  void _loadSuggestedTimeline(WidgetRef ref, EventModel event) async {
-    final suggestions = EventTemplateService.getSuggestedTimeline(event.id, event.category);
-    final repo = ref.read(timelineRepositoryProvider);
-    for (var item in suggestions) {
-      await repo.addTimelineItem(item);
-    }
-  }
 
-  void _showAddTimelineDialog(BuildContext context, WidgetRef ref) {
+  void _showAddTimelineDialog(BuildContext context, WidgetRef ref, int totalDays) {
     final titleController = TextEditingController();
     final timeController = TextEditingController();
     final descController = TextEditingController();
     TimelinePhase selectedPhase = TimelinePhase.eventDay;
+    int selectedDayNumber = 1;
 
     showModalBottomSheet(
       context: context,
@@ -174,6 +188,15 @@ class TimelineScreen extends ConsumerWidget {
                 onChanged: (val) => setDialogState(() => selectedPhase = val!),
                 decoration: const InputDecoration(labelText: 'Phase'),
               ),
+              if (selectedPhase == TimelinePhase.eventDay && totalDays > 1) ...[
+                const SizedBox(height: 8),
+                DropdownButtonFormField<int>(
+                  value: selectedDayNumber,
+                  items: List.generate(totalDays, (i) => DropdownMenuItem(value: i + 1, child: Text('Day ${i + 1}'))),
+                  onChanged: (val) => setDialogState(() => selectedDayNumber = val!),
+                  decoration: const InputDecoration(labelText: 'Assign to Day'),
+                ),
+              ],
               TextField(controller: titleController, decoration: const InputDecoration(labelText: 'Title')),
               TextField(controller: timeController, decoration: const InputDecoration(labelText: 'Time / Offset (e.g. 10:00 AM)')),
               TextField(controller: descController, decoration: const InputDecoration(labelText: 'Description (Optional)')),
@@ -185,6 +208,7 @@ class TimelineScreen extends ConsumerWidget {
                     eventId: eventId,
                     title: titleController.text,
                     phase: selectedPhase,
+                    dayNumber: selectedPhase == TimelinePhase.eventDay ? selectedDayNumber : 1,
                     timeOrOffset: timeController.text,
                     description: descController.text.isEmpty ? null : descController.text,
                   );

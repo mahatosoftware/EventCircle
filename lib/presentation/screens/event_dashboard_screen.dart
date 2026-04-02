@@ -39,14 +39,13 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     final user = ref.watch(currentUserProvider);
+    final eventAsync = ref.watch(eventByIdStreamProvider(widget.eventId));
     final dashboardAsync = ref.watch(dashboardDataProvider(widget.eventId));
 
-    // Priority 1: Show the stream data if available.
-    // Priority 2: Show initialEvent if we are still loading (prevents empty screens).
+    final event = eventAsync.value ?? widget.initialEvent;
     final dashboard = dashboardAsync.value;
-    final event = dashboard?.event ?? widget.initialEvent;
 
-    if (dashboardAsync.hasError && event == null) {
+    if (eventAsync.hasError && event == null) {
       return Scaffold(
         body: Center(
           child: Column(
@@ -54,9 +53,9 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
             children: [
               const Icon(Icons.cloud_off, size: 64, color: Colors.red),
               const SizedBox(height: 16),
-              Text('Error loading dashboard: ${dashboardAsync.error}'),
+              Text('Error loading event: ${eventAsync.error}'),
               ElevatedButton(
-                onPressed: () => ref.refresh(dashboardDataProvider(widget.eventId)),
+                onPressed: () => ref.refresh(eventByIdStreamProvider(widget.eventId)),
                 child: const Text('Retry'),
               ),
             ],
@@ -68,14 +67,7 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
     if (event == null) {
       return const Scaffold(
         body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CircularProgressIndicator(),
-              SizedBox(height: 16),
-              Text('Syncing event dashboard...', style: TextStyle(color: Colors.grey)),
-            ],
-          ),
+          child: CircularProgressIndicator(),
         ),
       );
     }
@@ -312,9 +304,20 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
     BuildContext context, 
     DashboardData? dashboard,
   ) {
-    final collected = dashboard?.totalCollected ?? 0.0;
-    final spent = dashboard?.totalExpenses ?? 0.0;
-    final count = dashboard?.members.length ?? 0;
+    if (dashboard == null) {
+       return Row(
+         children: [
+            _buildStatLoadingItem(context),
+            const SizedBox(width: 12),
+            _buildStatLoadingItem(context),
+            const SizedBox(width: 12),
+            _buildStatLoadingItem(context),
+         ],
+       );
+    }
+    final collected = dashboard.totalCollected;
+    final spent = dashboard.totalExpenses;
+    final count = dashboard.members.length;
 
     return Row(
       children: [
@@ -325,6 +328,21 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
         _buildStatItem(context, 'Members', count.toString(), Icons.people_outline, Colors.blue),
       ],
     );
+  }
+
+  Widget _buildStatLoadingItem(BuildContext context) {
+     return Expanded(
+       child: Container(
+         height: 80,
+         padding: const EdgeInsets.all(16),
+         decoration: BoxDecoration(
+           color: Colors.grey.shade50,
+           borderRadius: BorderRadius.circular(16),
+           border: Border.all(color: Colors.grey.shade100),
+         ),
+         child: const Center(child: SizedBox(width: 20, height: 20, child: CircularProgressIndicator(strokeWidth: 2,))),
+       ),
+     );
   }
 
   Widget _buildStatItem(BuildContext context, String label, String value, IconData icon, Color color) {
@@ -622,9 +640,21 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
 
   Widget _buildTransparencySection(
       BuildContext context, DashboardData? dashboard) {
-    final totalCollected = dashboard?.totalCollected ?? 0.0;
-    final memberCount = dashboard?.members.length ?? 0;
-    final paidCount = dashboard?.payments.where((p) => p.status == PaymentStatus.success).length ?? 0;
+    if (dashboard == null) {
+      return Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade50,
+          borderRadius: BorderRadius.circular(24),
+          border: Border.all(color: Colors.grey.shade100),
+        ),
+        child: const Center(child: Text('Calculating progress...', style: TextStyle(fontSize: 12, color: Colors.grey))),
+      );
+    }
+    final totalCollected = dashboard.totalCollected;
+    final memberCount = dashboard.members.length;
+    final paidCount = dashboard.payments.where((p) => p.status == PaymentStatus.success).length;
     final progress = memberCount == 0 ? 0.0 : paidCount / memberCount;
 
     return Container(
