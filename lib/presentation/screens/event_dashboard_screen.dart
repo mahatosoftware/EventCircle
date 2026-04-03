@@ -104,20 +104,45 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
                 Share.share('Check out our event collection transparency: https://eventcircle.com/public/${widget.eventId}');
               },
             ),
-            if (user != null && user.id == event.organizerId)
-              IconButton(
-                icon: const Icon(Icons.edit_outlined, size: 20),
-                tooltip: 'Edit Event',
-                onPressed: () => context.push('/event/${widget.eventId}/edit'),
-              ),
-            IconButton(
-              icon: const Icon(Icons.auto_awesome_motion_outlined, size: 20),
-              tooltip: 'Save as Blueprint',
-              onPressed: () => context.push('/event/${widget.eventId}/save-template'),
-            ),
-            IconButton(
-              icon: const Icon(Icons.settings_outlined, size: 20),
-              onPressed: () => context.push('/event/${widget.eventId}/finance-settings'),
+            PopupMenuButton<String>(
+              icon: const Icon(Icons.more_vert_rounded, size: 20),
+              onSelected: (value) {
+                switch (value) {
+                  case 'edit': context.push('/event/${widget.eventId}/edit'); break;
+                  case 'blueprint': context.push('/event/${widget.eventId}/save-template'); break;
+                  case 'finance': context.push('/event/${widget.eventId}/finance-settings'); break;
+                }
+              },
+              itemBuilder: (context) => [
+                if (user != null && user.id == event.organizerId)
+                  const PopupMenuItem(
+                    value: 'edit',
+                    child: ListTile(
+                      leading: Icon(Icons.edit_outlined, size: 20),
+                      title: Text('Edit Details', style: TextStyle(fontSize: 14)),
+                      dense: true,
+                      contentPadding: EdgeInsets.zero,
+                    ),
+                  ),
+                const PopupMenuItem(
+                  value: 'blueprint',
+                  child: ListTile(
+                    leading: Icon(Icons.auto_awesome_motion_outlined, size: 20),
+                    title: Text('Save Blueprint', style: TextStyle(fontSize: 14)),
+                    dense: true,
+                    contentPadding: EdgeInsets.zero,
+                  ),
+                ),
+                const PopupMenuItem(
+                  value: 'finance',
+                  child: ListTile(
+                    leading: Icon(Icons.settings_outlined, size: 20),
+                    title: Text('Finance Settings', style: TextStyle(fontSize: 14)),
+                    dense: true,
+                    contentPadding: EdgeInsets.zero,
+                  ),
+                ),
+              ],
             ),
           ],
           bottom: const TabBar(

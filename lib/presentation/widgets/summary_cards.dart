@@ -26,31 +26,7 @@ class SummaryCards extends StatelessWidget {
         children: [
           Text('Financial Overview', style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold, color: Colors.grey.shade700)),
           const SizedBox(height: 16),
-          Row(
-            children: [
-              Expanded(
-                child: _buildSummaryCard(
-                  context,
-                  'Collected',
-                  '₹$totalCollected',
-                  Colors.green,
-                  Icons.arrow_downward_outlined,
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: _buildSummaryCard(
-                  context,
-                  'Expenses',
-                  '₹$totalExpenses',
-                  Colors.red,
-                  Icons.arrow_upward_outlined,
-                ),
-              ),
-            ],
-          ),
           if (totalPlannedBudget != null && totalPlannedBudget! > 0) ...[
-            const SizedBox(height: 12),
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -87,14 +63,38 @@ class SummaryCards extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 12),
           ],
+          Row(
+            children: [
+              Expanded(
+                child: _buildSummaryCard(
+                  context,
+                  'Collected',
+                  '₹${totalCollected.toStringAsFixed(0)}',
+                  Colors.green,
+                  Icons.arrow_downward_outlined,
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: _buildSummaryCard(
+                  context,
+                  'Expenses',
+                  '₹${totalExpenses.toStringAsFixed(0)}',
+                  Colors.red,
+                  Icons.arrow_upward_outlined,
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 12),
           SizedBox(
             width: double.infinity,
             child: _buildSummaryCard(
               context,
               'Remaining Balance',
-              '₹$balance',
+              '₹${balance.toStringAsFixed(0)}',
               balance >= 0 ? Colors.blue : Colors.red,
               Icons.account_balance_wallet_outlined,
             ),
