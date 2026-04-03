@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../models/template_model.dart';
 
@@ -18,7 +19,24 @@ class TemplateRepository {
   }
 
   Future<void> createTemplate(TemplateModel template) async {
+    // If the template doesn't already have a code, generate one (for new creations)
+    if (template.templateCode == null) {
+      final code = _generateTemplateCode();
+      template = template.copyWith(templateCode: code);
+    }
+    // Versioning starts at the default specified in the model
     await _firestore.collection('templates').doc(template.id).set(template.toDeepJson());
+  }
+
+  String _generateTemplateCode() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    final rand = Random();
+    return List.generate(7, (index) => chars[rand.nextInt(chars.length)]).join();
+  }
+
+  Future<void> updateTemplate(TemplateModel template) async {
+    final updated = template.copyWith(version: template.version + 1);
+    await _firestore.collection('templates').doc(template.id).update(updated.toDeepJson());
   }
 
   Future<void> incrementUsage(String templateId) async {

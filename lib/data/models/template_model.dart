@@ -58,6 +58,8 @@ class TemplateModel with _$TemplateModel {
     @Default(0) int usageCount,
     @Default(0.0) double rating,
     @Default(true) bool isPublic,
+    @Default(1) int version,
+    String? templateCode,
     DateTime? createdAt,
   }) = _TemplateModel;
 

@@ -50,6 +50,8 @@ mixin _$TemplateModel {
   int get usageCount => throw _privateConstructorUsedError;
   double get rating => throw _privateConstructorUsedError;
   bool get isPublic => throw _privateConstructorUsedError;
+  int get version => throw _privateConstructorUsedError;
+  String? get templateCode => throw _privateConstructorUsedError;
   DateTime? get createdAt => throw _privateConstructorUsedError;
 
   /// Serializes this TemplateModel to a JSON map.
@@ -92,6 +94,8 @@ abstract class $TemplateModelCopyWith<$Res> {
     int usageCount,
     double rating,
     bool isPublic,
+    int version,
+    String? templateCode,
     DateTime? createdAt,
   });
 }
@@ -133,6 +137,8 @@ class _$TemplateModelCopyWithImpl<$Res, $Val extends TemplateModel>
     Object? usageCount = null,
     Object? rating = null,
     Object? isPublic = null,
+    Object? version = null,
+    Object? templateCode = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(
@@ -225,6 +231,14 @@ class _$TemplateModelCopyWithImpl<$Res, $Val extends TemplateModel>
                 ? _value.isPublic
                 : isPublic // ignore: cast_nullable_to_non_nullable
                       as bool,
+            version: null == version
+                ? _value.version
+                : version // ignore: cast_nullable_to_non_nullable
+                      as int,
+            templateCode: freezed == templateCode
+                ? _value.templateCode
+                : templateCode // ignore: cast_nullable_to_non_nullable
+                      as String?,
             createdAt: freezed == createdAt
                 ? _value.createdAt
                 : createdAt // ignore: cast_nullable_to_non_nullable
@@ -267,6 +281,8 @@ abstract class _$$TemplateModelImplCopyWith<$Res>
     int usageCount,
     double rating,
     bool isPublic,
+    int version,
+    String? templateCode,
     DateTime? createdAt,
   });
 }
@@ -307,6 +323,8 @@ class __$$TemplateModelImplCopyWithImpl<$Res>
     Object? usageCount = null,
     Object? rating = null,
     Object? isPublic = null,
+    Object? version = null,
+    Object? templateCode = freezed,
     Object? createdAt = freezed,
   }) {
     return _then(
@@ -399,6 +417,14 @@ class __$$TemplateModelImplCopyWithImpl<$Res>
             ? _value.isPublic
             : isPublic // ignore: cast_nullable_to_non_nullable
                   as bool,
+        version: null == version
+            ? _value.version
+            : version // ignore: cast_nullable_to_non_nullable
+                  as int,
+        templateCode: freezed == templateCode
+            ? _value.templateCode
+            : templateCode // ignore: cast_nullable_to_non_nullable
+                  as String?,
         createdAt: freezed == createdAt
             ? _value.createdAt
             : createdAt // ignore: cast_nullable_to_non_nullable
@@ -434,6 +460,8 @@ class _$TemplateModelImpl implements _TemplateModel {
     this.usageCount = 0,
     this.rating = 0.0,
     this.isPublic = true,
+    this.version = 1,
+    this.templateCode,
     this.createdAt,
   }) : _tags = tags,
        _config = config,
@@ -601,11 +629,16 @@ class _$TemplateModelImpl implements _TemplateModel {
   @JsonKey()
   final bool isPublic;
   @override
+  @JsonKey()
+  final int version;
+  @override
+  final String? templateCode;
+  @override
   final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'TemplateModel(id: $id, title: $title, description: $description, category: $category, contributionType: $contributionType, createdBy: $createdBy, tags: $tags, config: $config, taskBlueprints: $taskBlueprints, timelineBlueprints: $timelineBlueprints, vendorBlueprints: $vendorBlueprints, inventoryBlueprints: $inventoryBlueprints, roleBlueprints: $roleBlueprints, venueBlueprints: $venueBlueprints, ticketBlueprints: $ticketBlueprints, customFieldBlueprints: $customFieldBlueprints, announcementBlueprints: $announcementBlueprints, budgetBlueprints: $budgetBlueprints, enabledModules: $enabledModules, usageCount: $usageCount, rating: $rating, isPublic: $isPublic, createdAt: $createdAt)';
+    return 'TemplateModel(id: $id, title: $title, description: $description, category: $category, contributionType: $contributionType, createdBy: $createdBy, tags: $tags, config: $config, taskBlueprints: $taskBlueprints, timelineBlueprints: $timelineBlueprints, vendorBlueprints: $vendorBlueprints, inventoryBlueprints: $inventoryBlueprints, roleBlueprints: $roleBlueprints, venueBlueprints: $venueBlueprints, ticketBlueprints: $ticketBlueprints, customFieldBlueprints: $customFieldBlueprints, announcementBlueprints: $announcementBlueprints, budgetBlueprints: $budgetBlueprints, enabledModules: $enabledModules, usageCount: $usageCount, rating: $rating, isPublic: $isPublic, version: $version, templateCode: $templateCode, createdAt: $createdAt)';
   }
 
   @override
@@ -674,6 +707,9 @@ class _$TemplateModelImpl implements _TemplateModel {
             (identical(other.rating, rating) || other.rating == rating) &&
             (identical(other.isPublic, isPublic) ||
                 other.isPublic == isPublic) &&
+            (identical(other.version, version) || other.version == version) &&
+            (identical(other.templateCode, templateCode) ||
+                other.templateCode == templateCode) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
@@ -704,6 +740,8 @@ class _$TemplateModelImpl implements _TemplateModel {
     usageCount,
     rating,
     isPublic,
+    version,
+    templateCode,
     createdAt,
   ]);
 
@@ -745,6 +783,8 @@ abstract class _TemplateModel implements TemplateModel {
     final int usageCount,
     final double rating,
     final bool isPublic,
+    final int version,
+    final String? templateCode,
     final DateTime? createdAt,
   }) = _$TemplateModelImpl;
 
@@ -795,6 +835,10 @@ abstract class _TemplateModel implements TemplateModel {
   double get rating;
   @override
   bool get isPublic;
+  @override
+  int get version;
+  @override
+  String? get templateCode;
   @override
   DateTime? get createdAt;
 

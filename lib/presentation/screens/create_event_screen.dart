@@ -363,6 +363,11 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                                       style: TextStyle(color: Colors.blue.shade800, fontSize: 10, fontWeight: FontWeight.bold),
                                     ),
                                   ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    'V${template.version}', 
+                                    style: TextStyle(color: Colors.grey.shade400, fontSize: 10, fontWeight: FontWeight.bold),
+                                  ),
                                   const Spacer(),
                                   const Icon(Icons.star, size: 14, color: Colors.amber),
                                   const SizedBox(width: 4),
@@ -405,6 +410,14 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                               const SizedBox(height: 16),
                               Row(
                                 children: [
+                                  if (template.templateCode != null) ...[
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                      decoration: BoxDecoration(color: Colors.grey.shade100, borderRadius: BorderRadius.circular(4)),
+                                      child: Text('#${template.templateCode}', style: TextStyle(fontSize: 10, color: Colors.grey.shade700, fontFamily: 'monospace', fontWeight: FontWeight.bold)),
+                                    ),
+                                    const SizedBox(width: 8),
+                                  ],
                                   Icon(Icons.trending_up, size: 14, color: Colors.green.shade600),
                                   const SizedBox(width: 4),
                                   Text('${template.usageCount} community uses', style: TextStyle(fontSize: 11, color: Colors.green.shade700, fontWeight: FontWeight.w500)),

@@ -83,6 +83,8 @@ _$TemplateModelImpl _$$TemplateModelImplFromJson(
   usageCount: (json['usageCount'] as num?)?.toInt() ?? 0,
   rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
   isPublic: json['isPublic'] as bool? ?? true,
+  version: (json['version'] as num?)?.toInt() ?? 1,
+  templateCode: json['templateCode'] as String?,
   createdAt: json['createdAt'] == null
       ? null
       : DateTime.parse(json['createdAt'] as String),
@@ -114,6 +116,8 @@ Map<String, dynamic> _$$TemplateModelImplToJson(_$TemplateModelImpl instance) =>
       'usageCount': instance.usageCount,
       'rating': instance.rating,
       'isPublic': instance.isPublic,
+      'version': instance.version,
+      'templateCode': instance.templateCode,
       'createdAt': instance.createdAt?.toIso8601String(),
     };
 
@@ -139,6 +143,7 @@ const _$ContributionTypeEnumMap = {
   ContributionType.recurring: 'recurring',
   ContributionType.ticketBased: 'ticketBased',
   ContributionType.sponsor: 'sponsor',
+  ContributionType.none: 'none',
 };
 
 const _$TemplateModuleEnumMap = {

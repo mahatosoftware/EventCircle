@@ -27,7 +27,8 @@ enum ContributionType {
   groupBased('Group-Based', 'One payment per group (Family, Flat, Team)'),
   recurring('Recurring', 'Periodic payments (Monthly maintenance)'),
   ticketBased('Ticket-Based', 'Payment equals entry ticket'),
-  sponsor('Sponsor Contribution', 'Large contributions from sponsors');
+  sponsor('Sponsor Contribution', 'Large contributions from sponsors'),
+  none('No Contribution Needed', 'Event with zero cost or collection requirement');
 
   final String displayName;
   final String description;

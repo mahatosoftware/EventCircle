@@ -130,4 +130,5 @@ const _$ContributionTypeEnumMap = {
   ContributionType.recurring: 'recurring',
   ContributionType.ticketBased: 'ticketBased',
   ContributionType.sponsor: 'sponsor',
+  ContributionType.none: 'none',
 };
