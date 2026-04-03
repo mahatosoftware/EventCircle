@@ -21,6 +21,7 @@ class ExpenseModel with _$ExpenseModel {
     String? approvedBy,
     DateTime? approvedAt,
     String? receiptUrl,
+    String? budgetItemId, // Reference to the budget planning item
     
     // Reimbursement Fields
     @Default(PaidByType.organizer) PaidByType paidByType,

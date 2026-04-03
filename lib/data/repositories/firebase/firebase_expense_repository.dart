@@ -17,7 +17,14 @@ class FirebaseExpenseRepository implements ExpenseRepository {
       return snapshot.docs.map((doc) => ExpenseModel.fromJson({...doc.data(), 'id': doc.id})).toList();
     });
   }
-
+  
+  @override
+  Future<ExpenseModel?> getExpense(String eventId, String id) async {
+    final doc = await _firestore.collection(_collection).doc(id).get();
+    if (!doc.exists) return null;
+    return ExpenseModel.fromJson({...doc.data()!, 'id': doc.id});
+  }
+  
   @override
   Future<void> addExpense(ExpenseModel expense) async {
     await _firestore.collection(_collection).doc(expense.id).set(expense.toJson());

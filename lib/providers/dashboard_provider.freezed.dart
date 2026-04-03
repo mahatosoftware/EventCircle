@@ -23,6 +23,7 @@ mixin _$DashboardData {
   List<ExpenseModel> get expenses => throw _privateConstructorUsedError;
   double get totalCollected => throw _privateConstructorUsedError;
   double get totalExpenses => throw _privateConstructorUsedError;
+  double get totalPlannedBudget => throw _privateConstructorUsedError;
   double get totalPendingReimbursement => throw _privateConstructorUsedError;
   double get totalPaidReimbursement => throw _privateConstructorUsedError;
   Map<String, MemberModel> get memberMap => throw _privateConstructorUsedError;
@@ -51,6 +52,7 @@ abstract class $DashboardDataCopyWith<$Res> {
     List<ExpenseModel> expenses,
     double totalCollected,
     double totalExpenses,
+    double totalPlannedBudget,
     double totalPendingReimbursement,
     double totalPaidReimbursement,
     Map<String, MemberModel> memberMap,
@@ -82,6 +84,7 @@ class _$DashboardDataCopyWithImpl<$Res, $Val extends DashboardData>
     Object? expenses = null,
     Object? totalCollected = null,
     Object? totalExpenses = null,
+    Object? totalPlannedBudget = null,
     Object? totalPendingReimbursement = null,
     Object? totalPaidReimbursement = null,
     Object? memberMap = null,
@@ -113,6 +116,10 @@ class _$DashboardDataCopyWithImpl<$Res, $Val extends DashboardData>
             totalExpenses: null == totalExpenses
                 ? _value.totalExpenses
                 : totalExpenses // ignore: cast_nullable_to_non_nullable
+                      as double,
+            totalPlannedBudget: null == totalPlannedBudget
+                ? _value.totalPlannedBudget
+                : totalPlannedBudget // ignore: cast_nullable_to_non_nullable
                       as double,
             totalPendingReimbursement: null == totalPendingReimbursement
                 ? _value.totalPendingReimbursement
@@ -166,6 +173,7 @@ abstract class _$$DashboardDataImplCopyWith<$Res>
     List<ExpenseModel> expenses,
     double totalCollected,
     double totalExpenses,
+    double totalPlannedBudget,
     double totalPendingReimbursement,
     double totalPaidReimbursement,
     Map<String, MemberModel> memberMap,
@@ -197,6 +205,7 @@ class __$$DashboardDataImplCopyWithImpl<$Res>
     Object? expenses = null,
     Object? totalCollected = null,
     Object? totalExpenses = null,
+    Object? totalPlannedBudget = null,
     Object? totalPendingReimbursement = null,
     Object? totalPaidReimbursement = null,
     Object? memberMap = null,
@@ -228,6 +237,10 @@ class __$$DashboardDataImplCopyWithImpl<$Res>
         totalExpenses: null == totalExpenses
             ? _value.totalExpenses
             : totalExpenses // ignore: cast_nullable_to_non_nullable
+                  as double,
+        totalPlannedBudget: null == totalPlannedBudget
+            ? _value.totalPlannedBudget
+            : totalPlannedBudget // ignore: cast_nullable_to_non_nullable
                   as double,
         totalPendingReimbursement: null == totalPendingReimbursement
             ? _value.totalPendingReimbursement
@@ -264,6 +277,7 @@ class _$DashboardDataImpl implements _DashboardData {
     required final List<ExpenseModel> expenses,
     required this.totalCollected,
     required this.totalExpenses,
+    required this.totalPlannedBudget,
     required this.totalPendingReimbursement,
     required this.totalPaidReimbursement,
     required final Map<String, MemberModel> memberMap,
@@ -307,6 +321,8 @@ class _$DashboardDataImpl implements _DashboardData {
   @override
   final double totalExpenses;
   @override
+  final double totalPlannedBudget;
+  @override
   final double totalPendingReimbursement;
   @override
   final double totalPaidReimbursement;
@@ -337,7 +353,7 @@ class _$DashboardDataImpl implements _DashboardData {
 
   @override
   String toString() {
-    return 'DashboardData(event: $event, members: $members, payments: $payments, expenses: $expenses, totalCollected: $totalCollected, totalExpenses: $totalExpenses, totalPendingReimbursement: $totalPendingReimbursement, totalPaidReimbursement: $totalPaidReimbursement, memberMap: $memberMap, recentActivities: $recentActivities, moduleAccess: $moduleAccess)';
+    return 'DashboardData(event: $event, members: $members, payments: $payments, expenses: $expenses, totalCollected: $totalCollected, totalExpenses: $totalExpenses, totalPlannedBudget: $totalPlannedBudget, totalPendingReimbursement: $totalPendingReimbursement, totalPaidReimbursement: $totalPaidReimbursement, memberMap: $memberMap, recentActivities: $recentActivities, moduleAccess: $moduleAccess)';
   }
 
   @override
@@ -353,6 +369,8 @@ class _$DashboardDataImpl implements _DashboardData {
                 other.totalCollected == totalCollected) &&
             (identical(other.totalExpenses, totalExpenses) ||
                 other.totalExpenses == totalExpenses) &&
+            (identical(other.totalPlannedBudget, totalPlannedBudget) ||
+                other.totalPlannedBudget == totalPlannedBudget) &&
             (identical(
                   other.totalPendingReimbursement,
                   totalPendingReimbursement,
@@ -383,6 +401,7 @@ class _$DashboardDataImpl implements _DashboardData {
     const DeepCollectionEquality().hash(_expenses),
     totalCollected,
     totalExpenses,
+    totalPlannedBudget,
     totalPendingReimbursement,
     totalPaidReimbursement,
     const DeepCollectionEquality().hash(_memberMap),
@@ -407,6 +426,7 @@ abstract class _DashboardData implements DashboardData {
     required final List<ExpenseModel> expenses,
     required final double totalCollected,
     required final double totalExpenses,
+    required final double totalPlannedBudget,
     required final double totalPendingReimbursement,
     required final double totalPaidReimbursement,
     required final Map<String, MemberModel> memberMap,
@@ -426,6 +446,8 @@ abstract class _DashboardData implements DashboardData {
   double get totalCollected;
   @override
   double get totalExpenses;
+  @override
+  double get totalPlannedBudget;
   @override
   double get totalPendingReimbursement;
   @override

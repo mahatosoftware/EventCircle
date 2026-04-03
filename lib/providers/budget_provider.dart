@@ -60,6 +60,9 @@ class _GuardedBudgetRepository implements BudgetRepository {
   Stream<List<BudgetItemModel>> getBudgetItems(String eventId) => _delegate.getBudgetItems(eventId);
 
   @override
+  Future<BudgetItemModel?> getBudgetItem(String eventId, String id) => _delegate.getBudgetItem(eventId, id);
+
+  @override
   Future<void> addBudgetItem(BudgetItemModel item) async {
     await _requireEdit(item.eventId);
     await _delegate.addBudgetItem(item);

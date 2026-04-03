@@ -31,8 +31,10 @@ mixin _$ExpenseModel {
   String? get createdBy => throw _privateConstructorUsedError;
   String? get approvedBy => throw _privateConstructorUsedError;
   DateTime? get approvedAt => throw _privateConstructorUsedError;
-  String? get receiptUrl =>
-      throw _privateConstructorUsedError; // Reimbursement Fields
+  String? get receiptUrl => throw _privateConstructorUsedError;
+  String? get budgetItemId =>
+      throw _privateConstructorUsedError; // Reference to the budget planning item
+  // Reimbursement Fields
   PaidByType get paidByType => throw _privateConstructorUsedError;
   String? get paidByUserId =>
       throw _privateConstructorUsedError; // ID of the volunteer/member who paid
@@ -74,6 +76,7 @@ abstract class $ExpenseModelCopyWith<$Res> {
     String? approvedBy,
     DateTime? approvedAt,
     String? receiptUrl,
+    String? budgetItemId,
     PaidByType paidByType,
     String? paidByUserId,
     bool isReimbursable,
@@ -111,6 +114,7 @@ class _$ExpenseModelCopyWithImpl<$Res, $Val extends ExpenseModel>
     Object? approvedBy = freezed,
     Object? approvedAt = freezed,
     Object? receiptUrl = freezed,
+    Object? budgetItemId = freezed,
     Object? paidByType = null,
     Object? paidByUserId = freezed,
     Object? isReimbursable = null,
@@ -165,6 +169,10 @@ class _$ExpenseModelCopyWithImpl<$Res, $Val extends ExpenseModel>
             receiptUrl: freezed == receiptUrl
                 ? _value.receiptUrl
                 : receiptUrl // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            budgetItemId: freezed == budgetItemId
+                ? _value.budgetItemId
+                : budgetItemId // ignore: cast_nullable_to_non_nullable
                       as String?,
             paidByType: null == paidByType
                 ? _value.paidByType
@@ -225,6 +233,7 @@ abstract class _$$ExpenseModelImplCopyWith<$Res>
     String? approvedBy,
     DateTime? approvedAt,
     String? receiptUrl,
+    String? budgetItemId,
     PaidByType paidByType,
     String? paidByUserId,
     bool isReimbursable,
@@ -261,6 +270,7 @@ class __$$ExpenseModelImplCopyWithImpl<$Res>
     Object? approvedBy = freezed,
     Object? approvedAt = freezed,
     Object? receiptUrl = freezed,
+    Object? budgetItemId = freezed,
     Object? paidByType = null,
     Object? paidByUserId = freezed,
     Object? isReimbursable = null,
@@ -316,6 +326,10 @@ class __$$ExpenseModelImplCopyWithImpl<$Res>
             ? _value.receiptUrl
             : receiptUrl // ignore: cast_nullable_to_non_nullable
                   as String?,
+        budgetItemId: freezed == budgetItemId
+            ? _value.budgetItemId
+            : budgetItemId // ignore: cast_nullable_to_non_nullable
+                  as String?,
         paidByType: null == paidByType
             ? _value.paidByType
             : paidByType // ignore: cast_nullable_to_non_nullable
@@ -368,6 +382,7 @@ class _$ExpenseModelImpl implements _ExpenseModel {
     this.approvedBy,
     this.approvedAt,
     this.receiptUrl,
+    this.budgetItemId,
     this.paidByType = PaidByType.organizer,
     this.paidByUserId,
     this.isReimbursable = false,
@@ -404,6 +419,9 @@ class _$ExpenseModelImpl implements _ExpenseModel {
   final DateTime? approvedAt;
   @override
   final String? receiptUrl;
+  @override
+  final String? budgetItemId;
+  // Reference to the budget planning item
   // Reimbursement Fields
   @override
   @JsonKey()
@@ -429,7 +447,7 @@ class _$ExpenseModelImpl implements _ExpenseModel {
 
   @override
   String toString() {
-    return 'ExpenseModel(id: $id, eventId: $eventId, title: $title, amount: $amount, category: $category, createdAt: $createdAt, status: $status, createdBy: $createdBy, approvedBy: $approvedBy, approvedAt: $approvedAt, receiptUrl: $receiptUrl, paidByType: $paidByType, paidByUserId: $paidByUserId, isReimbursable: $isReimbursable, reimbursementStatus: $reimbursementStatus, paidAt: $paidAt, paymentMode: $paymentMode, transactionRef: $transactionRef, rejectionReason: $rejectionReason)';
+    return 'ExpenseModel(id: $id, eventId: $eventId, title: $title, amount: $amount, category: $category, createdAt: $createdAt, status: $status, createdBy: $createdBy, approvedBy: $approvedBy, approvedAt: $approvedAt, receiptUrl: $receiptUrl, budgetItemId: $budgetItemId, paidByType: $paidByType, paidByUserId: $paidByUserId, isReimbursable: $isReimbursable, reimbursementStatus: $reimbursementStatus, paidAt: $paidAt, paymentMode: $paymentMode, transactionRef: $transactionRef, rejectionReason: $rejectionReason)';
   }
 
   @override
@@ -454,6 +472,8 @@ class _$ExpenseModelImpl implements _ExpenseModel {
                 other.approvedAt == approvedAt) &&
             (identical(other.receiptUrl, receiptUrl) ||
                 other.receiptUrl == receiptUrl) &&
+            (identical(other.budgetItemId, budgetItemId) ||
+                other.budgetItemId == budgetItemId) &&
             (identical(other.paidByType, paidByType) ||
                 other.paidByType == paidByType) &&
             (identical(other.paidByUserId, paidByUserId) ||
@@ -486,6 +506,7 @@ class _$ExpenseModelImpl implements _ExpenseModel {
     approvedBy,
     approvedAt,
     receiptUrl,
+    budgetItemId,
     paidByType,
     paidByUserId,
     isReimbursable,
@@ -523,6 +544,7 @@ abstract class _ExpenseModel implements ExpenseModel {
     final String? approvedBy,
     final DateTime? approvedAt,
     final String? receiptUrl,
+    final String? budgetItemId,
     final PaidByType paidByType,
     final String? paidByUserId,
     final bool isReimbursable,
@@ -557,7 +579,10 @@ abstract class _ExpenseModel implements ExpenseModel {
   @override
   DateTime? get approvedAt;
   @override
-  String? get receiptUrl; // Reimbursement Fields
+  String? get receiptUrl;
+  @override
+  String? get budgetItemId; // Reference to the budget planning item
+  // Reimbursement Fields
   @override
   PaidByType get paidByType;
   @override

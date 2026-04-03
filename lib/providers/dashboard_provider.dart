@@ -8,6 +8,7 @@ import 'event_provider.dart';
 import 'member_provider.dart';
 import 'payment_provider.dart';
 import 'expense_provider.dart';
+import 'budget_provider.dart';
 import 'access_control_provider.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -22,6 +23,7 @@ class DashboardData with _$DashboardData {
     required List<ExpenseModel> expenses,
     required double totalCollected,
     required double totalExpenses,
+    required double totalPlannedBudget,
     required double totalPendingReimbursement,
     required double totalPaidReimbursement,
     required Map<String, MemberModel> memberMap,
@@ -35,6 +37,7 @@ final dashboardDataProvider = Provider.family<AsyncValue<DashboardData>, String>
   final membersAsync = ref.watch(membersForEventStreamProvider(eventId));
   final paymentsAsync = ref.watch(paymentsForEventStreamProvider(eventId));
   final expensesAsync = ref.watch(expensesForEventStreamProvider(eventId));
+  final budgetAsync = ref.watch(budgetForEventStreamProvider(eventId));
 
   // If anything is still in error state and we don't have a value, return error.
   if (eventAsync.hasError) return AsyncError(eventAsync.error!, eventAsync.stackTrace!);
@@ -46,6 +49,7 @@ final dashboardDataProvider = Provider.family<AsyncValue<DashboardData>, String>
   final members = membersAsync.value ?? [];
   final payments = paymentsAsync.value ?? [];
   final expenses = expensesAsync.value ?? [];
+  final budget = budgetAsync.value ?? [];
 
   // Pre-calculate access
   final accessMap = <String, ModuleAccessLevel>{};
@@ -79,6 +83,11 @@ final dashboardDataProvider = Provider.family<AsyncValue<DashboardData>, String>
     }
   }
 
+  double totalBudget = 0;
+  for (final b in budget) {
+    totalBudget += b.estimatedCost;
+  }
+
   // Pre-map members
   final memberMap = {for (var m in members) m.id: m};
 
@@ -96,6 +105,7 @@ final dashboardDataProvider = Provider.family<AsyncValue<DashboardData>, String>
     expenses: expenses,
     totalCollected: totalCollected,
     totalExpenses: totalSpent,
+    totalPlannedBudget: totalBudget,
     totalPendingReimbursement: pendingReimbursement,
     totalPaidReimbursement: paidReimbursement,
     memberMap: memberMap,

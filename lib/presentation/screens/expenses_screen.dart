@@ -12,6 +12,7 @@ import '../../data/services/event_template_service.dart';
 import 'package:uuid/uuid.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/event_user_provider.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class ExpensesScreen extends ConsumerStatefulWidget {
   final String eventId;
@@ -149,10 +150,17 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen> with SingleTick
                     ),
                   );
                 }
-                return ListView.builder(
-                  padding: const EdgeInsets.all(16),
-                  itemCount: budget.length,
-                  itemBuilder: (context, index) => _buildBudgetTile(context, budget[index], ref),
+                return Column(
+                  children: [
+                    _buildBudgetSummary(budget),
+                    Expanded(
+                      child: ListView.builder(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        itemCount: budget.length,
+                        itemBuilder: (context, index) => _buildBudgetTile(context, budget[index], ref),
+                      ),
+                    ),
+                  ],
                 );
               },
               loading: () => const Center(child: CircularProgressIndicator()),
@@ -740,6 +748,62 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen> with SingleTick
     );
   }
 
+  Widget _buildBudgetSummary(List<BudgetItemModel> budget) {
+    final totalPlanned = budget.fold(0.0, (sum, b) => sum + b.estimatedCost);
+    final totalActual = budget.fold(0.0, (sum, b) => sum + b.actualCost);
+    
+    return Container(
+      margin: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: Colors.grey.shade200),
+        boxShadow: [BoxShadow(color: Colors.black.withAlpha(5), blurRadius: 10, offset: const Offset(0, 4))],
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _buildSimpleSummary('TOTAL PLANNED', '₹${totalPlanned.toStringAsFixed(0)}', Colors.blue),
+              _buildSimpleSummary('TOTAL ACTUAL', '₹${totalActual.toStringAsFixed(0)}', totalActual > totalPlanned ? Colors.red : Colors.green),
+            ],
+          ),
+          const SizedBox(height: 16),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(4),
+            child: LinearPercentIndicator(
+              lineHeight: 8.0,
+              percent: totalPlanned > 0 ? (totalActual / totalPlanned).clamp(0.0, 1.0) : 0.0,
+              backgroundColor: Colors.grey.shade100,
+              progressColor: totalActual > totalPlanned ? Colors.red : Colors.blue,
+              barRadius: const Radius.circular(4),
+              animation: true,
+              padding: EdgeInsets.zero,
+            ),
+          ),
+          if (totalActual > totalPlanned)
+            const Padding(
+              padding: EdgeInsets.only(top: 8.0),
+              child: Text('Warning: Total actual spending exceeds planned budget!', style: TextStyle(fontSize: 10, color: Colors.red, fontWeight: FontWeight.bold)),
+            ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSimpleSummary(String label, String value, Color color) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: TextStyle(fontSize: 9, fontWeight: FontWeight.w800, color: Colors.grey.shade600, letterSpacing: 0.5)),
+        const SizedBox(height: 4),
+        Text(value, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: color)),
+      ],
+    );
+  }
+
   Widget _buildBudgetTile(BuildContext context, BudgetItemModel item, WidgetRef ref) {
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
@@ -763,8 +827,17 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen> with SingleTick
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text('₹${item.estimatedCost}', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.blue)),
-                Text(item.isMandatory ? 'Mandatory' : 'Optional', style: const TextStyle(fontSize: 10, color: Colors.grey)),
+                Text('₹${item.actualCost.toStringAsFixed(0)}', style: TextStyle(fontWeight: FontWeight.w900, color: item.actualCost > item.estimatedCost ? Colors.red : Colors.green)),
+                Text('Actual', style: const TextStyle(fontSize: 10, color: Colors.grey)),
+              ],
+            ),
+            const SizedBox(width: 12),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text('₹${item.estimatedCost.toStringAsFixed(0)}', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.blue)),
+                Text(item.isMandatory ? 'Planned' : 'Optional', style: const TextStyle(fontSize: 10, color: Colors.grey)),
               ],
             ),
             const SizedBox(width: 8),
@@ -795,6 +868,7 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen> with SingleTick
 
     final titleController = TextEditingController();
     final amountController = TextEditingController();
+    String? selectedBudgetItemId;
 
     showDialog(
       context: context,
@@ -817,6 +891,42 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen> with SingleTick
                       items: categories.map((c) => DropdownMenuItem(value: c, child: Text(c))).toList(),
                       onChanged: (val) => setDialogState(() => selectedCategory = val!),
                       decoration: const InputDecoration(labelText: 'Category'),
+                    ),
+                    const SizedBox(height: 12),
+                    ref.watch(budgetForEventStreamProvider(widget.eventId)).when(
+                      data: (budget) => DropdownButtonFormField<String?>(
+                        value: selectedBudgetItemId,
+                        isExpanded: true,
+                        hint: const Text('Link to Budget Item (Optional)', style: TextStyle(fontSize: 13)),
+                        selectedItemBuilder: (context) {
+                          return [
+                            const Text('None', style: TextStyle(fontSize: 13, overflow: TextOverflow.ellipsis)),
+                            ...budget.map((b) => Text('${b.title} (₹${b.estimatedCost})', style: const TextStyle(fontSize: 13, overflow: TextOverflow.ellipsis))),
+                          ];
+                        },
+                        items: [
+                          const DropdownMenuItem<String?>(value: null, child: Text('None', style: TextStyle(fontSize: 13))),
+                          ...budget.map((b) => DropdownMenuItem(
+                            value: b.id, 
+                            child: Text('${b.title} (₹${b.estimatedCost})', style: const TextStyle(fontSize: 13, overflow: TextOverflow.ellipsis))
+                          )),
+                        ],
+                        onChanged: (val) {
+                          setDialogState(() {
+                            selectedBudgetItemId = val;
+                            if (val != null) {
+                              final item = budget.firstWhere((i) => i.id == val);
+                              selectedCategory = item.category;
+                              if (titleController.text.isEmpty) {
+                                titleController.text = item.title;
+                              }
+                            }
+                          });
+                        },
+                        decoration: const InputDecoration(labelText: 'Budget Alignment', contentPadding: EdgeInsets.symmetric(horizontal: 0)),
+                      ),
+                      loading: () => const LinearProgressIndicator(),
+                      error: (err, _) => Text('Error loading budget: $err'),
                     ),
                     const SizedBox(height: 16),
                     const Divider(),
@@ -881,6 +991,7 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen> with SingleTick
                       paidByUserId: selectedVolunteerId,
                       isReimbursable: isVolunteer,
                       reimbursementStatus: isVolunteer ? ReimbursementStatus.pending : ReimbursementStatus.none,
+                      budgetItemId: selectedBudgetItemId,
                     );
                     await ref.read(expenseRepositoryProvider).addExpense(newExpense);
                     if (context.mounted) Navigator.pop(context);

@@ -23,6 +23,7 @@ _$ExpenseModelImpl _$$ExpenseModelImplFromJson(Map<String, dynamic> json) =>
           ? null
           : DateTime.parse(json['approvedAt'] as String),
       receiptUrl: json['receiptUrl'] as String?,
+      budgetItemId: json['budgetItemId'] as String?,
       paidByType:
           $enumDecodeNullable(_$PaidByTypeEnumMap, json['paidByType']) ??
           PaidByType.organizer,
@@ -55,6 +56,7 @@ Map<String, dynamic> _$$ExpenseModelImplToJson(_$ExpenseModelImpl instance) =>
       'approvedBy': instance.approvedBy,
       'approvedAt': instance.approvedAt?.toIso8601String(),
       'receiptUrl': instance.receiptUrl,
+      'budgetItemId': instance.budgetItemId,
       'paidByType': _$PaidByTypeEnumMap[instance.paidByType]!,
       'paidByUserId': instance.paidByUserId,
       'isReimbursable': instance.isReimbursable,

@@ -196,6 +196,7 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
           SummaryCards(
             totalCollected: dashboard?.totalCollected ?? 0.0,
             totalExpenses: dashboard?.totalExpenses ?? 0.0,
+            totalPlannedBudget: dashboard?.totalPlannedBudget,
           ),
           if (dashboard != null && (dashboard.totalPendingReimbursement > 0 || dashboard.totalPaidReimbursement > 0)) ...[
             const SizedBox(height: 16),

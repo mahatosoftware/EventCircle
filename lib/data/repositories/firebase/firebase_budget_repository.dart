@@ -15,6 +15,13 @@ class FirebaseBudgetRepository implements BudgetRepository {
         .map((snapshot) =>
             snapshot.docs.map((doc) => BudgetItemModel.fromJson(doc.data())).toList());
   }
+  
+  @override
+  Future<BudgetItemModel?> getBudgetItem(String eventId, String id) async {
+    final doc = await _db.collection('events').doc(eventId).collection('budget').doc(id).get();
+    if (!doc.exists) return null;
+    return BudgetItemModel.fromJson(doc.data()!);
+  }
 
   @override
   Future<void> addBudgetItem(BudgetItemModel item) {
