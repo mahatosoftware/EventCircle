@@ -177,7 +177,7 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildQuickStats(context, dashboard),
+          _buildQuickStats(context, dashboard, event),
           const SizedBox(height: 24),
           _buildInfoCard(context, event),
           const SizedBox(height: 24),
@@ -212,7 +212,7 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildTransparencySection(context, dashboard),
+          _buildTransparencySection(context, dashboard, event),
           const SizedBox(height: 24),
           if (event.contributionType == ContributionType.itemBased && event.itemTargets != null) ...[
             _buildItemBasedSection(context, event),
@@ -222,10 +222,11 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
             totalCollected: dashboard?.totalCollected ?? 0.0,
             totalExpenses: dashboard?.totalExpenses ?? 0.0,
             totalPlannedBudget: dashboard?.totalPlannedBudget,
+            currencySymbol: event.currencySymbol,
           ),
           if (dashboard != null && (dashboard.totalPendingReimbursement > 0 || dashboard.totalPaidReimbursement > 0)) ...[
             const SizedBox(height: 16),
-            _buildReimbursementLiabilityCard(context, dashboard),
+            _buildReimbursementLiabilityCard(context, dashboard, event),
           ],
           const SizedBox(height: 24),
           _buildAuditLogsCard(context),
@@ -234,7 +235,7 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
     );
   }
 
-  Widget _buildReimbursementLiabilityCard(BuildContext context, DashboardData dashboard) {
+  Widget _buildReimbursementLiabilityCard(BuildContext context, DashboardData dashboard, EventModel event) {
     return InkWell(
       onTap: () => context.push('/event/${widget.eventId}/expenses'),
       borderRadius: BorderRadius.circular(24),
@@ -264,7 +265,7 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('₹${dashboard.totalPendingReimbursement}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: Colors.amber)),
+                      Text('${event.currencySymbol}${dashboard.totalPendingReimbursement}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: Colors.amber)),
                       const Text('Pending Liability', style: TextStyle(fontSize: 11, color: Colors.grey, fontWeight: FontWeight.bold)),
                     ],
                   ),
@@ -275,7 +276,7 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('₹${dashboard.totalPaidReimbursement}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: Colors.blue)),
+                      Text('${event.currencySymbol}${dashboard.totalPaidReimbursement}', style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: Colors.blue)),
                       const Text('Already Reimbursed', style: TextStyle(fontSize: 11, color: Colors.grey, fontWeight: FontWeight.bold)),
                     ],
                   ),
@@ -329,6 +330,7 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
   Widget _buildQuickStats(
     BuildContext context, 
     DashboardData? dashboard,
+    EventModel event,
   ) {
     if (dashboard == null) {
        return Row(
@@ -344,12 +346,13 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
     final collected = dashboard.totalCollected;
     final spent = dashboard.totalExpenses;
     final count = dashboard.members.length;
+    final symbol = event.currencySymbol;
 
     return Row(
       children: [
-        _buildStatItem(context, 'Collected', '₹${NumberFormat.compact().format(collected)}', Icons.payments_outlined, Colors.green),
+        _buildStatItem(context, 'Collected', '$symbol${NumberFormat.compact().format(collected)}', Icons.payments_outlined, Colors.green),
         const SizedBox(width: 12),
-        _buildStatItem(context, 'Spent', '₹${NumberFormat.compact().format(spent)}', Icons.receipt_long_outlined, Colors.red),
+        _buildStatItem(context, 'Spent', '$symbol${NumberFormat.compact().format(spent)}', Icons.receipt_long_outlined, Colors.red),
         const SizedBox(width: 12),
         _buildStatItem(context, 'Members', count.toString(), Icons.people_outline, Colors.blue),
       ],
@@ -581,7 +584,7 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(entry.key, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
-                    Text('₹$collected / ₹$target', style: TextStyle(fontSize: 11, color: Colors.grey.shade600, fontWeight: FontWeight.bold)),
+                    Text('${event.currencySymbol}$collected / ${event.currencySymbol}$target', style: TextStyle(fontSize: 11, color: Colors.grey.shade600, fontWeight: FontWeight.bold)),
                   ],
                 ),
                 const SizedBox(height: 8),
@@ -665,7 +668,7 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
   }
 
   Widget _buildTransparencySection(
-      BuildContext context, DashboardData? dashboard) {
+      BuildContext context, DashboardData? dashboard, EventModel event) {
     if (dashboard == null) {
       return Container(
         width: double.infinity,
@@ -698,7 +701,7 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text('COLLECTION PROGRESS', style: TextStyle(fontSize: 11, fontWeight: FontWeight.w800, color: Theme.of(context).primaryColor, letterSpacing: 1)),
-              Text('₹${NumberFormat.compact().format(totalCollected)}',
+              Text('${event.currencySymbol}${NumberFormat.compact().format(totalCollected)}',
                   style: TextStyle(fontWeight: FontWeight.w900, color: Theme.of(context).primaryColor, fontSize: 18)),
             ],
           ),

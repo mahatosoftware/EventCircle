@@ -4,12 +4,14 @@ class SummaryCards extends StatelessWidget {
   final double totalCollected;
   final double totalExpenses;
   final double? totalPlannedBudget;
+  final String currencySymbol;
 
   const SummaryCards({
     super.key,
     required this.totalCollected,
     required this.totalExpenses,
     this.totalPlannedBudget,
+    this.currencySymbol = '₹',
   });
 
   @override
@@ -42,7 +44,7 @@ class SummaryCards extends StatelessWidget {
                       const Expanded(
                         child: Text('Budget Performance', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.blue)),
                       ),
-                      Text('₹${totalExpenses.toStringAsFixed(0)} / ₹${totalPlannedBudget?.toStringAsFixed(0)}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: Colors.blue)),
+                      Text('$currencySymbol${totalExpenses.toStringAsFixed(0)} / $currencySymbol${totalPlannedBudget?.toStringAsFixed(0)}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: Colors.blue)),
                     ],
                   ),
                   const SizedBox(height: 12),
@@ -71,7 +73,7 @@ class SummaryCards extends StatelessWidget {
                 child: _buildSummaryCard(
                   context,
                   'Collected',
-                  '₹${totalCollected.toStringAsFixed(0)}',
+                  '$currencySymbol${totalCollected.toStringAsFixed(0)}',
                   Colors.green,
                   Icons.arrow_downward_outlined,
                 ),
@@ -81,7 +83,7 @@ class SummaryCards extends StatelessWidget {
                 child: _buildSummaryCard(
                   context,
                   'Expenses',
-                  '₹${totalExpenses.toStringAsFixed(0)}',
+                  '$currencySymbol${totalExpenses.toStringAsFixed(0)}',
                   Colors.red,
                   Icons.arrow_upward_outlined,
                 ),
@@ -94,7 +96,7 @@ class SummaryCards extends StatelessWidget {
             child: _buildSummaryCard(
               context,
               'Remaining Balance',
-              '₹${balance.toStringAsFixed(0)}',
+              '$currencySymbol${balance.toStringAsFixed(0)}',
               balance >= 0 ? Colors.blue : Colors.red,
               Icons.account_balance_wallet_outlined,
             ),

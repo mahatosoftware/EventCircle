@@ -38,9 +38,10 @@ class PublicDashboardScreen extends ConsumerWidget {
                 _buildHeader(context, event, totalCollected, progress, paidCount, memberCount),
                 const SizedBox(height: 24),
                 SummaryCards(
-                  totalCollected: totalCollected,
-                  totalExpenses: totalSpent,
-                ),
+                   totalCollected: totalCollected,
+                   totalExpenses: totalSpent,
+                   currencySymbol: event.currencySymbol,
+                 ),
                 const SizedBox(height: 24),
                 Text('Member Payment List', style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
                 const SizedBox(height: 12),
@@ -96,7 +97,7 @@ class PublicDashboardScreen extends ConsumerWidget {
                 Column(
                   children: [
                     const Text('Total Collected', style: TextStyle(fontSize: 12, color: Colors.grey)),
-                    Text('₹$total', style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    Text('${event.currencySymbol}$total', style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).primaryColor,
                     )),

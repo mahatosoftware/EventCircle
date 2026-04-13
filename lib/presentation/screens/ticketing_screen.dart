@@ -131,7 +131,7 @@ class _TicketingScreenState extends ConsumerState<TicketingScreen> {
           : ListView.builder(
               padding: const EdgeInsets.all(16),
               itemCount: tickets.length,
-              itemBuilder: (context, index) => _buildTicketCard(tickets[index]),
+              itemBuilder: (context, index) => _buildTicketCard(tickets[index], event?.currencySymbol),
             ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () => _showAddTicketTypeDialog(),
@@ -363,7 +363,7 @@ class _TicketingScreenState extends ConsumerState<TicketingScreen> {
     );
   }
 
-  Widget _buildTicketCard(TicketModel ticket) {
+  Widget _buildTicketCard(TicketModel ticket, String? currencySymbol) {
     final soldProgress = ticket.capacity > 0 ? ticket.soldCount / ticket.capacity : 0.0;
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
@@ -375,7 +375,7 @@ class _TicketingScreenState extends ConsumerState<TicketingScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(ticket.title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                Text('₹${ticket.price}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text('${currencySymbol ?? '₹'}${ticket.price}', style: const TextStyle(fontWeight: FontWeight.bold)),
               ],
             ),
             const SizedBox(height: 12),

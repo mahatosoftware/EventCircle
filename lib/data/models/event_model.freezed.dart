@@ -25,6 +25,7 @@ mixin _$EventModel {
   String get title => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get organizerId => throw _privateConstructorUsedError;
+  String get currency => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   EventCategory get category => throw _privateConstructorUsedError;
@@ -84,6 +85,7 @@ abstract class $EventModelCopyWith<$Res> {
     String title,
     String description,
     String organizerId,
+    String currency,
     double amount,
     DateTime createdAt,
     EventCategory category,
@@ -131,6 +133,7 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
     Object? title = null,
     Object? description = null,
     Object? organizerId = null,
+    Object? currency = null,
     Object? amount = null,
     Object? createdAt = null,
     Object? category = null,
@@ -174,6 +177,10 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
             organizerId: null == organizerId
                 ? _value.organizerId
                 : organizerId // ignore: cast_nullable_to_non_nullable
+                      as String,
+            currency: null == currency
+                ? _value.currency
+                : currency // ignore: cast_nullable_to_non_nullable
                       as String,
             amount: null == amount
                 ? _value.amount
@@ -295,6 +302,7 @@ abstract class _$$EventModelImplCopyWith<$Res>
     String title,
     String description,
     String organizerId,
+    String currency,
     double amount,
     DateTime createdAt,
     EventCategory category,
@@ -341,6 +349,7 @@ class __$$EventModelImplCopyWithImpl<$Res>
     Object? title = null,
     Object? description = null,
     Object? organizerId = null,
+    Object? currency = null,
     Object? amount = null,
     Object? createdAt = null,
     Object? category = null,
@@ -384,6 +393,10 @@ class __$$EventModelImplCopyWithImpl<$Res>
         organizerId: null == organizerId
             ? _value.organizerId
             : organizerId // ignore: cast_nullable_to_non_nullable
+                  as String,
+        currency: null == currency
+            ? _value.currency
+            : currency // ignore: cast_nullable_to_non_nullable
                   as String,
         amount: null == amount
             ? _value.amount
@@ -498,6 +511,7 @@ class _$EventModelImpl implements _EventModel {
     required this.title,
     required this.description,
     required this.organizerId,
+    this.currency = 'INR',
     required this.amount,
     required this.createdAt,
     required this.category,
@@ -550,6 +564,9 @@ class _$EventModelImpl implements _EventModel {
   final String description;
   @override
   final String organizerId;
+  @override
+  @JsonKey()
+  final String currency;
   @override
   final double amount;
   @override
@@ -696,7 +713,7 @@ class _$EventModelImpl implements _EventModel {
 
   @override
   String toString() {
-    return 'EventModel(id: $id, title: $title, description: $description, organizerId: $organizerId, amount: $amount, createdAt: $createdAt, category: $category, contributionType: $contributionType, hybridSettings: $hybridSettings, location: $location, startDate: $startDate, endDate: $endDate, tiers: $tiers, itemTargets: $itemTargets, groups: $groups, recurringPeriod: $recurringPeriod, note: $note, templateId: $templateId, templateSnapshot: $templateSnapshot, isHybrid: $isHybrid, activeModels: $activeModels, allowedPaymentMethods: $allowedPaymentMethods, contributionTargetGroup: $contributionTargetGroup, maxGuests: $maxGuests, isRsvpRequired: $isRsvpRequired, guestCategories: $guestCategories, guestMetadataFields: $guestMetadataFields, isExpenseApprovalRequired: $isExpenseApprovalRequired, expenseCategories: $expenseCategories)';
+    return 'EventModel(id: $id, title: $title, description: $description, organizerId: $organizerId, currency: $currency, amount: $amount, createdAt: $createdAt, category: $category, contributionType: $contributionType, hybridSettings: $hybridSettings, location: $location, startDate: $startDate, endDate: $endDate, tiers: $tiers, itemTargets: $itemTargets, groups: $groups, recurringPeriod: $recurringPeriod, note: $note, templateId: $templateId, templateSnapshot: $templateSnapshot, isHybrid: $isHybrid, activeModels: $activeModels, allowedPaymentMethods: $allowedPaymentMethods, contributionTargetGroup: $contributionTargetGroup, maxGuests: $maxGuests, isRsvpRequired: $isRsvpRequired, guestCategories: $guestCategories, guestMetadataFields: $guestMetadataFields, isExpenseApprovalRequired: $isExpenseApprovalRequired, expenseCategories: $expenseCategories)';
   }
 
   @override
@@ -710,6 +727,8 @@ class _$EventModelImpl implements _EventModel {
                 other.description == description) &&
             (identical(other.organizerId, organizerId) ||
                 other.organizerId == organizerId) &&
+            (identical(other.currency, currency) ||
+                other.currency == currency) &&
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
@@ -787,6 +806,7 @@ class _$EventModelImpl implements _EventModel {
     title,
     description,
     organizerId,
+    currency,
     amount,
     createdAt,
     category,
@@ -834,6 +854,7 @@ abstract class _EventModel implements EventModel {
     required final String title,
     required final String description,
     required final String organizerId,
+    final String currency,
     required final double amount,
     required final DateTime createdAt,
     required final EventCategory category,
@@ -872,6 +893,8 @@ abstract class _EventModel implements EventModel {
   String get description;
   @override
   String get organizerId;
+  @override
+  String get currency;
   @override
   double get amount;
   @override

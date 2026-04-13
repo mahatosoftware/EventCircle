@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'currency.dart';
 
 part 'event_model.freezed.dart';
 part 'event_model.g.dart';
@@ -42,6 +43,7 @@ class EventModel with _$EventModel {
     required String title,
     required String description,
     required String organizerId,
+    @Default('INR') String currency,
     required double amount,
     required DateTime createdAt,
     required EventCategory category,
@@ -73,3 +75,14 @@ class EventModel with _$EventModel {
 
   factory EventModel.fromJson(Map<String, dynamic> json) => _$EventModelFromJson(json);
 }
+
+extension EventModelCurrency on EventModel {
+  String get currencySymbol {
+    try {
+      return storeCurrencies.firstWhere((c) => c.code == currency).symbol;
+    } catch (_) {
+      return '₹'; // Fallback
+    }
+  }
+}
+

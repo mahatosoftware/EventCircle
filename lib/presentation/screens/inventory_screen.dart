@@ -36,7 +36,7 @@ class InventoryScreen extends ConsumerWidget {
             itemBuilder: (context, index) {
               final cat = grouped.keys.elementAt(index);
               final catItems = grouped[cat]!;
-              return _buildCategorySection(context, cat, catItems, ref);
+              return _buildCategorySection(context, cat, catItems, ref, eventAsync.value?.currencySymbol);
             },
           );
         },
@@ -79,7 +79,7 @@ class InventoryScreen extends ConsumerWidget {
     }
   }
 
-  Widget _buildCategorySection(BuildContext context, String category, List<InventoryItemModel> items, WidgetRef ref) {
+  Widget _buildCategorySection(BuildContext context, String category, List<InventoryItemModel> items, WidgetRef ref, String? currencySymbol) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -87,13 +87,13 @@ class InventoryScreen extends ConsumerWidget {
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8.0),
           child: Text(category, style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.blue)),
         ),
-        ...items.map((item) => _buildItemTile(context, item, ref)),
+        ...items.map((item) => _buildItemTile(context, item, ref, currencySymbol)),
         const SizedBox(height: 16),
       ],
     );
   }
 
-  Widget _buildItemTile(BuildContext context, InventoryItemModel item, WidgetRef ref) {
+  Widget _buildItemTile(BuildContext context, InventoryItemModel item, WidgetRef ref, String? currencySymbol) {
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
       child: ListTile(
@@ -103,7 +103,7 @@ class InventoryScreen extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text('₹${item.estimatedCost ?? 0}', style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text('${currencySymbol ?? '₹'}${item.estimatedCost ?? 0}', style: const TextStyle(fontWeight: FontWeight.bold)),
             _buildStatusChip(item.status),
           ],
         ),

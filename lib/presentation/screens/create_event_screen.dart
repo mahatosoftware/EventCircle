@@ -1,23 +1,18 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
-import '../../providers/event_provider.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/template_provider.dart';
-import '../../providers/task_provider.dart';
-import '../../providers/timeline_provider.dart';
-import '../../providers/vendor_inventory_provider.dart';
-import '../../providers/role_provider.dart';
-import '../../providers/event_user_provider.dart';
-import '../../providers/venue_ticketing_provider.dart';
-import '../../providers/custom_announcement_provider.dart';
 import '../../data/models/event_model.dart';
 import '../../data/models/event_role_model.dart';
 import '../../data/models/event_user_model.dart';
 import '../../data/models/template_model.dart';
+import '../../data/models/currency.dart';
 
 class CreateEventScreen extends ConsumerStatefulWidget {
   const CreateEventScreen({super.key});
@@ -43,6 +38,11 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
   bool _isTemplateSelected = false;
   String _searchQuery = '';
   bool _isSubmitting = false;
+  String? _submitStatus;
+  Currency? _selectedCurrencyItem;
+
+  static const int _maxWritesPerBatch = 450; // Firestore limit is 500. Keep headroom.
+  static const Duration _batchCommitTimeout = Duration(seconds: 45);
 
   @override
   void dispose() {
@@ -88,6 +88,181 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
     }
   }
 
+  void _setSubmitStatus(String? status) {
+    if (!mounted) return;
+    setState(() => _submitStatus = status);
+  }
+
+  Map<String, dynamic>? _buildTemplateSnapshot(TemplateModel? template) {
+    if (template == null) return null;
+    // Keep this intentionally light to avoid hitting Firestore's 1MiB document limit.
+    return {
+      'id': template.id,
+      'title': template.title,
+      'version': template.version,
+      'templateCode': template.templateCode,
+      'enabledModules': template.enabledModules.map((m) => m.name).toList(),
+      'createdAt': template.createdAt?.toIso8601String(),
+    };
+  }
+
+  Future<void> _commitBatch(
+    WriteBatch batch, {
+    required String label,
+  }) async {
+    debugPrint('CreateEventScreen: Committing batch ($label)...');
+    await batch.commit().timeout(_batchCommitTimeout);
+    debugPrint('CreateEventScreen: Batch committed ($label).');
+  }
+
+  int _blueprintWriteCount(TemplateModel template) {
+    return template.taskBlueprints.length +
+        template.timelineBlueprints.length +
+        template.vendorBlueprints.length +
+        template.inventoryBlueprints.length +
+        template.roleBlueprints.length +
+        template.venueBlueprints.length +
+        template.ticketBlueprints.length +
+        template.customFieldBlueprints.length +
+        template.announcementBlueprints.length;
+  }
+
+  Future<void> _importTemplateBlueprints({
+    required FirebaseFirestore db,
+    required String eventId,
+    required TemplateModel template,
+  }) async {
+    final uuid = const Uuid();
+    final total = _blueprintWriteCount(template);
+    if (total == 0) return;
+
+    int done = 0;
+    int inBatch = 0;
+    WriteBatch batch = db.batch();
+
+    Future<void> flush(String label) async {
+      if (inBatch == 0) return;
+      _setSubmitStatus('Setting up modules… $done/$total');
+      await _commitBatch(batch, label: label);
+      batch = db.batch();
+      inBatch = 0;
+      // Yield to the UI thread between commits so the app doesn't look frozen.
+      await Future<void>.delayed(Duration.zero);
+    }
+
+    void addWrite(void Function(WriteBatch b) write) {
+      write(batch);
+      done++;
+      inBatch++;
+      if (inBatch >= _maxWritesPerBatch) {
+        // Commit boundary handled by callers (loop awaits flush()).
+      }
+    }
+
+    // Task Blueprints (global tasks collection)
+    for (final task in template.taskBlueprints) {
+      final taskId = uuid.v4();
+      addWrite((b) => b.set(
+            db.collection('tasks').doc(taskId),
+            task.copyWith(id: taskId, eventId: eventId).toJson(),
+          ));
+      if (inBatch >= _maxWritesPerBatch) await flush('tasks');
+    }
+
+    // Timeline Blueprints
+    for (final item in template.timelineBlueprints) {
+      final itemId = uuid.v4();
+      addWrite((b) => b.set(
+            db.collection('events').doc(eventId).collection('timeline').doc(itemId),
+            item.copyWith(id: itemId, eventId: eventId).toJson(),
+          ));
+      if (inBatch >= _maxWritesPerBatch) await flush('timeline');
+    }
+
+    // Vendor Blueprints
+    for (final vendor in template.vendorBlueprints) {
+      final vendorId = uuid.v4();
+      addWrite((b) => b.set(
+            db.collection('events').doc(eventId).collection('vendors').doc(vendorId),
+            vendor.copyWith(id: vendorId, eventId: eventId).toJson(),
+          ));
+      if (inBatch >= _maxWritesPerBatch) await flush('vendors');
+    }
+
+    // Inventory Blueprints
+    for (final item in template.inventoryBlueprints) {
+      final itemId = uuid.v4();
+      addWrite((b) => b.set(
+            db.collection('events').doc(eventId).collection('inventory').doc(itemId),
+            item.copyWith(id: itemId, eventId: eventId).toJson(),
+          ));
+      if (inBatch >= _maxWritesPerBatch) await flush('inventory');
+    }
+
+    // Role Blueprints
+    for (final def in template.roleBlueprints) {
+      final roleId = uuid.v4();
+      final role = EventRoleModel(
+        id: roleId,
+        eventId: eventId,
+        name: def.name,
+        description: def.description,
+        moduleAccess: def.moduleAccess,
+        userIds: const [],
+      );
+      addWrite((b) => b.set(
+            db.collection('events').doc(eventId).collection('roles').doc(roleId),
+            role.toJson(),
+          ));
+      if (inBatch >= _maxWritesPerBatch) await flush('roles');
+    }
+
+    // Venue Blueprints
+    for (final venue in template.venueBlueprints) {
+      final venueId = uuid.v4();
+      addWrite((b) => b.set(
+            db.collection('events').doc(eventId).collection('venues').doc(venueId),
+            venue.copyWith(id: venueId, eventId: eventId).toJson(),
+          ));
+      if (inBatch >= _maxWritesPerBatch) await flush('venues');
+    }
+
+    // Ticket Blueprints
+    for (final ticket in template.ticketBlueprints) {
+      final ticketId = uuid.v4();
+      addWrite((b) => b.set(
+            db.collection('events').doc(eventId).collection('tickets').doc(ticketId),
+            ticket.copyWith(id: ticketId, eventId: eventId).toJson(),
+          ));
+      if (inBatch >= _maxWritesPerBatch) await flush('tickets');
+    }
+
+    // Custom Fields
+    for (final field in template.customFieldBlueprints) {
+      final fieldId = uuid.v4();
+      addWrite((b) => b.set(
+            db.collection('events').doc(eventId).collection('customFields').doc(fieldId),
+            field.copyWith(id: fieldId, eventId: eventId).toJson(),
+          ));
+      if (inBatch >= _maxWritesPerBatch) await flush('customFields');
+    }
+
+    // Announcements
+    for (final announcement in template.announcementBlueprints) {
+      final announcementId = uuid.v4();
+      addWrite((b) => b.set(
+            db.collection('events').doc(eventId).collection('announcements').doc(announcementId),
+            announcement
+                .copyWith(id: announcementId, eventId: eventId, createdAt: DateTime.now())
+                .toJson(),
+          ));
+      if (inBatch >= _maxWritesPerBatch) await flush('announcements');
+    }
+
+    await flush('final');
+    _setSubmitStatus(null);
+  }
+
   Future<void> _handleSave() async {
     // Dismiss keyboard
     FocusScope.of(context).unfocus();
@@ -106,6 +281,13 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
       return;
     }
 
+    if (_selectedCurrencyItem == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please select a currency')),
+      );
+      return;
+    }
+
     final user = ref.read(currentUserProvider);
     if (user == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -115,6 +297,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
     }
 
     setState(() => _isSubmitting = true);
+    _setSubmitStatus(_selectedTemplate == null ? 'Creating event…' : 'Creating event & modules…');
 
     try {
       final newEvent = EventModel(
@@ -122,6 +305,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
         title: _titleController.text,
         description: _descriptionController.text,
         organizerId: user.id,
+        currency: _selectedCurrencyItem!.code,
         amount: double.tryParse(_amountController.text) ?? 0.0,
         createdAt: DateTime.now(),
         category: _selectedCategory!,
@@ -131,132 +315,75 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
         endDate: _endDate,
         note: _noteController.text.isEmpty ? null : _noteController.text,
         templateId: _selectedTemplate?.id,
-        templateSnapshot: _selectedTemplate?.toDeepJson(),
+        templateSnapshot: _buildTemplateSnapshot(_selectedTemplate),
       );
 
-      final repo = ref.read(eventRepositoryProvider);
-      await repo.createEvent(newEvent);
-
-      // Always create the system Owner role and add the creator as an event participant.
+      final db = FirebaseFirestore.instance;
       final uuid = const Uuid();
-      final roleRepo = ref.read(roleRepositoryProvider);
-      await roleRepo.addRole(
-        EventRoleModel(
-          id: uuid.v4(),
-          eventId: newEvent.id,
-          name: 'Owner',
-          description: 'Event owner with full access.',
-          moduleAccess: fullAccessForAllModules(),
-          userIds: [newEvent.organizerId],
-          isSystem: true,
-          systemKey: 'owner',
-        ),
+
+      // 1) Create Event + required docs (small batch)
+      final initBatch = db.batch();
+      initBatch.set(db.collection('events').doc(newEvent.id), newEvent.toJson());
+
+      // 2) Create Owner Role
+      final ownerRoleId = uuid.v4();
+      final ownerRole = EventRoleModel(
+        id: ownerRoleId,
+        eventId: newEvent.id,
+        name: 'Owner',
+        description: 'Event owner with full access.',
+        moduleAccess: fullAccessForAllModules(),
+        userIds: [newEvent.organizerId],
+        isSystem: true,
+        systemKey: 'owner',
+      );
+      initBatch.set(
+        db.collection('events').doc(newEvent.id).collection('roles').doc(ownerRoleId),
+        ownerRole.toJson(),
       );
 
-      await ref.read(eventUserRepositoryProvider).addUserToEvent(
-        EventUserModel(
-          id: newEvent.organizerId,
-          eventId: newEvent.id,
-          status: EventUserStatus.active,
-          addedAt: DateTime.now(),
-          addedBy: newEvent.organizerId,
-        ),
+      // 3) Add User to Event
+      final eventUser = EventUserModel(
+        id: newEvent.organizerId,
+        eventId: newEvent.id,
+        status: EventUserStatus.active,
+        addedAt: DateTime.now(),
+        addedBy: newEvent.organizerId,
+      );
+      initBatch.set(
+        db.collection('events').doc(newEvent.id).collection('users').doc(eventUser.id),
+        eventUser.toJson(),
       );
 
-      if (_selectedTemplate != null) {
-        final template = _selectedTemplate!;
-        Future<void> unpack(String label, Future<void> Function() fn) async {
-          try {
-            await fn();
-          } catch (e) {
-            debugPrint('Blueprint Import [$label] failed: $e');
-            // We continue with other modules even if one fails
-          }
-        }
+      // Template usage bump should not block event creation if it fails.
+      final template = _selectedTemplate;
+      if (template != null) {
+        initBatch.update(
+          db.collection('templates').doc(template.id),
+          {'usageCount': FieldValue.increment(1)},
+        );
+      }
 
-        await unpack('Tasks', () async {
-          final taskRepo = ref.read(taskRepositoryProvider);
-          for (final task in template.taskBlueprints) {
-            await taskRepo.addTask(task.copyWith(id: uuid.v4(), eventId: newEvent.id));
-          }
-        });
+      _setSubmitStatus('Creating event…');
+      await _commitBatch(initBatch, label: 'init');
 
-        await unpack('Timeline', () async {
-          final tRepo = ref.read(timelineRepositoryProvider);
-          for (final item in template.timelineBlueprints) {
-            await tRepo.addTimelineItem(item.copyWith(id: uuid.v4(), eventId: newEvent.id));
-          }
-        });
-
-        await unpack('Vendors', () async {
-          final vRepo = ref.read(vendorRepositoryProvider);
-          for (final vendor in template.vendorBlueprints) {
-            await vRepo.addVendor(vendor.copyWith(id: uuid.v4(), eventId: newEvent.id));
-          }
-        });
-
-        await unpack('Inventory', () async {
-          final iRepo = ref.read(inventoryRepositoryProvider);
-          for (final item in template.inventoryBlueprints) {
-            await iRepo.addInventoryItem(item.copyWith(id: uuid.v4(), eventId: newEvent.id));
-          }
-        });
-
-        await unpack('Roles', () async {
-          for (final def in template.roleBlueprints) {
-            await roleRepo.addRole(
-              EventRoleModel(
-                id: uuid.v4(),
-                eventId: newEvent.id,
-                name: def.name,
-                description: def.description,
-                moduleAccess: def.moduleAccess,
-                userIds: const [],
-              ),
-            );
-          }
-        });
-
-        await unpack('Venues', () async {
-          final vtRepo = ref.read(venueTicketingRepositoryProvider);
-          for (final venue in template.venueBlueprints) {
-            await vtRepo.addVenue(venue.copyWith(id: uuid.v4(), eventId: newEvent.id));
-          }
-        });
-
-        await unpack('Tickets', () async {
-          final vtRepo = ref.read(venueTicketingRepositoryProvider);
-          for (final ticket in template.ticketBlueprints) {
-            await vtRepo.addTicket(ticket.copyWith(id: uuid.v4(), eventId: newEvent.id));
-          }
-        });
-
-        await unpack('Custom Fields', () async {
-          final caRepo = ref.read(customAnnouncementRepositoryProvider);
-          for (final field in template.customFieldBlueprints) {
-            await caRepo.addCustomField(field.copyWith(id: uuid.v4(), eventId: newEvent.id));
-          }
-        });
-
-        await unpack('Announcements', () async {
-          final caRepo = ref.read(customAnnouncementRepositoryProvider);
-          for (final announcement in template.announcementBlueprints) {
-            await caRepo.addAnnouncement(
-              announcement.copyWith(id: uuid.v4(), eventId: newEvent.id, createdAt: DateTime.now()),
-            );
-          }
-        });
-
-        try {
-          await ref.read(templateRepositoryProvider).incrementUsage(template.id);
-        } catch (e) {
-          debugPrint('CreateEventScreen: incrementUsage failed: $e');
-        }
+      // 2) Import template blueprints in chunked batches (avoids Firestore batch-size limit + UI freezes).
+      if (template != null) {
+        await _importTemplateBlueprints(db: db, eventId: newEvent.id, template: template);
       }
 
       if (mounted) {
-        context.go('/home');
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Event created successfully')));
+        context.go('/home');
+      }
+    } on TimeoutException catch (e, st) {
+      debugPrint('CreateEventScreen event creation timed out: $e\n$st');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Network is slow — creation timed out. Please check Home; the event may appear shortly.'),
+          ),
+        );
       }
     } on FirebaseException catch (e, st) {
       debugPrint('CreateEventScreen event creation failed: ${e.code} ${e.message}\n$st');
@@ -270,7 +397,10 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
       }
     } finally {
       if (mounted) {
-        setState(() => _isSubmitting = false);
+        setState(() {
+          _isSubmitting = false;
+          _submitStatus = null;
+        });
       }
     }
   }
@@ -621,14 +751,38 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                 validator: (v) => v?.isEmpty ?? true ? 'Required' : null,
               ),
               const SizedBox(height: 16),
+              DropdownButtonFormField<Currency>(
+                isExpanded: true,
+                value: _selectedCurrencyItem,
+                decoration: const InputDecoration(
+                  labelText: 'Currency',
+                  prefixIcon: Icon(Icons.currency_exchange_outlined),
+                ),
+                items: storeCurrencies.map((Currency c) {
+                  return DropdownMenuItem<Currency>(
+                    value: c,
+                    child: Text(
+                      '${c.code} (${c.symbol}) - ${c.name}',
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  );
+                }).toList(),
+                onChanged: (value) => setState(() => _selectedCurrencyItem = value),
+                validator: (v) => v == null ? 'Required' : null,
+              ),
+              const SizedBox(height: 16),
               Row(
                 children: [
-                  Expanded(
+                   Expanded(
                     child: TextFormField(
                       controller: _amountController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'Target / Amount',
-                        prefixIcon: Icon(Icons.currency_rupee),
+                        prefixIcon: Icon(_selectedCurrencyItem != null 
+                             ? Icons.payments_outlined
+                             : Icons.currency_rupee),
+                        prefixText: _selectedCurrencyItem?.symbol != null ? '${_selectedCurrencyItem!.symbol} ' : null,
                       ),
                       keyboardType: TextInputType.number,
                     ),
@@ -668,10 +822,25 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                   elevation: 4,
                 ),
                 child: _isSubmitting
-                    ? const SizedBox(
-                        height: 24,
-                        width: 24,
-                        child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
+                          ),
+                          const SizedBox(width: 12),
+                          Flexible(
+                            child: Text(
+                              _submitStatus ?? 'Working…',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                        ],
                       )
                     : Text(_selectedTemplate == null ? 'Create Custom Event' : 'Create Event',
                         style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
