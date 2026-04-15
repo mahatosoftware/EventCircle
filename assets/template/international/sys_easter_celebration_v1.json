@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_easter_celebration_v1",
+      "templateName": "Easter Celebration",
+      "category": "communityAndCultural",
+      "description": "Holiday celebration with egg hunts, festive meals, and family activities.",
+      "tags": ["easter", "egg hunt", "holiday", "family", "spring"],
+      "defaultFields": {
+        "contributionType": "voluntary",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "kids"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_easter_task_hunt", "eventId": "blueprint_dummy", "title": "Organize Easter Egg Hunt", "status": "pending", "phase": "preEvent", "description": "Prepare and hide eggs for children.", "dueOffset": "T-1 day", "role": "Kids Coordinator", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_easter_budget_eggs", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Eggs & Decorations", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_easter_timeline_hunt", "eventId": "blueprint_dummy", "title": "Main Egg Hunt Event", "phase": "eventDay", "timeOrOffset": "10:30 AM", "dayNumber": 1, "description": "The main activity for children." }
+      ],
+      "version": 1
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_group_tour_v1",
+      "templateName": "Group Tour Planning",
+      "category": "travel",
+      "description": "Large scale multi-day travel with a group (Seniors/Students/Clubs).",
+      "tags": ["group tour", "travel", "itinerary", "guided", "bus tour"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "roles", "inventory", "contribution", "userManagement"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_tour_task_guide", "eventId": "blueprint_dummy", "title": "Book Certified Tour Guide", "status": "pending", "phase": "preEvent", "description": "Secure expert services for site explanations.", "dueOffset": "T-20 days", "role": "Logistics", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_tour_budget_hotel", "eventId": "blueprint_dummy", "category": "Venue", "title": "Hotel/Accommodation", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_tour_timeline_briefing", "eventId": "blueprint_dummy", "title": "Morning Tour Briefing", "phase": "eventDay", "timeOrOffset": "07:30 AM", "dayNumber": 1, "description": "Overview of daily schedule." }
+      ],
+      "version": 1
+    }
+  ]
+}

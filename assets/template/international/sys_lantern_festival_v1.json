@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_lantern_fest_v1",
+      "templateName": "Lantern Festival",
+      "category": "communityAndCultural",
+      "description": "Decorative festival focused on the lighting of lanterns and community gatherings.",
+      "tags": ["lantern festival", "festival", "cultrual", "traditional", "lights"],
+      "defaultFields": {
+        "contributionType": "voluntary",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "roles", "inventory"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_lf_task_materials", "eventId": "blueprint_dummy", "title": "Buy Lantern Making Supplies", "status": "pending", "phase": "preEvent", "description": "Ensure paper, wire, and lights are ready for workshops.", "dueOffset": "T-7 days", "role": "Logistics", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_lf_budget_decor", "eventId": "blueprint_dummy", "category": "Decoration", "title": "Grand Display Lanterns", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_lf_timeline_lighting", "eventId": "blueprint_dummy", "title": "Main Lighting Event", "phase": "eventDay", "timeOrOffset": "08:00 PM", "dayNumber": 1, "description": "The moment all lanterns are lit." }
+      ],
+      "version": 1
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_gender_reveal_v1",
+      "templateName": "Baby Gender Reveal",
+      "category": "personal",
+      "description": "Special gathering to reveal the gender of the upcoming new family member.",
+      "tags": ["baby", "gender reveal", "party", "revelation", "family"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "decoration"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_gr_task_confetti", "eventId": "blueprint_dummy", "title": "Secure Reveal Method", "status": "pending", "phase": "preEvent", "description": "Arrange smoke, balloon, or confetti with the correct color.", "dueOffset": "T-10 days", "role": "Logistics", "dependsOn": [] },
+        { "id": "sys_gr_task_theme", "eventId": "blueprint_dummy", "title": "Pink & Blue Themed Decor", "status": "pending", "phase": "preEvent", "description": "Ensure the venue is decorated in the gender theme colors.", "dueOffset": "T-5 days", "role": "Decoration", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_gr_budget_cake", "eventId": "blueprint_dummy", "category": "Food", "title": "Themed Reveal Cake", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_gr_timeline_reveal", "eventId": "blueprint_dummy", "title": "The Grand Reveal", "phase": "eventDay", "timeOrOffset": "04:30 PM", "dayNumber": 1, "description": "The main reveal moment of the ceremony." }
+      ],
+      "version": 1
+    }
+  ]
+}

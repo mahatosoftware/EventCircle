@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_retirement_v1",
+      "templateName": "Retirement Party",
+      "category": "personal",
+      "description": "Celebrate a successful career and the start of a new chapter.",
+      "tags": ["retirement", "farewell", "career", "party", "office"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "roles"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_retirement_task_tribute", "eventId": "blueprint_dummy", "title": "Prepare Video/Speech Tribute", "status": "pending", "phase": "preEvent", "description": "Gather photos and memories for a presentation.", "dueOffset": "T-15 days", "role": "Media", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_retirement_budget_memento", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Retirement Memento/Gift", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_retirement_timeline_speech", "eventId": "blueprint_dummy", "title": "Specials Speeches & Tributes", "phase": "eventDay", "timeOrOffset": "07:00 PM", "dayNumber": 1, "description": "Colleagues and family sharing memories." }
+      ],
+      "version": 1
+    }
+  ]
+}

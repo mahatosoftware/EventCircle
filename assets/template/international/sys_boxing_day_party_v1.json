@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_boxing_day_v1",
+      "templateName": "Boxing Day Party",
+      "category": "personal",
+      "description": "Post-holiday gathering featuring relaxed socializing and group activities.",
+      "tags": ["boxing day", "party", "post-christmas", "gathering"],
+      "defaultFields": {
+        "contributionType": "voluntary",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_bx_task_menu", "eventId": "blueprint_dummy", "title": "Finalize Casual Menu", "status": "pending", "phase": "preEvent", "description": "Plan light foods for the day after Christmas.", "dueOffset": "T-3 days", "role": "Food Manager", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_bx_budget_food", "eventId": "blueprint_dummy", "category": "Food", "title": "Catering & Snacks", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_bx_timeline_social", "eventId": "blueprint_dummy", "title": "Socializing & Games", "phase": "eventDay", "timeOrOffset": "02:00 PM", "dayNumber": 1, "description": "Relaxed time with group activities." }
+      ],
+      "version": 1
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_anniversary_v1",
+      "templateName": "Anniversary Celebration",
+      "category": "personal",
+      "description": "Celebrate years of togetherness with a special gathering or party.",
+      "tags": ["anniversary", "celebration", "milestone", "couple", "party"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_anniversary_task_venue", "eventId": "blueprint_dummy", "title": "Select Party Venue", "status": "pending", "phase": "preEvent", "description": "Book a restaurant, hall, or plan for home setup.", "dueOffset": "T-30 days", "role": "Organizer", "dependsOn": [] },
+        { "id": "sys_anniversary_task_gift", "eventId": "blueprint_dummy", "title": "Arrange Anniversary Gift", "status": "pending", "phase": "preEvent", "description": "Purchase or organize special gift for the couple.", "dueOffset": "T-10 days", "role": "Organizer", "dependsOn": [] },
+        { "id": "sys_anniversary_task_cake", "eventId": "blueprint_dummy", "title": "Order Anniversary Cake", "status": "pending", "phase": "preEvent", "description": "Finalize cake design and flavor.", "dueOffset": "T-7 days", "role": "Food Manager", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_anniversary_budget_food", "eventId": "blueprint_dummy", "category": "Food", "title": "Food & Drinks", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 },
+        { "id": "sys_anniversary_budget_cake", "eventId": "blueprint_dummy", "category": "Food", "title": "Cake", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_anniversary_timeline_cake", "eventId": "blueprint_dummy", "title": "Cake Cutting Ceremony", "phase": "eventDay", "timeOrOffset": "08:00 PM", "dayNumber": 1, "description": "Main celebration highlight." }
+      ],
+      "version": 1
+    }
+  ]
+}

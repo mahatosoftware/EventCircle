@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_christening_v1",
+      "templateName": "Christening Event",
+      "category": "personal",
+      "description": "Sacramental ceremony to officially baptize and welcome a baby into the faith.",
+      "tags": ["christening", "baptism", "baby", "ceremony", "family"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_chr_task_officiant", "eventId": "blueprint_dummy", "title": "Book Officiant / Priest", "status": "pending", "phase": "preEvent", "description": "Secure the dates with the religious authority.", "dueOffset": "T-30 days", "role": "Organizer", "dependsOn": [] },
+        { "id": "sys_chr_task_godparents", "eventId": "blueprint_dummy", "title": "Confirm Godparents", "status": "pending", "phase": "preEvent", "description": "Officially invite and confirm the godparents.", "dueOffset": "T-20 days", "role": "Host", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_chr_budget_church", "eventId": "blueprint_dummy", "category": "Venue", "title": "Ceremony Fee / Offering", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_chr_timeline_ritual", "eventId": "blueprint_dummy", "title": "Main Baptism Ceremony", "phase": "eventDay", "timeOrOffset": "11:00 AM", "dayNumber": 1, "description": "The main religious ritual." }
+      ],
+      "version": 1
+    }
+  ]
+}

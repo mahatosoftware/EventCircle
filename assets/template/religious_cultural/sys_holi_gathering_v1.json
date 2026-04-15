@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_holi_gathering_v1",
+      "templateName": "Holi Gathering",
+      "category": "communityAndCultural",
+      "description": "Festival of colors with music, snacks, and lots of fun.",
+      "tags": ["holi", "colors", "festival", "party", "spring"],
+      "defaultFields": {
+        "contributionType": "variable",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_holi_task_colors", "eventId": "blueprint_dummy", "title": "Purchase Organic Colors", "status": "pending", "phase": "preEvent", "description": "Ensure safe and organic colors for all participants.", "dueOffset": "T-5 days", "role": "Logistics", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_holi_budget_colors", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Colors & Supplies", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_holi_timeline_play", "eventId": "blueprint_dummy", "title": "Color Play Starts", "phase": "eventDay", "timeOrOffset": "10:00 AM", "dayNumber": 1, "description": "Main activity commencement." }
+      ],
+      "version": 1
+    }
+  ]
+}

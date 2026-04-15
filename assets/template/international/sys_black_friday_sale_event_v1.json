@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_black_friday_v1",
+      "templateName": "Black Friday Sale Event",
+      "category": "corporate",
+      "description": "Large scale commercial sale event featuring heavy discounts and marketing.",
+      "tags": ["black friday", "sale", "corporate", "marketing", "discounts"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "roles", "inventory", "media"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_bf_task_discounts", "eventId": "blueprint_dummy", "title": "Finalize Product Discount List", "status": "pending", "phase": "preEvent", "description": "Select items and discount percentages.", "dueOffset": "T-30 days", "role": "Organizer", "dependsOn": [] },
+        { "id": "sys_bf_task_ads", "eventId": "blueprint_dummy", "title": "Prepare Ad Campaigns", "status": "pending", "phase": "preEvent", "description": "Design graphics and schedules for the sale.", "dueOffset": "T-15 days", "role": "Media", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_bf_budget_marketing", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Ads & Digital Marketing", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_bf_timeline_launch", "eventId": "blueprint_dummy", "title": "Main Sale Commencement", "phase": "eventDay", "timeOrOffset": "06:00 AM", "dayNumber": 1, "description": "Door-busting start of the sale." }
+      ],
+      "version": 1
+    }
+  ]
+}

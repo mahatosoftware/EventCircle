@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_korean_ny_v1",
+      "templateName": "Korean New Year (Seollal)",
+      "category": "communityAndCultural",
+      "description": "Seollal celebration featuring deep bows (Sebae), traditional dress (Hanbok), and rice cake soup (Tteokguk).",
+      "tags": ["seollal", "korean new year", "festival", "traditional", "hanbok"],
+      "defaultFields": {
+        "contributionType": "voluntary",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "kids"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_kny_task_tteokguk", "eventId": "blueprint_dummy", "title": "Prepare Tteokguk (Rice Cake Soup)", "status": "pending", "phase": "eventDay", "description": "Ensure the traditional soup is ready for family members.", "dueOffset": "Event Morning", "role": "Food Manager", "dependsOn": [] },
+        { "id": "sys_kny_task_hanbok", "eventId": "blueprint_dummy", "title": "Coordinate Hanbok Attire", "status": "pending", "phase": "preEvent", "description": "Ensure family members have their traditional dress ready.", "dueOffset": "T-10 days", "role": "Host", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_kny_budget_gifts", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "New Year Lucky Money & Gifts", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_kny_timeline_sebae", "eventId": "blueprint_dummy", "title": "Sebae (Formal Greetings & Bows)", "phase": "eventDay", "timeOrOffset": "10:00 AM", "dayNumber": 1, "description": "Children performing formal bows to elders." }
+      ],
+      "version": 1
+    }
+  ]
+}

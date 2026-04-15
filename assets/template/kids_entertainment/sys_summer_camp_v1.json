@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_summer_camp_v1",
+      "templateName": "Summer Camp",
+      "category": "kids",
+      "description": "Multi-day activities for children during vacations, usually with learning and fun.",
+      "tags": ["summer camp", "kids", "vacation", "learning", "workshops"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "roles", "inventory", "contribution", "userManagement"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_camp_task_medical", "eventId": "blueprint_dummy", "title": "Collect Child Medical Info", "status": "pending", "phase": "preEvent", "description": "Ensure awareness of any allergies or conditions.", "dueOffset": "T-15 days", "role": "Kids Coordinator", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_camp_budget_craft", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Arts & Crafts Kits", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_camp_timeline_orientation", "eventId": "blueprint_dummy", "title": "Summer Camp Orientation", "phase": "eventDay", "timeOrOffset": "10:00 AM", "dayNumber": 1, "description": "Rules and team-building start." }
+      ],
+      "version": 1
+    }
+  ]
+}

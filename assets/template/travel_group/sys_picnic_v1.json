@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_picnic_v1",
+      "templateName": "Weekend Picnic",
+      "category": "travel",
+      "description": "Short social outing to a scenic spot with food and games.",
+      "tags": ["picnic", "weekend", "travel", "outing", "nature"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "location", "roles", "inventory", "contribution"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_picnic_task_location", "eventId": "blueprint_dummy", "title": "Confirm Scenic Spot", "status": "pending", "phase": "preEvent", "description": "Check for facilities like drinking water/park permits.", "dueOffset": "T-10 days", "role": "Logistics", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_picnic_budget_snacks", "eventId": "blueprint_dummy", "category": "Food", "title": "Packed Meals & Snacks", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_picnic_timeline_arrival", "eventId": "blueprint_dummy", "title": "Arrival & Mat Setup", "phase": "eventDay", "timeOrOffset": "09:30 AM", "dayNumber": 1, "description": "Finding a spot and setting up." }
+      ],
+      "version": 1
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_tambola_night_v1",
+      "templateName": "Tambola Night",
+      "category": "kids",
+      "description": "Fun game event using Tambola/Housie for social entertaining.",
+      "tags": ["tambola", "housie", "kids", "games", "entertainment"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "inventory", "contribution"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_tambola_task_tickets", "eventId": "blueprint_dummy", "title": "Prepare & Print Tambola Tickets", "status": "pending", "phase": "preEvent", "description": "Ensure enough unique tickets for all players.", "dueOffset": "T-2 days", "role": "Organizer", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_tambola_budget_cash", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Cash Prizes / Rewards", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_tambola_timeline_main", "eventId": "blueprint_dummy", "title": "Main Tambola Session", "phase": "eventDay", "timeOrOffset": "08:00 PM", "dayNumber": 1, "description": "Calling numbers and rewarding prizes like Full House." }
+      ],
+      "version": 1
+    }
+  ]
+}

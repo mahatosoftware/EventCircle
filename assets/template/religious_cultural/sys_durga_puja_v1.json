@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_durga_puja_v1",
+      "templateName": "Durga Puja",
+      "category": "communityAndCultural",
+      "description": "Grand celebration of Durga Puja with multi-day events, aarti, and community feast.",
+      "tags": ["durga", "puja", "pujo", "festival", "community", "aarti", "pandal"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "roles", "inventory", "contribution", "userManagement"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_durga_task_pandal", "eventId": "blueprint_dummy", "title": "Pandal Construction & Decor", "status": "pending", "phase": "preEvent", "description": "Coordinate setup of the pujo pandal and idol.", "dueOffset": "T-30 days", "role": "Setup Team", "dependsOn": [] },
+        { "id": "sys_durga_task_cultural", "eventId": "blueprint_dummy", "title": "Plan Cultural Programs", "status": "pending", "phase": "preEvent", "description": "Organize music, dance, and drama performances.", "dueOffset": "T-15 days", "role": "Program Coordinator", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_durga_budget_idol", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Durga Idol & Decor", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_durga_timeline_shasthi", "eventId": "blueprint_dummy", "title": "Bodhon & Shasthi Puja", "phase": "eventDay", "timeOrOffset": "06:00 PM", "dayNumber": 1, "description": "Commencement of the main festival." }
+      ],
+      "version": 1
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_quiz_comp_v1",
+      "templateName": "Quiz Competition",
+      "category": "educational",
+      "description": "Educational activity designed to test knowledge through a series of questions.",
+      "tags": ["quiz", "knowledge", "academic", "competition", "education"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "inventory"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_quiz_task_questions", "eventId": "blueprint_dummy", "title": "Finalize Quiz Questions", "status": "pending", "phase": "preEvent", "description": "Prepare rounds like visual, rapid fire, and core topics.", "dueOffset": "T-3 days", "role": "Organizer", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_quiz_budget_prizes", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Quiz Trophies & Certificates", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_quiz_timeline_final", "eventId": "blueprint_dummy", "title": "Grand Finale Round", "phase": "eventDay", "timeOrOffset": "04:30 PM", "dayNumber": 1, "description": "Final series of questions for top teams." }
+      ],
+      "version": 1
+    }
+  ]
+}

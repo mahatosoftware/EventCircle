@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_halloween_party_v1",
+      "templateName": "Halloween Party",
+      "category": "personal",
+      "description": "Fun costume party with themed games, spooky decor, and treats.",
+      "tags": ["halloween", "party", "costume", "spooky", "tricks and treats"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "decoration"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_hall_task_decor", "eventId": "blueprint_dummy", "title": "Secure Spooky Decorations", "status": "pending", "phase": "preEvent", "description": "Arrange pumpkins, skeletons, and cobwebs.", "dueOffset": "T-15 days", "role": "Decoration", "dependsOn": [] },
+        { "id": "sys_hall_task_contest", "eventId": "blueprint_dummy", "title": "Organize Costume Contest", "status": "pending", "phase": "preEvent", "description": "Select categories for the costume awards.", "dueOffset": "T-7 days", "role": "Host", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_hall_budget_candy", "eventId": "blueprint_dummy", "category": "Food", "title": "Holiday Candy & Snacks", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_hall_timeline_contest", "eventId": "blueprint_dummy", "title": "Main Costume Contest", "phase": "eventDay", "timeOrOffset": "09:00 PM", "dayNumber": 1, "description": "Showcasing and judging the best costumes." }
+      ],
+      "version": 1
+    }
+  ]
+}

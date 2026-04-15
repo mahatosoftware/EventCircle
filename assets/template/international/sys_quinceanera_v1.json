@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_quinceanera_v1",
+      "templateName": "Quinceañera",
+      "category": "personal",
+      "description": "Celebration of a girl's 15th birthday, marking her transition from childhood to maturity.",
+      "tags": ["quinceanera", "birthday", "mexican", "transition", "formal", "party"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location", "roles", "inventory"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_quin_task_gown", "eventId": "blueprint_dummy", "title": "Secure Quinceañera Gown", "status": "pending", "phase": "preEvent", "description": "Ensure the formal celebratory dress is ready and fitted.", "dueOffset": "T-90 days", "role": "Organizer", "dependsOn": [] },
+        { "id": "sys_quin_task_court", "eventId": "blueprint_dummy", "title": "Finalize Court of Honor (Damas y Chambelanes)", "status": "pending", "phase": "preEvent", "description": "Coordinate roles for the celebratory entourage.", "dueOffset": "T-60 days", "role": "Host", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_quin_budget_hall", "eventId": "blueprint_dummy", "category": "Venue", "title": "Event Hall & Decor", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_quin_timeline_waltz", "eventId": "blueprint_dummy", "title": "The Grand Waltz (El Vals)", "phase": "eventDay", "timeOrOffset": "09:00 PM", "dayNumber": 1, "description": "The main celebratory dance." }
+      ],
+      "version": 1
+    }
+  ]
+}

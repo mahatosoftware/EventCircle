@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_prom_night_v1",
+      "templateName": "Prom Night",
+      "category": "personal",
+      "description": "Formal dance event for high school or college students featuring formal dress and dance.",
+      "tags": ["prom", "formal", "dance", "academic", "party"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location", "roles", "inventory"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_prom_task_king", "eventId": "blueprint_dummy", "title": "Organize Prom King/Queen Vote", "status": "pending", "phase": "preEvent", "description": "Prepare voting method for and coronation.", "dueOffset": "T-15 days", "role": "Organizer", "dependsOn": [] },
+        { "id": "sys_prom_task_limo", "eventId": "blueprint_dummy", "title": "Arrange Group Transportation", "status": "pending", "phase": "preEvent", "description": "Secure limousine or group cars.", "dueOffset": "T-30 days", "role": "Logistics", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_prom_budget_venue", "eventId": "blueprint_dummy", "category": "Venue", "title": "Ballroom/Hall Rental", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_prom_timeline_coronation", "eventId": "blueprint_dummy", "title": "Coronation & Slow Dance", "phase": "eventDay", "timeOrOffset": "10:30 PM", "dayNumber": 1, "description": "Defining moment of the night." }
+      ],
+      "version": 1
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_training_workshop_v1",
+      "templateName": "Training Workshop",
+      "category": "corporate",
+      "description": "Educational session designed to teach specific skills or provide training.",
+      "tags": ["training", "workshop", "professional development", "education", "corporate"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "roles", "inventory"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_workshop_task_materials", "eventId": "blueprint_dummy", "title": "Prepare Training Kits", "status": "pending", "phase": "preEvent", "description": "Print handouts and assemble kits for participants.", "dueOffset": "T-3 days", "role": "Program Coordinator", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_workshop_budget_trainer", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Trainer Fees", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_workshop_timeline_handson", "eventId": "blueprint_dummy", "title": "Hands-on Exercise", "phase": "eventDay", "timeOrOffset": "02:00 PM", "dayNumber": 1, "description": "Interactive practical session." }
+      ],
+      "version": 1
+    }
+  ]
+}

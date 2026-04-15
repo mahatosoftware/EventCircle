@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_debate_comp_v1",
+      "templateName": "Debate Competition",
+      "category": "educational",
+      "description": "Structured competition for verbal arguments on specific topics.",
+      "tags": ["debate", "competition", "education", "speech", "argument"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "roles"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_debate_task_judges", "eventId": "blueprint_dummy", "title": "Invite Guest Judges", "status": "pending", "phase": "preEvent", "description": "Select experts for the panel.", "dueOffset": "T-10 days", "role": "Organizer", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_debate_budget_misc", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Judging Panel Honorarium", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_debate_timeline_rebuttal", "eventId": "blueprint_dummy", "title": "Rebuttal Rounds", "phase": "eventDay", "timeOrOffset": "11:30 AM", "dayNumber": 1, "description": "Direct interaction between teams." }
+      ],
+      "version": 1
+    }
+  ]
+}

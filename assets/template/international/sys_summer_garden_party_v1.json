@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_garden_party_v1",
+      "templateName": "Summer Garden Party",
+      "category": "personal",
+      "description": "Relaxed outdoor social gathering featuring fresh food, games, and nature.",
+      "tags": ["garden party", "summer", "outdoor", "social", "nature"],
+      "defaultFields": {
+        "contributionType": "voluntary",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_sgp_task_weather", "eventId": "blueprint_dummy", "title": "Monitor Weather & Plan B", "status": "pending", "phase": "preEvent", "description": "Ensure a backup indoor or tent plan.", "dueOffset": "T-3 days", "role": "Organizer", "dependsOn": [] },
+        { "id": "sys_sgp_task_bugs", "eventId": "blueprint_dummy", "title": "Pest Control & Decor", "status": "pending", "phase": "preEvent", "description": "Ensure the garden is ready (mosquitoes, lighting).", "dueOffset": "T-1 day", "role": "Decoration", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_sgp_budget_bbq", "eventId": "blueprint_dummy", "category": "Food", "title": "BBQ & Refreshments", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_sgp_timeline_social", "eventId": "blueprint_dummy", "title": "Garden Socializing", "phase": "eventDay", "timeOrOffset": "05:00 PM", "dayNumber": 1, "description": "Main interaction and relaxed activities." }
+      ],
+      "version": 1
+    }
+  ]
+}

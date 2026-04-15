@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_team_outing_v1",
+      "templateName": "Team Outing",
+      "category": "corporate",
+      "description": "Recreational trip or activity designed to build teamwork and rapport.",
+      "tags": ["team building", "outing", "corporate", "retreat", "activity"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location", "roles"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_outing_task_transport", "eventId": "blueprint_dummy", "title": "Arrange Group Transport", "status": "pending", "phase": "preEvent", "description": "Book buses or cars for all team members.", "dueOffset": "T-7 days", "role": "Logistics", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_outing_budget_activities", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Activity Fees", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_outing_timeline_departure", "eventId": "blueprint_dummy", "title": "Departure from Office", "phase": "eventDay", "timeOrOffset": "08:00 AM", "dayNumber": 1, "description": "Meeting point and departure." }
+      ],
+      "version": 1
+    }
+  ]
+}

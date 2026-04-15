@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_new_year_v1",
+      "templateName": "New Year Party",
+      "category": "communityAndCultural",
+      "description": "Grand celebration to welcome the new year with music, food, and countdown.",
+      "tags": ["new year", "party", "celebration", "countdown", "midnight"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location", "roles", "inventory", "contribution"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_ny_task_venue", "eventId": "blueprint_dummy", "title": "Book Party Venue", "status": "pending", "phase": "preEvent", "description": "Secure a hall or restaurant for the celebration.", "dueOffset": "T-45 days", "role": "Organizer", "dependsOn": [] },
+        { "id": "sys_ny_task_dj", "eventId": "blueprint_dummy", "title": "Secure DJ and Music System", "status": "pending", "phase": "preEvent", "description": "Ensure music for the party and countdown.", "dueOffset": "T-20 days", "role": "Program Coordinator", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_ny_budget_catering", "eventId": "blueprint_dummy", "category": "Food", "title": "Party Snacks & Dinner", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_ny_timeline_countdown", "eventId": "blueprint_dummy", "title": "Midnight Countdown", "phase": "eventDay", "timeOrOffset": "11:59 PM", "dayNumber": 1, "description": "Group countdown to the new year." }
+      ],
+      "version": 1
+    }
+  ]
+}

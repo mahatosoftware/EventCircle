@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_thanksgiving_dinner_v1",
+      "templateName": "Thanksgiving Dinner",
+      "category": "personal",
+      "description": "Gather for a traditional Thanksgiving meal with family and friends.",
+      "tags": ["thanksgiving", "dinner", "family", "traditional", "gathering"],
+      "defaultFields": {
+        "contributionType": "voluntary",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_thanks_task_turkey", "eventId": "blueprint_dummy", "title": "Secure Turkey & Main Ingredients", "status": "pending", "phase": "preEvent", "description": "Ensure the main holiday bird is ordered.", "dueOffset": "T-10 days", "role": "Food Manager", "dependsOn": [] },
+        { "id": "sys_thanks_task_potluck", "eventId": "blueprint_dummy", "title": "Coordinate Potluck Dishes", "status": "pending", "phase": "preEvent", "description": "Assign side dishes to guest contributors.", "dueOffset": "T-7 days", "role": "Host", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_thanks_budget_food", "eventId": "blueprint_dummy", "category": "Food", "title": "Main Meal & Desserts", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_thanks_timeline_feast", "eventId": "blueprint_dummy", "title": "Main Holiday Dinner", "phase": "eventDay", "timeOrOffset": "04:30 PM", "dayNumber": 1, "description": "The main gathering and shared meal." }
+      ],
+      "version": 1
+    }
+  ]
+}

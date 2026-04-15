@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_shichigosan_v1",
+      "templateName": "Shichi-Go-San",
+      "category": "personal",
+      "description": "Japanese traditional rite of passage and festival for girls and boys.",
+      "tags": ["shichigosan", "ritual", "baby", "tradition", "cultural"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_sgs_task_attire", "eventId": "blueprint_dummy", "title": "Secure Traditional Kimono/Attire", "status": "pending", "phase": "preEvent", "description": "Rent or buy formal clothes for the child.", "dueOffset": "T-30 days", "role": "Organizer", "dependsOn": [] },
+        { "id": "sys_sgs_task_shrine", "eventId": "blueprint_dummy", "title": "Schedule Shrine Visit", "status": "pending", "phase": "preEvent", "description": "Coordinate timing with the local shrine.", "dueOffset": "T-15 days", "role": "Host", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_sgs_budget_attire", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Traditional Costume Rental", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_sgs_timeline_visit", "eventId": "blueprint_dummy", "title": "Shrine Blessing Ceremony", "phase": "eventDay", "timeOrOffset": "10:00 AM", "dayNumber": 1, "description": "The peak religious moment for the child." }
+      ],
+      "version": 1
+    }
+  ]
+}

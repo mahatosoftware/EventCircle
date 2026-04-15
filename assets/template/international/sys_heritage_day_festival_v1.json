@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_heritage_day_v1",
+      "templateName": "Heritage Day Festival",
+      "category": "communityAndCultural",
+      "description": "Celebration of cultural diversity and shared traditions through music, dance, and food.",
+      "tags": ["heritage day", "culture", "festival", "diversity", "traditional"],
+      "defaultFields": {
+        "contributionType": "voluntary",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "roles", "inventory"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_hdf_task_stalls", "eventId": "blueprint_dummy", "title": "Invite Cultural Stalls & Vendors", "status": "pending", "phase": "preEvent", "description": "Ensure representation from diverse community groups.", "dueOffset": "T-45 days", "role": "Logistics", "dependsOn": [] },
+        { "id": "sys_hdf_task_performers", "eventId": "blueprint_dummy", "title": "Finalize Cultural Performers List", "status": "pending", "phase": "preEvent", "description": "Coordinate dance, music, and storytelling acts.", "dueOffset": "T-30 days", "role": "Program Coordinator", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_hdf_budget_stage", "eventId": "blueprint_dummy", "category": "Venue", "title": "Stage, Sound & Lighting", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_hdf_timeline_parade", "eventId": "blueprint_dummy", "title": "Grand Cultural Parade", "phase": "eventDay", "timeOrOffset": "11:00 AM", "dayNumber": 1, "description": "Highlighting diverse traditional outfits and symbols." }
+      ],
+      "version": 1
+    }
+  ]
+}

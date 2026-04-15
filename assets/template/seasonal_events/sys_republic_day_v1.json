@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_republic_day_v1",
+      "templateName": "Republic Day Event",
+      "category": "communityAndCultural",
+      "description": "National day celebration involving flag hoisting, speeches, and patriotic performances.",
+      "tags": ["republic day", "celebration", "flag hoisting", "patriotism", "constitution"],
+      "defaultFields": {
+        "contributionType": "voluntary",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "roles", "inventory"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_rd_task_decoration", "eventId": "blueprint_dummy", "title": "Tri-color Patriotic Decor", "status": "pending", "phase": "preEvent", "description": "Ensure the venue represents the national theme.", "dueOffset": "T-2 days", "role": "Decoration", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_rd_budget_prizes", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Medals for Parade Participants", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_rd_timeline_speech", "eventId": "blueprint_dummy", "title": "Patriotic Speeches", "phase": "eventDay", "timeOrOffset": "09:30 AM", "dayNumber": 1, "description": "Talk on national achievements." }
+      ],
+      "version": 1
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_pilgrimage_v1",
+      "templateName": "Pilgrimage Trip",
+      "category": "travel",
+      "description": "Plan a spiritual journey with group travel and religious ceremonies.",
+      "tags": ["pilgrimage", "spiritual", "travel", "religious", "temple"],
+      "defaultFields": {
+        "contributionType": "variable",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "roles", "contribution"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_pilgrimage_task_darshan", "eventId": "blueprint_dummy", "title": "Book Darshan / Puja Tickets", "status": "pending", "phase": "preEvent", "description": "Arrange priority entry at the shrine.", "dueOffset": "T-45 days", "role": "Organizer", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_pilgrimage_budget_offering", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Puja / Offerings", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_pilgrimage_timeline_prayer", "eventId": "blueprint_dummy", "title": "Main Prayer Session", "phase": "eventDay", "timeOrOffset": "05:00 AM", "dayNumber": 1, "description": "Special morning ritual/darshan." }
+      ],
+      "version": 1
+    }
+  ]
+}

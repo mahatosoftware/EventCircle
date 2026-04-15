@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_school_annual_v1",
+      "templateName": "School Annual Function",
+      "category": "educational",
+      "description": "Annual celebration of a school's cultural and academic successes.",
+      "tags": ["school", "annual function", "education", "cultural", "student"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "roles", "inventory", "userManagement"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_school_task_rehearsals", "eventId": "blueprint_dummy", "title": "Coordinate Daily Rehearsals", "status": "pending", "phase": "preEvent", "description": "Manage practice times for all performances.", "dueOffset": "T-30 days", "role": "Program Coordinator", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_school_budget_costumes", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Student Costumes & Props", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_school_timeline_grand", "eventId": "blueprint_dummy", "title": "Grand Closing & National Anthem", "phase": "eventDay", "timeOrOffset": "09:00 PM", "dayNumber": 1, "description": "Festival concluding session." }
+      ],
+      "version": 1
+    }
+  ]
+}

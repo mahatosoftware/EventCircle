@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_obon_fest_v1",
+      "templateName": "Obon Festival",
+      "category": "communityAndCultural",
+      "description": "Japanese Buddhist custom to honor early spirits of one's ancestors.",
+      "tags": ["obon", "festival", "ancestors", "traditional", "cultural"],
+      "defaultFields": {
+        "contributionType": "voluntary",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "roles", "inventory"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_obon_task_lanterns", "eventId": "blueprint_dummy", "title": "Buy Floating/Display Lanterns", "status": "pending", "phase": "preEvent", "description": "Secure specific lanterns for the ritual.", "dueOffset": "T-10 days", "role": "Logistics", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_obon_budget_ritual", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Ritual Supplies & Offerings", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_obon_timeline_dance", "eventId": "blueprint_dummy", "title": "Bon Odori Dance Session", "phase": "eventDay", "timeOrOffset": "07:00 PM", "dayNumber": 1, "description": "Communal ritual dancing." }
+      ],
+      "version": 1
+    }
+  ]
+}

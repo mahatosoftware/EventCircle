@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_day_dead_v1",
+      "templateName": "Day of the Dead (Día de los Muertos)",
+      "category": "communityAndCultural",
+      "description": "Traditional Mexican festival to honor deceased ancestors with altars (ofrendas) and specific foods.",
+      "tags": ["day of the dead", "dia de los muertos", "mexican", "festival", "traditional"],
+      "defaultFields": {
+        "contributionType": "voluntary",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "decoration", "roles"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_dod_task_ofrenda", "eventId": "blueprint_dummy", "title": "Build Final Altar (Ofrenda)", "status": "pending", "phase": "preEvent", "description": "Assemble photos, Marigolds, and favorite items of the deceased.", "dueOffset": "T-2 days", "role": "Decoration", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_dod_budget_flowers", "eventId": "blueprint_dummy", "category": "Decoration", "title": "Cempasúchil (Marigolds) & Candles", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_dod_timeline_offering", "eventId": "blueprint_dummy", "title": "Traditional Grave Visit & Offerings", "phase": "eventDay", "timeOrOffset": "06:00 PM", "dayNumber": 1, "description": "Gathering at the cemetery or community altar." }
+      ],
+      "version": 1
+    }
+  ]
+}

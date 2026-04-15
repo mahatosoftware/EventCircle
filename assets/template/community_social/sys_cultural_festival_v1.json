@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_cultural_festival_v1",
+      "templateName": "Cultural Festival",
+      "category": "communityAndCultural",
+      "description": "Large scale community event showcasing diverse cultures through performances and food.",
+      "tags": ["cultural", "festival", "community", "performances", "food stalls"],
+      "defaultFields": {
+        "contributionType": "variable",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "roles", "inventory", "userManagement"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_cultural_task_stalls", "eventId": "blueprint_dummy", "title": "Allocate Food Stalls", "status": "pending", "phase": "preEvent", "description": "Invite and allot spaces for food vendors.", "dueOffset": "T-20 days", "role": "Food Manager", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_cultural_budget_marketing", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Marketing & Banners", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_cultural_timeline_opening", "eventId": "blueprint_dummy", "title": "Festival Opening", "phase": "eventDay", "timeOrOffset": "10:00 AM", "dayNumber": 1, "description": "Official inauguration." }
+      ],
+      "version": 1
+    }
+  ]
+}

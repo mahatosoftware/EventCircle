@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_product_launch_v1",
+      "templateName": "Product Launch Event",
+      "category": "corporate",
+      "description": "Event dedicated to introducing a new product or service to the market.",
+      "tags": ["product launch", "marketing", "corporate", "branding", "event"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location", "roles", "media"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_launch_task_demo", "eventId": "blueprint_dummy", "title": "Prepare Product Demo", "status": "pending", "phase": "preEvent", "description": "Ensure the product is ready for a live presentation.", "dueOffset": "T-5 days", "role": "Organizer", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_launch_budget_pr", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "PR & Influencer Outreach", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_launch_timeline_reveal", "eventId": "blueprint_dummy", "title": "Product Reveal", "phase": "eventDay", "timeOrOffset": "06:00 PM", "dayNumber": 1, "description": "Main presentation highlight." }
+      ],
+      "version": 1
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_family_trip_v1",
+      "templateName": "Family Trip Planner",
+      "category": "travel",
+      "description": "Comprehensive planning for family vacations, including logistics and itinerary.",
+      "tags": ["travel", "family", "vacation", "trip", "itinerary"],
+      "defaultFields": {
+        "contributionType": "variable",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "location", "roles", "inventory", "contribution"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_trip_task_itinerary", "eventId": "blueprint_dummy", "title": "Create Daily Itinerary", "status": "pending", "phase": "preEvent", "description": "Draft sightseeing and travel plan for each day.", "dueOffset": "T-30 days", "role": "Travel Coordinator", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_trip_budget_tickets", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Travel Tickets (Bus/Train/Flight)", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_trip_timeline_packing", "eventId": "blueprint_dummy", "title": "Final Packing Check", "phase": "preEvent", "timeOrOffset": "06:00 PM", "dayNumber": 0, "description": "Ensure essentials like medications/passports are ready." }
+      ],
+      "version": 1
+    }
+  ]
+}

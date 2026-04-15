@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_kids_comp_v1",
+      "templateName": "Kids Competition Event",
+      "category": "kids",
+      "description": "Fun athletic or intellectual competition specifically for children.",
+      "tags": ["kids", "competition", "athletic", "games", "fun"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "roles", "inventory", "contribution"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_kids_task_age", "eventId": "blueprint_dummy", "title": "Define Age Categories", "status": "pending", "phase": "preEvent", "description": "Ensure fair play by grouping kids similarly.", "dueOffset": "T-10 days", "role": "Kids Coordinator", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_kids_budget_toys", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Toys & Prizes", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_kids_timeline_medals", "eventId": "blueprint_dummy", "title": "Medal Distribution", "phase": "eventDay", "timeOrOffset": "12:00 PM", "dayNumber": 1, "description": "Awarding winners." }
+      ],
+      "version": 1
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_fancy_dress_v1",
+      "templateName": "Fancy Dress Competition",
+      "category": "kids",
+      "description": "Creative event where participants dress as different characters.",
+      "tags": ["fancy dress", "kids", "competition", "creative", "costumes"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "roles"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_fancy_task_themes", "eventId": "blueprint_dummy", "title": "Pick Competition Themes", "status": "pending", "phase": "preEvent", "description": "Suggestions like superheroes, nature, etc.", "dueOffset": "T-20 days", "role": "Kids Coordinator", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_fancy_budget_photo", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Costume Photography Session", "estimatedCost": 0.0, "isMandatory": false, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_fancy_timeline_parade", "eventId": "blueprint_dummy", "title": "Grand Costume Parade", "phase": "eventDay", "timeOrOffset": "04:00 PM", "dayNumber": 1, "description": "Stage walk of all participants." }
+      ],
+      "version": 1
+    }
+  ]
+}

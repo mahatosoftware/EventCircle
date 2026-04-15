@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_housewarming_v1",
+      "templateName": "Housewarming Ceremony",
+      "category": "personal",
+      "description": "Welcome friends and family to your new home.",
+      "tags": ["housewarming", "new home", "puja", "party", "griha pravesh"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_housewarming_task_priest", "eventId": "blueprint_dummy", "title": "Book Priest (for Puja)", "status": "pending", "phase": "preEvent", "description": "If having a religious ceremony, book the officiant.", "dueOffset": "T-20 days", "role": "Organizer", "dependsOn": [] },
+        { "id": "sys_housewarming_task_cleanup", "eventId": "blueprint_dummy", "title": "New House Deep Clean", "status": "pending", "phase": "preEvent", "description": "Ensure the house is ready for guests.", "dueOffset": "T-2 days", "role": "Setup Team", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_housewarming_budget_food", "eventId": "blueprint_dummy", "category": "Food", "title": "Refreshments/Dinner", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_housewarming_timeline_puja", "eventId": "blueprint_dummy", "title": "Housewarming Rituals", "phase": "eventDay", "timeOrOffset": "09:00 AM", "dayNumber": 1, "description": "Initial blessings and rituals." }
+      ],
+      "version": 1
+    }
+  ]
+}

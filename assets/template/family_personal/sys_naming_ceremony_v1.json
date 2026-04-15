@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_naming_ceremony_v1",
+      "templateName": "Naming Ceremony",
+      "category": "personal",
+      "description": "Special ceremony to officially name the baby.",
+      "tags": ["naming", "baby", "ceremony", "family", "tradition"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_naming_task_name", "eventId": "blueprint_dummy", "title": "Finalize Baby Name", "status": "pending", "phase": "preEvent", "description": "Select the name to be announced.", "dueOffset": "T-5 days", "role": "Organizer", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_naming_budget_food", "eventId": "blueprint_dummy", "category": "Food", "title": "Guest Catering", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_naming_timeline_announcement", "eventId": "blueprint_dummy", "title": "Name Announcement", "phase": "eventDay", "timeOrOffset": "11:00 AM", "dayNumber": 1, "description": "The official announcement of the baby's name." }
+      ],
+      "version": 1
+    }
+  ]
+}

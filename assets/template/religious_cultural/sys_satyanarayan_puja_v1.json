@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_satyanarayan_puja_v1",
+      "templateName": "Satyanarayan Puja",
+      "category": "communityAndCultural",
+      "description": "A traditional puja dedicated to Lord Vishnu, often performed for thanksgiving or housewarming.",
+      "tags": ["puja", "pooja", "satyanarayan", "vishnu", "ritual", "prasad", "home"],
+      "defaultFields": {
+        "contributionType": "variable",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "roles", "inventory", "contribution"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_satya_task_priest", "eventId": "blueprint_dummy", "title": "Book Priest / Pandit", "status": "pending", "phase": "preEvent", "description": "Confirm the priest for the specific date and timing.", "dueOffset": "T-10 days", "role": "Organizer", "dependsOn": [] },
+        { "id": "sys_satya_task_samagri", "eventId": "blueprint_dummy", "title": "Purchase Puja Samagri", "status": "pending", "phase": "preEvent", "description": "Buy fruits, flowers, incense, and specific ritual items.", "dueOffset": "T-3 days", "role": "Logistics", "dependsOn": [] },
+        { "id": "sys_satya_task_prasad", "eventId": "blueprint_dummy", "title": "Prepare Sinni / Prasad", "status": "pending", "phase": "eventDay", "description": "Prepare the sacred food offering.", "dueOffset": "Event Morning", "role": "Food Manager", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_satya_budget_dakshina", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Priest Dakshina", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 },
+        { "id": "sys_satya_budget_samagri", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Puja Materials", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_satya_timeline_start", "eventId": "blueprint_dummy", "title": "Puja Commencement", "phase": "eventDay", "timeOrOffset": "10:30 AM", "dayNumber": 1, "description": "Start of the main rituals." },
+        { "id": "sys_satya_timeline_katha", "eventId": "blueprint_dummy", "title": "Satyanarayan Katha", "phase": "eventDay", "timeOrOffset": "11:30 AM", "dayNumber": 1, "description": "Reading the sacred story." }
+      ],
+      "version": 1
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_hanami_fest_v1",
+      "templateName": "Hanami Festival",
+      "category": "communityAndCultural",
+      "description": "Japanese cherry blossom viewing festival featuring picnics under the trees.",
+      "tags": ["hanami", "festival", "cherry blossom", "picnic", "spring"],
+      "defaultFields": {
+        "contributionType": "voluntary",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "location", "roles"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_hanami_task_spot", "eventId": "blueprint_dummy", "title": "Secure Picnic Spot Early", "status": "pending", "phase": "eventDay", "description": "Ensure a prime viewing area is obtained early in the day.", "dueOffset": "Event Morning", "role": "Logistics", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_hanami_budget_bento", "eventId": "blueprint_dummy", "category": "Food", "title": "Blossom Snacks & Bento Kits", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_hanami_timeline_picnic", "eventId": "blueprint_dummy", "title": "Group Viewing & Meal", "phase": "eventDay", "timeOrOffset": "12:30 PM", "dayNumber": 1, "description": "The peak of the blossom appreciation social." }
+      ],
+      "version": 1
+    }
+  ]
+}

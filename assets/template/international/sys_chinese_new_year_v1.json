@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_chinese_ny_v1",
+      "templateName": "Chinese New Year",
+      "category": "communityAndCultural",
+      "description": "Lunar New Year celebration featuring red decor, traditional meals, and lucky symbols.",
+      "tags": ["chinese new year", "lunar new year", "festival", "traditional", "cultural"],
+      "defaultFields": {
+        "contributionType": "voluntary",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "roles", "inventory"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_cny_task_decor", "eventId": "blueprint_dummy", "title": "Secure Red Decor & Lanterns", "status": "pending", "phase": "preEvent", "description": "Ensure auspicious decorations are ready.", "dueOffset": "T-10 days", "role": "Decoration", "dependsOn": [] },
+        { "id": "sys_cny_task_envelopes", "eventId": "blueprint_dummy", "title": "Prepare Red Envelopes (Hong Bao)", "status": "pending", "phase": "preEvent", "description": "Prepare lucky money for children and guests.", "dueOffset": "T-3 days", "role": "Host", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_cny_budget_feast", "eventId": "blueprint_dummy", "category": "Food", "title": "Traditional Lunar Feast", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_cny_timeline_dinner", "eventId": "blueprint_dummy", "title": "Reunion Dinner", "phase": "eventDay", "timeOrOffset": "07:30 PM", "dayNumber": 1, "description": "The main family meal highlight." }
+      ],
+      "version": 1
+    }
+  ]
+}

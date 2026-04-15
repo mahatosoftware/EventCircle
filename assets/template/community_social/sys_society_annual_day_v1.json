@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_society_annual_day_v1",
+      "templateName": "Society Annual Day",
+      "category": "communityAndCultural",
+      "description": "Celebration of the housing society's achievements with cultural performances.",
+      "tags": ["society", "annual day", "community", "cultural", "celebration"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "roles", "inventory", "contribution", "userManagement"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_society_task_permits", "eventId": "blueprint_dummy", "title": "Secure Local Permits", "status": "pending", "phase": "preEvent", "description": "Obtain necessary permissions for loudspeakers/events.", "dueOffset": "T-15 days", "role": "Logistics", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_society_budget_tent", "eventId": "blueprint_dummy", "category": "Venue", "title": "Stage & Tent Setup", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_society_timeline_award", "eventId": "blueprint_dummy", "title": "Award Ceremony", "phase": "eventDay", "timeOrOffset": "07:00 PM", "dayNumber": 1, "description": "Recognizing society members." }
+      ],
+      "version": 1
+    }
+  ]
+}

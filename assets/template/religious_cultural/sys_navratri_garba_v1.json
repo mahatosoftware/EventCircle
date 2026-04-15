@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_navratri_garba_v1",
+      "templateName": "Navratri Garba Event",
+      "category": "communityAndCultural",
+      "description": "Vibrant Navratri celebration with Garba and Dandiya Raas.",
+      "tags": ["navratri", "garba", "dandiya", "dance", "festival"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "roles", "inventory"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_navratri_task_music", "eventId": "blueprint_dummy", "title": "Secure DJ / Live Band", "status": "pending", "phase": "preEvent", "description": "Book music specifically for Garba and Dandiya.", "dueOffset": "T-20 days", "role": "Program Coordinator", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_navratri_budget_sound", "eventId": "blueprint_dummy", "category": "Venue", "title": "Sound & Lighting", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_navratri_timeline_dance", "eventId": "blueprint_dummy", "title": "Garba Session Start", "phase": "eventDay", "timeOrOffset": "08:30 PM", "dayNumber": 1, "description": "Main dance event commences." }
+      ],
+      "version": 1
+    }
+  ]
+}

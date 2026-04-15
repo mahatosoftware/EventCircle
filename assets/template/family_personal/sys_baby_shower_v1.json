@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_baby_shower_v1",
+      "templateName": "Baby Shower",
+      "category": "personal",
+      "description": "Celebrate the upcoming arrival of a new family member.",
+      "tags": ["baby", "shower", "maternity", "celebration", "party"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_baby_shower_task_theme", "eventId": "blueprint_dummy", "title": "Pick a Theme", "status": "pending", "phase": "preEvent", "description": "Decide on color scheme and motif.", "dueOffset": "T-30 days", "role": "Decoration", "dependsOn": [] },
+        { "id": "sys_baby_shower_task_games", "eventId": "blueprint_dummy", "title": "Plan Baby Shower Games", "status": "pending", "phase": "preEvent", "description": "Organize interactive games and prizes.", "dueOffset": "T-15 days", "role": "Host", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_baby_shower_budget_decor", "eventId": "blueprint_dummy", "category": "Decoration", "title": "Theme Decor", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_baby_shower_timeline_games", "eventId": "blueprint_dummy", "title": "Games & Activities", "phase": "eventDay", "timeOrOffset": "04:00 PM", "dayNumber": 1, "description": "Interactive sessions with guests." }
+      ],
+      "version": 1
+    }
+  ]
+}

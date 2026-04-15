@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_charity_fundraiser_v1",
+      "templateName": "Charity Fundraiser",
+      "category": "communityAndCultural",
+      "description": "Event aimed at raising funds for a specific cause or organization.",
+      "tags": ["charity", "fundraiser", "donation", "community", "social cause"],
+      "defaultFields": {
+        "contributionType": "variable",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "contribution"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_fundraiser_task_cause", "eventId": "blueprint_dummy", "title": "Define Fundraising Goal", "status": "pending", "phase": "preEvent", "description": "Clear target and cause description for donors.", "dueOffset": "T-30 days", "role": "Organizer", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_fundraiser_budget_venue", "eventId": "blueprint_dummy", "category": "Venue", "title": "Venue (if not sponsored)", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_fundraiser_timeline_pitch", "eventId": "blueprint_dummy", "title": "Keynote Pitch", "phase": "eventDay", "timeOrOffset": "06:30 PM", "dayNumber": 1, "description": "Presentation of the cause and goals." }
+      ],
+      "version": 1
+    }
+  ]
+}

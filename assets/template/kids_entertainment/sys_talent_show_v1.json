@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_talent_show_v1",
+      "templateName": "Talent Show",
+      "category": "kids",
+      "description": "Opportunity for individuals to showcase their unique skills and talents.",
+      "tags": ["talent show", "kids", "performance", "stage", "creative"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "roles", "media"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_talent_task_sound", "eventId": "blueprint_dummy", "title": "Test Audio/Video for Shows", "status": "pending", "phase": "preEvent", "description": "Ensure tracks and mics are working.", "dueOffset": "T-1 day", "role": "Setup Team", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_talent_budget_stage", "eventId": "blueprint_dummy", "category": "Venue", "title": "Stage Lights & Decor", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_talent_timeline_magic", "eventId": "blueprint_dummy", "title": "Variety Performances Round", "phase": "eventDay", "timeOrOffset": "06:30 PM", "dayNumber": 1, "description": "Sequence of talent showcases." }
+      ],
+      "version": 1
+    }
+  ]
+}

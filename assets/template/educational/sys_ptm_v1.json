@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_ptm_v1",
+      "templateName": "Parent-Teacher Meeting",
+      "category": "educational",
+      "description": "Scheduled discussions between parents and teachers about student progress.",
+      "tags": ["ptm", "education", "school", "meeting", "student"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "timeline", "guestManagement", "communication"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_ptm_task_schedule", "eventId": "blueprint_dummy", "title": "Prepare Meeting Slots", "status": "pending", "phase": "preEvent", "description": "Coordinate individual times for each parent.", "dueOffset": "T-3 days", "role": "Organizer", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_ptm_budget_misc", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Printing of Progress Reports", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_ptm_timeline_start", "eventId": "blueprint_dummy", "title": "Session Commencement", "phase": "eventDay", "timeOrOffset": "08:00 AM", "dayNumber": 1, "description": "First series of meetings." }
+      ],
+      "version": 1
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_science_exhib_v1",
+      "templateName": "Science Exhibition",
+      "category": "educational",
+      "description": "Event where students display projects, models, and scientific experiments.",
+      "tags": ["science", "exhibition", "education", "student", "projects"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "location", "roles", "inventory"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_sci_task_projects", "eventId": "blueprint_dummy", "title": "Assign Project Spaces", "status": "pending", "phase": "preEvent", "description": "Allot tables and power sockets for models.", "dueOffset": "T-5 days", "role": "Logistics", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_sci_budget_materials", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Display Boards & Supplies", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_sci_timeline_judging", "eventId": "blueprint_dummy", "title": "Project Judging & Evaluation", "phase": "eventDay", "timeOrOffset": "11:00 AM", "dayNumber": 1, "description": "Panel review of student models." }
+      ],
+      "version": 1
+    }
+  ]
+}

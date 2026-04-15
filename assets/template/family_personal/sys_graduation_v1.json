@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_graduation_v1",
+      "templateName": "Graduation Celebration",
+      "category": "personal",
+      "description": "Celebrate educational achievements with friends and family.",
+      "tags": ["graduation", "degree", "party", "success", "academic"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_graduation_task_decor", "eventId": "blueprint_dummy", "title": "Graduation Themed Decor", "status": "pending", "phase": "preEvent", "description": "Arrange caps, gowns, and diploma motifs.", "dueOffset": "T-10 days", "role": "Decoration", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_graduation_budget_party", "eventId": "blueprint_dummy", "category": "Food", "title": "Party Snacks & Food", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_graduation_timeline_photos", "eventId": "blueprint_dummy", "title": "Photo Session with Gowns", "phase": "eventDay", "timeOrOffset": "05:00 PM", "dayNumber": 1, "description": "Capturing memories with friends." }
+      ],
+      "version": 1
+    }
+  ]
+}

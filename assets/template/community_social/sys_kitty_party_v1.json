@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_kitty_party_v1",
+      "templateName": "Kitty Party",
+      "category": "communityAndCultural",
+      "description": "A social gathering for friends with games, snacks, and fun.",
+      "tags": ["kitty party", "social", "gathering", "games", "friends"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "contribution"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_kitty_task_games", "eventId": "blueprint_dummy", "title": "Organize Games", "status": "pending", "phase": "preEvent", "description": "Select games like Tambola or cards for the group.", "dueOffset": "T-3 days", "role": "Organizer", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_kitty_budget_snacks", "eventId": "blueprint_dummy", "category": "Food", "title": "Snacks & Drinks", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_kitty_timeline_games", "eventId": "blueprint_dummy", "title": "Game Session", "phase": "eventDay", "timeOrOffset": "04:30 PM", "dayNumber": 1, "description": "Fun activities and competitions." }
+      ],
+      "version": 1
+    }
+  ]
+}

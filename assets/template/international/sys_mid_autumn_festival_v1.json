@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_mid_autumn_v1",
+      "templateName": "Mid-Autumn Festival",
+      "category": "communityAndCultural",
+      "description": "Harvest festival featuring mooncakes, lantern walks, and family appreciation.",
+      "tags": ["mid-autumn", "festival", "mooncake", "lanterns", "harvest"],
+      "defaultFields": {
+        "contributionType": "voluntary",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "kids"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_maf_task_mooncakes", "eventId": "blueprint_dummy", "title": "Secure Mooncakes", "status": "pending", "phase": "preEvent", "description": "Order traditional or creative mooncakes early.", "dueOffset": "T-15 days", "role": "Food Manager", "dependsOn": [] },
+        { "id": "sys_maf_task_lanterns", "eventId": "blueprint_dummy", "title": "Buy/Make Lanterns for Kids", "status": "pending", "phase": "preEvent", "description": "Ensure kids have lanterns for the night walk.", "dueOffset": "T-5 days", "role": "Kids Coordinator", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_maf_budget_mooncakes", "eventId": "blueprint_dummy", "category": "Food", "title": "Mooncakes & Tea", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_maf_timeline_lighting", "eventId": "blueprint_dummy", "title": "Lantern Lighting & Night Walk", "phase": "eventDay", "timeOrOffset": "07:30 PM", "dayNumber": 1, "description": "Communal evening activities." }
+      ],
+      "version": 1
+    }
+  ]
+}

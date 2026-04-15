@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_christmas_v1",
+      "templateName": "Christmas Celebration",
+      "category": "communityAndCultural",
+      "description": "Holiday celebration with tree decoration, carols, and gift exchange.",
+      "tags": ["christmas", "holiday", "carols", "secretsanta", "party"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_christmas_task_santa", "eventId": "blueprint_dummy", "title": "Organize Secret Santa", "status": "pending", "phase": "preEvent", "description": "Assign names for the gift exchange.", "dueOffset": "T-15 days", "role": "Organizer", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_christmas_budget_tree", "eventId": "blueprint_dummy", "category": "Decoration", "title": "Tree & Decor", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_christmas_timeline_gifts", "eventId": "blueprint_dummy", "title": "Gift Exchange", "phase": "eventDay", "timeOrOffset": "08:30 PM", "dayNumber": 1, "description": "Secret Santa reveal and gift distribution." }
+      ],
+      "version": 1
+    }
+  ]
+}

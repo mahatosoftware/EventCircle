@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_dragon_boat_v1",
+      "templateName": "Dragon Boat Festival",
+      "category": "communityAndCultural",
+      "description": "Cultural event featuring boat races, sticky rice dumplings (Zongzi), and tradition.",
+      "tags": ["dragon boat", "festival", "race", "traditional", "zongzi"],
+      "defaultFields": {
+        "contributionType": "voluntary",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "roles", "inventory"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_dbf_task_boats", "eventId": "blueprint_dummy", "title": "Confirm Boat Rentals & Safety", "status": "pending", "phase": "preEvent", "description": "Ensure racing boats are secured and inspected.", "dueOffset": "T-30 days", "role": "Logistics", "dependsOn": [] },
+        { "id": "sys_dbf_task_zongzi", "eventId": "blueprint_dummy", "title": "Order Sticky Rice Dumplings", "status": "pending", "phase": "preEvent", "description": "Arrange traditional dumplings for the group.", "dueOffset": "T-10 days", "role": "Food Manager", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_dbf_budget_racing", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Boat & Safety Equipment Fees", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_dbf_timeline_race", "eventId": "blueprint_dummy", "title": "Main Boat Race", "phase": "eventDay", "timeOrOffset": "10:00 AM", "dayNumber": 1, "description": "The peak of the festival competition." }
+      ],
+      "version": 1
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_blood_donation_v1",
+      "templateName": "Blood Donation Camp",
+      "category": "communityAndCultural",
+      "description": "Organize a community blood donation drive in partnership with local hospitals.",
+      "tags": ["blood donation", "health", "community service", "camp"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "location", "roles", "inventory"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_blood_task_hospital", "eventId": "blueprint_dummy", "title": "Partner with Blood Bank/Hospital", "status": "pending", "phase": "preEvent", "description": "Confirm medical team and equipment support.", "dueOffset": "T-20 days", "role": "Logistics", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_blood_budget_refreshments", "eventId": "blueprint_dummy", "category": "Food", "title": "Refreshments for Donors", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_blood_timeline_start", "eventId": "blueprint_dummy", "title": "Camp Commencement", "phase": "eventDay", "timeOrOffset": "09:00 AM", "dayNumber": 1, "description": "Medical team setup and donor arrival." }
+      ],
+      "version": 1
+    }
+  ]
+}

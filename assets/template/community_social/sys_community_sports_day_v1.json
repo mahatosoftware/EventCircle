@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_community_sports_day_v1",
+      "templateName": "Community Sports Day",
+      "category": "communityAndCultural",
+      "description": "A day of athletic competitions and fun games for the whole community.",
+      "tags": ["sports", "community", "games", "fitness", "fun"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "roles", "inventory", "contribution"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_sports_task_equipment", "eventId": "blueprint_dummy", "title": "Rent Sports Equipment", "status": "pending", "phase": "preEvent", "description": "Arrange for kits, balls, Nets, and field markers.", "dueOffset": "T-7 days", "role": "Logistics", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_sports_budget_prizes", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Medals & Trophies", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_sports_timeline_race", "eventId": "blueprint_dummy", "title": "Main Track Events", "phase": "eventDay", "timeOrOffset": "10:30 AM", "dayNumber": 1, "description": "Races and field competitions." }
+      ],
+      "version": 1
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_african_wedding_v1",
+      "templateName": "African Wedding Ceremony",
+      "category": "personal",
+      "description": "Elaborate traditional wedding celebration featuring specific cultural rites, group dances, and colorful attire.",
+      "tags": ["wedding", "african", "traditional", "ceremony", "family", "party"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location", "roles", "inventory"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_awc_task_attire", "eventId": "blueprint_dummy", "title": "Coordinate Traditional Attire (Aso Ebi, etc.)", "status": "pending", "phase": "preEvent", "description": "Ensure families and friends have the correct fabrics and styles.", "dueOffset": "T-90 days", "role": "Organizer", "dependsOn": [] },
+        { "id": "sys_awc_task_menu", "eventId": "blueprint_dummy", "title": "Finalize Traditional Feast Menu", "status": "pending", "phase": "preEvent", "description": "Ensure specific cultural dishes are included.", "dueOffset": "T-60 days", "role": "Food Manager", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_awc_budget_hosting", "eventId": "blueprint_dummy", "category": "Venue", "title": "Large Scale Venue & Decor", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_awc_timeline_reception", "eventId": "blueprint_dummy", "title": "The Grand Reception & Entrance", "phase": "eventDay", "timeOrOffset": "04:00 PM", "dayNumber": 1, "description": "The main celebration and social highlight." }
+      ],
+      "version": 1
+    }
+  ]
+}

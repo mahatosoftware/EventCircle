@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_hajj_sendoff_v1",
+      "templateName": "Hajj Send-off Event",
+      "category": "personal",
+      "description": "Gathering to bid farewell and offer prayers for family or community members embarking on the Hajj pilgrimage.",
+      "tags": ["hajj", "pilgrimage", "send-off", "farewell", "spiritual", "family"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_hso_task_prayers", "eventId": "blueprint_dummy", "title": "Coordinate Group Prayers / Duas", "status": "pending", "phase": "preEvent", "description": "Ensure the spiritual program is organized.", "dueOffset": "T-3 days", "role": "Host", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_hso_budget_hosting", "eventId": "blueprint_dummy", "category": "Food", "title": "Refreshments for Guests", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_hso_timeline_dua", "eventId": "blueprint_dummy", "title": "Special Prayer Session (Dua)", "phase": "eventDay", "timeOrOffset": "05:30 PM", "dayNumber": 1, "description": "Group prayer for the pilgrims." }
+      ],
+      "version": 1
+    }
+  ]
+}

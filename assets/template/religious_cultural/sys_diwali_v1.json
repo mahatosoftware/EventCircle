@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_diwali_v1",
+      "templateName": "Diwali Celebration",
+      "category": "communityAndCultural",
+      "description": "Festival of lights involving rangoli, decoration, lakshmi puja, and sweets distribution.",
+      "tags": ["diwali", "deepavali", "lights", "festival", "lakshmi puja", "home"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_diwali_task_lights", "eventId": "blueprint_dummy", "title": "Diya & Lighting Arrangement", "status": "pending", "phase": "eventDay", "description": "Decorate the venue with lights and diyas.", "dueOffset": "Event Evening", "role": "Decoration", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_diwali_budget_sweets", "eventId": "blueprint_dummy", "category": "Food", "title": "Sweets & Gift Boxes", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_diwali_timeline_puja", "eventId": "blueprint_dummy", "title": "Lakshmi Puja", "phase": "eventDay", "timeOrOffset": "07:30 PM", "dayNumber": 1, "description": "Evening prayer rituals." }
+      ],
+      "version": 1
+    }
+  ]
+}

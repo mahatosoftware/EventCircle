@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_rio_carnival_v1",
+      "templateName": "Rio Carnival Event",
+      "category": "communityAndCultural",
+      "description": "Grand Brazilian festival featuring large scale parades, Samba music, and elaborate costumes.",
+      "tags": ["rio carnival", "brazil", "festival", "samba", "parade", "costumes"],
+      "defaultFields": {
+        "contributionType": "voluntary",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "roles", "inventory", "media"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_rio_task_floats", "eventId": "blueprint_dummy", "title": "Coordinate Parade Floats & Props", "status": "pending", "phase": "preEvent", "description": "Ensure the grand display items are ready.", "dueOffset": "T-30 days", "role": "Logistics", "dependsOn": [] },
+        { "id": "sys_rio_task_samba", "eventId": "blueprint_dummy", "title": "Secure Samba Dancers & Band", "status": "pending", "phase": "preEvent", "description": "Arrange professional performers for the main event.", "dueOffset": "T-20 days", "role": "Program Coordinator", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_rio_budget_floats", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Float Materials & Artist Fees", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_rio_timeline_grand", "eventId": "blueprint_dummy", "title": "Main Sambadrome Style Parade", "phase": "eventDay", "timeOrOffset": "09:00 PM", "dayNumber": 1, "description": "The peak of the event festivities." }
+      ],
+      "version": 1
+    }
+  ]
+}

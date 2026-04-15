@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_business_networking_meet_v1",
+      "templateName": "Business Networking Meet",
+      "category": "corporate",
+      "description": "Structured gathering for professionals to build connections and partnerships.",
+      "tags": ["networking", "business", "professional", "corporate", "meetup"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location", "contribution"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_network_task_list", "eventId": "blueprint_dummy", "title": "Create Participant Directory", "status": "pending", "phase": "preEvent", "description": "Collect LinkedIn/business details for distribution.", "dueOffset": "T-2 days", "role": "Communication", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_network_budget_hall", "eventId": "blueprint_dummy", "category": "Venue", "title": "Meeting Hall Rental", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_network_timeline_speed", "eventId": "blueprint_dummy", "title": "Speed Networking Session", "phase": "eventDay", "timeOrOffset": "05:00 PM", "dayNumber": 1, "description": "Structured interaction rounds." }
+      ],
+      "version": 1
+    }
+  ]
+}

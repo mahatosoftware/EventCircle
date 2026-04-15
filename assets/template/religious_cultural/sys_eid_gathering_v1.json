@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_eid_gathering_v1",
+      "templateName": "Eid Gathering",
+      "category": "communityAndCultural",
+      "description": "Celebration of Eid with traditional food, prayers, and family time.",
+      "tags": ["eid", "celebration", "festival", "family", "traditional"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_eid_task_menu", "eventId": "blueprint_dummy", "title": "Finalize Eid Menu", "status": "pending", "phase": "preEvent", "description": "Plan traditional dishes like Sheer Khurma and Biryani.", "dueOffset": "T-7 days", "role": "Food Manager", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_eid_budget_food", "eventId": "blueprint_dummy", "category": "Food", "title": "Catering / Ingredients", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_eid_timeline_feast", "eventId": "blueprint_dummy", "title": "Festive Feast", "phase": "eventDay", "timeOrOffset": "01:30 PM", "dayNumber": 1, "description": "Main celebratory meal with family and friends." }
+      ],
+      "version": 1
+    }
+  ]
+}

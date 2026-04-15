@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_trekking_v1",
+      "templateName": "Trekking Event",
+      "category": "travel",
+      "description": "Adventure activity involving hiking through trails and mountains.",
+      "tags": ["trekking", "adventure", "hiking", "travel", "mountain"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "location", "roles", "inventory", "contribution"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_trek_task_safety", "eventId": "blueprint_dummy", "title": "Verify Trail Safety & Permits", "status": "pending", "phase": "preEvent", "description": "Obtain permissions from forest departments if needed.", "dueOffset": "T-15 days", "role": "Organizer", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_trek_budget_equipment", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "First Aid & Equipment", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_trek_timeline_summit", "eventId": "blueprint_dummy", "title": "Summit Highlight", "phase": "eventDay", "timeOrOffset": "11:30 AM", "dayNumber": 1, "description": "Reaching the highest point and group photos." }
+      ],
+      "version": 1
+    }
+  ]
+}

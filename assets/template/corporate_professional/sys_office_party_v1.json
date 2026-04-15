@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_office_party_v1",
+      "templateName": "Office Party",
+      "category": "corporate",
+      "description": "Casual gathering or celebration for team members within the office or at a venue.",
+      "tags": ["office", "corporate", "party", "team building", "celebration"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_office_task_theme", "eventId": "blueprint_dummy", "title": "Finalize Party Theme", "status": "pending", "phase": "preEvent", "description": "Select a theme and decoration style.", "dueOffset": "T-10 days", "role": "Organizer", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_office_budget_food", "eventId": "blueprint_dummy", "category": "Food", "title": "Catering & Snacks", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_office_timeline_awards", "eventId": "blueprint_dummy", "title": "Recognition & Rewards", "phase": "eventDay", "timeOrOffset": "03:00 PM", "dayNumber": 1, "description": "Brief ceremony for employee recognition." }
+      ],
+      "version": 1
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_carnival_v1",
+      "templateName": "Carnival Party",
+      "category": "communityAndCultural",
+      "description": "Vibrant celebration featuring costumes, music, and community spirit.",
+      "tags": ["carnival", "party", "festival", "costumes", "music"],
+      "defaultFields": {
+        "contributionType": "voluntary",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "roles", "inventory"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_carn_task_music", "eventId": "blueprint_dummy", "title": "Secure High-Energy Music/DJ", "status": "pending", "phase": "preEvent", "description": "Ensure music for dancing and parades.", "dueOffset": "T-15 days", "role": "Program Coordinator", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_carn_budget_costumes", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Special Costumes & Masks", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_carn_timeline_parade", "eventId": "blueprint_dummy", "title": "Costume Parade & Interactive Dance", "phase": "eventDay", "timeOrOffset": "07:00 PM", "dayNumber": 1, "description": "The main social highlight of the party." }
+      ],
+      "version": 1
+    }
+  ]
+}

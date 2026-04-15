@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_chuseok_v1",
+      "templateName": "Chuseok Festival",
+      "category": "communityAndCultural",
+      "description": "Major Korean harvest festival featuring ancestral rites, traditional food like Songpyeon, and games.",
+      "tags": ["chuseok", "festival", "korean", "harvest", "traditional", "songpyeon"],
+      "defaultFields": {
+        "contributionType": "voluntary",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "roles", "inventory"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_chu_task_songpyeon", "eventId": "blueprint_dummy", "title": "Secure Songpyeon & Traditional Food", "status": "pending", "phase": "preEvent", "description": "Order or prepare specific harvest rice cakes.", "dueOffset": "T-5 days", "role": "Food Manager", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_chu_budget_food", "eventId": "blueprint_dummy", "category": "Food", "title": "Traditional Harvest Meal", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_chu_timeline_ritual", "eventId": "blueprint_dummy", "title": "Ancestral Rites (Charye)", "phase": "eventDay", "timeOrOffset": "09:00 AM", "dayNumber": 1, "description": "Morning ritual to honor ancestors." }
+      ],
+      "version": 1
+    }
+  ]
+}

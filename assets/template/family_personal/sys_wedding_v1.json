@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_wedding_v1",
+      "templateName": "Wedding Ceremony",
+      "category": "personal",
+      "description": "Comprehensive wedding planning from pre-wedding rituals to the main ceremony and reception.",
+      "tags": ["wedding", "marriage", "reception", "ceremony", "bride", "groom", "party"],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location", "roles", "inventory", "userManagement"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_wedding_task_venue", "eventId": "blueprint_dummy", "title": "Book Wedding & Reception Venue", "status": "pending", "phase": "preEvent", "description": "Secure the dates and venue for all major ceremonies.", "dueOffset": "T-180 days", "role": "Organizer", "dependsOn": [] },
+        { "id": "sys_wedding_task_catering", "eventId": "blueprint_dummy", "title": "Finalize Catering Service", "status": "pending", "phase": "preEvent", "description": "Select caterer and decide on the menu for all events.", "dueOffset": "T-120 days", "role": "Food Manager", "dependsOn": [] },
+        { "id": "sys_wedding_task_invites", "eventId": "blueprint_dummy", "title": "Design and Send Invitations", "status": "pending", "phase": "preEvent", "description": "Finalize guest list and send out physical or digital invites.", "dueOffset": "T-60 days", "role": "Communication", "dependsOn": [] },
+        { "id": "sys_wedding_task_decor", "eventId": "blueprint_dummy", "title": "Assign Decorator and Theme", "status": "pending", "phase": "preEvent", "description": "Choose floral and lighting themes for the wedding stage and venue.", "dueOffset": "T-45 days", "role": "Decoration", "dependsOn": [] },
+        { "id": "sys_wedding_task_attire", "eventId": "blueprint_dummy", "title": "Finalize Wedding Attire", "status": "pending", "phase": "preEvent", "description": "Complete fittings for the bride, groom, and immediate family.", "dueOffset": "T-30 days", "role": "Organizer", "dependsOn": [] },
+        { "id": "sys_wedding_task_photo", "eventId": "blueprint_dummy", "title": "Book Photographer & Videographer", "status": "pending", "phase": "preEvent", "description": "Secure professional media services for the event.", "dueOffset": "T-90 days", "role": "Media", "dependsOn": [] },
+        { "id": "sys_wedding_task_setup", "eventId": "blueprint_dummy", "title": "Venue Setup Verification", "status": "pending", "phase": "eventDay", "description": "Ensure সব decorations and seating are in place.", "dueOffset": "Event Morning", "role": "Setup Team", "dependsOn": [] },
+        { "id": "sys_wedding_task_ceremony", "eventId": "blueprint_dummy", "title": "Coordinate Main Ceremony", "status": "pending", "phase": "eventDay", "description": "Oversee the rituals and timing with the officiant.", "dueOffset": "Event Start", "role": "Organizer", "dependsOn": [] },
+        { "id": "sys_wedding_task_payments", "eventId": "blueprint_dummy", "title": "Settle Final Vendor Payments", "status": "pending", "phase": "postEvent", "description": "Complete all financial transactions with service providers.", "dueOffset": "T+7 days", "role": "Treasurer", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_wedding_budget_venue", "eventId": "blueprint_dummy", "category": "Venue", "title": "Venue Rental", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 },
+        { "id": "sys_wedding_budget_food", "eventId": "blueprint_dummy", "category": "Food", "title": "Catering per plate", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 },
+        { "id": "sys_wedding_budget_decor", "eventId": "blueprint_dummy", "category": "Decoration", "title": "Decoration & Lighting", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 },
+        { "id": "sys_wedding_budget_media", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Photography & Video", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_wedding_timeline_arrival", "eventId": "blueprint_dummy", "title": "Guest Arrival & Welcome", "phase": "eventDay", "timeOrOffset": "10:00 AM", "dayNumber": 1, "description": "Welcoming guests at the venue entrance." },
+        { "id": "sys_wedding_timeline_rituals", "eventId": "blueprint_dummy", "title": "Main Wedding Rituals", "phase": "eventDay", "timeOrOffset": "11:30 AM", "dayNumber": 1, "description": "Wedding vows and traditions." },
+        { "id": "sys_wedding_timeline_lunch", "eventId": "blueprint_dummy", "title": "Wedding Lunch/Dinner", "phase": "eventDay", "timeOrOffset": "01:30 PM", "dayNumber": 1, "description": "Main meal service for guests." }
+      ],
+      "version": 1
+    }
+  ]
+}

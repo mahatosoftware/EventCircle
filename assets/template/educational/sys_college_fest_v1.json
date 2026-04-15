@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_college_fest_v1",
+      "templateName": "College Fest",
+      "category": "educational",
+      "description": "Multi-day festival with cultural, technical, and sports competitions for college students.",
+      "tags": ["college fest", "celebration", "academic", "cultural", "campus"],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "roles", "inventory", "userManagement"]
+      },
+      "taskBlueprints": [
+        { "id": "sys_fest_task_sponsorship", "eventId": "blueprint_dummy", "title": "Secure Brand Sponsorships", "status": "pending", "phase": "preEvent", "description": "Pitch to local businesses and brands.", "dueOffset": "T-60 days", "role": "Finance Coordinator", "dependsOn": [] }
+      ],
+      "budgetBlueprints": [
+        { "id": "sys_fest_budget_concert", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Artist/Live Concert Fee", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
+      ],
+      "timelineBlueprints": [
+        { "id": "sys_fest_timeline_proshow", "eventId": "blueprint_dummy", "title": "Professional Concert Show", "phase": "eventDay", "timeOrOffset": "07:30 PM", "dayNumber": 2, "description": "Main festival highlight." }
+      ],
+      "version": 1
+    }
+  ]
+}
