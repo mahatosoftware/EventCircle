@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_community_fundraiser_v1",
+      "templateName": "Community Fundraiser",
+      "category": "charityAndFundraising",
+      "description": "Collect contributions, track expenses, and keep members informed.",
+      "tags": [
+        "fundraiser",
+        "fundraising",
+        "donation",
+        "donations",
+        "charity",
+        "contribution",
+        "volunteers",
+        "sponsors",
+        "campaign"
+      ],
+      "defaultFields": {
+        "contributionType": "voluntary",
+        "amount": 0,
+        "enabledModules": ["contribution", "budget", "expenses", "guestManagement", "communication", "roles", "userManagement"]
+      },
+      "version": 1
+    }
+  ]
+}

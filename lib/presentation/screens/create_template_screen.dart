@@ -31,6 +31,7 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _descriptionController = TextEditingController();
+  final _keywordsController = TextEditingController();
   
   EventCategory _category = EventCategory.socialAndPersonal;
   
@@ -56,6 +57,7 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
   void dispose() {
     _titleController.dispose();
     _descriptionController.dispose();
+    _keywordsController.dispose();
     super.dispose();
   }
 
@@ -93,6 +95,16 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
                 ),
                 maxLines: 2,
                 validator: (v) => v?.isEmpty ?? true ? 'Required' : null,
+              ),
+              const SizedBox(height: 16),
+              TextFormField(
+                controller: _keywordsController,
+                decoration: const InputDecoration(
+                  labelText: 'Search Keywords (Optional)',
+                  prefixIcon: Icon(Icons.tag_outlined),
+                  hintText: 'e.g. puja, festival, ganesh, visarjan',
+                ),
+                maxLines: 2,
               ),
               const SizedBox(height: 16),
               DropdownButtonFormField<EventCategory>(
@@ -378,6 +390,8 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
     }
     config['communicationEnabled'] = _selectedModules[TemplateModule.communication]!;
 
+    final keywords = _parseKeywords(_keywordsController.text);
+
     return TemplateModel(
       id: templateId,
       title: _titleController.text,
@@ -387,6 +401,7 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
           ? EventTemplateService.getSuggestedContribution(_category).type 
           : ContributionType.voluntary,
       createdBy: userId,
+      tags: keywords,
       enabledModules: _selectedModules.entries.where((e) => e.value).map((e) => e.key).toList(),
       config: config,
       taskBlueprints: _selectedModules[TemplateModule.task]! ? EventTemplateService.getSuggestedTasks(dummyEventId, _category) : [],
@@ -405,6 +420,15 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
 
   Future<TemplateModel> _buildTemplateFromExistingEvent(String templateId, String userId) async {
     return _buildTemplateFromSuggestions(templateId, userId);
+  }
+
+  List<String> _parseKeywords(String raw) {
+    final parts = raw
+        .split(RegExp(r'[,\n]'))
+        .map((s) => s.trim().toLowerCase())
+        .where((s) => s.isNotEmpty)
+        .toList();
+    return parts.toSet().toList();
   }
 
   List<String> _enabledRoleModules() {

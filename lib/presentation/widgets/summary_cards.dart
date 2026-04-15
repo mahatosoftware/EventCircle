@@ -44,7 +44,15 @@ class SummaryCards extends StatelessWidget {
                       const Expanded(
                         child: Text('Budget Performance', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.blue)),
                       ),
-                      Text('$currencySymbol${totalExpenses.toStringAsFixed(0)} / $currencySymbol${totalPlannedBudget?.toStringAsFixed(0)}', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: Colors.blue)),
+                      Flexible(
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            '$currencySymbol${totalExpenses.toStringAsFixed(0)} / $currencySymbol${totalPlannedBudget?.toStringAsFixed(0)}',
+                            style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w900, color: Colors.blue),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 12),
@@ -131,12 +139,16 @@ class SummaryCards extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 8),
-          Text(
-            amount,
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: color,
-                ),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Text(
+              amount,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: color,
+                  ),
+            ),
           ),
         ],
       ),

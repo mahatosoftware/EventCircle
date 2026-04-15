@@ -8,11 +8,13 @@ import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
 import '../../providers/auth_provider.dart';
 import '../../providers/template_provider.dart';
+import '../../providers/template_search_feedback_provider.dart';
 import '../../data/models/event_model.dart';
 import '../../data/models/event_role_model.dart';
 import '../../data/models/event_user_model.dart';
 import '../../data/models/template_model.dart';
 import '../../data/models/currency.dart';
+import '../../data/constants/system_template_constants.dart';
 
 class CreateEventScreen extends ConsumerStatefulWidget {
   const CreateEventScreen({super.key});
@@ -40,6 +42,9 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
   bool _isSubmitting = false;
   String? _submitStatus;
   Currency? _selectedCurrencyItem;
+  Timer? _noResultSearchDebounce;
+  String? _lastLoggedNoResultQuery;
+  List<TemplateModel> _latestTemplates = const [];
 
   static const int _maxWritesPerBatch = 450; // Firestore limit is 500. Keep headroom.
   static const Duration _batchCommitTimeout = Duration(seconds: 45);
@@ -52,7 +57,66 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
     _locationController.dispose();
     _noteController.dispose();
     _searchController.dispose();
+    _noResultSearchDebounce?.cancel();
     super.dispose();
+  }
+
+  bool _matchesTemplate(TemplateModel t, String rawQuery) {
+    final query = rawQuery.trim().toLowerCase();
+    if (query.isEmpty) return true;
+    final terms = query.split(RegExp(r'\s+')).where((x) => x.isNotEmpty).toList();
+    final haystack = [
+      t.title,
+      t.description,
+      t.category.displayName,
+      ...t.tags,
+    ].join(' ').toLowerCase();
+    return terms.every(haystack.contains);
+  }
+
+  bool _isSystemTemplate(TemplateModel t) => t.createdBy == systemTemplateCreatedBy;
+
+  List<TemplateModel> _filterTemplates(List<TemplateModel> templates, String rawQuery) {
+    return templates.where((t) => _matchesTemplate(t, rawQuery)).toList();
+  }
+
+  void _scheduleNoResultQueryLogIfNeeded({
+    required int systemMatchCount,
+    required int customMatchCount,
+  }) {
+    final normalized = _searchQuery.trim().toLowerCase();
+    if (normalized.isEmpty) return;
+    if (systemMatchCount > 0) return;
+    if (_lastLoggedNoResultQuery == normalized) return;
+
+    _noResultSearchDebounce?.cancel();
+    _noResultSearchDebounce = Timer(const Duration(milliseconds: 800), () async {
+      if (!mounted) return;
+      final stableNormalized = _searchQuery.trim().toLowerCase();
+      if (stableNormalized.isEmpty) return;
+      if (stableNormalized != normalized) return; // User kept typing; skip this run.
+
+      final systemTemplates = _latestTemplates.where(_isSystemTemplate).toList();
+      final customTemplates = _latestTemplates.where((t) => !_isSystemTemplate(t)).toList();
+      final systemMatches = _filterTemplates(systemTemplates, _searchQuery);
+      if (systemMatches.isNotEmpty) return;
+      final customMatches = _filterTemplates(customTemplates, _searchQuery);
+      if (_lastLoggedNoResultQuery == stableNormalized) return;
+
+      _lastLoggedNoResultQuery = stableNormalized;
+      final user = ref.read(currentUserProvider);
+      try {
+        await ref.read(templateSearchFeedbackRepositoryProvider).logNoMatchQuery(
+              query: _searchQuery,
+              userId: user?.id,
+              publicTemplateCount: _latestTemplates.length,
+              systemMatchCount: systemMatches.length,
+              customMatchCount: customMatches.length,
+            );
+      } catch (_) {
+        // Best-effort analytics; ignore failures.
+      }
+    });
   }
 
   void _applyTemplate(TemplateModel template) {
@@ -124,7 +188,8 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
         template.venueBlueprints.length +
         template.ticketBlueprints.length +
         template.customFieldBlueprints.length +
-        template.announcementBlueprints.length;
+        template.announcementBlueprints.length +
+        template.budgetBlueprints.length;
   }
 
   Future<void> _importTemplateBlueprints({
@@ -139,10 +204,14 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
     int done = 0;
     int inBatch = 0;
     WriteBatch batch = db.batch();
+    int lastUiDone = -1;
+    DateTime lastUiAt = DateTime.fromMillisecondsSinceEpoch(0);
+
+    _setSubmitStatus('Setup 0/$total');
 
     Future<void> flush(String label) async {
       if (inBatch == 0) return;
-      _setSubmitStatus('Setting up modules… $done/$total');
+      _setSubmitStatus('Setup $done/$total');
       await _commitBatch(batch, label: label);
       batch = db.batch();
       inBatch = 0;
@@ -150,10 +219,26 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
       await Future<void>.delayed(Duration.zero);
     }
 
-    void addWrite(void Function(WriteBatch b) write) {
+    Future<void> addWrite(void Function(WriteBatch b) write) async {
       write(batch);
       done++;
       inBatch++;
+
+      final now = DateTime.now();
+      final shouldUpdate =
+          done == 1 || done == total || (done - lastUiDone) >= 10 || now.difference(lastUiAt).inMilliseconds >= 250;
+      if (shouldUpdate) {
+        lastUiDone = done;
+        lastUiAt = now;
+        _setSubmitStatus('Setup $done/$total');
+      }
+
+      // Allow the UI to paint intermediate progress, especially when total is small
+      // (otherwise all writes run before the first await/flush).
+      if (shouldUpdate) {
+        await Future<void>.delayed(Duration.zero);
+      }
+
       if (inBatch >= _maxWritesPerBatch) {
         // Commit boundary handled by callers (loop awaits flush()).
       }
@@ -162,7 +247,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
     // Task Blueprints (global tasks collection)
     for (final task in template.taskBlueprints) {
       final taskId = uuid.v4();
-      addWrite((b) => b.set(
+      await addWrite((b) => b.set(
             db.collection('tasks').doc(taskId),
             task.copyWith(id: taskId, eventId: eventId).toJson(),
           ));
@@ -172,7 +257,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
     // Timeline Blueprints
     for (final item in template.timelineBlueprints) {
       final itemId = uuid.v4();
-      addWrite((b) => b.set(
+      await addWrite((b) => b.set(
             db.collection('events').doc(eventId).collection('timeline').doc(itemId),
             item.copyWith(id: itemId, eventId: eventId).toJson(),
           ));
@@ -182,7 +267,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
     // Vendor Blueprints
     for (final vendor in template.vendorBlueprints) {
       final vendorId = uuid.v4();
-      addWrite((b) => b.set(
+      await addWrite((b) => b.set(
             db.collection('events').doc(eventId).collection('vendors').doc(vendorId),
             vendor.copyWith(id: vendorId, eventId: eventId).toJson(),
           ));
@@ -192,7 +277,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
     // Inventory Blueprints
     for (final item in template.inventoryBlueprints) {
       final itemId = uuid.v4();
-      addWrite((b) => b.set(
+      await addWrite((b) => b.set(
             db.collection('events').doc(eventId).collection('inventory').doc(itemId),
             item.copyWith(id: itemId, eventId: eventId).toJson(),
           ));
@@ -210,7 +295,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
         moduleAccess: def.moduleAccess,
         userIds: const [],
       );
-      addWrite((b) => b.set(
+      await addWrite((b) => b.set(
             db.collection('events').doc(eventId).collection('roles').doc(roleId),
             role.toJson(),
           ));
@@ -220,7 +305,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
     // Venue Blueprints
     for (final venue in template.venueBlueprints) {
       final venueId = uuid.v4();
-      addWrite((b) => b.set(
+      await addWrite((b) => b.set(
             db.collection('events').doc(eventId).collection('venues').doc(venueId),
             venue.copyWith(id: venueId, eventId: eventId).toJson(),
           ));
@@ -230,7 +315,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
     // Ticket Blueprints
     for (final ticket in template.ticketBlueprints) {
       final ticketId = uuid.v4();
-      addWrite((b) => b.set(
+      await addWrite((b) => b.set(
             db.collection('events').doc(eventId).collection('tickets').doc(ticketId),
             ticket.copyWith(id: ticketId, eventId: eventId).toJson(),
           ));
@@ -240,7 +325,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
     // Custom Fields
     for (final field in template.customFieldBlueprints) {
       final fieldId = uuid.v4();
-      addWrite((b) => b.set(
+      await addWrite((b) => b.set(
             db.collection('events').doc(eventId).collection('customFields').doc(fieldId),
             field.copyWith(id: fieldId, eventId: eventId).toJson(),
           ));
@@ -250,13 +335,23 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
     // Announcements
     for (final announcement in template.announcementBlueprints) {
       final announcementId = uuid.v4();
-      addWrite((b) => b.set(
+      await addWrite((b) => b.set(
             db.collection('events').doc(eventId).collection('announcements').doc(announcementId),
             announcement
                 .copyWith(id: announcementId, eventId: eventId, createdAt: DateTime.now())
                 .toJson(),
           ));
       if (inBatch >= _maxWritesPerBatch) await flush('announcements');
+    }
+
+    // Budget
+    for (final item in template.budgetBlueprints) {
+      final itemId = uuid.v4();
+      await addWrite((b) => b.set(
+            db.collection('events').doc(eventId).collection('budget').doc(itemId),
+            item.copyWith(id: itemId, eventId: eventId).toJson(),
+          ));
+      if (inBatch >= _maxWritesPerBatch) await flush('budget');
     }
 
     await flush('final');
@@ -451,10 +546,17 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
           Expanded(
             child: templatesAsync.when(
               data: (templates) {
-                final filtered = templates.where((t) => 
-                  t.title.toLowerCase().contains(_searchQuery) ||
-                  t.category.displayName.toLowerCase().contains(_searchQuery)
-                ).toList();
+                _latestTemplates = templates;
+                final systemTemplates = templates.where(_isSystemTemplate).toList();
+                final customTemplates = templates.where((t) => !_isSystemTemplate(t)).toList();
+                final filteredSystem = _filterTemplates(systemTemplates, _searchQuery);
+                final filteredCustom = _filterTemplates(customTemplates, _searchQuery);
+                final filtered = [...filteredSystem, ...filteredCustom];
+
+                _scheduleNoResultQueryLogIfNeeded(
+                  systemMatchCount: filteredSystem.length,
+                  customMatchCount: filteredCustom.length,
+                );
 
                 if (filtered.isEmpty) {
                   return _buildEmptyState();
@@ -491,6 +593,22 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                                     child: Text(
                                       template.category.displayName.toUpperCase(),
                                       style: TextStyle(color: Colors.blue.shade800, fontSize: 10, fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                    decoration: BoxDecoration(
+                                      color: _isSystemTemplate(template) ? Colors.green.shade50 : Colors.deepPurple.shade50,
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: Text(
+                                      _isSystemTemplate(template) ? 'SYSTEM' : 'COMMUNITY',
+                                      style: TextStyle(
+                                        color: _isSystemTemplate(template) ? Colors.green.shade800 : Colors.deepPurple.shade800,
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
                                   ),
                                   const SizedBox(width: 8),

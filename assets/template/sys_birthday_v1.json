@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_birthday_v1",
+      "templateName": "Birthday",
+      "category": "socialAndPersonal",
+      "description": "Plan a birthday celebration with tasks grouped by phase.",
+      "tags": [
+        "birthday",
+        "party",
+        "celebration",
+        "cake",
+        "decor",
+        "invitations",
+        "rsvp",
+        "games"
+      ],
+      "defaultFields": {
+        "contributionType": "none",
+        "amount": 0,
+        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication"]
+      },
+      "taskBlueprints": [
+        {
+          "id": "sys_birthday_task_book_venue",
+          "eventId": "blueprint_dummy",
+          "title": "Book venue",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Book and confirm the venue.",
+          "dueOffset": "T-25 days",
+          "role": "Organizer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_birthday_task_finalize_catering_menu",
+          "eventId": "blueprint_dummy",
+          "title": "Finalize catering menu",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Confirm food items and quantities.",
+          "dueOffset": "T-10 days",
+          "role": "Food Manager",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_birthday_task_finalize_guest_list",
+          "eventId": "blueprint_dummy",
+          "title": "Finalize guest list",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Finalize the list of guests to be invited.",
+          "dueOffset": "T-30 days",
+          "role": "Organizer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_birthday_task_send_invitations",
+          "eventId": "blueprint_dummy",
+          "title": "Send invitations",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Send invites to the guest list.",
+          "dueOffset": "T-15 days",
+          "role": "Communication",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_birthday_task_venue_setup_decoration",
+          "eventId": "blueprint_dummy",
+          "title": "Venue setup and decoration",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Set up the venue and complete decorations.",
+          "dueOffset": "Event Morning",
+          "role": "Setup Team",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_birthday_task_guest_greeting_management",
+          "eventId": "blueprint_dummy",
+          "title": "Guest greeting and management",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Greet guests and help manage arrivals.",
+          "dueOffset": "Event Start",
+          "role": "Host",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_birthday_task_clear_vendor_payments",
+          "eventId": "blueprint_dummy",
+          "title": "Clear vendor payments",
+          "status": "pending",
+          "phase": "postEvent",
+          "description": "Settle all pending vendor invoices.",
+          "dueOffset": "T+3 days",
+          "role": "Treasurer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_birthday_task_venue_handover_cleanup",
+          "eventId": "blueprint_dummy",
+          "title": "Venue handover and cleanup",
+          "status": "pending",
+          "phase": "postEvent",
+          "description": "Clean up and hand over the venue.",
+          "dueOffset": "T+1 day",
+          "role": "Logistics",
+          "dependsOn": []
+        }
+      ],
+      "budgetBlueprints": [
+        {
+          "id": "sys_birthday_budget_dress_outfit",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Dress outfit",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_birthday_budget_photography",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Photography",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_birthday_budget_catering",
+          "eventId": "blueprint_dummy",
+          "category": "Food",
+          "title": "Catering",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_birthday_budget_venue_rental",
+          "eventId": "blueprint_dummy",
+          "category": "Venue",
+          "title": "Venue rental",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_birthday_budget_stage_lighting",
+          "eventId": "blueprint_dummy",
+          "category": "Decoration",
+          "title": "Stage and lighting",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_birthday_budget_cake",
+          "eventId": "blueprint_dummy",
+          "category": "Food",
+          "title": "Cake",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_birthday_budget_return_gift",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Return gift",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_birthday_budget_snacks",
+          "eventId": "blueprint_dummy",
+          "category": "Food",
+          "title": "Snacks",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        }
+      ],
+      "version": 1
+    }
+  ]
+}

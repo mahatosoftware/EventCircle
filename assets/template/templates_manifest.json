@@ -1,0 +1,8 @@
+{
+  "templates": [
+    "assets/template/sys_basic_event_v1.json",
+    "assets/template/sys_birthday_v1.json",
+    "assets/template/sys_ganesh_puja_v1.json",
+    "assets/template/sys_community_fundraiser_v1.json"
+  ]
+}

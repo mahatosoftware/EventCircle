@@ -360,10 +360,10 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen> with SingleTick
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildSimpleStat('Total Spent', '₹$totalSpent'),
-              _buildSimpleStat('Pending', '₹$pending'),
-              _buildSimpleStat('Approved', '₹$approved'),
-              _buildSimpleStat('Paid', '₹$paid'),
+              Expanded(child: _buildSimpleStat('Total Spent', '₹$totalSpent')),
+              Expanded(child: _buildSimpleStat('Pending', '₹$pending')),
+              Expanded(child: _buildSimpleStat('Approved', '₹$approved')),
+              Expanded(child: _buildSimpleStat('Paid', '₹$paid')),
             ],
           ),
         ],
@@ -375,8 +375,11 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen> with SingleTick
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(value, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
-        Text(label, style: const TextStyle(color: Colors.white60, fontSize: 10)),
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(value, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+        ),
+        Text(label, style: const TextStyle(color: Colors.white60, fontSize: 10), maxLines: 1, overflow: TextOverflow.ellipsis),
       ],
     );
   }
@@ -766,8 +769,9 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen> with SingleTick
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildSimpleSummary('TOTAL PLANNED', '₹${totalPlanned.toStringAsFixed(0)}', Colors.blue),
-              _buildSimpleSummary('TOTAL ACTUAL', '₹${totalActual.toStringAsFixed(0)}', totalActual > totalPlanned ? Colors.red : Colors.green),
+              Expanded(child: _buildSimpleSummary('TOTAL PLANNED', '₹${totalPlanned.toStringAsFixed(0)}', Colors.blue)),
+              const SizedBox(width: 16),
+              Expanded(child: _buildSimpleSummary('TOTAL ACTUAL', '₹${totalActual.toStringAsFixed(0)}', totalActual > totalPlanned ? Colors.red : Colors.green)),
             ],
           ),
           const SizedBox(height: 16),
@@ -799,7 +803,10 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen> with SingleTick
       children: [
         Text(label, style: TextStyle(fontSize: 9, fontWeight: FontWeight.w800, color: Colors.grey.shade600, letterSpacing: 0.5)),
         const SizedBox(height: 4),
-        Text(value, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: color)),
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(value, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w900, color: color)),
+        ),
       ],
     );
   }
@@ -807,52 +814,199 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen> with SingleTick
   Widget _buildBudgetTile(BuildContext context, BudgetItemModel item, WidgetRef ref) {
     return Card(
       margin: const EdgeInsets.only(bottom: 8),
-      child: ListTile(
-        leading: const CircleAvatar(backgroundColor: Colors.blueAccent, child: Icon(Icons.calculate_outlined, color: Colors.white, size: 16)),
-        title: Text(item.title),
-        subtitle: Row(
-          children: [
-            Text(item.category, style: const TextStyle(fontSize: 12)),
-            const SizedBox(width: 8),
-            if (item.isMandatory) 
-              const Icon(Icons.priority_high, size: 12, color: Colors.red)
-            else 
-              const Icon(Icons.check_circle_outline, size: 12, color: Colors.green),
-          ],
-        ),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text('₹${item.actualCost.toStringAsFixed(0)}', style: TextStyle(fontWeight: FontWeight.w900, color: item.actualCost > item.estimatedCost ? Colors.red : Colors.green)),
-                Text('Actual', style: const TextStyle(fontSize: 10, color: Colors.grey)),
-              ],
-            ),
-            const SizedBox(width: 12),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text('₹${item.estimatedCost.toStringAsFixed(0)}', style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.blue)),
-                Text(item.isMandatory ? 'Planned' : 'Optional', style: const TextStyle(fontSize: 10, color: Colors.grey)),
-              ],
-            ),
-            const SizedBox(width: 8),
-            IconButton(
-              icon: const Icon(Icons.delete_outline, size: 18, color: Colors.grey),
-              onPressed: () => _showDeleteConfirmation(
-                context: context,
-                title: item.title,
-                onDelete: (reason) => ref.read(budgetRepositoryProvider).deleteBudgetItem(
-                      item.eventId,
-                      item.id,
-                      reason: reason,
-                      prevData: item.toJson(),
-                    ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: InkWell(
+        onTap: () => _showEditBudgetDialog(context, ref, item),
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Row(
+            children: [
+              CircleAvatar(
+                backgroundColor: Colors.blue.shade50,
+                radius: 18,
+                child: Icon(Icons.calculate_outlined, color: Colors.blue.shade800, size: 18),
               ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.title,
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          item.category,
+                          style: TextStyle(fontSize: 11, color: Colors.grey.shade600),
+                        ),
+                        const SizedBox(width: 4),
+                        if (item.isMandatory)
+                          const Icon(Icons.priority_high, size: 10, color: Colors.red)
+                        else
+                          const Icon(Icons.check_circle_outline, size: 10, color: Colors.green),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      '₹${item.actualCost.toStringAsFixed(0)}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 14,
+                        color: item.actualCost > item.estimatedCost ? Colors.red : Colors.green,
+                      ),
+                    ),
+                  ),
+                  Text('Actual', style: TextStyle(fontSize: 10, color: Colors.grey.shade500)),
+                ],
+              ),
+              const SizedBox(width: 12),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      '₹${item.estimatedCost.toStringAsFixed(0)}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                        color: Colors.blue.shade700,
+                      ),
+                    ),
+                  ),
+                  Text(item.isMandatory ? 'Planned' : 'Optional', style: TextStyle(fontSize: 10, color: Colors.grey.shade500)),
+                ],
+              ),
+              const SizedBox(width: 4),
+              PopupMenuButton<String>(
+                icon: const Icon(Icons.more_vert, size: 20, color: Colors.grey),
+                padding: EdgeInsets.zero,
+                onSelected: (val) {
+                  if (val == 'edit') {
+                    _showEditBudgetDialog(context, ref, item);
+                  } else if (val == 'delete') {
+                    _showDeleteConfirmation(
+                      context: context,
+                      title: item.title,
+                      onDelete: (reason) => ref.read(budgetRepositoryProvider).deleteBudgetItem(
+                            item.eventId,
+                            item.id,
+                            reason: reason,
+                            prevData: item.toJson(),
+                          ),
+                    );
+                  }
+                },
+                itemBuilder: (context) => [
+                  const PopupMenuItem(value: 'edit', child: ListTile(leading: Icon(Icons.edit_outlined, size: 20), title: Text('Edit'), contentPadding: EdgeInsets.zero)),
+                  const PopupMenuItem(value: 'delete', child: ListTile(leading: Icon(Icons.delete_outline, color: Colors.red, size: 20), title: Text('Delete', style: TextStyle(color: Colors.red)), contentPadding: EdgeInsets.zero)),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showEditBudgetDialog(BuildContext context, WidgetRef ref, BudgetItemModel item) {
+    final categories = List<String>.from(budgetCategories);
+    if (!categories.contains(item.category)) {
+      categories.add(item.category);
+    }
+
+    String selectedCategory = item.category;
+    bool isMandatory = item.isMandatory;
+
+    final titleController = TextEditingController(text: item.title);
+    final estimatedController = TextEditingController(text: item.estimatedCost.toStringAsFixed(0));
+    final noteController = TextEditingController(text: item.note ?? '');
+
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setDialogState) => AlertDialog(
+          title: const Text('Edit Budget Item'),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: titleController,
+                  decoration: const InputDecoration(labelText: 'Title'),
+                ),
+                const SizedBox(height: 12),
+                DropdownButtonFormField<String>(
+                  value: selectedCategory,
+                  items: categories.map((c) => DropdownMenuItem(value: c, child: Text(c))).toList(),
+                  onChanged: (val) => setDialogState(() => selectedCategory = val ?? selectedCategory),
+                  decoration: const InputDecoration(labelText: 'Category'),
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: estimatedController,
+                  decoration: const InputDecoration(labelText: 'Planned Amount'),
+                  keyboardType: TextInputType.number,
+                ),
+                const SizedBox(height: 12),
+                SwitchListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: const Text('Mandatory'),
+                  value: isMandatory,
+                  onChanged: (v) => setDialogState(() => isMandatory = v),
+                ),
+                TextField(
+                  controller: noteController,
+                  decoration: const InputDecoration(labelText: 'Note (optional)'),
+                  maxLines: 2,
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('Cancel'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final title = titleController.text.trim();
+                if (title.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Title is required.')));
+                  return;
+                }
+
+                final planned = double.tryParse(estimatedController.text.trim()) ?? item.estimatedCost;
+                final next = item.copyWith(
+                  title: title,
+                  category: selectedCategory,
+                  estimatedCost: planned,
+                  isMandatory: isMandatory,
+                  note: noteController.text.trim().isEmpty ? null : noteController.text.trim(),
+                );
+
+                try {
+                  await ref.read(budgetRepositoryProvider).updateBudgetItem(next);
+                  if (context.mounted) Navigator.pop(context);
+                } catch (e) {
+                  if (!context.mounted) return;
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Update failed: $e')));
+                }
+              },
+              child: const Text('Save'),
             ),
           ],
         ),

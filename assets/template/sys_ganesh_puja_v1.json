@@ -1,0 +1,687 @@
+{
+  "schemaVersion": 2,
+  "version": 9,
+  "templates": [
+    {
+      "templateId": "sys_ganesh_puja_v1",
+      "templateName": "Ganesh Puja",
+      "category": "communityAndCultural",
+      "description": "Organize Ganesh Puja with pre-event planning, event-day execution, and post-event wrap-up.",
+      "tags": [
+        "ganesh",
+        "ganesha",
+        "puja",
+        "pooja",
+        "festival",
+        "aarti",
+        "prasad",
+        "pandit",
+        "idol",
+        "visarjan"
+      ],
+      "defaultFields": {
+        "contributionType": "variable",
+        "amount": 0,
+        "enabledModules": [
+          "task",
+          "budget",
+          "timeline",
+          "guestManagement",
+          "communication",
+          "location",
+          "roles",
+          "inventory",
+          "userManagement",
+          "contribution"
+        ]
+      },
+      "taskBlueprints": [
+        {
+          "id": "sys_ganesh_puja_task_finalize_puja_date_time",
+          "eventId": "blueprint_dummy",
+          "title": "Finalize puja date and time",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Confirm the puja date/time and overall schedule.",
+          "dueOffset": "T-14 days",
+          "role": "Organizer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_book_priest_pandit",
+          "eventId": "blueprint_dummy",
+          "title": "Book priest / pandit",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Confirm priest availability and requirements.",
+          "dueOffset": "T-12 days",
+          "role": "Organizer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_prepare_guest_list",
+          "eventId": "blueprint_dummy",
+          "title": "Prepare guest list",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Create invite list and estimate headcount.",
+          "dueOffset": "T-10 days",
+          "role": "Organizer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_send_invitations",
+          "eventId": "blueprint_dummy",
+          "title": "Send invitations",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Send invitations and track RSVPs if needed.",
+          "dueOffset": "T-9 days",
+          "role": "Communication",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_arrange_ganesh_idol",
+          "eventId": "blueprint_dummy",
+          "title": "Arrange Ganesh idol",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Select and arrange the Ganesh idol and delivery/pickup.",
+          "dueOffset": "T-7 days",
+          "role": "Logistics",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_purchase_puja_samagri",
+          "eventId": "blueprint_dummy",
+          "title": "Purchase puja samagri",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Purchase all required puja items.",
+          "dueOffset": "T-5 days",
+          "role": "Logistics",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_book_venue_prepare_home_setup",
+          "eventId": "blueprint_dummy",
+          "title": "Book venue / prepare home setup",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Confirm venue booking or finalize home setup.",
+          "dueOffset": "T-10 days",
+          "role": "Organizer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_arrange_decoration_materials",
+          "eventId": "blueprint_dummy",
+          "title": "Arrange decoration materials",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Arrange flowers, lighting, backdrop, and decor items.",
+          "dueOffset": "T-4 days",
+          "role": "Decoration",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_plan_prasad_food_menu",
+          "eventId": "blueprint_dummy",
+          "title": "Plan prasad and food menu",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Finalize prasad and food menu and quantities.",
+          "dueOffset": "T-6 days",
+          "role": "Food Manager",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_arrange_seating_sound_system",
+          "eventId": "blueprint_dummy",
+          "title": "Arrange seating and sound system",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Arrange seating layout, microphones, and speakers.",
+          "dueOffset": "T-3 days",
+          "role": "Setup Team",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_plan_cultural_program_schedule",
+          "eventId": "blueprint_dummy",
+          "title": "Plan cultural program schedule",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Prepare a schedule for cultural performances.",
+          "dueOffset": "T-5 days",
+          "role": "Program Coordinator",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_organize_kids_competition_events",
+          "eventId": "blueprint_dummy",
+          "title": "Organize kids competition events",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Finalize competition types, rules, and participants.",
+          "dueOffset": "T-6 days",
+          "role": "Kids Coordinator",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_prepare_competition_materials_prizes",
+          "eventId": "blueprint_dummy",
+          "title": "Prepare competition materials and prizes",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Prepare materials, certificates, and prizes.",
+          "dueOffset": "T-2 days",
+          "role": "Kids Coordinator",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_assign_volunteers_stage_event_coordination",
+          "eventId": "blueprint_dummy",
+          "title": "Assign volunteers for stage and event coordination",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Assign volunteers for stage, crowd flow, and coordination.",
+          "dueOffset": "T-2 days",
+          "role": "Organizer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_install_decorate_ganesh_idol",
+          "eventId": "blueprint_dummy",
+          "title": "Install and decorate Ganesh idol",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Install the idol and complete decorations.",
+          "dueOffset": "Event Morning",
+          "role": "Decoration",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_set_up_puja_altar",
+          "eventId": "blueprint_dummy",
+          "title": "Set up puja altar",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Set up the altar with samagri and essentials.",
+          "dueOffset": "Event Morning",
+          "role": "Setup Team",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_welcome_guests",
+          "eventId": "blueprint_dummy",
+          "title": "Welcome guests",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Welcome guests and guide seating/flow.",
+          "dueOffset": "Event Start",
+          "role": "Host",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_conduct_ganesh_puja_rituals",
+          "eventId": "blueprint_dummy",
+          "title": "Conduct Ganesh Puja rituals",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Coordinate rituals with priest and manage flow.",
+          "dueOffset": "Event Start",
+          "role": "Organizer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_conduct_kids_competitions",
+          "eventId": "blueprint_dummy",
+          "title": "Conduct kids competitions",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Run kids competitions and coordinate judges.",
+          "dueOffset": "Event Midday",
+          "role": "Kids Coordinator",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_host_cultural_program_performances",
+          "eventId": "blueprint_dummy",
+          "title": "Host cultural program performances",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Coordinate stage and performance sequence.",
+          "dueOffset": "Event Evening",
+          "role": "Program Coordinator",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_announce_winners_distribute_prizes",
+          "eventId": "blueprint_dummy",
+          "title": "Announce winners and distribute prizes",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Announce winners and distribute prizes/certificates.",
+          "dueOffset": "Event Evening",
+          "role": "Kids Coordinator",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_distribute_prasad",
+          "eventId": "blueprint_dummy",
+          "title": "Distribute prasad",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Distribute prasad and manage queue/flow.",
+          "dueOffset": "After Puja",
+          "role": "Food Manager",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_serve_food_refreshments",
+          "eventId": "blueprint_dummy",
+          "title": "Serve food / refreshments",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Serve food/refreshments and ensure replenishment.",
+          "dueOffset": "After Puja",
+          "role": "Food Manager",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_manage_guest_coordination",
+          "eventId": "blueprint_dummy",
+          "title": "Manage guest coordination",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Coordinate guest movement, seating, and assistance.",
+          "dueOffset": "All Day",
+          "role": "Host",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_capture_photos_videos",
+          "eventId": "blueprint_dummy",
+          "title": "Capture photos and videos",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Capture key moments (puja, competitions, performances).",
+          "dueOffset": "All Day",
+          "role": "Media",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_ganesh_visarjan_arrangements",
+          "eventId": "blueprint_dummy",
+          "title": "Ganesh visarjan arrangements",
+          "status": "pending",
+          "phase": "postEvent",
+          "description": "Arrange visarjan logistics, timing, and safety.",
+          "dueOffset": "T+1 day",
+          "role": "Logistics",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_cleanup_venue_home",
+          "eventId": "blueprint_dummy",
+          "title": "Cleanup venue/home",
+          "status": "pending",
+          "phase": "postEvent",
+          "description": "Cleanup and restore the space after the event.",
+          "dueOffset": "T+1 day",
+          "role": "Logistics",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_settle_vendor_payments",
+          "eventId": "blueprint_dummy",
+          "title": "Settle vendor payments",
+          "status": "pending",
+          "phase": "postEvent",
+          "description": "Settle vendor bills and close accounts.",
+          "dueOffset": "T+3 days",
+          "role": "Treasurer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_return_rented_items",
+          "eventId": "blueprint_dummy",
+          "title": "Return rented items",
+          "status": "pending",
+          "phase": "postEvent",
+          "description": "Return rented items and collect deposits if applicable.",
+          "dueOffset": "T+2 days",
+          "role": "Logistics",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_thank_guests_performers_volunteers",
+          "eventId": "blueprint_dummy",
+          "title": "Thank guests, performers, and volunteers",
+          "status": "pending",
+          "phase": "postEvent",
+          "description": "Send thank-you messages and acknowledgements.",
+          "dueOffset": "T+2 days",
+          "role": "Communication",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_store_reusable_decoration_materials",
+          "eventId": "blueprint_dummy",
+          "title": "Store reusable decoration materials",
+          "status": "pending",
+          "phase": "postEvent",
+          "description": "Pack and store reusable decoration materials safely.",
+          "dueOffset": "T+2 days",
+          "role": "Decoration",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ganesh_puja_task_collect_feedback_future_events",
+          "eventId": "blueprint_dummy",
+          "title": "Collect feedback for future events",
+          "status": "pending",
+          "phase": "postEvent",
+          "description": "Collect feedback and note improvements for next time.",
+          "dueOffset": "T+5 days",
+          "role": "Organizer",
+          "dependsOn": []
+        }
+      ],
+      "budgetBlueprints": [
+        {
+          "id": "sys_ganesh_puja_budget_ganesh_idol",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Ganesh idol",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ganesh_puja_budget_puja_samagri",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Puja samagri",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ganesh_puja_budget_priest_dakshina",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Priest / pandit dakshina",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ganesh_puja_budget_decoration_materials",
+          "eventId": "blueprint_dummy",
+          "category": "Decoration",
+          "title": "Decoration materials",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ganesh_puja_budget_flowers_garlands",
+          "eventId": "blueprint_dummy",
+          "category": "Decoration",
+          "title": "Flowers and garlands",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ganesh_puja_budget_venue_rental",
+          "eventId": "blueprint_dummy",
+          "category": "Venue",
+          "title": "Venue rental",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ganesh_puja_budget_seating_tent",
+          "eventId": "blueprint_dummy",
+          "category": "Venue",
+          "title": "Seating and tent arrangements",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ganesh_puja_budget_sound_system",
+          "eventId": "blueprint_dummy",
+          "category": "Venue",
+          "title": "Sound system / microphone",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ganesh_puja_budget_lighting_stage_setup",
+          "eventId": "blueprint_dummy",
+          "category": "Decoration",
+          "title": "Lighting and stage setup",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ganesh_puja_budget_prasad_ingredients",
+          "eventId": "blueprint_dummy",
+          "category": "Food",
+          "title": "Prasad ingredients",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ganesh_puja_budget_food_refreshments",
+          "eventId": "blueprint_dummy",
+          "category": "Food",
+          "title": "Food and refreshments",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ganesh_puja_budget_cultural_program_expenses",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Cultural program expenses",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ganesh_puja_budget_kids_competition_prizes",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Kids competition prizes",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ganesh_puja_budget_printing_invitations_banners",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Printing invitations / banners",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ganesh_puja_budget_photography_videography",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Photography / videography",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ganesh_puja_budget_volunteer_support",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Volunteer support expenses",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ganesh_puja_budget_cleanup_waste_disposal",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Cleanup and waste disposal",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ganesh_puja_budget_visarjan_transportation",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Visarjan transportation arrangements",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ganesh_puja_budget_misc_contingency",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Miscellaneous contingency expenses",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        }
+      ],
+      "timelineBlueprints": [
+        {
+          "id": "sys_ganesh_puja_timeline_idol_installation",
+          "eventId": "blueprint_dummy",
+          "title": "Ganesh Idol Installation & Decoration",
+          "phase": "eventDay",
+          "timeOrOffset": "08:00 AM",
+          "dayNumber": 1,
+          "description": "Final setup of the idol and complete decorations."
+        },
+        {
+          "id": "sys_ganesh_puja_timeline_opening_puja",
+          "eventId": "blueprint_dummy",
+          "title": "Prana Pratishtha & Opening Puja",
+          "phase": "eventDay",
+          "timeOrOffset": "09:30 AM",
+          "dayNumber": 1,
+          "description": "Sankalpa and initial rituals with the priest."
+        },
+        {
+          "id": "sys_ganesh_puja_timeline_bhajans",
+          "eventId": "blueprint_dummy",
+          "title": "Community Bhajans & Chanting",
+          "phase": "eventDay",
+          "timeOrOffset": "11:00 AM",
+          "dayNumber": 1,
+          "description": "Devotional songs and group prayers."
+        },
+        {
+          "id": "sys_ganesh_puja_timeline_noon_aarti",
+          "eventId": "blueprint_dummy",
+          "title": "Noon Aarti & Prasad Distribution",
+          "phase": "eventDay",
+          "timeOrOffset": "12:30 PM",
+          "dayNumber": 1,
+          "description": "Grand Aarti followed by distribution of prasad."
+        },
+        {
+          "id": "sys_ganesh_puja_timeline_lunch",
+          "eventId": "blueprint_dummy",
+          "title": "Community Lunch",
+          "phase": "eventDay",
+          "timeOrOffset": "01:30 PM",
+          "dayNumber": 1,
+          "description": "Shared meal for all participants."
+        },
+        {
+          "id": "sys_ganesh_puja_timeline_kids_competitions",
+          "eventId": "blueprint_dummy",
+          "title": "Kids Competitions",
+          "phase": "eventDay",
+          "timeOrOffset": "04:00 PM",
+          "dayNumber": 1,
+          "description": "Drawing, Shloka, and other competitions for children."
+        },
+        {
+          "id": "sys_ganesh_puja_timeline_evening_aarti",
+          "eventId": "blueprint_dummy",
+          "title": "Evening Aarti",
+          "phase": "eventDay",
+          "timeOrOffset": "06:30 PM",
+          "dayNumber": 1,
+          "description": "Evening prayer rituals."
+        },
+        {
+          "id": "sys_ganesh_puja_timeline_cultural_program",
+          "eventId": "blueprint_dummy",
+          "title": "Cultural Program",
+          "phase": "eventDay",
+          "timeOrOffset": "07:30 PM",
+          "dayNumber": 1,
+          "description": "Dance, music performances, and prize distribution."
+        },
+        {
+          "id": "sys_ganesh_puja_timeline_day2_morning_aarti",
+          "eventId": "blueprint_dummy",
+          "title": "Morning Aarti & Puja",
+          "phase": "eventDay",
+          "timeOrOffset": "08:30 AM",
+          "dayNumber": 2,
+          "description": "Daily morning rituals and prayer."
+        },
+        {
+          "id": "sys_ganesh_puja_timeline_day2_bhajan_sandhya",
+          "eventId": "blueprint_dummy",
+          "title": "Bhajan Sandhya",
+          "phase": "eventDay",
+          "timeOrOffset": "06:00 PM",
+          "dayNumber": 2,
+          "description": "Evening of devotional songs and community gathering."
+        },
+        {
+          "id": "sys_ganesh_puja_timeline_day3_morning_aarti",
+          "eventId": "blueprint_dummy",
+          "title": "Morning Aarti & Puja",
+          "phase": "eventDay",
+          "timeOrOffset": "08:30 AM",
+          "dayNumber": 3,
+          "description": "Daily morning rituals."
+        },
+        {
+          "id": "sys_ganesh_puja_timeline_day3_visarjan_prep",
+          "eventId": "blueprint_dummy",
+          "title": "Visarjan Preparation & Final Aarti",
+          "phase": "eventDay",
+          "timeOrOffset": "04:00 PM",
+          "dayNumber": 3,
+          "description": "Preparing for the immersion procession."
+        },
+        {
+          "id": "sys_ganesh_puja_timeline_day3_visarjan_procession",
+          "eventId": "blueprint_dummy",
+          "title": "Ganesh Visarjan Procession",
+          "phase": "eventDay",
+          "timeOrOffset": "05:30 PM",
+          "dayNumber": 3,
+          "description": "Grand procession for idol immersion."
+        }
+      ],
+      "version": 8
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_basic_event_v1",
+      "templateName": "Basic Event",
+      "category": "socialAndPersonal",
+      "description": "A lightweight starter template with common modules enabled.",
+      "tags": [
+        "basic",
+        "starter",
+        "simple",
+        "lightweight",
+        "gathering",
+        "meetup",
+        "planning"
+      ],
+      "defaultFields": {
+        "contributionType": "fixed",
+        "amount": 0,
+        "enabledModules": ["task", "timeline", "guestManagement", "communication", "roles", "userManagement"]
+      },
+      "version": 1
+    }
+  ]
+}
