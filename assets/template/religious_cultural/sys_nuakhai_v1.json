@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_nuakhai_v1",
+      "templateName": "Nuakhai",
+      "category": "communityAndCultural",
+      "description": "Celebrate the harvest festival of Odisha with the offering of new rice (Nabanna) and Sambalpuri folk traditions.",
+      "tags": [
+        "nuakhai",
+        "odisha",
+        "harvest",
+        "festival",
+        "culture",
+        "nabanna",
+        "sambalpuri",
+        "juhar"
+      ],
+      "defaultFields": {
+        "contributionType": "variable",
+        "amount": 0,
+        "enabledModules": [
+          "task",
+          "budget",
+          "timeline",
+          "guestManagement",
+          "communication",
+          "location",
+          "roles",
+          "inventory",
+          "userManagement",
+          "contribution"
+        ]
+      },
+      "taskBlueprints": [
+        {
+          "id": "sys_nuakhai_task_procure_nabanna",
+          "eventId": "blueprint_dummy",
+          "title": "Procure 'Nabanna' (New Rice)",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Arrange for the first harvest rice to be offered as Nabanna.",
+          "dueOffset": "T-3 days",
+          "role": "Logistics"
+        },
+        {
+          "id": "sys_nuakhai_task_prepare_pitha",
+          "eventId": "blueprint_dummy",
+          "title": "Prepare Arisa and Manda Pitha",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Prepare traditional Odia pithas (rice cakes) for the community feast.",
+          "dueOffset": "T-1 day",
+          "role": "Food Manager"
+        },
+        {
+          "id": "sys_nuakhai_task_offering_rituals",
+          "eventId": "blueprint_dummy",
+          "title": "Nabanna offering and Puja",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Offer the new rice to the deity at the fixed auspicious time (Lagna).",
+          "dueOffset": "Morning 09:30 AM",
+          "role": "Organizer"
+        },
+        {
+          "id": "sys_nuakhai_task_juhar_greeting",
+          "eventId": "blueprint_dummy",
+          "title": "Nuakhai Juhar (Greeting Elders)",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Organize the community gathering for elders to bless the youth.",
+          "dueOffset": "Morning 11:00 AM",
+          "role": "Organizer"
+        },
+        {
+          "id": "sys_nuakhai_task_sambalpuri_dance",
+          "eventId": "blueprint_dummy",
+          "title": "Sambalpuri Folk Dance (Dalkhai/Rasarkeli)",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Coordinate folk dance performances and community participation.",
+          "dueOffset": "Afternoon 04:00 PM",
+          "role": "Program Coordinator"
+        }
+      ],
+      "budgetBlueprints": [
+        {
+          "id": "sys_nuakhai_budget_nabanna_food",
+          "eventId": "blueprint_dummy",
+          "category": "Food",
+          "title": "Nabanna and Community Feast Items",
+          "estimatedCost": 0.0,
+          "isMandatory": true
+        },
+        {
+          "id": "sys_nuakhai_budget_performers",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Sambalpuri Folk Group Honorarium",
+          "estimatedCost": 0.0,
+          "isMandatory": false
+        }
+      ],
+      "timelineBlueprints": [
+        {
+          "id": "sys_nuakhai_timeline_nabanna",
+          "eventId": "blueprint_dummy",
+          "title": "Nabanna Lagna (Offering)",
+          "phase": "eventDay",
+          "timeOrOffset": "09:45 AM",
+          "dayNumber": 1,
+          "description": "Offering the first rice to the Goddess."
+        },
+        {
+          "id": "sys_nuakhai_timeline_juhar",
+          "eventId": "blueprint_dummy",
+          "title": "Nuakhai Juhar Gathering",
+          "phase": "eventDay",
+          "timeOrOffset": "11:00 AM",
+          "dayNumber": 1,
+          "description": "Exchange of greetings and blessings."
+        },
+        {
+          "id": "sys_nuakhai_timeline_dance",
+          "eventId": "blueprint_dummy",
+          "title": "Sambalpuri Cultural Night",
+          "phase": "eventDay",
+          "timeOrOffset": "06:00 PM",
+          "dayNumber": 1,
+          "description": "Traditional Sambalpuri music and dance."
+        }
+      ]
+    }
+  ]
+}

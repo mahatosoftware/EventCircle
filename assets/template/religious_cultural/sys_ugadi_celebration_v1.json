@@ -1,0 +1,245 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_ugadi_celebration_v1",
+      "templateName": "Ugadi Celebration",
+      "category": "communityAndCultural",
+      "description": "Celebrate the Telugu and Kannada New Year with Ugadi Pachadi, mango leaf decorations, and Panchanga Sravanam.",
+      "tags": [
+        "ugadi",
+        "new year",
+        "telugu",
+        "kannada",
+        "festival",
+        "culture",
+        "pachadi",
+        "panchanga",
+        "tradition"
+      ],
+      "defaultFields": {
+        "contributionType": "variable",
+        "amount": 0,
+        "enabledModules": [
+          "task",
+          "budget",
+          "timeline",
+          "guestManagement",
+          "communication",
+          "location",
+          "roles",
+          "inventory",
+          "userManagement",
+          "contribution"
+        ]
+      },
+      "taskBlueprints": [
+        {
+          "id": "sys_ugadi_task_finalize_venue_time",
+          "eventId": "blueprint_dummy",
+          "title": "Finalize venue and event time",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Select a community hall or home venue and set the schedule for the day.",
+          "dueOffset": "T-10 days",
+          "role": "Organizer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ugadi_task_procure_mango_leaves_neem",
+          "eventId": "blueprint_dummy",
+          "title": "Procure mango leaves and neem flowers",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Purchase fresh mango leaves for Thorana and neem flowers for the Pachadi.",
+          "dueOffset": "T-2 days",
+          "role": "Logistics",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ugadi_task_purchase_pachadi_ingredients",
+          "eventId": "blueprint_dummy",
+          "title": "Purchase Ugadi Pachadi ingredients",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Buy raw mangoes, jaggery, tamarind, green chillies, and salt (representing the 6 flavors).",
+          "dueOffset": "T-3 days",
+          "role": "Food Manager",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ugadi_task_book_panchanga_speaker",
+          "eventId": "blueprint_dummy",
+          "title": "Book priest/expert for Panchanga Sravanam",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Invite an expert or priest to read the yearly forecast from the new almanac.",
+          "dueOffset": "T-15 days",
+          "role": "Program Coordinator",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ugadi_task_decorate_entrance",
+          "eventId": "blueprint_dummy",
+          "title": "Decorate entrance with Thorana and Muggulu",
+          "status": "eventDay",
+          "phase": "eventDay",
+          "description": "Tie mango leaf garlands (Thorana) and draw traditional patterns (Muggulu) at the entrance.",
+          "dueOffset": "Morning 07:00 AM",
+          "role": "Decoration",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ugadi_task_prepare_pachadi",
+          "eventId": "blueprint_dummy",
+          "title": "Prepare and serve Ugadi Pachadi",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Prepare the ritualistic 6-flavor dish and serve to all guests as the first offering.",
+          "dueOffset": "Morning 09:00 AM",
+          "role": "Food Manager",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ugadi_task_conduct_panchanga_session",
+          "eventId": "blueprint_dummy",
+          "title": "Conduct Panchanga Sravanam session",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Organize the reading of the yearly forecast and distribute copies if applicable.",
+          "dueOffset": "Morning 10:30 AM",
+          "role": "Program Coordinator",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ugadi_task_serve_traditional_lunch",
+          "eventId": "blueprint_dummy",
+          "title": "Serve grand Ugadi lunch with Holige/Puran Poli",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Coordinate the festival lunch serving traditional delicacies.",
+          "dueOffset": "Afternoon 12:30 PM",
+          "role": "Food Manager",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ugadi_task_organize_cultural_meet",
+          "eventId": "blueprint_dummy",
+          "title": "Organize Kavi Sammelan / Cultural program",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Hold poetry readings, music performances, or community discussions.",
+          "dueOffset": "Afternoon 03:00 PM",
+          "role": "Program Coordinator",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_ugadi_task_settle_honorarium",
+          "eventId": "blueprint_dummy",
+          "title": "Settle honorarium and vendor payments",
+          "status": "pending",
+          "phase": "postEvent",
+          "description": "Pay the priest/speaker and settle catering/venue bills.",
+          "dueOffset": "T+2 days",
+          "role": "Treasurer",
+          "dependsOn": []
+        }
+      ],
+      "budgetBlueprints": [
+        {
+          "id": "sys_ugadi_budget_pachadi_ingredients",
+          "eventId": "blueprint_dummy",
+          "category": "Food",
+          "title": "Pachadi Ingredients and Neem Flowers",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ugadi_budget_thoralu_decor",
+          "eventId": "blueprint_dummy",
+          "category": "Decoration",
+          "title": "Mango Leaves and Decoration Materials",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ugadi_budget_lunch_catering",
+          "eventId": "blueprint_dummy",
+          "category": "Food",
+          "title": "Grand Festival Lunch Catering",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ugadi_budget_honorarium",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Honorarium for Panchanga Speaker/Priest",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_ugadi_budget_cultural_expenses",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Cultural Program Logistics",
+          "estimatedCost": 0.0,
+          "isMandatory": false,
+          "actualCost": 0.0
+        }
+      ],
+      "timelineBlueprints": [
+        {
+          "id": "sys_ugadi_timeline_thorana",
+          "eventId": "blueprint_dummy",
+          "title": "Entrance Decoration (Thorana)",
+          "phase": "eventDay",
+          "timeOrOffset": "07:30 AM",
+          "dayNumber": 1,
+          "description": "Tying mango leaves and drawing Muggulu at the entrance."
+        },
+        {
+          "id": "sys_ugadi_timeline_pachadi_distribution",
+          "eventId": "blueprint_dummy",
+          "title": "Ugadi Pachadi Distribution",
+          "phase": "eventDay",
+          "timeOrOffset": "09:30 AM",
+          "dayNumber": 1,
+          "description": "First tasting of the bitter-sweet mixture to start the year."
+        },
+        {
+          "id": "sys_ugadi_timeline_panchanga",
+          "eventId": "blueprint_dummy",
+          "title": "Panchanga Sravanam",
+          "phase": "eventDay",
+          "timeOrOffset": "10:30 AM",
+          "dayNumber": 1,
+          "description": "Listening to the yearly forecast from the new almanac."
+        },
+        {
+          "id": "sys_ugadi_timeline_lunch",
+          "eventId": "blueprint_dummy",
+          "title": "Festival Feast (Grand Lunch)",
+          "phase": "eventDay",
+          "timeOrOffset": "12:30 PM",
+          "dayNumber": 1,
+          "description": "Enjoying traditional Telugu/Kannada delicacies."
+        },
+        {
+          "id": "sys_ugadi_timeline_cultural",
+          "eventId": "blueprint_dummy",
+          "title": "Kavi Sammelan / Cultural Hour",
+          "phase": "eventDay",
+          "timeOrOffset": "04:00 PM",
+          "dayNumber": 1,
+          "description": "Poetry recitals and community cultural exchange."
+        }
+      ]
+    }
+  ]
+}

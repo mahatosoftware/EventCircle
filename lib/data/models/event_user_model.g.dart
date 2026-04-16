@@ -32,4 +32,6 @@ Map<String, dynamic> _$$EventUserModelImplToJson(
 const _$EventUserStatusEnumMap = {
   EventUserStatus.active: 'active',
   EventUserStatus.removed: 'removed',
+  EventUserStatus.pendingApproval: 'pendingApproval',
+  EventUserStatus.blocked: 'blocked',
 };

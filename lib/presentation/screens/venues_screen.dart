@@ -50,24 +50,9 @@ class VenuesScreen extends ConsumerWidget {
           Icon(Icons.map_outlined, size: 80, color: Colors.grey.withAlpha(128)),
           const SizedBox(height: 16),
           const Text('No venues defined for this event'),
-          const SizedBox(height: 24),
-          if (event != null) 
-            ElevatedButton.icon(
-              onPressed: () => _loadSuggestedVenues(ref, event),
-              icon: const Icon(Icons.auto_awesome),
-              label: const Text('Load Suggested Venues'),
-            ),
         ],
       ),
     );
-  }
-
-  void _loadSuggestedVenues(WidgetRef ref, EventModel event) async {
-    final suggestions = EventTemplateService.getSuggestedVenues(event.id, event.category);
-    final repo = ref.read(venueTicketingRepositoryProvider);
-    for (var v in suggestions) {
-      await repo.addVenue(v);
-    }
   }
 
   Widget _buildVenueCard(BuildContext context, LocationModel venue, WidgetRef ref) {
@@ -134,49 +119,111 @@ class VenuesScreen extends ConsumerWidget {
   }
 
   void _showAddVenueDialog(BuildContext context, WidgetRef ref) {
-    final nameController = TextEditingController();
-    final addrController = TextEditingController();
-    final parkController = TextEditingController();
-    final instController = TextEditingController();
-
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Add Venue Location'),
-        content: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(controller: nameController, decoration: const InputDecoration(labelText: 'Venue Name')),
-              TextField(controller: addrController, decoration: const InputDecoration(labelText: 'Address')),
-              TextField(controller: parkController, decoration: const InputDecoration(labelText: 'Parking Information')),
-              TextField(controller: instController, decoration: const InputDecoration(labelText: 'Additional Instructions')),
-            ],
-          ),
-        ),
-        actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
-          ElevatedButton(
-            onPressed: () async {
-              final newVenue = LocationModel(
-                id: const Uuid().v4(),
-                eventId: eventId,
-                name: nameController.text,
-                address: addrController.text,
-                parkingInfo: parkController.text,
-                instructions: instController.text,
-              );
-              await ref.read(venueTicketingRepositoryProvider).addVenue(newVenue);
-              Navigator.pop(context);
-            },
-            child: const Text('Add Venue'),
-          ),
-        ],
-      ),
-    );
+    _showVenueForm(context, ref);
   }
 
   void _showEditVenueDialog(BuildContext context, WidgetRef ref, LocationModel venue) {
-      // Similar to add dialog but with pre-filled controllers
+    _showVenueForm(context, ref, existing: venue);
+  }
+
+  void _showVenueForm(BuildContext context, WidgetRef ref, {LocationModel? existing}) {
+    final nameController = TextEditingController(text: existing?.name);
+    final addrController = TextEditingController(text: existing?.address);
+    final parkController = TextEditingController(text: existing?.parkingInfo);
+    final instController = TextEditingController(text: existing?.instructions);
+    bool isMain = existing?.isMainVenue ?? false;
+
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setDialogState) => AlertDialog(
+          title: Text(existing == null ? 'Add Location' : 'Edit Location'),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(
+                  controller: nameController,
+                  decoration: InputDecoration(labelText: 'Venue Name', prefixIcon: Icon(Icons.business_outlined)),
+                ),
+                const SizedBox(height: 8),
+                TextField(
+                  controller: addrController,
+                  decoration: InputDecoration(labelText: 'Address', prefixIcon: Icon(Icons.location_on_outlined)),
+                ),
+                const SizedBox(height: 8),
+                TextField(
+                  controller: parkController,
+                  decoration: InputDecoration(labelText: 'Parking Information', prefixIcon: Icon(Icons.local_parking_outlined)),
+                ),
+                const SizedBox(height: 8),
+                TextField(
+                  controller: instController,
+                  decoration: InputDecoration(labelText: 'Additional Instructions', prefixIcon: Icon(Icons.notes_outlined)),
+                ),
+                const SizedBox(height: 16),
+                SwitchListTile(
+                  title: const Text('Main Venue', style: TextStyle(fontSize: 14)),
+                  subtitle: const Text('Primary location for the event', style: TextStyle(fontSize: 12)),
+                  value: isMain,
+                  onChanged: (v) => setDialogState(() => isMain = v),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            if (existing != null)
+              TextButton.icon(
+                onPressed: () async {
+                  final confirm = await showDialog<bool>(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Delete Location?'),
+                      content: const Text('Are you sure you want to remove this venue? This action cannot be undone.'),
+                      actions: [
+                        TextButton(onPressed: () => Navigator.pop(context, false), child: const Text('Cancel')),
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, true),
+                          style: TextButton.styleFrom(foregroundColor: Colors.red),
+                          child: const Text('Delete'),
+                        ),
+                      ],
+                    ),
+                  );
+                  if (confirm == true) {
+                    await ref.read(venueTicketingRepositoryProvider).deleteVenue(eventId, existing.id);
+                    if (context.mounted) Navigator.pop(context);
+                  }
+                },
+                icon: const Icon(Icons.delete_outline, size: 18),
+                label: const Text('Delete'),
+                style: TextButton.styleFrom(foregroundColor: Colors.red),
+              ),
+            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Cancel')),
+            ElevatedButton(
+              onPressed: () async {
+                final model = LocationModel(
+                  id: existing?.id ?? const Uuid().v4(),
+                  eventId: eventId,
+                  name: nameController.text,
+                  address: addrController.text,
+                  parkingInfo: parkController.text,
+                  instructions: instController.text,
+                  isMainVenue: isMain,
+                );
+
+                if (existing == null) {
+                  await ref.read(venueTicketingRepositoryProvider).addVenue(model);
+                } else {
+                  await ref.read(venueTicketingRepositoryProvider).updateVenue(model);
+                }
+                if (context.mounted) Navigator.pop(context);
+              },
+              child: Text(existing == null ? 'Add Venue' : 'Save Changes'),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

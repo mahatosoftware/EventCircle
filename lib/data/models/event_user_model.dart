@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'event_user_model.freezed.dart';
 part 'event_user_model.g.dart';
 
-enum EventUserStatus { active, removed }
+enum EventUserStatus { active, removed, pendingApproval, blocked }
 
 @freezed
 class EventUserModel with _$EventUserModel {

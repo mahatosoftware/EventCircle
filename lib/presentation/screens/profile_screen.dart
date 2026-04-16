@@ -138,6 +138,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           ),
                         ),
                         const SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         if (_editing)
                           FilledButton(
                             onPressed: _saving ? null : () => _save(user),

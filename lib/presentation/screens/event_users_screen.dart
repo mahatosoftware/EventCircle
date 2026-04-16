@@ -11,6 +11,8 @@ import '../../providers/event_provider.dart';
 import '../../providers/event_user_provider.dart';
 import '../../providers/role_provider.dart';
 import '../../providers/user_provider.dart';
+import '../../providers/invitation_provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class EventUsersScreen extends ConsumerWidget {
   final String eventId;
@@ -32,78 +34,199 @@ class EventUsersScreen extends ConsumerWidget {
       hasModuleAccessProvider((eventId: eventId, module: EventModules.roles, required: ModuleAccessLevel.edit)),
     );
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Users'),
-        actions: [
-          IconButton(
-            tooltip: 'Add user',
-            icon: const Icon(Icons.person_add_alt_1_outlined),
-            onPressed: !canEditUsers ? null : () => _openAddUserSheet(context, ref),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Users'),
+          bottom: const TabBar(
+            tabs: [
+              Tab(text: 'Members'),
+              Tab(text: 'Requests'),
+            ],
           ),
-        ],
+          actions: [
+            IconButton(
+              tooltip: 'Join Settings',
+              icon: const Icon(Icons.settings_outlined),
+              onPressed: !canEditUsers ? null : () => _showJoinSettings(context, ref, eventAsync.value),
+            ),
+            IconButton(
+              tooltip: 'Invite Link',
+              icon: const Icon(Icons.share_outlined),
+              onPressed: !canEditUsers ? null : () => _showInviteOptions(context, ref, eventAsync.value),
+            ),
+            IconButton(
+              tooltip: 'Add user manually',
+              icon: const Icon(Icons.person_add_alt_1_outlined),
+              onPressed: !canEditUsers ? null : () => _openAddUserSheet(context, ref),
+            ),
+          ],
+        ),
+        body: !canViewUsers
+            ? const Center(child: Text('You do not have access to Users.'))
+            : eventAsync.when(
+                loading: () => const Center(child: CircularProgressIndicator()),
+                error: (e, _) => Center(child: Text('Failed to load event: $e')),
+                data: (event) {
+                  if (event == null) return const Center(child: Text('Event not found'));
+                  return usersAsync.when(
+                    loading: () => const Center(child: CircularProgressIndicator()),
+                    error: (e, _) => Center(child: Text('Failed to load users: $e')),
+                    data: (eventUsers) {
+                      final roles = rolesAsync.value ?? const <EventRoleModel>[];
+                      final active = eventUsers.where((u) => u.status == EventUserStatus.active).toList();
+                      final requests = eventUsers.where((u) => u.status == EventUserStatus.pendingApproval).toList();
+                      final removed = eventUsers.where((u) => u.status == EventUserStatus.removed).toList();
+
+                      // Ensure the owner is always in the active list
+                      final ownerId = event.organizerId;
+                      if (!active.any((u) => u.id == ownerId)) {
+                        active.insert(0, EventUserModel(
+                          id: ownerId,
+                          eventId: eventId,
+                          status: EventUserStatus.active,
+                          addedAt: event.createdAt,
+                        ));
+                      }
+
+                      return TabBarView(
+                        children: [
+                          // Members Tab
+                          ListView(
+                            padding: const EdgeInsets.all(16),
+                            children: [
+                              Text('Active (${active.length})', style: Theme.of(context).textTheme.titleMedium),
+                              const SizedBox(height: 8),
+                              ...active.map(
+                                (eu) => _EventUserTile(
+                                  event: event,
+                                  eventUser: eu,
+                                  roles: roles,
+                                  canEditUsers: canEditUsers,
+                                  canEditRoles: canEditRoles,
+                                ),
+                              ),
+                              if (removed.isNotEmpty) ...[
+                                const SizedBox(height: 20),
+                                Text('Removed (${removed.length})', style: Theme.of(context).textTheme.titleMedium),
+                                const SizedBox(height: 8),
+                                ...removed.map((eu) => _EventUserTile(
+                                      event: event,
+                                      eventUser: eu,
+                                      roles: roles,
+                                      canEditUsers: false,
+                                      canEditRoles: false,
+                                    )),
+                              ],
+                            ],
+                          ),
+                          // Requests Tab
+                          requests.isEmpty
+                              ? const Center(child: Text('No pending requests.'))
+                              : ListView.builder(
+                                  padding: const EdgeInsets.all(16),
+                                  itemCount: requests.length,
+                                  itemBuilder: (context, index) => _EventUserTile(
+                                    event: event,
+                                    eventUser: requests[index],
+                                    roles: roles,
+                                    canEditUsers: canEditUsers,
+                                    canEditRoles: false,
+                                    isRequest: true,
+                                  ),
+                                ),
+                        ],
+                      );
+                    },
+                  );
+                },
+              ),
       ),
-      body: !canViewUsers
-          ? const Center(child: Text('You do not have access to Users.'))
-          : eventAsync.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(child: Text('Failed to load event: $e')),
-        data: (event) {
-          if (event == null) return const Center(child: Text('Event not found'));
-          return usersAsync.when(
-            loading: () => const Center(child: CircularProgressIndicator()),
-            error: (e, _) => Center(child: Text('Failed to load users: $e')),
-            data: (eventUsers) {
-              final roles = rolesAsync.value ?? const <EventRoleModel>[];
-              final active = eventUsers.where((u) => u.status == EventUserStatus.active).toList();
-              final removed = eventUsers.where((u) => u.status == EventUserStatus.removed).toList();
+    );
+  }
 
-              // Ensure the owner is always in the active list
-              final ownerId = event.organizerId;
-              if (!active.any((u) => u.id == ownerId)) {
-                active.insert(0, EventUserModel(
-                  id: ownerId, 
-                  eventId: eventId, 
-                  status: EventUserStatus.active,
-                  addedAt: event.createdAt,
-                ));
-              }
+  void _showJoinSettings(BuildContext context, WidgetRef ref, EventModel? event) {
+    if (event == null) return;
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(
+        builder: (context, setState) => AlertDialog(
+          title: const Text('Join Settings'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SwitchListTile(
+                title: const Text('Enable Public Joining'),
+                subtitle: const Text('Allows users to find and request to join the event.'),
+                value: event.isPublicJoinEnabled,
+                onChanged: (v) async {
+                  await ref.read(eventRepositoryProvider).updateEvent(event.copyWith(isPublicJoinEnabled: v));
+                  Navigator.pop(context);
+                },
+              ),
+              SwitchListTile(
+                title: const Text('Approval Required'),
+                subtitle: const Text('If enabled, joining via link needs organizer approval.'),
+                value: event.isJoinApprovalRequired,
+                onChanged: (v) async {
+                  await ref.read(eventRepositoryProvider).updateEvent(event.copyWith(isJoinApprovalRequired: v));
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Close')),
+          ],
+        ),
+      ),
+    );
+  }
 
-              if (active.isEmpty) {
-                return const Center(child: Text('No users added to this event yet.'));
-              }
-
-              return ListView(
-                padding: const EdgeInsets.all(16),
-                children: [
-                  Text('Active (${active.length})', style: Theme.of(context).textTheme.titleMedium),
-                  const SizedBox(height: 8),
-                  ...active.map(
-                    (eu) => _EventUserTile(
-                      event: event,
-                      eventUser: eu,
-                      roles: roles,
-                      canEditUsers: canEditUsers,
-                      canEditRoles: canEditRoles,
-                    ),
-                  ),
-                  if (removed.isNotEmpty) ...[
-                    const SizedBox(height: 20),
-                    Text('Removed (${removed.length})', style: Theme.of(context).textTheme.titleMedium),
-                    const SizedBox(height: 8),
-                    ...removed.map((eu) => _EventUserTile(
-                          event: event,
-                          eventUser: eu,
-                          roles: roles,
-                          canEditUsers: false,
-                          canEditRoles: false,
-                        )),
-                  ],
-                ],
-              );
-            },
-          );
-        },
+  void _showInviteOptions(BuildContext context, WidgetRef ref, EventModel? event) {
+    if (event == null) return;
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+      builder: (context) => Padding(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text('Share Invite', style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 24),
+            ListTile(
+              leading: const CircleAvatar(child: Icon(Icons.verified_user_outlined)),
+              title: const Text('One-time Pre-approved Link'),
+              subtitle: const Text('Recipient joins directly bypassing approval.'),
+              onTap: () async {
+                final user = ref.read(currentUserProvider);
+                final invite = await ref.read(invitationRepositoryProvider).createPreApprovedInvitation(eventId, user?.id ?? 'organizer');
+                final link = 'https://eventcircle.app/join?token=${invite.token}';
+                await Share.share('Join my event "${event.title}" directly using this link: $link');
+                if (context.mounted) Navigator.pop(context);
+              },
+            ),
+            const Divider(),
+            ListTile(
+              leading: const CircleAvatar(child: Icon(Icons.link)),
+              title: const Text('General Joining Link'),
+              subtitle: Text(event.isJoinApprovalRequired ? 'Requires organizer approval.' : 'Allows direct join (currently based on settings).'),
+              onTap: () async {
+                if (!event.isPublicJoinEnabled) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Enable Public Joining in settings first.')));
+                  return;
+                }
+                final link = 'https://eventcircle.app/event/$eventId/join';
+                await Share.share('Join my event "${event.title}" on EventCircle: $link');
+                if (context.mounted) Navigator.pop(context);
+              },
+            ),
+            const SizedBox(height: 16),
+          ],
+        ),
       ),
     );
   }
@@ -213,6 +336,7 @@ class _EventUserTile extends ConsumerWidget {
   final List<EventRoleModel> roles;
   final bool canEditUsers;
   final bool canEditRoles;
+  final bool isRequest;
 
   const _EventUserTile({
     required this.event,
@@ -220,6 +344,7 @@ class _EventUserTile extends ConsumerWidget {
     required this.roles,
     required this.canEditUsers,
     required this.canEditRoles,
+    this.isRequest = false,
   });
 
   @override
@@ -270,16 +395,32 @@ class _EventUserTile extends ConsumerWidget {
                   spacing: 6,
                   runSpacing: 6,
                   children: [
-                    if (assignedRoles.isEmpty)
+                    if (assignedRoles.isEmpty && !isRequest)
                       const _RoleChip(label: 'No roles', level: ModuleAccessLevel.none)
-                    else
+                    else if (!isRequest)
                       for (final r in assignedRoles) _RoleChip(label: r.name, level: _roleLevel(r)),
+                    if (isRequest)
+                      const _RoleChip(label: 'PENDING APPROVAL', level: ModuleAccessLevel.view),
                   ],
                 ),
               ],
             ),
-            isThreeLine: subtitleBits.isNotEmpty,
-            trailing: PopupMenuButton<String>(
+            isThreeLine: subtitleBits.isNotEmpty || isRequest,
+            trailing: isRequest 
+              ? Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.check_circle_outline, color: Colors.green),
+                      onPressed: !canEditUsers ? null : () => _handleRequest(context, ref, true),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.cancel_outlined, color: Colors.red),
+                      onPressed: !canEditUsers ? null : () => _handleRequest(context, ref, false),
+                    ),
+                  ],
+                )
+              : PopupMenuButton<String>(
               onSelected: (v) async {
                 switch (v) {
                   case 'roles':
@@ -441,6 +582,27 @@ class _EventUserTile extends ConsumerWidget {
         ),
       ),
     );
+  }
+
+  Future<void> _handleRequest(BuildContext context, WidgetRef ref, bool approve) async {
+    final eventUserRepo = ref.read(eventUserRepositoryProvider);
+    try {
+      if (approve) {
+        await eventUserRepo.updateEventUser(eventUser.copyWith(
+          status: EventUserStatus.active,
+          addedAt: DateTime.now(),
+        ));
+      } else {
+        await eventUserRepo.updateEventUser(eventUser.copyWith(
+          status: EventUserStatus.blocked,
+          removedAt: DateTime.now(),
+        ));
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Action failed: $e')));
+      }
+    }
   }
 
   Future<void> _removeFromEvent(BuildContext context, WidgetRef ref) async {

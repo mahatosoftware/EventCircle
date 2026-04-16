@@ -12,6 +12,7 @@ import '../presentation/screens/payments_screen.dart';
 import '../presentation/screens/expenses_screen.dart';
 import '../presentation/screens/public_dashboard_screen.dart';
 import '../presentation/screens/profile_screen.dart';
+import '../presentation/screens/contact_us_screen.dart';
 
 import '../presentation/screens/tasks_screen.dart';
 import '../presentation/screens/create_template_screen.dart';
@@ -98,6 +99,10 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: '/profile',
             builder: (context, state) => const ProfileScreen(),
+          ),
+          GoRoute(
+            path: '/contact-us',
+            builder: (context, state) => const ContactUsScreen(),
           ),
           GoRoute(
             path: '/create-event',

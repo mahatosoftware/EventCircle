@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_ratha_yatra_v1",
+      "templateName": "Ratha Yatra",
+      "category": "communityAndCultural",
+      "description": "Organize the Chariot Festival of Lord Jagannath with Pahandi rituals, chariot pulling, and Poda Pitha distribution.",
+      "tags": [
+        "ratha yatra",
+        "jagannath",
+        "chariot",
+        "festival",
+        "odisha",
+        "culture",
+        "puri",
+        "poda pitha"
+      ],
+      "defaultFields": {
+        "contributionType": "variable",
+        "amount": 0,
+        "enabledModules": [
+          "task",
+          "budget",
+          "timeline",
+          "guestManagement",
+          "communication",
+          "location",
+          "roles",
+          "inventory",
+          "userManagement",
+          "contribution"
+        ]
+      },
+      "taskBlueprints": [
+        {
+          "id": "sys_ratha_task_prepare_chariots",
+          "eventId": "blueprint_dummy",
+          "title": "Prepare/Decorate Chariots",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Construct or decorate the Rathas for the deities.",
+          "dueOffset": "T-7 days",
+          "role": "Setup Team"
+        },
+        {
+          "id": "sys_ratha_task_poda_pitha",
+          "eventId": "blueprint_dummy",
+          "title": "Batch prepare Poda Pitha",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Bake traditional Poda Pitha for offerings and distribution.",
+          "dueOffset": "T-1 day",
+          "role": "Food Manager"
+        },
+        {
+          "id": "sys_ratha_task_pahandi",
+          "eventId": "blueprint_dummy",
+          "title": "Pahandi Rituals",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Coordinate the ceremonial procession of Lord Jagannath, Balabhadra, and Subhadra to the chariots.",
+          "dueOffset": "Morning 09:00 AM",
+          "role": "Organizer"
+        },
+        {
+          "id": "sys_ratha_task_chhera_pahanra",
+          "eventId": "blueprint_dummy",
+          "title": "Chhera Pahanra (Sweeping ritual)",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Coordinate the symbolic sweeping of the chariots.",
+          "dueOffset": "Afternoon 02:00 PM",
+          "role": "Organizer"
+        },
+        {
+          "id": "sys_ratha_task_pulling_chariots",
+          "eventId": "blueprint_dummy",
+          "title": "Chariot Pulling",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Manage the crowd flow and ropes for pulling the chariots to the destination.",
+          "dueOffset": "Afternoon 04:00 PM",
+          "role": "Logistics"
+        }
+      ],
+      "budgetBlueprints": [
+        {
+          "id": "sys_ratha_budget_decoration",
+          "eventId": "blueprint_dummy",
+          "category": "Decoration",
+          "title": "Chariot Decoration and Materials",
+          "estimatedCost": 0.0,
+          "isMandatory": true
+        },
+        {
+          "id": "sys_ratha_budget_prasad",
+          "eventId": "blueprint_dummy",
+          "category": "Food",
+          "title": "Poda Pitha and Chapan Bhog Prasad",
+          "estimatedCost": 0.0,
+          "isMandatory": true
+        }
+      ],
+      "timelineBlueprints": [
+        {
+          "id": "sys_ratha_timeline_pahandi",
+          "eventId": "blueprint_dummy",
+          "title": "Pahandi Bije",
+          "phase": "eventDay",
+          "timeOrOffset": "09:30 AM",
+          "dayNumber": 1,
+          "description": "Deities moving to the chariots."
+        },
+        {
+          "id": "sys_ratha_timeline_chhera_pahanra",
+          "eventId": "blueprint_dummy",
+          "title": "Chhera Pahanra",
+          "phase": "eventDay",
+          "timeOrOffset": "02:30 PM",
+          "dayNumber": 1,
+          "description": "Ceremonial sweeping of the decks."
+        },
+        {
+          "id": "sys_ratha_timeline_pulling",
+          "eventId": "blueprint_dummy",
+          "title": "Ratha Tana (Pulling)",
+          "phase": "eventDay",
+          "timeOrOffset": "04:30 PM",
+          "dayNumber": 1,
+          "description": "The chariot procession begins."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_janmashtami_v1",
+      "templateName": "Janmashtami",
+      "category": "communityAndCultural",
+      "description": "Celebrate the birth of Lord Krishna with Jhulan, Dahi Handi competitions, and midnight Maha Aarti.",
+      "tags": [
+        "janmashtami",
+        "krishna",
+        "festival",
+        "dahi handi",
+        "culture",
+        "jhula",
+        "puja",
+        "midnight",
+        "tradition"
+      ],
+      "defaultFields": {
+        "contributionType": "variable",
+        "amount": 0,
+        "enabledModules": [
+          "task",
+          "budget",
+          "timeline",
+          "guestManagement",
+          "communication",
+          "location",
+          "roles",
+          "inventory",
+          "userManagement",
+          "contribution"
+        ]
+      },
+      "taskBlueprints": [
+        {
+          "id": "sys_janmashtami_task_procure_idol_jhula",
+          "eventId": "blueprint_dummy",
+          "title": "Procure Krishna idol and decorative Jhula",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Purchase or arrange a beautiful idol of Lord Krishna and a decorated swing (Jhula).",
+          "dueOffset": "T-7 days",
+          "role": "Logistics",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_janmashtami_task_setup_dahi_handi",
+          "eventId": "blueprint_dummy",
+          "title": "Set up Dahi Handi (pot and ropes)",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Arrange for the earthen pot (Handi), strong ropes, and a high-altitude hanging mechanism.",
+          "dueOffset": "T-5 days",
+          "role": "Setup Team",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_janmashtami_task_organize_kids_dressup",
+          "eventId": "blueprint_dummy",
+          "title": "Organize Krishna/Radha fancy dress",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Coordinate a dress-up competition or parade for children in Krishna/Radha costumes.",
+          "dueOffset": "T-10 days",
+          "role": "Program Coordinator",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_janmashtami_task_prepare_makhan_mishri",
+          "eventId": "blueprint_dummy",
+          "title": "Prepare Makhan Mishri and Maha Prasad",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Prepare fresh butter, mishri, and Chappan Bhog offerings for the puja.",
+          "dueOffset": "T-1 day",
+          "role": "Food Manager",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_janmashtami_task_decorate_jhula_area",
+          "eventId": "blueprint_dummy",
+          "title": "Decorate the Jhula and Puja area",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Complete decorations with flowers, peacock feathers, and festive lights around the swing.",
+          "dueOffset": "Morning 10:00 AM",
+          "role": "Decoration",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_janmashtami_task_conduct_dahi_handi",
+          "eventId": "blueprint_dummy",
+          "title": "Conduct Dahi Handi competition",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Lead the Dahi Handi breaking ceremony and manage the crowd flow.",
+          "dueOffset": "Evening 06:00 PM",
+          "role": "Event Coordinator",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_janmashtami_task_midnight_aarti",
+          "eventId": "blueprint_dummy",
+          "title": "Midnight Birth Ritual and Maha Aarti",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Perform the ceremonial bath and aarti for Lord Krishna at midnight.",
+          "dueOffset": "Midnight 12:00 AM",
+          "role": "Organizer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_janmashtami_task_prasad_distribution",
+          "eventId": "blueprint_dummy",
+          "title": "Distribute Prasad and cleanup",
+          "status": "pending",
+          "phase": "postEvent",
+          "description": "Distribute Maha Prasad to all guests and clean the event premises.",
+          "dueOffset": "T+1 day",
+          "role": "Logistics",
+          "dependsOn": []
+        }
+      ],
+      "budgetBlueprints": [
+        {
+          "id": "sys_janmashtami_budget_idol_jhula",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Idol, Jhula, and Peacock Feathers",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_janmashtami_budget_dahi_handi_setup",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Dahi Handi Equipment and Prizes",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_janmashtami_budget_decoration",
+          "eventId": "blueprint_dummy",
+          "category": "Decoration",
+          "title": "Flowers and Lighting Decoration",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_janmashtami_budget_food_prasad",
+          "eventId": "blueprint_dummy",
+          "category": "Food",
+          "title": "Maha Prasad (Chappan Bhog) and Makhan Mishri",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_janmashtami_budget_bhajan_group",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Bhajan Group / Sound System",
+          "estimatedCost": 0.0,
+          "isMandatory": false,
+          "actualCost": 0.0
+        }
+      ],
+      "timelineBlueprints": [
+        {
+          "id": "sys_janmashtami_timeline_setup",
+          "eventId": "blueprint_dummy",
+          "title": "Jhula Unveiling & Decoration",
+          "phase": "eventDay",
+          "timeOrOffset": "11:00 AM",
+          "dayNumber": 1,
+          "description": "Opening the decorated Krishna swing for early visitors."
+        },
+        {
+          "id": "sys_janmashtami_timeline_fancy_dress",
+          "eventId": "blueprint_dummy",
+          "title": "Kids Fancy Dress (Krishna/Radha)",
+          "phase": "eventDay",
+          "timeOrOffset": "05:00 PM",
+          "dayNumber": 1,
+          "description": "Performances and parade by children."
+        },
+        {
+          "id": "sys_janmashtami_timeline_dahi_handi",
+          "eventId": "blueprint_dummy",
+          "title": "Dahi Handi Breaking Ceremony",
+          "phase": "eventDay",
+          "timeOrOffset": "07:00 PM",
+          "dayNumber": 1,
+          "description": "Competitive breaking of the earthen butter pot."
+        },
+        {
+          "id": "sys_janmashtami_timeline_bhajans",
+          "eventId": "blueprint_dummy",
+          "title": "Bhajan Sandhya & Kirtans",
+          "phase": "eventDay",
+          "timeOrOffset": "09:00 PM",
+          "dayNumber": 1,
+          "description": "Devotional songs leading up to the birth ritual."
+        },
+        {
+          "id": "sys_janmashtami_timeline_birth",
+          "eventId": "blueprint_dummy",
+          "title": "Midnight Birth Celebration & Aarti",
+          "phase": "eventDay",
+          "timeOrOffset": "12:00 AM",
+          "dayNumber": 1,
+          "description": "Grand Aarti and celebration of Krishna's birth."
+        }
+      ]
+    }
+  ]
+}

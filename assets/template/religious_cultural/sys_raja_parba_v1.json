@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_raja_parba_v1",
+      "templateName": "Raja Parba",
+      "category": "communityAndCultural",
+      "description": "Celebrate the festival of swings, pithas, and womanhood with Raja Doli and traditional Podapitha.",
+      "tags": [
+        "raja",
+        "parba",
+        "odisha",
+        "swing",
+        "doli",
+        "culture",
+        "womanhood",
+        "poda pitha"
+      ],
+      "defaultFields": {
+        "contributionType": "variable",
+        "amount": 0,
+        "enabledModules": [
+          "task",
+          "budget",
+          "timeline",
+          "guestManagement",
+          "communication",
+          "location",
+          "roles",
+          "inventory",
+          "userManagement",
+          "contribution"
+        ]
+      },
+      "taskBlueprints": [
+        {
+          "id": "sys_raja_task_setup_swings",
+          "eventId": "blueprint_dummy",
+          "title": "Setup Raja Doli (Swings)",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Arrange ropes and decorated swings for children and women.",
+          "dueOffset": "T-3 days",
+          "role": "Setup Team"
+        },
+        {
+          "id": "sys_raja_task_pithas",
+          "eventId": "blueprint_dummy",
+          "title": "Prepare Odia Pithas (Poda/Manda/Kakara)",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Prepare traditional rice cakes for the 3-day festival.",
+          "dueOffset": "T-1 day",
+          "role": "Food Manager"
+        },
+        {
+          "id": "sys_raja_task_procure_paan",
+          "eventId": "blueprint_dummy",
+          "title": "Procure Raja Paan (Betel Leaves)",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Arrange for traditional sweet paan for the celebration.",
+          "dueOffset": "T-1 day",
+          "role": "Food Manager"
+        },
+        {
+          "id": "sys_raja_task_indoor_games",
+          "eventId": "blueprint_dummy",
+          "title": "Organize indoor games (Cards/Ludo)",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Set up areas for traditional indoor games as people avoid walking on the earth.",
+          "dueOffset": "Morning 10:00 AM",
+          "role": "Event Coordinator"
+        },
+        {
+          "id": "sys_raja_task_distribution",
+          "eventId": "blueprint_dummy",
+          "title": "Distribute Pithas and Raja Paan",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Serve traditional delicacies and paan to all attendees.",
+          "dueOffset": "Afternoon 02:00 PM",
+          "role": "Food Manager"
+        }
+      ],
+      "budgetBlueprints": [
+        {
+          "id": "sys_raja_budget_pithas_food",
+          "eventId": "blueprint_dummy",
+          "category": "Food",
+          "title": "Traditional Pithas and Sweet Paan",
+          "estimatedCost": 0.0,
+          "isMandatory": true
+        },
+        {
+          "id": "sys_raja_budget_swings",
+          "eventId": "blueprint_dummy",
+          "category": "Decoration",
+          "title": "Swings (Doli) setup and decoration",
+          "estimatedCost": 0.0,
+          "isMandatory": true
+        }
+      ],
+      "timelineBlueprints": [
+        {
+          "id": "sys_raja_timeline_doli",
+          "eventId": "blueprint_dummy",
+          "title": "Raja Doli Opening",
+          "phase": "eventDay",
+          "timeOrOffset": "08:30 AM",
+          "dayNumber": 1,
+          "description": "The festive swinging ceremony begins."
+        },
+        {
+          "id": "sys_raja_timeline_games",
+          "eventId": "blueprint_dummy",
+          "title": "Indoor Games Session",
+          "phase": "eventDay",
+          "timeOrOffset": "11:00 AM",
+          "dayNumber": 1,
+          "description": "Card games, Ludo, and community bonding."
+        },
+        {
+          "id": "sys_raja_timeline_paan",
+          "eventId": "blueprint_dummy",
+          "title": "Raja Paan Ceremony",
+          "phase": "eventDay",
+          "timeOrOffset": "01:30 PM",
+          "dayNumber": 1,
+          "description": "Traditional distribution of sweet betel leaves."
+        }
+      ]
+    }
+  ]
+}

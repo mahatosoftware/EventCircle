@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_onam_celebration_v1",
+      "templateName": "Onam Celebration",
+      "category": "communityAndCultural",
+      "description": "Celebrate the harvest festival of Kerala with Pookalam, traditional Sadya, and cultural programs.",
+      "tags": [
+        "onam",
+        "kerala",
+        "festival",
+        "sadya",
+        "pookalam",
+        "culture",
+        "harvest",
+        "community"
+      ],
+      "defaultFields": {
+        "contributionType": "variable",
+        "amount": 0,
+        "enabledModules": [
+          "task",
+          "budget",
+          "timeline",
+          "guestManagement",
+          "communication",
+          "location",
+          "roles",
+          "inventory",
+          "userManagement",
+          "contribution"
+        ]
+      },
+      "taskBlueprints": [
+        {
+          "id": "sys_onam_task_finalize_onam_date",
+          "eventId": "blueprint_dummy",
+          "title": "Finalize Onam celebration date and venue",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Identify the specific day for celebration (Thiruvonam) and book venue.",
+          "dueOffset": "T-20 days",
+          "role": "Organizer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_onam_task_book_sadya_catering",
+          "eventId": "blueprint_dummy",
+          "title": "Book Onam Sadya catering",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Book a caterer specializing in traditional Kerala Sadya served on banana leaves.",
+          "dueOffset": "T-15 days",
+          "role": "Food Manager",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_onam_task_purchase_flowers_pookalam",
+          "eventId": "blueprint_dummy",
+          "title": "Pre-order flowers for Pookalam",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Arrange for variety of colored flowers (Chethi, Jamanthi, etc.) for the rangoli.",
+          "dueOffset": "T-3 days",
+          "role": "Decoration",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_onam_task_arrange_traditional_attire",
+          "eventId": "blueprint_dummy",
+          "title": "Arrange traditional attire (Mundu/Sari)",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Coordinate or inform guests about the traditional Kerala dress code (Kasavu Mundu/Sari).",
+          "dueOffset": "T-7 days",
+          "role": "Communication",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_onam_task_organize_tug_of_war",
+          "eventId": "blueprint_dummy",
+          "title": "Organize Tug of War (Vadamvali)",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Arrange rope and finalize teams for the traditional tug of war competition.",
+          "dueOffset": "T-5 days",
+          "role": "Event Coordinator",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_onam_task_invite_pulikali_performers",
+          "eventId": "blueprint_dummy",
+          "title": "Invite/Book traditional performers",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Book performers for Pulikali or Thiruvathira Kali if applicable.",
+          "dueOffset": "T-10 days",
+          "role": "Program Coordinator",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_onam_task_create_pookalam",
+          "eventId": "blueprint_dummy",
+          "title": "Create Pookalam (Flower Rangoli)",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Draw the design and arrange the flowers at the entrance.",
+          "dueOffset": "Morning 06:00 AM",
+          "role": "Decoration",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_onam_task_setup_luncharea_banana_leaves",
+          "eventId": "blueprint_dummy",
+          "title": "Set up Sadya area with banana leaves",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Arrange seating and place fresh banana leaves for the grand feast.",
+          "dueOffset": "Morning 11:30 AM",
+          "role": "Setup Team",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_onam_task_serve_sadya",
+          "eventId": "blueprint_dummy",
+          "title": "Serve Onam Sadya",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Coordinate serving of all 20+ items in the traditional order.",
+          "dueOffset": "Afternoon 12:30 PM",
+          "role": "Food Manager",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_onam_task_conduct_games",
+          "eventId": "blueprint_dummy",
+          "title": "Conduct traditional games and competitions",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Run Vadamvali, Uriadi, and other community games.",
+          "dueOffset": "Afternoon 03:00 PM",
+          "role": "Event Coordinator",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_onam_task_cleanup_venue",
+          "eventId": "blueprint_dummy",
+          "title": "Clean up venue and dispose organic waste",
+          "status": "pending",
+          "phase": "postEvent",
+          "description": "Properly dispose of banana leaves and flowers; clean the venue.",
+          "dueOffset": "T+1 day",
+          "role": "Logistics",
+          "dependsOn": []
+        }
+      ],
+      "budgetBlueprints": [
+        {
+          "id": "sys_onam_budget_catering",
+          "eventId": "blueprint_dummy",
+          "category": "Food",
+          "title": "Onam Sadya Catering",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_onam_budget_flowers",
+          "eventId": "blueprint_dummy",
+          "category": "Decoration",
+          "title": "Flowers for Pookalam",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_onam_budget_performers",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Traditional Performers/Artist Honorarium",
+          "estimatedCost": 0.0,
+          "isMandatory": false,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_onam_budget_prizes",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Prizes for Competitions",
+          "estimatedCost": 0.0,
+          "isMandatory": false,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_onam_budget_venue",
+          "eventId": "blueprint_dummy",
+          "category": "Venue",
+          "title": "Venue Rental",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        }
+      ],
+      "timelineBlueprints": [
+        {
+          "id": "sys_onam_timeline_pookalam",
+          "eventId": "blueprint_dummy",
+          "title": "Pookalam Completion",
+          "phase": "eventDay",
+          "timeOrOffset": "08:30 AM",
+          "dayNumber": 1,
+          "description": "Finished flower rangoli ready for viewing."
+        },
+        {
+          "id": "sys_onam_timeline_lamp_lighting",
+          "eventId": "blueprint_dummy",
+          "title": "Lighting of the Lamp (Nilavilakku)",
+          "phase": "eventDay",
+          "timeOrOffset": "10:00 AM",
+          "dayNumber": 1,
+          "description": "Inauguration of the celebration."
+        },
+        {
+          "id": "sys_onam_timeline_cultural_start",
+          "eventId": "blueprint_dummy",
+          "title": "Cultural Programs / Thiruvathira Kali",
+          "phase": "eventDay",
+          "timeOrOffset": "10:30 AM",
+          "dayNumber": 1,
+          "description": "Traditional dance and music performances."
+        },
+        {
+          "id": "sys_onam_timeline_sadya",
+          "eventId": "blueprint_dummy",
+          "title": "Onam Sadya Feast",
+          "phase": "eventDay",
+          "timeOrOffset": "12:30 PM",
+          "dayNumber": 1,
+          "description": "Traditional lunch served on banana leaves."
+        },
+        {
+          "id": "sys_onam_timeline_games",
+          "eventId": "blueprint_dummy",
+          "title": "Onakalikal (Traditional Games)",
+          "phase": "eventDay",
+          "timeOrOffset": "03:00 PM",
+          "dayNumber": 1,
+          "description": "Vadamvali (Tug of war), Pulikali, and other fun activities."
+        },
+        {
+          "id": "sys_onam_timeline_tea_prizes",
+          "eventId": "blueprint_dummy",
+          "title": "Tea & Prize Distribution",
+          "phase": "eventDay",
+          "timeOrOffset": "05:00 PM",
+          "dayNumber": 1,
+          "description": "Snacks and distribution of prizes to game winners."
+        }
+      ]
+    }
+  ]
+}

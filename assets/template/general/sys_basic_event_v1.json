@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "version": 1,
+  "version": 10,
   "templates": [
     {
       "templateId": "sys_basic_event_v1",

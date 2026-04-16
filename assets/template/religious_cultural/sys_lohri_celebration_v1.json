@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_lohri_celebration_v1",
+      "templateName": "Lohri Celebration",
+      "category": "communityAndCultural",
+      "description": "Celebrate the winter folk festival with a community bonfire, traditional Punjabi snacks, and Bhangra dance.",
+      "tags": [
+        "lohri",
+        "punjabi",
+        "festival",
+        "bonfire",
+        "culture",
+        "winter",
+        "bhangra",
+        "tradition"
+      ],
+      "defaultFields": {
+        "contributionType": "variable",
+        "amount": 0,
+        "enabledModules": [
+          "task",
+          "budget",
+          "timeline",
+          "guestManagement",
+          "communication",
+          "location",
+          "roles",
+          "inventory",
+          "userManagement",
+          "contribution"
+        ]
+      },
+      "taskBlueprints": [
+        {
+          "id": "sys_lohri_task_arrange_firewood",
+          "eventId": "blueprint_dummy",
+          "title": "Arrange for firewood and logs",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Source and transport wood, logs, and dry twigs for the central bonfire.",
+          "dueOffset": "T-3 days",
+          "role": "Logistics",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_lohri_task_procure_bonfire_snacks",
+          "eventId": "blueprint_dummy",
+          "title": "Procure bonfire snacks (Rewari, Gajak, Popcorn)",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Buy peanuts, popcorn, rewari, and til-gajak for offerings and distribution.",
+          "dueOffset": "T-4 days",
+          "role": "Food Manager",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_lohri_task_book_dhol_players",
+          "eventId": "blueprint_dummy",
+          "title": "Book Dhol players and music",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Hire traditional dhol players to lead the Bhangra and Gidha dancing.",
+          "dueOffset": "T-10 days",
+          "role": "Program Coordinator",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_lohri_task_setup_bonfire_area",
+          "eventId": "blueprint_dummy",
+          "title": "Set up bonfire and seating area",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Construct the bonfire stack in the center and arrange circular seating/standing space.",
+          "dueOffset": "Afternoon 04:00 PM",
+          "role": "Setup Team",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_lohri_task_lighting_ceremony",
+          "eventId": "blueprint_dummy",
+          "title": "Lohri Bonfire lighting ceremony",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Perform the auspicious lighting of the bonfire at sunset/night.",
+          "dueOffset": "Evening 06:30 PM",
+          "role": "Organizer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_lohri_task_offerings_and_songs",
+          "eventId": "blueprint_dummy",
+          "title": "Conduct fire offerings and folk songs",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Perform parikrama, throw snacks into the fire, and sing 'Sunder Mundriye'.",
+          "dueOffset": "Evening 07:00 PM",
+          "role": "Organizer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_lohri_task_serve_dinner",
+          "eventId": "blueprint_dummy",
+          "title": "Serve traditional dinner (Saag & Makki di Roti)",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Serve the classic Punjabi winter meal to all guests.",
+          "dueOffset": "Night 08:30 PM",
+          "role": "Food Manager",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_lohri_task_cleanup_ash",
+          "eventId": "blueprint_dummy",
+          "title": "Cleanup bonfire area and ash disposal",
+          "status": "pending",
+          "phase": "postEvent",
+          "description": "Ensure the fire is extinguished and clean the area after the celebration.",
+          "dueOffset": "T+1 day",
+          "role": "Logistics",
+          "dependsOn": []
+        }
+      ],
+      "budgetBlueprints": [
+        {
+          "id": "sys_lohri_budget_firewood",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Firewood and Bonfire Supplies",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_lohri_budget_snacks",
+          "eventId": "blueprint_dummy",
+          "category": "Food",
+          "title": "Lohri Snacks (Peanuts, Gajak, Popcorn)",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_lohri_budget_dhol",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Dhol Players and Music System",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_lohri_budget_dinner",
+          "eventId": "blueprint_dummy",
+          "category": "Food",
+          "title": "Traditional Dinner Catering",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        }
+      ],
+      "timelineBlueprints": [
+        {
+          "id": "sys_lohri_timeline_setup",
+          "eventId": "blueprint_dummy",
+          "title": "Bonfire & Dhol Start",
+          "phase": "eventDay",
+          "timeOrOffset": "06:00 PM",
+          "dayNumber": 1,
+          "description": "Guests gather around the bonfire area with dhol beats."
+        },
+        {
+          "id": "sys_lohri_timeline_lighting",
+          "eventId": "blueprint_dummy",
+          "title": "Lighting the Lohri Bonfire",
+          "phase": "eventDay",
+          "timeOrOffset": "06:45 PM",
+          "dayNumber": 1,
+          "description": "The main celebration ritual begins."
+        },
+        {
+          "id": "sys_lohri_timeline_offering",
+          "eventId": "blueprint_dummy",
+          "title": "Parikrama and Fire Offerings",
+          "phase": "eventDay",
+          "timeOrOffset": "07:15 PM",
+          "dayNumber": 1,
+          "description": "Singing folk songs and offering snacks to the fire."
+        },
+        {
+          "id": "sys_lohri_timeline_dance",
+          "eventId": "blueprint_dummy",
+          "title": "Bhangra and Gidha Performance",
+          "phase": "eventDay",
+          "timeOrOffset": "08:00 PM",
+          "dayNumber": 1,
+          "description": "Community dancing session around the bonfire."
+        },
+        {
+          "id": "sys_lohri_timeline_dinner",
+          "eventId": "blueprint_dummy",
+          "title": "Lohri Dinner",
+          "phase": "eventDay",
+          "timeOrOffset": "09:00 PM",
+          "dayNumber": 1,
+          "description": "Serving Sarson ka Saag and Makki ki Roti."
+        }
+      ]
+    }
+  ]
+}

@@ -71,6 +71,8 @@ class EventModel with _$EventModel {
     // Expense Tracking
     @Default(false) bool isExpenseApprovalRequired,
     @Default(['Venue', 'Food', 'Decoration', 'Miscellaneous']) List<String> expenseCategories,
+    @Default(false) bool isPublicJoinEnabled,
+    @Default(true) bool isJoinApprovalRequired,
   }) = _EventModel;
 
   factory EventModel.fromJson(Map<String, dynamic> json) => _$EventModelFromJson(json);

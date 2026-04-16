@@ -64,14 +64,18 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
   bool _matchesTemplate(TemplateModel t, String rawQuery) {
     final query = rawQuery.trim().toLowerCase();
     if (query.isEmpty) return true;
+    
     final terms = query.split(RegExp(r'\s+')).where((x) => x.isNotEmpty).toList();
+    
     final haystack = [
       t.title,
       t.description,
       t.category.displayName,
+      if (t.templateCode != null) t.templateCode!,
       ...t.tags,
     ].join(' ').toLowerCase();
-    return terms.every(haystack.contains);
+
+    return terms.every((term) => haystack.contains(term));
   }
 
   bool _isSystemTemplate(TemplateModel t) => t.createdBy == systemTemplateCreatedBy;
@@ -530,7 +534,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                   : null,
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
               ),
-              onChanged: (value) => setState(() => _searchQuery = value.toLowerCase()),
+              onChanged: (value) => setState(() => _searchQuery = value),
             ),
           ),
           const Padding(

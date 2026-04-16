@@ -409,7 +409,7 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
       vendorBlueprints: _selectedModules[TemplateModule.vendor]! ? EventTemplateService.getSuggestedVendors(dummyEventId, _category) : [],
       inventoryBlueprints: _selectedModules[TemplateModule.inventory]! ? EventTemplateService.getSuggestedInventory(dummyEventId, _category) : [],
       roleBlueprints: _selectedModules[TemplateModule.roles]! ? List<RoleDefinitionModel>.from(_roleDefinitions) : [],
-      venueBlueprints: _selectedModules[TemplateModule.location]! ? EventTemplateService.getSuggestedVenues(dummyEventId, _category) : [],
+      venueBlueprints: [],
       ticketBlueprints: _selectedModules[TemplateModule.ticketing]! ? EventTemplateService.getSuggestedTickets(dummyEventId, _category) : [],
       customFieldBlueprints: _selectedModules[TemplateModule.customFields]! ? EventTemplateService.getSuggestedCustomFields(dummyEventId, _category) : [],
       announcementBlueprints: _selectedModules[TemplateModule.announcements]! ? EventTemplateService.getSuggestedAnnouncements(dummyEventId, _category) : [],

@@ -7,6 +7,7 @@ abstract class VenueTicketingRepository {
   Stream<List<LocationModel>> getVenues(String eventId);
   Future<void> addVenue(LocationModel venue);
   Future<void> updateVenue(LocationModel venue);
+  Future<void> deleteVenue(String eventId, String venueId);
   
   Stream<List<TicketModel>> getTickets(String eventId);
   Future<void> addTicket(TicketModel ticket);
@@ -37,6 +38,10 @@ class FirebaseVenueTicketingRepository implements VenueTicketingRepository {
   @override
   Future<void> updateVenue(LocationModel venue) =>
       _db.collection('events').doc(venue.eventId).collection('venues').doc(venue.id).update(venue.toJson());
+
+  @override
+  Future<void> deleteVenue(String eventId, String venueId) =>
+      _db.collection('events').doc(eventId).collection('venues').doc(venueId).delete();
 
   @override
   Stream<List<TicketModel>> getTickets(String eventId) {

@@ -62,6 +62,8 @@ mixin _$EventModel {
   // Expense Tracking
   bool get isExpenseApprovalRequired => throw _privateConstructorUsedError;
   List<String> get expenseCategories => throw _privateConstructorUsedError;
+  bool get isPublicJoinEnabled => throw _privateConstructorUsedError;
+  bool get isJoinApprovalRequired => throw _privateConstructorUsedError;
 
   /// Serializes this EventModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -111,6 +113,8 @@ abstract class $EventModelCopyWith<$Res> {
     List<String> guestMetadataFields,
     bool isExpenseApprovalRequired,
     List<String> expenseCategories,
+    bool isPublicJoinEnabled,
+    bool isJoinApprovalRequired,
   });
 }
 
@@ -159,6 +163,8 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
     Object? guestMetadataFields = null,
     Object? isExpenseApprovalRequired = null,
     Object? expenseCategories = null,
+    Object? isPublicJoinEnabled = null,
+    Object? isJoinApprovalRequired = null,
   }) {
     return _then(
       _value.copyWith(
@@ -282,6 +288,14 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
                 ? _value.expenseCategories
                 : expenseCategories // ignore: cast_nullable_to_non_nullable
                       as List<String>,
+            isPublicJoinEnabled: null == isPublicJoinEnabled
+                ? _value.isPublicJoinEnabled
+                : isPublicJoinEnabled // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            isJoinApprovalRequired: null == isJoinApprovalRequired
+                ? _value.isJoinApprovalRequired
+                : isJoinApprovalRequired // ignore: cast_nullable_to_non_nullable
+                      as bool,
           )
           as $Val,
     );
@@ -328,6 +342,8 @@ abstract class _$$EventModelImplCopyWith<$Res>
     List<String> guestMetadataFields,
     bool isExpenseApprovalRequired,
     List<String> expenseCategories,
+    bool isPublicJoinEnabled,
+    bool isJoinApprovalRequired,
   });
 }
 
@@ -375,6 +391,8 @@ class __$$EventModelImplCopyWithImpl<$Res>
     Object? guestMetadataFields = null,
     Object? isExpenseApprovalRequired = null,
     Object? expenseCategories = null,
+    Object? isPublicJoinEnabled = null,
+    Object? isJoinApprovalRequired = null,
   }) {
     return _then(
       _$EventModelImpl(
@@ -498,6 +516,14 @@ class __$$EventModelImplCopyWithImpl<$Res>
             ? _value._expenseCategories
             : expenseCategories // ignore: cast_nullable_to_non_nullable
                   as List<String>,
+        isPublicJoinEnabled: null == isPublicJoinEnabled
+            ? _value.isPublicJoinEnabled
+            : isPublicJoinEnabled // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        isJoinApprovalRequired: null == isJoinApprovalRequired
+            ? _value.isJoinApprovalRequired
+            : isJoinApprovalRequired // ignore: cast_nullable_to_non_nullable
+                  as bool,
       ),
     );
   }
@@ -542,6 +568,8 @@ class _$EventModelImpl implements _EventModel {
       'Decoration',
       'Miscellaneous',
     ],
+    this.isPublicJoinEnabled = false,
+    this.isJoinApprovalRequired = true,
   }) : _hybridSettings = hybridSettings,
        _tiers = tiers,
        _itemTargets = itemTargets,
@@ -712,8 +740,15 @@ class _$EventModelImpl implements _EventModel {
   }
 
   @override
+  @JsonKey()
+  final bool isPublicJoinEnabled;
+  @override
+  @JsonKey()
+  final bool isJoinApprovalRequired;
+
+  @override
   String toString() {
-    return 'EventModel(id: $id, title: $title, description: $description, organizerId: $organizerId, currency: $currency, amount: $amount, createdAt: $createdAt, category: $category, contributionType: $contributionType, hybridSettings: $hybridSettings, location: $location, startDate: $startDate, endDate: $endDate, tiers: $tiers, itemTargets: $itemTargets, groups: $groups, recurringPeriod: $recurringPeriod, note: $note, templateId: $templateId, templateSnapshot: $templateSnapshot, isHybrid: $isHybrid, activeModels: $activeModels, allowedPaymentMethods: $allowedPaymentMethods, contributionTargetGroup: $contributionTargetGroup, maxGuests: $maxGuests, isRsvpRequired: $isRsvpRequired, guestCategories: $guestCategories, guestMetadataFields: $guestMetadataFields, isExpenseApprovalRequired: $isExpenseApprovalRequired, expenseCategories: $expenseCategories)';
+    return 'EventModel(id: $id, title: $title, description: $description, organizerId: $organizerId, currency: $currency, amount: $amount, createdAt: $createdAt, category: $category, contributionType: $contributionType, hybridSettings: $hybridSettings, location: $location, startDate: $startDate, endDate: $endDate, tiers: $tiers, itemTargets: $itemTargets, groups: $groups, recurringPeriod: $recurringPeriod, note: $note, templateId: $templateId, templateSnapshot: $templateSnapshot, isHybrid: $isHybrid, activeModels: $activeModels, allowedPaymentMethods: $allowedPaymentMethods, contributionTargetGroup: $contributionTargetGroup, maxGuests: $maxGuests, isRsvpRequired: $isRsvpRequired, guestCategories: $guestCategories, guestMetadataFields: $guestMetadataFields, isExpenseApprovalRequired: $isExpenseApprovalRequired, expenseCategories: $expenseCategories, isPublicJoinEnabled: $isPublicJoinEnabled, isJoinApprovalRequired: $isJoinApprovalRequired)';
   }
 
   @override
@@ -795,7 +830,11 @@ class _$EventModelImpl implements _EventModel {
             const DeepCollectionEquality().equals(
               other._expenseCategories,
               _expenseCategories,
-            ));
+            ) &&
+            (identical(other.isPublicJoinEnabled, isPublicJoinEnabled) ||
+                other.isPublicJoinEnabled == isPublicJoinEnabled) &&
+            (identical(other.isJoinApprovalRequired, isJoinApprovalRequired) ||
+                other.isJoinApprovalRequired == isJoinApprovalRequired));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -832,6 +871,8 @@ class _$EventModelImpl implements _EventModel {
     const DeepCollectionEquality().hash(_guestMetadataFields),
     isExpenseApprovalRequired,
     const DeepCollectionEquality().hash(_expenseCategories),
+    isPublicJoinEnabled,
+    isJoinApprovalRequired,
   ]);
 
   /// Create a copy of EventModel
@@ -880,6 +921,8 @@ abstract class _EventModel implements EventModel {
     final List<String> guestMetadataFields,
     final bool isExpenseApprovalRequired,
     final List<String> expenseCategories,
+    final bool isPublicJoinEnabled,
+    final bool isJoinApprovalRequired,
   }) = _$EventModelImpl;
 
   factory _EventModel.fromJson(Map<String, dynamic> json) =
@@ -947,6 +990,10 @@ abstract class _EventModel implements EventModel {
   bool get isExpenseApprovalRequired;
   @override
   List<String> get expenseCategories;
+  @override
+  bool get isPublicJoinEnabled;
+  @override
+  bool get isJoinApprovalRequired;
 
   /// Create a copy of EventModel
   /// with the given fields replaced by the non-null parameter values.

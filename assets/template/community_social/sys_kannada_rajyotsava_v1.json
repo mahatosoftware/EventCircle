@@ -1,0 +1,232 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_kannada_rajyotsava_v1",
+      "templateName": "Kannada Rajyotsava",
+      "category": "communityAndCultural",
+      "description": "Celebrate Karnataka Formation Day with flag hoisting, state anthem, and traditional Kannada cultural programs.",
+      "tags": [
+        "rajyotsava",
+        "karnataka",
+        "kannada",
+        "culture",
+        "formation day",
+        "tradition",
+        "community"
+      ],
+      "defaultFields": {
+        "contributionType": "variable",
+        "amount": 0,
+        "enabledModules": [
+          "task",
+          "budget",
+          "timeline",
+          "guestManagement",
+          "communication",
+          "location",
+          "roles",
+          "inventory",
+          "userManagement",
+          "contribution"
+        ]
+      },
+      "taskBlueprints": [
+        {
+          "id": "sys_rajyotsava_task_procure_flags_decor",
+          "eventId": "blueprint_dummy",
+          "title": "Procure Rajyotsava flags and yellow-red decor",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Purchase Karnataka state flags, buntings, and yellow/red decoration materials.",
+          "dueOffset": "T-5 days",
+          "role": "Decoration",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_rajyotsava_task_book_traditional_performers",
+          "eventId": "blueprint_dummy",
+          "title": "Book traditional performers (Dollu Kunitha, etc.)",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Hire artists for Dollu Kunitha, Yakshagana, or Kannada folk music.",
+          "dueOffset": "T-15 days",
+          "role": "Program Coordinator",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_rajyotsava_task_finalize_speakers_guests",
+          "eventId": "blueprint_dummy",
+          "title": "Finalize speakers and award guests",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Invite prominent speakers and finalize the list for Rajyotsava awards if applicable.",
+          "dueOffset": "T-10 days",
+          "role": "Organizer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_rajyotsava_task_plan_karnataka_menu",
+          "eventId": "blueprint_dummy",
+          "title": "Plan traditional Karnataka-themed menu",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Finalize menu featuring Bisi Bele Bath, Holige, and other Karnataka delicacies.",
+          "dueOffset": "T-7 days",
+          "role": "Food Manager",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_rajyotsava_task_flag_hoisting_setup",
+          "eventId": "blueprint_dummy",
+          "title": "Set up flag hoisting and anthem audio",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Arrange the main stage with the state flag and ensure the state anthem audio is ready.",
+          "dueOffset": "Morning 07:30 AM",
+          "role": "Setup Team",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_rajyotsava_task_conduct_anthem_ceremony",
+          "eventId": "blueprint_dummy",
+          "title": "Conduct flag hoisting and sing Naada Geethe",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Lead the community in the flag hoisting and singing of 'Jaya Bharata Jananiya Tanujate'.",
+          "dueOffset": "Morning 09:00 AM",
+          "role": "Organizer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_rajyotsava_task_orchestrate_cultural_programs",
+          "eventId": "blueprint_dummy",
+          "title": "Orchestrate cultural programs and awards",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Manage the sequence of folk dances, music, and the recognition ceremony.",
+          "dueOffset": "Morning 10:30 AM",
+          "role": "Program Coordinator",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_rajyotsava_task_serve_traditional_feast",
+          "eventId": "blueprint_dummy",
+          "title": "Serve traditional Karnataka feast",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Coordinate the serving of authentic regional food to all participants.",
+          "dueOffset": "Afternoon 01:00 PM",
+          "role": "Food Manager",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_rajyotsava_task_settle_honorarium",
+          "eventId": "blueprint_dummy",
+          "title": "Settle performer honorariums and cleanup",
+          "status": "pending",
+          "phase": "postEvent",
+          "description": "Complete artist payments and ensure the venue is cleaned up.",
+          "dueOffset": "T+2 days",
+          "role": "Organizer",
+          "dependsOn": []
+        }
+      ],
+      "budgetBlueprints": [
+        {
+          "id": "sys_rajyotsava_budget_flags_decor",
+          "eventId": "blueprint_dummy",
+          "category": "Decoration",
+          "title": "Flags, Buntings, and Yellow-Red Decor",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_rajyotsava_budget_artists_performers",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Cultural Groups and Artists Honorarium",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_rajyotsava_budget_sound_stage",
+          "eventId": "blueprint_dummy",
+          "category": "Venue",
+          "title": "Stage, Sound System, and Lighting",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_rajyotsava_budget_food_catering",
+          "eventId": "blueprint_dummy",
+          "category": "Food",
+          "title": "Traditional Karnataka Meal Catering",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_rajyotsava_budget_awards_plaques",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Awards, Plaques, and Certificates",
+          "estimatedCost": 0.0,
+          "isMandatory": false,
+          "actualCost": 0.0
+        }
+      ],
+      "timelineBlueprints": [
+        {
+          "id": "sys_rajyotsava_timeline_flag_hoisting",
+          "eventId": "blueprint_dummy",
+          "title": "Flag Hoisting & Naada Geethe",
+          "phase": "eventDay",
+          "timeOrOffset": "09:00 AM",
+          "dayNumber": 1,
+          "description": "Opening ceremony with the state flag and anthem."
+        },
+        {
+          "id": "sys_rajyotsava_timeline_inauguration",
+          "eventId": "blueprint_dummy",
+          "title": "Inaugural Speech & Lamp Lighting",
+          "phase": "eventDay",
+          "timeOrOffset": "09:30 AM",
+          "dayNumber": 1,
+          "description": "Welcome address and keynote about Karnataka heritage."
+        },
+        {
+          "id": "sys_rajyotsava_timeline_cultural_start",
+          "eventId": "blueprint_dummy",
+          "title": "Traditional Folk Performances",
+          "phase": "eventDay",
+          "timeOrOffset": "10:30 AM",
+          "dayNumber": 1,
+          "description": "Dollu Kunitha, folk songs, and regional dances."
+        },
+        {
+          "id": "sys_rajyotsava_timeline_awards",
+          "eventId": "blueprint_dummy",
+          "title": "Rajyotsava Awards Ceremony",
+          "phase": "eventDay",
+          "timeOrOffset": "12:00 PM",
+          "dayNumber": 1,
+          "description": "Recognizing community members for excellence."
+        },
+        {
+          "id": "sys_rajyotsava_timeline_lunch",
+          "eventId": "blueprint_dummy",
+          "title": "Grand Karnataka Lunch",
+          "phase": "eventDay",
+          "timeOrOffset": "01:00 PM",
+          "dayNumber": 1,
+          "description": "Community dining with traditional dishes."
+        }
+      ]
+    }
+  ]
+}

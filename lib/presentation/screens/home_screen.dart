@@ -15,31 +15,8 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('My Events'),
-        actions: [
-          PopupMenuButton<String>(
-            tooltip: 'Account',
-            onSelected: (value) async {
-              switch (value) {
-                case 'profile':
-                  context.push('/profile');
-                  return;
-                case 'logout':
-                  await ref.read(authRepositoryProvider).logout();
-                  if (context.mounted) context.go('/login');
-                  return;
-              }
-            },
-            itemBuilder: (context) => const [
-              PopupMenuItem(value: 'profile', child: Text('Profile')),
-              PopupMenuItem(value: 'logout', child: Text('Logout')),
-            ],
-            child: const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 12),
-              child: Icon(Icons.account_circle_outlined),
-            ),
-          ),
-        ],
       ),
+      drawer: _buildDrawer(context, ref),
       body: eventsAsync.when(
         data: (events) => events.isEmpty
             ? _buildEmptyState(context)
@@ -61,6 +38,68 @@ class HomeScreen extends ConsumerWidget {
         onPressed: () => context.push('/create-event'),
         label: const Text('Create Event'),
         icon: const Icon(Icons.add),
+      ),
+    );
+  }
+
+  Widget _buildDrawer(BuildContext context, WidgetRef ref) {
+    final userAsync = ref.watch(authStateProvider);
+
+    return Drawer(
+      child: Column(
+        children: [
+          userAsync.maybeWhen(
+            data: (user) => UserAccountsDrawerHeader(
+              accountName: Text(user?.name ?? 'User'),
+              accountEmail: Text(user?.email ?? 'N/A'),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Text(
+                  (user?.name.isNotEmpty ?? false) ? user!.name[0].toUpperCase() : '?',
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+              ),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+            orElse: () => const DrawerHeader(child: Center(child: CircularProgressIndicator())),
+          ),
+          ListTile(
+            leading: const Icon(Icons.event_outlined),
+            title: const Text('My Events'),
+            onTap: () => Navigator.pop(context),
+          ),
+          ListTile(
+            leading: const Icon(Icons.person_outline),
+            title: const Text('Profile'),
+            onTap: () {
+              Navigator.pop(context);
+              context.push('/profile');
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.help_outline),
+            title: const Text('Contact Us & Feedback'),
+            onTap: () {
+              Navigator.pop(context);
+              context.push('/contact-us');
+            },
+          ),
+          const Spacer(),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.logout, color: Colors.red),
+            title: const Text('Logout', style: TextStyle(color: Colors.red)),
+            onTap: () async {
+              Navigator.pop(context);
+              await ref.read(authRepositoryProvider).logout();
+              if (context.mounted) context.go('/login');
+            },
+          ),
+          const SizedBox(height: 16),
+        ],
       ),
     );
   }

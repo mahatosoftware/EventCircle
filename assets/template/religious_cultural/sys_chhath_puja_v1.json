@@ -1,0 +1,235 @@
+{
+  "schemaVersion": 2,
+  "version": 1,
+  "templates": [
+    {
+      "templateId": "sys_chhath_puja_v1",
+      "templateName": "Chhath Puja",
+      "category": "communityAndCultural",
+      "description": "Organize the 4-day Sun worship festival with Ghat preparation, Sandhya and Usha Arghya rituals, and traditional Prasad.",
+      "tags": [
+        "chhath",
+        "puja",
+        "surya",
+        "festival",
+        "bihar",
+        "up",
+        "culture",
+        "arghya",
+        "thekua",
+        "tradition"
+      ],
+      "defaultFields": {
+        "contributionType": "variable",
+        "amount": 0,
+        "enabledModules": [
+          "task",
+          "budget",
+          "timeline",
+          "guestManagement",
+          "communication",
+          "location",
+          "roles",
+          "inventory",
+          "userManagement",
+          "contribution"
+        ]
+      },
+      "taskBlueprints": [
+        {
+          "id": "sys_chhath_task_identify_clean_ghat",
+          "eventId": "blueprint_dummy",
+          "title": "Identify and clean the Puja Ghat",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Identify a water body bank (Ghat) and coordinate deep cleaning and path preparation.",
+          "dueOffset": "T-10 days",
+          "role": "Logistics",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_chhath_task_procure_daura_soop",
+          "eventId": "blueprint_dummy",
+          "title": "Procure bamboo baskets (Daura and Soop)",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Purchase or arrange traditional bamboo baskets for holding offerings.",
+          "dueOffset": "T-5 days",
+          "role": "Logistics",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_chhath_task_prepare_thekua_prasad",
+          "eventId": "blueprint_dummy",
+          "title": "Prepare Thekua and traditional Prasad",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Prepare the signature Thekua, rice laddoos, and collect structural prasad items.",
+          "dueOffset": "T-2 days",
+          "role": "Food Manager",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_chhath_task_purchase_fruits_puja_items",
+          "eventId": "blueprint_dummy",
+          "title": "Purchase seasonal fruits and puja samagri",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Buy sugarcane stalks, coconuts, bananas, and other essential ritual fruits.",
+          "dueOffset": "T-3 days",
+          "role": "Food Manager",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_chhath_task_setup_ghat_lighting",
+          "eventId": "blueprint_dummy",
+          "title": "Set up Ghat lighting and temporary tents",
+          "status": "pending",
+          "phase": "preEvent",
+          "description": "Arrange generator/electrical supply for night lighting and safety at the Ghat.",
+          "dueOffset": "T-2 days",
+          "role": "Setup Team",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_chhath_task_coordinate_nahay_khay",
+          "eventId": "blueprint_dummy",
+          "title": "Coordinate Nahay Khay logistics",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Manage the rituals and food for the first day of Chhath.",
+          "dueOffset": "Day 1 Morning",
+          "role": "Organizer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_chhath_task_manage_sandhya_arghya",
+          "eventId": "blueprint_dummy",
+          "title": "Manage Sandhya Arghya (Evening Offerings)",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Coordinate the procession to the Ghat and the sunset ritual offerings.",
+          "dueOffset": "Day 3 Evening",
+          "role": "Organizer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_chhath_task_manage_usha_arghya",
+          "eventId": "blueprint_dummy",
+          "title": "Manage Usha Arghya (Morning Offerings)",
+          "status": "pending",
+          "phase": "eventDay",
+          "description": "Coordinate the pre-dawn gathering and the sunrise ritual offerings.",
+          "dueOffset": "Day 4 Morning",
+          "role": "Organizer",
+          "dependsOn": []
+        },
+        {
+          "id": "sys_chhath_task_ghat_cleanup_post",
+          "eventId": "blueprint_dummy",
+          "title": "Clean up the Ghat area post-event",
+          "status": "pending",
+          "phase": "postEvent",
+          "description": "Remove decorations and ensure no ritual waste remains in the water body.",
+          "dueOffset": "T+1 day",
+          "role": "Logistics",
+          "dependsOn": []
+        }
+      ],
+      "budgetBlueprints": [
+        {
+          "id": "sys_chhath_budget_ghat_prep",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Ghat Cleaning and Repair",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_chhath_budget_lighting_sound",
+          "eventId": "blueprint_dummy",
+          "category": "Venue",
+          "title": "Lighting, Sound and Tents at the Ghat",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_chhath_budget_soop_daura",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Daura, Soop, and Pooja Samagri",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_chhath_budget_prasad_ingredients",
+          "eventId": "blueprint_dummy",
+          "category": "Food",
+          "title": "Prasad Ingredients (Thekua, etc.) and Fruits",
+          "estimatedCost": 0.0,
+          "isMandatory": true,
+          "actualCost": 0.0
+        },
+        {
+          "id": "sys_chhath_budget_volunteer_support",
+          "eventId": "blueprint_dummy",
+          "category": "Miscellaneous",
+          "title": "Volunteer Support and Logistics",
+          "estimatedCost": 0.0,
+          "isMandatory": false,
+          "actualCost": 0.0
+        }
+      ],
+      "timelineBlueprints": [
+        {
+          "id": "sys_chhath_timeline_day3_departure",
+          "eventId": "blueprint_dummy",
+          "title": "Sandhya Arghya Procession to Ghat",
+          "phase": "eventDay",
+          "timeOrOffset": "04:00 PM",
+          "dayNumber": 3,
+          "description": "Carrying the offerings (Daura) to the water body."
+        },
+        {
+          "id": "sys_chhath_timeline_day3_sunset",
+          "eventId": "blueprint_dummy",
+          "title": "Sandhya Arghya Offering (Sunset)",
+          "phase": "eventDay",
+          "timeOrOffset": "05:30 PM",
+          "dayNumber": 3,
+          "description": "Performing the ritual offering to the setting Sun."
+        },
+        {
+          "id": "sys_chhath_timeline_day4_morning",
+          "eventId": "blueprint_dummy",
+          "title": "Arrival at Ghat for Usha Arghya",
+          "phase": "eventDay",
+          "timeOrOffset": "05:00 AM",
+          "dayNumber": 4,
+          "description": "Gathering at the Ghat before sunrise."
+        },
+        {
+          "id": "sys_chhath_timeline_day4_sunrise",
+          "eventId": "blueprint_dummy",
+          "title": "Usha Arghya Offering (Sunrise)",
+          "phase": "eventDay",
+          "timeOrOffset": "06:30 AM",
+          "dayNumber": 4,
+          "description": "Final offering ceremony to the rising Sun."
+        },
+        {
+          "id": "sys_chhath_timeline_day4_prasad",
+          "eventId": "blueprint_dummy",
+          "title": "Breaking Fast & Prasad Distribution",
+          "phase": "eventDay",
+          "timeOrOffset": "08:00 AM",
+          "dayNumber": 4,
+          "description": "Completion of Vrat and sharing Prasad with everyone."
+        }
+      ]
+    }
+  ]
+}

@@ -72,6 +72,8 @@ _$EventModelImpl _$$EventModelImplFromJson(Map<String, dynamic> json) =>
               ?.map((e) => e as String)
               .toList() ??
           const ['Venue', 'Food', 'Decoration', 'Miscellaneous'],
+      isPublicJoinEnabled: json['isPublicJoinEnabled'] as bool? ?? false,
+      isJoinApprovalRequired: json['isJoinApprovalRequired'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$$EventModelImplToJson(_$EventModelImpl instance) =>
@@ -108,6 +110,8 @@ Map<String, dynamic> _$$EventModelImplToJson(_$EventModelImpl instance) =>
       'guestMetadataFields': instance.guestMetadataFields,
       'isExpenseApprovalRequired': instance.isExpenseApprovalRequired,
       'expenseCategories': instance.expenseCategories,
+      'isPublicJoinEnabled': instance.isPublicJoinEnabled,
+      'isJoinApprovalRequired': instance.isJoinApprovalRequired,
     };
 
 const _$EventCategoryEnumMap = {
