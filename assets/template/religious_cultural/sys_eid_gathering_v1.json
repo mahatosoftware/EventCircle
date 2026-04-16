@@ -1,28 +1,269 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_eid_gathering_v1",
-      "templateName": "Eid Gathering",
-      "category": "communityAndCultural",
-      "description": "Celebration of Eid with traditional food, prayers, and family time.",
-      "tags": ["eid", "celebration", "festival", "family", "traditional"],
-      "defaultFields": {
-        "contributionType": "none",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_eid_task_menu", "eventId": "blueprint_dummy", "title": "Finalize Eid Menu", "status": "pending", "phase": "preEvent", "description": "Plan traditional dishes like Sheer Khurma and Biryani.", "dueOffset": "T-7 days", "role": "Food Manager", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_eid_budget_food", "eventId": "blueprint_dummy", "category": "Food", "title": "Catering / Ingredients", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_eid_timeline_feast", "eventId": "blueprint_dummy", "title": "Festive Feast", "phase": "eventDay", "timeOrOffset": "01:30 PM", "dayNumber": 1, "description": "Main celebratory meal with family and friends." }
-      ],
-      "version": 1
-    }
-  ]
+   "version" : 4,
+   "templates" : [
+      {
+         "roleBlueprints" : [
+            {
+               "id" : "sys_role_admin",
+               "moduleAccess" : {
+                  "budget" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "contribution" : "full",
+                  "customFields" : "full",
+                  "chat" : "full",
+                  "auditLog" : "full",
+                  "tasks" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "users" : "full",
+                  "roles" : "full",
+                  "guests" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full"
+               },
+               "name" : "Admin",
+               "description" : "Full access to all modules."
+            },
+            {
+               "name" : "Organizer",
+               "moduleAccess" : {
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "budget" : "edit",
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "contribution" : "edit",
+                  "auditLog" : "view",
+                  "tasks" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "guests" : "edit"
+               },
+               "id" : "sys_role_organizer",
+               "description" : "Manage most event details."
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "id" : "sys_role_coordinator",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "timeline" : "edit",
+                  "inventory" : "view",
+                  "guests" : "view",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view",
+                  "tasks" : "edit",
+                  "auditLog" : "none"
+               },
+               "name" : "Coordinator"
+            },
+            {
+               "moduleAccess" : {
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "tasks" : "update",
+                  "auditLog" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "view"
+               },
+               "name" : "Volunteer",
+               "id" : "sys_role_volunteer",
+               "description" : "Update task progress."
+            },
+            {
+               "description" : "Regular participant.",
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "contribution" : "view",
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none"
+               },
+               "id" : "sys_role_participant"
+            },
+            {
+               "moduleAccess" : {
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "contribution" : "none",
+                  "customFields" : "none",
+                  "chat" : "none",
+                  "guests" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none"
+               },
+               "name" : "Guest",
+               "id" : "sys_role_guest",
+               "description" : "Limited viewing access."
+            },
+            {
+               "description" : "Read-only access.",
+               "id" : "sys_role_viewer",
+               "moduleAccess" : {
+                  "ticketing" : "view",
+                  "announcements" : "view",
+                  "roles" : "view",
+                  "users" : "view",
+                  "guests" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "contribution" : "view",
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "budget" : "view",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "tasks" : "view",
+                  "auditLog" : "view"
+               },
+               "name" : "Viewer"
+            },
+            {
+               "moduleAccess" : {
+                  "roles" : "view",
+                  "users" : "view",
+                  "announcements" : "edit"
+               },
+               "name" : "Society Admin",
+               "id" : "sys_role_society_admin",
+               "description" : "Board coordination."
+            },
+            {
+               "moduleAccess" : {
+                  "tasks" : "full",
+                  "chat" : "full",
+                  "timeline" : "full",
+                  "roles" : "none",
+                  "users" : "none"
+               },
+               "name" : "Event Coordinator",
+               "id" : "sys_role_coord",
+               "description" : "Overall execution lead."
+            },
+            {
+               "moduleAccess" : {
+                  "users" : "none",
+                  "budget" : "full",
+                  "roles" : "none",
+                  "contribution" : "full"
+               },
+               "name" : "Treasurer",
+               "id" : "sys_role_treasurer",
+               "description" : "Manage funds."
+            },
+            {
+               "description" : "Crowd control.",
+               "id" : "sys_role_security",
+               "moduleAccess" : {
+                  "chat" : "edit",
+                  "roles" : "none",
+                  "location" : "view",
+                  "users" : "none"
+               },
+               "name" : "Security Coordinator"
+            }
+         ],
+         "templateName" : "Eid Gathering",
+         "category" : "communityAndCultural",
+         "defaultFields" : {
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "communication",
+               "location",
+               "roles",
+               "userManagement"
+            ],
+            "amount" : 0,
+            "contributionType" : "none"
+         },
+         "version" : 2,
+         "description" : "Celebration of Eid with traditional food, prayers, and family time.",
+         "templateId" : "sys_eid_gathering_v1",
+         "timelineBlueprints" : [
+            {
+               "phase" : "eventDay",
+               "dayNumber" : 1,
+               "description" : "Main celebratory meal with family and friends.",
+               "timeOrOffset" : "01:30 PM",
+               "eventId" : "blueprint_dummy",
+               "id" : "sys_eid_timeline_feast",
+               "title" : "Festive Feast"
+            }
+         ],
+         "taskBlueprints" : [
+            {
+               "dueOffset" : "T-7 days",
+               "role" : "Food Manager",
+               "status" : "pending",
+               "phase" : "preEvent",
+               "description" : "Plan traditional dishes like Sheer Khurma and Biryani.",
+               "eventId" : "blueprint_dummy",
+               "id" : "sys_eid_task_menu",
+               "dependsOn" : [],
+               "title" : "Finalize Eid Menu"
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy",
+               "isMandatory" : true,
+               "id" : "sys_eid_budget_food",
+               "estimatedCost" : 0,
+               "title" : "Catering / Ingredients",
+               "category" : "Food"
+            }
+         ],
+         "tags" : [
+            "eid",
+            "celebration",
+            "festival",
+            "family",
+            "traditional"
+         ]
+      }
+   ],
+   "schemaVersion" : 2
 }

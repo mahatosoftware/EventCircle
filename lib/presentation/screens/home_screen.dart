@@ -87,6 +87,23 @@ class HomeScreen extends ConsumerWidget {
               context.push('/contact-us');
             },
           ),
+          userAsync.maybeWhen(
+            data: (user) {
+              const allowedEmails = ['mahatosoftware@gmail.com', 'debasishmahato@gmail.com'];
+              if (user != null && allowedEmails.contains(user.email)) {
+                return ListTile(
+                  leading: const Icon(Icons.admin_panel_settings_outlined, color: Colors.blue),
+                  title: const Text('Template Manager', style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold)),
+                  onTap: () {
+                    Navigator.pop(context);
+                    context.push('/template-manager');
+                  },
+                );
+              }
+              return const SizedBox.shrink();
+            },
+            orElse: () => const SizedBox.shrink(),
+          ),
           const Spacer(),
           const Divider(),
           ListTile(

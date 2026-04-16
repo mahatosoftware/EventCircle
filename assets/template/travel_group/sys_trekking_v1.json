@@ -1,28 +1,271 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_trekking_v1",
-      "templateName": "Trekking Event",
-      "category": "travel",
-      "description": "Adventure activity involving hiking through trails and mountains.",
-      "tags": ["trekking", "adventure", "hiking", "travel", "mountain"],
-      "defaultFields": {
-        "contributionType": "fixed",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "location", "roles", "inventory", "contribution"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_trek_task_safety", "eventId": "blueprint_dummy", "title": "Verify Trail Safety & Permits", "status": "pending", "phase": "preEvent", "description": "Obtain permissions from forest departments if needed.", "dueOffset": "T-15 days", "role": "Organizer", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_trek_budget_equipment", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "First Aid & Equipment", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_trek_timeline_summit", "eventId": "blueprint_dummy", "title": "Summit Highlight", "phase": "eventDay", "timeOrOffset": "11:30 AM", "dayNumber": 1, "description": "Reaching the highest point and group photos." }
-      ],
-      "version": 1
-    }
-  ]
+   "templates" : [
+      {
+         "taskBlueprints" : [
+            {
+               "role" : "Organizer",
+               "dueOffset" : "T-15 days",
+               "phase" : "preEvent",
+               "status" : "pending",
+               "eventId" : "blueprint_dummy",
+               "description" : "Obtain permissions from forest departments if needed.",
+               "title" : "Verify Trail Safety & Permits",
+               "dependsOn" : [],
+               "id" : "sys_trek_task_safety"
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "id" : "sys_trek_budget_equipment",
+               "isMandatory" : true,
+               "title" : "First Aid & Equipment",
+               "estimatedCost" : 0,
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0,
+               "category" : "Miscellaneous"
+            }
+         ],
+         "tags" : [
+            "trekking",
+            "adventure",
+            "hiking",
+            "travel",
+            "mountain"
+         ],
+         "templateId" : "sys_trekking_v1",
+         "timelineBlueprints" : [
+            {
+               "phase" : "eventDay",
+               "id" : "sys_trek_timeline_summit",
+               "title" : "Summit Highlight",
+               "dayNumber" : 1,
+               "description" : "Reaching the highest point and group photos.",
+               "timeOrOffset" : "11:30 AM",
+               "eventId" : "blueprint_dummy"
+            }
+         ],
+         "version" : 2,
+         "description" : "Adventure activity involving hiking through trails and mountains.",
+         "category" : "travel",
+         "defaultFields" : {
+            "contributionType" : "fixed",
+            "amount" : 0,
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "location",
+               "roles",
+               "inventory",
+               "contribution",
+               "userManagement"
+            ]
+         },
+         "roleBlueprints" : [
+            {
+               "id" : "sys_role_admin",
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "vendors" : "full",
+                  "location" : "full",
+                  "budget" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "contribution" : "full",
+                  "auditLog" : "full",
+                  "tasks" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "users" : "full",
+                  "roles" : "full",
+                  "guests" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full"
+               },
+               "description" : "Full access to all modules."
+            },
+            {
+               "moduleAccess" : {
+                  "users" : "view",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "guests" : "edit",
+                  "budget" : "edit",
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "contribution" : "edit",
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "auditLog" : "view",
+                  "tasks" : "edit"
+               },
+               "name" : "Organizer",
+               "id" : "sys_role_organizer",
+               "description" : "Manage most event details."
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "id" : "sys_role_coordinator",
+               "moduleAccess" : {
+                  "announcements" : "edit",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "guests" : "view",
+                  "inventory" : "view",
+                  "timeline" : "edit",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "edit"
+               },
+               "name" : "Coordinator"
+            },
+            {
+               "description" : "Update task progress.",
+               "name" : "Volunteer",
+               "moduleAccess" : {
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "tasks" : "update",
+                  "auditLog" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none"
+               },
+               "id" : "sys_role_volunteer"
+            },
+            {
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "contribution" : "view",
+                  "customFields" : "none",
+                  "chat" : "edit",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none"
+               },
+               "id" : "sys_role_participant",
+               "description" : "Regular participant."
+            },
+            {
+               "id" : "sys_role_guest",
+               "name" : "Guest",
+               "moduleAccess" : {
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "contribution" : "none",
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none"
+               },
+               "description" : "Limited viewing access."
+            },
+            {
+               "id" : "sys_role_viewer",
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "guests" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view",
+                  "roles" : "view",
+                  "users" : "view",
+                  "tasks" : "view",
+                  "auditLog" : "view",
+                  "contribution" : "view",
+                  "customFields" : "view",
+                  "chat" : "view",
+                  "budget" : "view",
+                  "location" : "view",
+                  "vendors" : "view"
+               },
+               "description" : "Read-only access."
+            },
+            {
+               "name" : "Trip Organizer",
+               "moduleAccess" : {
+                  "timeline" : "full",
+                  "roles" : "none",
+                  "users" : "view",
+                  "budget" : "edit",
+                  "tasks" : "full"
+               },
+               "id" : "sys_role_trip_org",
+               "description" : "Itinerary lead."
+            },
+            {
+               "moduleAccess" : {
+                  "users" : "none",
+                  "location" : "view",
+                  "roles" : "none",
+                  "chat" : "edit",
+                  "timeline" : "view"
+               },
+               "name" : "Guide",
+               "id" : "sys_role_guide",
+               "description" : "Local trip guide."
+            },
+            {
+               "description" : "Vehicle lead.",
+               "id" : "sys_role_transport",
+               "moduleAccess" : {
+                  "location" : "edit",
+                  "users" : "none",
+                  "roles" : "none",
+                  "chat" : "edit"
+               },
+               "name" : "Transport Coordinator"
+            },
+            {
+               "id" : "sys_role_emergency",
+               "name" : "Emergency Lead",
+               "moduleAccess" : {
+                  "location" : "view",
+                  "users" : "none",
+                  "chat" : "full",
+                  "roles" : "none"
+               },
+               "description" : "Safety lead."
+            }
+         ],
+         "templateName" : "Trekking Event"
+      }
+   ],
+   "version" : 4,
+   "schemaVersion" : 2
 }

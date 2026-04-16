@@ -1,29 +1,236 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_thanksgiving_dinner_v1",
-      "templateName": "Thanksgiving Dinner",
-      "category": "personal",
-      "description": "Gather for a traditional Thanksgiving meal with family and friends.",
-      "tags": ["thanksgiving", "dinner", "family", "traditional", "gathering"],
-      "defaultFields": {
-        "contributionType": "voluntary",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_thanks_task_turkey", "eventId": "blueprint_dummy", "title": "Secure Turkey & Main Ingredients", "status": "pending", "phase": "preEvent", "description": "Ensure the main holiday bird is ordered.", "dueOffset": "T-10 days", "role": "Food Manager", "dependsOn": [] },
-        { "id": "sys_thanks_task_potluck", "eventId": "blueprint_dummy", "title": "Coordinate Potluck Dishes", "status": "pending", "phase": "preEvent", "description": "Assign side dishes to guest contributors.", "dueOffset": "T-7 days", "role": "Host", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_thanks_budget_food", "eventId": "blueprint_dummy", "category": "Food", "title": "Main Meal & Desserts", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_thanks_timeline_feast", "eventId": "blueprint_dummy", "title": "Main Holiday Dinner", "phase": "eventDay", "timeOrOffset": "04:30 PM", "dayNumber": 1, "description": "The main gathering and shared meal." }
-      ],
-      "version": 1
-    }
-  ]
+   "schemaVersion" : 2,
+   "version" : 4,
+   "templates" : [
+      {
+         "defaultFields" : {
+            "contributionType" : "voluntary",
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "communication",
+               "location",
+               "roles",
+               "userManagement"
+            ],
+            "amount" : 0
+         },
+         "taskBlueprints" : [
+            {
+               "phase" : "preEvent",
+               "title" : "Secure Turkey & Main Ingredients",
+               "status" : "pending",
+               "dependsOn" : [],
+               "id" : "sys_thanks_task_turkey",
+               "role" : "Food Manager",
+               "eventId" : "blueprint_dummy",
+               "dueOffset" : "T-10 days",
+               "description" : "Ensure the main holiday bird is ordered."
+            },
+            {
+               "status" : "pending",
+               "phase" : "preEvent",
+               "dueOffset" : "T-7 days",
+               "role" : "Host",
+               "dependsOn" : [],
+               "id" : "sys_thanks_task_potluck",
+               "title" : "Coordinate Potluck Dishes",
+               "description" : "Assign side dishes to guest contributors.",
+               "eventId" : "blueprint_dummy"
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "category" : "Food",
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy",
+               "title" : "Main Meal & Desserts",
+               "estimatedCost" : 0,
+               "isMandatory" : true,
+               "id" : "sys_thanks_budget_food"
+            }
+         ],
+         "tags" : [
+            "thanksgiving",
+            "dinner",
+            "family",
+            "traditional",
+            "gathering"
+         ],
+         "version" : 2,
+         "category" : "personal",
+         "roleBlueprints" : [
+            {
+               "id" : "sys_role_admin",
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "users" : "full",
+                  "roles" : "full",
+                  "guests" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "budget" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "contribution" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "auditLog" : "full",
+                  "tasks" : "full"
+               },
+               "description" : "Full access to all modules."
+            },
+            {
+               "id" : "sys_role_organizer",
+               "name" : "Organizer",
+               "moduleAccess" : {
+                  "timeline" : "edit",
+                  "inventory" : "edit",
+                  "guests" : "edit",
+                  "roles" : "none",
+                  "users" : "view",
+                  "ticketing" : "edit",
+                  "announcements" : "edit",
+                  "tasks" : "edit",
+                  "auditLog" : "view",
+                  "contribution" : "edit",
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "budget" : "edit",
+                  "location" : "edit",
+                  "vendors" : "edit"
+               },
+               "description" : "Manage most event details."
+            },
+            {
+               "id" : "sys_role_coordinator",
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "edit",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "none",
+                  "inventory" : "view",
+                  "timeline" : "edit",
+                  "guests" : "view"
+               },
+               "description" : "Manage tasks and timeline."
+            },
+            {
+               "description" : "Update task progress.",
+               "name" : "Volunteer",
+               "moduleAccess" : {
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "update",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "guests" : "none"
+               },
+               "id" : "sys_role_volunteer"
+            },
+            {
+               "description" : "Regular participant.",
+               "id" : "sys_role_participant",
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "contribution" : "view",
+                  "customFields" : "none",
+                  "chat" : "edit",
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none"
+               }
+            },
+            {
+               "moduleAccess" : {
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "guests" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "none"
+               },
+               "name" : "Guest",
+               "id" : "sys_role_guest",
+               "description" : "Limited viewing access."
+            },
+            {
+               "id" : "sys_role_viewer",
+               "moduleAccess" : {
+                  "budget" : "view",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "contribution" : "view",
+                  "customFields" : "view",
+                  "chat" : "view",
+                  "auditLog" : "view",
+                  "tasks" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "view",
+                  "users" : "view",
+                  "roles" : "view",
+                  "guests" : "view",
+                  "inventory" : "view",
+                  "timeline" : "view"
+               },
+               "name" : "Viewer",
+               "description" : "Read-only access."
+            }
+         ],
+         "templateName" : "Thanksgiving Dinner",
+         "templateId" : "sys_thanksgiving_dinner_v1",
+         "timelineBlueprints" : [
+            {
+               "description" : "The main gathering and shared meal.",
+               "dayNumber" : 1,
+               "timeOrOffset" : "04:30 PM",
+               "eventId" : "blueprint_dummy",
+               "id" : "sys_thanks_timeline_feast",
+               "title" : "Main Holiday Dinner",
+               "phase" : "eventDay"
+            }
+         ],
+         "description" : "Gather for a traditional Thanksgiving meal with family and friends."
+      }
+   ]
 }

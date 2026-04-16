@@ -4,6 +4,12 @@ import '../models/event_model.dart';
 import '../models/budget_model.dart';
 import '../models/task_model.dart';
 import '../models/template_model.dart';
+import '../models/timeline_model.dart';
+import '../models/vendor_model.dart';
+import '../models/inventory_model.dart';
+import '../models/role_definition_model.dart';
+import '../models/venue_ticketing_model.dart';
+import '../models/custom_announcement_model.dart';
 
 class SystemTemplatePack {
   final int schemaVersion;
@@ -47,6 +53,14 @@ class SystemTemplateDefinition {
   final String description;
   final Map<String, dynamic> defaultFields;
   final List<TaskModel> taskBlueprints;
+  final List<TimelineItemModel> timelineBlueprints;
+  final List<VendorModel> vendorBlueprints;
+  final List<InventoryItemModel> inventoryBlueprints;
+  final List<RoleDefinitionModel> roleBlueprints;
+  final List<LocationModel> venueBlueprints;
+  final List<TicketModel> ticketBlueprints;
+  final List<CustomFieldDefinitionModel> customFieldBlueprints;
+  final List<AnnouncementModel> announcementBlueprints;
   final List<BudgetItemModel> budgetBlueprints;
   final int version;
   final String? templateCode;
@@ -60,6 +74,14 @@ class SystemTemplateDefinition {
     required this.description,
     required this.defaultFields,
     required this.taskBlueprints,
+    required this.timelineBlueprints,
+    required this.vendorBlueprints,
+    required this.inventoryBlueprints,
+    required this.roleBlueprints,
+    required this.venueBlueprints,
+    required this.ticketBlueprints,
+    required this.customFieldBlueprints,
+    required this.announcementBlueprints,
     required this.budgetBlueprints,
     required this.version,
     required this.templateCode,
@@ -76,6 +98,14 @@ class SystemTemplateDefinition {
         ? (json['defaultFields'] as Map<String, dynamic>)
         : <String, dynamic>{};
     final taskBlueprints = _taskBlueprintsFromJsonValue(json['taskBlueprints']);
+    final timelineBlueprints = _timelineBlueprintsFromJsonValue(json['timelineBlueprints']);
+    final vendorBlueprints = _vendorBlueprintsFromJsonValue(json['vendorBlueprints']);
+    final inventoryBlueprints = _inventoryBlueprintsFromJsonValue(json['inventoryBlueprints']);
+    final roleBlueprints = _roleBlueprintsFromJsonValue(json['roleBlueprints']);
+    final venueBlueprints = _venueBlueprintsFromJsonValue(json['venueBlueprints']);
+    final ticketBlueprints = _ticketBlueprintsFromJsonValue(json['ticketBlueprints']);
+    final customFieldBlueprints = _customFieldBlueprintsFromJsonValue(json['customFieldBlueprints']);
+    final announcementBlueprints = _announcementBlueprintsFromJsonValue(json['announcementBlueprints']);
     final budgetBlueprints = _budgetBlueprintsFromJsonValue(json['budgetBlueprints']);
     final version = (json['version'] as num?)?.toInt() ?? 1;
     final templateCode = (json['templateCode'] as String?)?.trim();
@@ -105,6 +135,14 @@ class SystemTemplateDefinition {
       description: description,
       defaultFields: defaultFields,
       taskBlueprints: taskBlueprints,
+      timelineBlueprints: timelineBlueprints,
+      vendorBlueprints: vendorBlueprints,
+      inventoryBlueprints: inventoryBlueprints,
+      roleBlueprints: roleBlueprints,
+      venueBlueprints: venueBlueprints,
+      ticketBlueprints: ticketBlueprints,
+      customFieldBlueprints: customFieldBlueprints,
+      announcementBlueprints: announcementBlueprints,
       budgetBlueprints: budgetBlueprints,
       version: version,
       templateCode: templateCode,
@@ -129,6 +167,14 @@ class SystemTemplateDefinition {
       tags: tags,
       config: defaultFields,
       taskBlueprints: taskBlueprints,
+      timelineBlueprints: timelineBlueprints,
+      vendorBlueprints: vendorBlueprints,
+      inventoryBlueprints: inventoryBlueprints,
+      roleBlueprints: roleBlueprints,
+      venueBlueprints: venueBlueprints,
+      ticketBlueprints: ticketBlueprints,
+      customFieldBlueprints: customFieldBlueprints,
+      announcementBlueprints: announcementBlueprints,
       budgetBlueprints: budgetBlueprints,
       enabledModules: enabledModules,
       version: version,
@@ -190,9 +236,103 @@ List<BudgetItemModel> _budgetBlueprintsFromJsonValue(dynamic value) {
     if (v is! Map<String, dynamic>) continue;
     try {
       out.add(BudgetItemModel.fromJson(v));
-    } catch (_) {
-      // Ignore invalid blueprint entries.
-    }
+    } catch (_) {}
+  }
+  return out;
+}
+
+List<TimelineItemModel> _timelineBlueprintsFromJsonValue(dynamic value) {
+  if (value is! List) return const [];
+  final out = <TimelineItemModel>[];
+  for (final v in value) {
+    if (v is! Map<String, dynamic>) continue;
+    try {
+      out.add(TimelineItemModel.fromJson(v));
+    } catch (_) {}
+  }
+  return out;
+}
+
+List<VendorModel> _vendorBlueprintsFromJsonValue(dynamic value) {
+  if (value is! List) return const [];
+  final out = <VendorModel>[];
+  for (final v in value) {
+    if (v is! Map<String, dynamic>) continue;
+    try {
+      out.add(VendorModel.fromJson(v));
+    } catch (_) {}
+  }
+  return out;
+}
+
+List<InventoryItemModel> _inventoryBlueprintsFromJsonValue(dynamic value) {
+  if (value is! List) return const [];
+  final out = <InventoryItemModel>[];
+  for (final v in value) {
+    if (v is! Map<String, dynamic>) continue;
+    try {
+      out.add(InventoryItemModel.fromJson(v));
+    } catch (_) {}
+  }
+  return out;
+}
+
+List<RoleDefinitionModel> _roleBlueprintsFromJsonValue(dynamic value) {
+  if (value is! List) return const [];
+  final out = <RoleDefinitionModel>[];
+  for (final v in value) {
+    if (v is! Map<String, dynamic>) continue;
+    try {
+      out.add(RoleDefinitionModel.fromJson(v));
+    } catch (_) {}
+  }
+  return out;
+}
+
+List<LocationModel> _venueBlueprintsFromJsonValue(dynamic value) {
+  if (value is! List) return const [];
+  final out = <LocationModel>[];
+  for (final v in value) {
+    if (v is! Map<String, dynamic>) continue;
+    try {
+      out.add(LocationModel.fromJson(v));
+    } catch (_) {}
+  }
+  return out;
+}
+
+List<TicketModel> _ticketBlueprintsFromJsonValue(dynamic value) {
+  if (value is! List) return const [];
+  final out = <TicketModel>[];
+  for (final v in value) {
+    if (v is! Map<String, dynamic>) continue;
+    try {
+      out.add(TicketModel.fromJson(v));
+    } catch (_) {}
+  }
+  return out;
+}
+
+List<CustomFieldDefinitionModel> _customFieldBlueprintsFromJsonValue(dynamic value) {
+  if (value is! List) return const [];
+  final out = <CustomFieldDefinitionModel>[];
+  for (final v in value) {
+    if (v is! Map<String, dynamic>) continue;
+    try {
+      out.add(CustomFieldDefinitionModel.fromJson(v));
+    } catch (_) {}
+  }
+  return out;
+}
+
+List<AnnouncementModel> _announcementBlueprintsFromJsonValue(dynamic value) {
+  if (value is! List) return const [];
+  final out = <AnnouncementModel>[];
+  for (final v in value) {
+    if (v is! Map<String, dynamic>) continue;
+    try {
+      out.add(AnnouncementModel.fromJson(v));
+    } catch (_) {}
   }
   return out;
 }

@@ -123,4 +123,9 @@ class FirebaseAuthRepository implements AuthRepository {
     await GoogleSignIn.instance.signOut();
     await _firebaseAuth.signOut();
   }
+
+  @override
+  Future<void> sendPasswordResetEmail(String email) async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
 }

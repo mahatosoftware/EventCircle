@@ -1,28 +1,269 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_school_annual_v1",
-      "templateName": "School Annual Function",
-      "category": "educational",
-      "description": "Annual celebration of a school's cultural and academic successes.",
-      "tags": ["school", "annual function", "education", "cultural", "student"],
-      "defaultFields": {
-        "contributionType": "none",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "roles", "inventory", "userManagement"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_school_task_rehearsals", "eventId": "blueprint_dummy", "title": "Coordinate Daily Rehearsals", "status": "pending", "phase": "preEvent", "description": "Manage practice times for all performances.", "dueOffset": "T-30 days", "role": "Program Coordinator", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_school_budget_costumes", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Student Costumes & Props", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_school_timeline_grand", "eventId": "blueprint_dummy", "title": "Grand Closing & National Anthem", "phase": "eventDay", "timeOrOffset": "09:00 PM", "dayNumber": 1, "description": "Festival concluding session." }
-      ],
-      "version": 1
-    }
-  ]
+   "templates" : [
+      {
+         "defaultFields" : {
+            "contributionType" : "none",
+            "amount" : 0,
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "roles",
+               "inventory",
+               "userManagement"
+            ]
+         },
+         "category" : "educational",
+         "templateName" : "School Annual Function",
+         "roleBlueprints" : [
+            {
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "budget" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "contribution" : "full",
+                  "customFields" : "full",
+                  "chat" : "full",
+                  "auditLog" : "full",
+                  "tasks" : "full",
+                  "users" : "full",
+                  "roles" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "guests" : "full"
+               },
+               "id" : "sys_role_admin",
+               "description" : "Full access to all modules."
+            },
+            {
+               "description" : "Manage most event details.",
+               "id" : "sys_role_organizer",
+               "name" : "Organizer",
+               "moduleAccess" : {
+                  "guests" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "auditLog" : "view",
+                  "tasks" : "edit",
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "budget" : "edit",
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "contribution" : "edit"
+               }
+            },
+            {
+               "moduleAccess" : {
+                  "guests" : "view",
+                  "timeline" : "edit",
+                  "inventory" : "view",
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "roles" : "none",
+                  "users" : "none",
+                  "tasks" : "edit",
+                  "auditLog" : "none",
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "budget" : "view",
+                  "location" : "view",
+                  "vendors" : "view"
+               },
+               "name" : "Coordinator",
+               "id" : "sys_role_coordinator",
+               "description" : "Manage tasks and timeline."
+            },
+            {
+               "description" : "Update task progress.",
+               "id" : "sys_role_volunteer",
+               "name" : "Volunteer",
+               "moduleAccess" : {
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "update",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "contribution" : "none",
+                  "customFields" : "none",
+                  "chat" : "full"
+               }
+            },
+            {
+               "description" : "Regular participant.",
+               "id" : "sys_role_participant",
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "customFields" : "none",
+                  "chat" : "edit",
+                  "contribution" : "view",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view"
+               }
+            },
+            {
+               "description" : "Limited viewing access.",
+               "name" : "Guest",
+               "moduleAccess" : {
+                  "contribution" : "none",
+                  "customFields" : "none",
+                  "chat" : "none",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none"
+               },
+               "id" : "sys_role_guest"
+            },
+            {
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "contribution" : "view",
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "budget" : "view",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "tasks" : "view",
+                  "auditLog" : "view",
+                  "roles" : "view",
+                  "users" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "view"
+               },
+               "id" : "sys_role_viewer",
+               "description" : "Read-only access."
+            },
+            {
+               "id" : "sys_role_principal",
+               "name" : "Principal/Admin",
+               "moduleAccess" : {
+                  "announcements" : "edit",
+                  "roles" : "full",
+                  "users" : "full",
+                  "budget" : "view"
+               },
+               "description" : "Institutional oversight."
+            },
+            {
+               "description" : "Academic lead.",
+               "id" : "sys_role_teacher",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "timeline" : "edit",
+                  "chat" : "full",
+                  "roles" : "none",
+                  "tasks" : "edit"
+               },
+               "name" : "Teacher Coordinator"
+            },
+            {
+               "description" : "Performing students.",
+               "name" : "Student Participant",
+               "moduleAccess" : {
+                  "timeline" : "view",
+                  "chat" : "edit",
+                  "roles" : "none",
+                  "users" : "none"
+               },
+               "id" : "sys_role_student"
+            },
+            {
+               "id" : "sys_role_judge",
+               "name" : "Judge",
+               "moduleAccess" : {
+                  "tasks" : "view",
+                  "users" : "none",
+                  "timeline" : "view",
+                  "roles" : "none"
+               },
+               "description" : "Evaluating competitions."
+            }
+         ],
+         "tags" : [
+            "school",
+            "annual function",
+            "education",
+            "cultural",
+            "student"
+         ],
+         "taskBlueprints" : [
+            {
+               "description" : "Manage practice times for all performances.",
+               "eventId" : "blueprint_dummy",
+               "dependsOn" : [],
+               "id" : "sys_school_task_rehearsals",
+               "title" : "Coordinate Daily Rehearsals",
+               "dueOffset" : "T-30 days",
+               "role" : "Program Coordinator",
+               "status" : "pending",
+               "phase" : "preEvent"
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "estimatedCost" : 0,
+               "title" : "Student Costumes & Props",
+               "id" : "sys_school_budget_costumes",
+               "isMandatory" : true,
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy",
+               "category" : "Miscellaneous"
+            }
+         ],
+         "templateId" : "sys_school_annual_v1",
+         "timelineBlueprints" : [
+            {
+               "phase" : "eventDay",
+               "timeOrOffset" : "09:00 PM",
+               "eventId" : "blueprint_dummy",
+               "description" : "Festival concluding session.",
+               "dayNumber" : 1,
+               "title" : "Grand Closing & National Anthem",
+               "id" : "sys_school_timeline_grand"
+            }
+         ],
+         "description" : "Annual celebration of a school's cultural and academic successes.",
+         "version" : 3
+      }
+   ],
+   "version" : 4,
+   "schemaVersion" : 2
 }

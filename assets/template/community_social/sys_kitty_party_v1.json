@@ -1,28 +1,268 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_kitty_party_v1",
-      "templateName": "Kitty Party",
-      "category": "communityAndCultural",
-      "description": "A social gathering for friends with games, snacks, and fun.",
-      "tags": ["kitty party", "social", "gathering", "games", "friends"],
-      "defaultFields": {
-        "contributionType": "fixed",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "contribution"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_kitty_task_games", "eventId": "blueprint_dummy", "title": "Organize Games", "status": "pending", "phase": "preEvent", "description": "Select games like Tambola or cards for the group.", "dueOffset": "T-3 days", "role": "Organizer", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_kitty_budget_snacks", "eventId": "blueprint_dummy", "category": "Food", "title": "Snacks & Drinks", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_kitty_timeline_games", "eventId": "blueprint_dummy", "title": "Game Session", "phase": "eventDay", "timeOrOffset": "04:30 PM", "dayNumber": 1, "description": "Fun activities and competitions." }
-      ],
-      "version": 1
-    }
-  ]
+   "version" : 4,
+   "templates" : [
+      {
+         "roleBlueprints" : [
+            {
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "users" : "full",
+                  "roles" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "guests" : "full",
+                  "location" : "full",
+                  "vendors" : "full",
+                  "budget" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "contribution" : "full",
+                  "auditLog" : "full",
+                  "tasks" : "full"
+               },
+               "id" : "sys_role_admin",
+               "description" : "Full access to all modules."
+            },
+            {
+               "moduleAccess" : {
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "contribution" : "edit",
+                  "location" : "edit",
+                  "vendors" : "edit",
+                  "budget" : "edit",
+                  "tasks" : "edit",
+                  "auditLog" : "view",
+                  "ticketing" : "edit",
+                  "announcements" : "edit",
+                  "roles" : "none",
+                  "users" : "view",
+                  "guests" : "edit",
+                  "timeline" : "edit",
+                  "inventory" : "edit"
+               },
+               "name" : "Organizer",
+               "id" : "sys_role_organizer",
+               "description" : "Manage most event details."
+            },
+            {
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "tasks" : "edit",
+                  "auditLog" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view",
+                  "guests" : "view",
+                  "timeline" : "edit",
+                  "inventory" : "view",
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "roles" : "none",
+                  "users" : "none"
+               },
+               "id" : "sys_role_coordinator",
+               "description" : "Manage tasks and timeline."
+            },
+            {
+               "id" : "sys_role_volunteer",
+               "name" : "Volunteer",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "contribution" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "auditLog" : "none",
+                  "tasks" : "update"
+               },
+               "description" : "Update task progress."
+            },
+            {
+               "description" : "Regular participant.",
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "contribution" : "view",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none"
+               },
+               "id" : "sys_role_participant"
+            },
+            {
+               "id" : "sys_role_guest",
+               "name" : "Guest",
+               "moduleAccess" : {
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "contribution" : "none",
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view"
+               },
+               "description" : "Limited viewing access."
+            },
+            {
+               "id" : "sys_role_viewer",
+               "moduleAccess" : {
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view",
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "contribution" : "view",
+                  "auditLog" : "view",
+                  "tasks" : "view",
+                  "users" : "view",
+                  "roles" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "view",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "guests" : "view"
+               },
+               "name" : "Viewer",
+               "description" : "Read-only access."
+            },
+            {
+               "description" : "Board coordination.",
+               "moduleAccess" : {
+                  "roles" : "view",
+                  "users" : "view",
+                  "announcements" : "edit"
+               },
+               "name" : "Society Admin",
+               "id" : "sys_role_society_admin"
+            },
+            {
+               "description" : "Overall execution lead.",
+               "name" : "Event Coordinator",
+               "moduleAccess" : {
+                  "tasks" : "full",
+                  "users" : "none",
+                  "chat" : "full",
+                  "timeline" : "full",
+                  "roles" : "none"
+               },
+               "id" : "sys_role_coord"
+            },
+            {
+               "description" : "Manage funds.",
+               "id" : "sys_role_treasurer",
+               "moduleAccess" : {
+                  "contribution" : "full",
+                  "roles" : "none",
+                  "budget" : "full",
+                  "users" : "none"
+               },
+               "name" : "Treasurer"
+            },
+            {
+               "id" : "sys_role_security",
+               "name" : "Security Coordinator",
+               "moduleAccess" : {
+                  "chat" : "edit",
+                  "roles" : "none",
+                  "location" : "view",
+                  "users" : "none"
+               },
+               "description" : "Crowd control."
+            }
+         ],
+         "templateName" : "Kitty Party",
+         "category" : "communityAndCultural",
+         "defaultFields" : {
+            "amount" : 0,
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "contribution",
+               "roles",
+               "userManagement"
+            ],
+            "contributionType" : "fixed"
+         },
+         "templateId" : "sys_kitty_party_v1",
+         "timelineBlueprints" : [
+            {
+               "phase" : "eventDay",
+               "dayNumber" : 1,
+               "description" : "Fun activities and competitions.",
+               "timeOrOffset" : "04:30 PM",
+               "eventId" : "blueprint_dummy",
+               "id" : "sys_kitty_timeline_games",
+               "title" : "Game Session"
+            }
+         ],
+         "description" : "A social gathering for friends with games, snacks, and fun.",
+         "version" : 2,
+         "budgetBlueprints" : [
+            {
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0,
+               "estimatedCost" : 0,
+               "title" : "Snacks & Drinks",
+               "isMandatory" : true,
+               "id" : "sys_kitty_budget_snacks",
+               "category" : "Food"
+            }
+         ],
+         "taskBlueprints" : [
+            {
+               "eventId" : "blueprint_dummy",
+               "role" : "Organizer",
+               "description" : "Select games like Tambola or cards for the group.",
+               "dueOffset" : "T-3 days",
+               "title" : "Organize Games",
+               "phase" : "preEvent",
+               "id" : "sys_kitty_task_games",
+               "status" : "pending",
+               "dependsOn" : []
+            }
+         ],
+         "tags" : [
+            "kitty party",
+            "social",
+            "gathering",
+            "games",
+            "friends"
+         ]
+      }
+   ],
+   "schemaVersion" : 2
 }

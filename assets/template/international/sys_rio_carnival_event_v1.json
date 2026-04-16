@@ -1,29 +1,280 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_rio_carnival_v1",
-      "templateName": "Rio Carnival Event",
-      "category": "communityAndCultural",
-      "description": "Grand Brazilian festival featuring large scale parades, Samba music, and elaborate costumes.",
-      "tags": ["rio carnival", "brazil", "festival", "samba", "parade", "costumes"],
-      "defaultFields": {
-        "contributionType": "voluntary",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "roles", "inventory", "media"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_rio_task_floats", "eventId": "blueprint_dummy", "title": "Coordinate Parade Floats & Props", "status": "pending", "phase": "preEvent", "description": "Ensure the grand display items are ready.", "dueOffset": "T-30 days", "role": "Logistics", "dependsOn": [] },
-        { "id": "sys_rio_task_samba", "eventId": "blueprint_dummy", "title": "Secure Samba Dancers & Band", "status": "pending", "phase": "preEvent", "description": "Arrange professional performers for the main event.", "dueOffset": "T-20 days", "role": "Program Coordinator", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_rio_budget_floats", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Float Materials & Artist Fees", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_rio_timeline_grand", "eventId": "blueprint_dummy", "title": "Main Sambadrome Style Parade", "phase": "eventDay", "timeOrOffset": "09:00 PM", "dayNumber": 1, "description": "The peak of the event festivities." }
-      ],
-      "version": 1
-    }
-  ]
+   "version" : 4,
+   "templates" : [
+      {
+         "category" : "communityAndCultural",
+         "defaultFields" : {
+            "amount" : 0,
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "roles",
+               "inventory",
+               "media",
+               "userManagement"
+            ],
+            "contributionType" : "voluntary"
+         },
+         "roleBlueprints" : [
+            {
+               "description" : "Full access to all modules.",
+               "id" : "sys_role_admin",
+               "moduleAccess" : {
+                  "auditLog" : "full",
+                  "tasks" : "full",
+                  "budget" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "contribution" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "guests" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "users" : "full",
+                  "roles" : "full"
+               },
+               "name" : "Admin"
+            },
+            {
+               "description" : "Manage most event details.",
+               "id" : "sys_role_organizer",
+               "name" : "Organizer",
+               "moduleAccess" : {
+                  "contribution" : "edit",
+                  "customFields" : "view",
+                  "chat" : "full",
+                  "budget" : "edit",
+                  "location" : "edit",
+                  "vendors" : "edit",
+                  "tasks" : "edit",
+                  "auditLog" : "view",
+                  "roles" : "none",
+                  "users" : "view",
+                  "ticketing" : "edit",
+                  "announcements" : "edit",
+                  "timeline" : "edit",
+                  "inventory" : "edit",
+                  "guests" : "edit"
+               }
+            },
+            {
+               "moduleAccess" : {
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "none",
+                  "inventory" : "view",
+                  "timeline" : "edit",
+                  "guests" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "edit"
+               },
+               "name" : "Coordinator",
+               "id" : "sys_role_coordinator",
+               "description" : "Manage tasks and timeline."
+            },
+            {
+               "description" : "Update task progress.",
+               "id" : "sys_role_volunteer",
+               "name" : "Volunteer",
+               "moduleAccess" : {
+                  "tasks" : "update",
+                  "auditLog" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view"
+               }
+            },
+            {
+               "description" : "Regular participant.",
+               "id" : "sys_role_participant",
+               "moduleAccess" : {
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "contribution" : "view",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none"
+               },
+               "name" : "Participant"
+            },
+            {
+               "description" : "Limited viewing access.",
+               "moduleAccess" : {
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "customFields" : "none",
+                  "chat" : "none",
+                  "contribution" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "guests" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view"
+               },
+               "name" : "Guest",
+               "id" : "sys_role_guest"
+            },
+            {
+               "description" : "Read-only access.",
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "guests" : "view",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "view",
+                  "users" : "view",
+                  "roles" : "view",
+                  "auditLog" : "view",
+                  "tasks" : "view",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "contribution" : "view",
+                  "customFields" : "view",
+                  "chat" : "view"
+               },
+               "id" : "sys_role_viewer"
+            },
+            {
+               "description" : "Board coordination.",
+               "name" : "Society Admin",
+               "moduleAccess" : {
+                  "users" : "view",
+                  "roles" : "view",
+                  "announcements" : "edit"
+               },
+               "id" : "sys_role_society_admin"
+            },
+            {
+               "id" : "sys_role_coord",
+               "moduleAccess" : {
+                  "timeline" : "full",
+                  "chat" : "full",
+                  "roles" : "none",
+                  "users" : "none",
+                  "tasks" : "full"
+               },
+               "name" : "Event Coordinator",
+               "description" : "Overall execution lead."
+            },
+            {
+               "description" : "Manage funds.",
+               "name" : "Treasurer",
+               "moduleAccess" : {
+                  "budget" : "full",
+                  "users" : "none",
+                  "contribution" : "full",
+                  "roles" : "none"
+               },
+               "id" : "sys_role_treasurer"
+            },
+            {
+               "description" : "Crowd control.",
+               "id" : "sys_role_security",
+               "name" : "Security Coordinator",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "location" : "view",
+                  "roles" : "none",
+                  "chat" : "edit"
+               }
+            }
+         ],
+         "templateName" : "Rio Carnival Event",
+         "budgetBlueprints" : [
+            {
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy",
+               "isMandatory" : true,
+               "id" : "sys_rio_budget_floats",
+               "title" : "Float Materials & Artist Fees",
+               "estimatedCost" : 0,
+               "category" : "Miscellaneous"
+            }
+         ],
+         "taskBlueprints" : [
+            {
+               "title" : "Coordinate Parade Floats & Props",
+               "id" : "sys_rio_task_floats",
+               "dependsOn" : [],
+               "eventId" : "blueprint_dummy",
+               "description" : "Ensure the grand display items are ready.",
+               "phase" : "preEvent",
+               "status" : "pending",
+               "role" : "Logistics",
+               "dueOffset" : "T-30 days"
+            },
+            {
+               "status" : "pending",
+               "dependsOn" : [],
+               "id" : "sys_rio_task_samba",
+               "title" : "Secure Samba Dancers & Band",
+               "phase" : "preEvent",
+               "dueOffset" : "T-20 days",
+               "description" : "Arrange professional performers for the main event.",
+               "role" : "Program Coordinator",
+               "eventId" : "blueprint_dummy"
+            }
+         ],
+         "tags" : [
+            "rio carnival",
+            "brazil",
+            "festival",
+            "samba",
+            "parade",
+            "costumes"
+         ],
+         "timelineBlueprints" : [
+            {
+               "phase" : "eventDay",
+               "eventId" : "blueprint_dummy",
+               "timeOrOffset" : "09:00 PM",
+               "description" : "The peak of the event festivities.",
+               "dayNumber" : 1,
+               "title" : "Main Sambadrome Style Parade",
+               "id" : "sys_rio_timeline_grand"
+            }
+         ],
+         "templateId" : "sys_rio_carnival_v1",
+         "version" : 2,
+         "description" : "Grand Brazilian festival featuring large scale parades, Samba music, and elaborate costumes."
+      }
+   ],
+   "schemaVersion" : 2
 }

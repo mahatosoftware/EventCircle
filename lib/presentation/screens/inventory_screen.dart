@@ -4,7 +4,6 @@ import '../../providers/vendor_inventory_provider.dart';
 import '../../providers/event_provider.dart';
 import '../../data/models/inventory_model.dart';
 import '../../data/models/event_model.dart';
-import '../../data/services/event_template_service.dart';
 import 'package:uuid/uuid.dart';
 
 class InventoryScreen extends ConsumerWidget {
@@ -60,23 +59,10 @@ class InventoryScreen extends ConsumerWidget {
           const SizedBox(height: 16),
           const Text('No items listed for procurement'),
           const SizedBox(height: 24),
-          if (event != null) 
-            ElevatedButton.icon(
-              onPressed: () => _loadSuggestedInventory(ref, event),
-              icon: const Icon(Icons.auto_awesome),
-              label: const Text('Load Suggested Items'),
-            ),
+          const Text('Tap "+" to add items manually', style: TextStyle(color: Colors.grey, fontSize: 13)),
         ],
       ),
     );
-  }
-
-  void _loadSuggestedInventory(WidgetRef ref, EventModel event) async {
-    final suggestions = EventTemplateService.getSuggestedInventory(event.id, event.category);
-    final repo = ref.read(inventoryRepositoryProvider);
-    for (var item in suggestions) {
-      await repo.addInventoryItem(item);
-    }
   }
 
   Widget _buildCategorySection(BuildContext context, String category, List<InventoryItemModel> items, WidgetRef ref, String? currencySymbol) {

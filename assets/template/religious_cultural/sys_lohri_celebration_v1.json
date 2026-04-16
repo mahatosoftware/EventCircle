@@ -1,213 +1,369 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_lohri_celebration_v1",
-      "templateName": "Lohri Celebration",
-      "category": "communityAndCultural",
-      "description": "Celebrate the winter folk festival with a community bonfire, traditional Punjabi snacks, and Bhangra dance.",
-      "tags": [
-        "lohri",
-        "punjabi",
-        "festival",
-        "bonfire",
-        "culture",
-        "winter",
-        "bhangra",
-        "tradition"
-      ],
-      "defaultFields": {
-        "contributionType": "variable",
-        "amount": 0,
-        "enabledModules": [
-          "task",
-          "budget",
-          "timeline",
-          "guestManagement",
-          "communication",
-          "location",
-          "roles",
-          "inventory",
-          "userManagement",
-          "contribution"
-        ]
-      },
-      "taskBlueprints": [
-        {
-          "id": "sys_lohri_task_arrange_firewood",
-          "eventId": "blueprint_dummy",
-          "title": "Arrange for firewood and logs",
-          "status": "pending",
-          "phase": "preEvent",
-          "description": "Source and transport wood, logs, and dry twigs for the central bonfire.",
-          "dueOffset": "T-3 days",
-          "role": "Logistics",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_lohri_task_procure_bonfire_snacks",
-          "eventId": "blueprint_dummy",
-          "title": "Procure bonfire snacks (Rewari, Gajak, Popcorn)",
-          "status": "pending",
-          "phase": "preEvent",
-          "description": "Buy peanuts, popcorn, rewari, and til-gajak for offerings and distribution.",
-          "dueOffset": "T-4 days",
-          "role": "Food Manager",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_lohri_task_book_dhol_players",
-          "eventId": "blueprint_dummy",
-          "title": "Book Dhol players and music",
-          "status": "pending",
-          "phase": "preEvent",
-          "description": "Hire traditional dhol players to lead the Bhangra and Gidha dancing.",
-          "dueOffset": "T-10 days",
-          "role": "Program Coordinator",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_lohri_task_setup_bonfire_area",
-          "eventId": "blueprint_dummy",
-          "title": "Set up bonfire and seating area",
-          "status": "pending",
-          "phase": "eventDay",
-          "description": "Construct the bonfire stack in the center and arrange circular seating/standing space.",
-          "dueOffset": "Afternoon 04:00 PM",
-          "role": "Setup Team",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_lohri_task_lighting_ceremony",
-          "eventId": "blueprint_dummy",
-          "title": "Lohri Bonfire lighting ceremony",
-          "status": "pending",
-          "phase": "eventDay",
-          "description": "Perform the auspicious lighting of the bonfire at sunset/night.",
-          "dueOffset": "Evening 06:30 PM",
-          "role": "Organizer",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_lohri_task_offerings_and_songs",
-          "eventId": "blueprint_dummy",
-          "title": "Conduct fire offerings and folk songs",
-          "status": "pending",
-          "phase": "eventDay",
-          "description": "Perform parikrama, throw snacks into the fire, and sing 'Sunder Mundriye'.",
-          "dueOffset": "Evening 07:00 PM",
-          "role": "Organizer",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_lohri_task_serve_dinner",
-          "eventId": "blueprint_dummy",
-          "title": "Serve traditional dinner (Saag & Makki di Roti)",
-          "status": "pending",
-          "phase": "eventDay",
-          "description": "Serve the classic Punjabi winter meal to all guests.",
-          "dueOffset": "Night 08:30 PM",
-          "role": "Food Manager",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_lohri_task_cleanup_ash",
-          "eventId": "blueprint_dummy",
-          "title": "Cleanup bonfire area and ash disposal",
-          "status": "pending",
-          "phase": "postEvent",
-          "description": "Ensure the fire is extinguished and clean the area after the celebration.",
-          "dueOffset": "T+1 day",
-          "role": "Logistics",
-          "dependsOn": []
-        }
-      ],
-      "budgetBlueprints": [
-        {
-          "id": "sys_lohri_budget_firewood",
-          "eventId": "blueprint_dummy",
-          "category": "Miscellaneous",
-          "title": "Firewood and Bonfire Supplies",
-          "estimatedCost": 0.0,
-          "isMandatory": true,
-          "actualCost": 0.0
-        },
-        {
-          "id": "sys_lohri_budget_snacks",
-          "eventId": "blueprint_dummy",
-          "category": "Food",
-          "title": "Lohri Snacks (Peanuts, Gajak, Popcorn)",
-          "estimatedCost": 0.0,
-          "isMandatory": true,
-          "actualCost": 0.0
-        },
-        {
-          "id": "sys_lohri_budget_dhol",
-          "eventId": "blueprint_dummy",
-          "category": "Miscellaneous",
-          "title": "Dhol Players and Music System",
-          "estimatedCost": 0.0,
-          "isMandatory": true,
-          "actualCost": 0.0
-        },
-        {
-          "id": "sys_lohri_budget_dinner",
-          "eventId": "blueprint_dummy",
-          "category": "Food",
-          "title": "Traditional Dinner Catering",
-          "estimatedCost": 0.0,
-          "isMandatory": true,
-          "actualCost": 0.0
-        }
-      ],
-      "timelineBlueprints": [
-        {
-          "id": "sys_lohri_timeline_setup",
-          "eventId": "blueprint_dummy",
-          "title": "Bonfire & Dhol Start",
-          "phase": "eventDay",
-          "timeOrOffset": "06:00 PM",
-          "dayNumber": 1,
-          "description": "Guests gather around the bonfire area with dhol beats."
-        },
-        {
-          "id": "sys_lohri_timeline_lighting",
-          "eventId": "blueprint_dummy",
-          "title": "Lighting the Lohri Bonfire",
-          "phase": "eventDay",
-          "timeOrOffset": "06:45 PM",
-          "dayNumber": 1,
-          "description": "The main celebration ritual begins."
-        },
-        {
-          "id": "sys_lohri_timeline_offering",
-          "eventId": "blueprint_dummy",
-          "title": "Parikrama and Fire Offerings",
-          "phase": "eventDay",
-          "timeOrOffset": "07:15 PM",
-          "dayNumber": 1,
-          "description": "Singing folk songs and offering snacks to the fire."
-        },
-        {
-          "id": "sys_lohri_timeline_dance",
-          "eventId": "blueprint_dummy",
-          "title": "Bhangra and Gidha Performance",
-          "phase": "eventDay",
-          "timeOrOffset": "08:00 PM",
-          "dayNumber": 1,
-          "description": "Community dancing session around the bonfire."
-        },
-        {
-          "id": "sys_lohri_timeline_dinner",
-          "eventId": "blueprint_dummy",
-          "title": "Lohri Dinner",
-          "phase": "eventDay",
-          "timeOrOffset": "09:00 PM",
-          "dayNumber": 1,
-          "description": "Serving Sarson ka Saag and Makki ki Roti."
-        }
-      ]
-    }
-  ]
+   "version" : 4,
+   "templates" : [
+      {
+         "timelineBlueprints" : [
+            {
+               "title" : "Bonfire & Dhol Start",
+               "id" : "sys_lohri_timeline_setup",
+               "timeOrOffset" : "06:00 PM",
+               "eventId" : "blueprint_dummy",
+               "dayNumber" : 1,
+               "description" : "Guests gather around the bonfire area with dhol beats.",
+               "phase" : "eventDay"
+            },
+            {
+               "id" : "sys_lohri_timeline_lighting",
+               "title" : "Lighting the Lohri Bonfire",
+               "description" : "The main celebration ritual begins.",
+               "dayNumber" : 1,
+               "timeOrOffset" : "06:45 PM",
+               "eventId" : "blueprint_dummy",
+               "phase" : "eventDay"
+            },
+            {
+               "id" : "sys_lohri_timeline_offering",
+               "title" : "Parikrama and Fire Offerings",
+               "dayNumber" : 1,
+               "description" : "Singing folk songs and offering snacks to the fire.",
+               "eventId" : "blueprint_dummy",
+               "timeOrOffset" : "07:15 PM",
+               "phase" : "eventDay"
+            },
+            {
+               "phase" : "eventDay",
+               "title" : "Bhangra and Gidha Performance",
+               "id" : "sys_lohri_timeline_dance",
+               "timeOrOffset" : "08:00 PM",
+               "eventId" : "blueprint_dummy",
+               "dayNumber" : 1,
+               "description" : "Community dancing session around the bonfire."
+            },
+            {
+               "phase" : "eventDay",
+               "description" : "Serving Sarson ka Saag and Makki ki Roti.",
+               "dayNumber" : 1,
+               "timeOrOffset" : "09:00 PM",
+               "eventId" : "blueprint_dummy",
+               "id" : "sys_lohri_timeline_dinner",
+               "title" : "Lohri Dinner"
+            }
+         ],
+         "templateId" : "sys_lohri_celebration_v1",
+         "description" : "Celebrate the winter folk festival with a community bonfire, traditional Punjabi snacks, and Bhangra dance.",
+         "taskBlueprints" : [
+            {
+               "id" : "sys_lohri_task_arrange_firewood",
+               "status" : "pending",
+               "dependsOn" : [],
+               "phase" : "preEvent",
+               "title" : "Arrange for firewood and logs",
+               "description" : "Source and transport wood, logs, and dry twigs for the central bonfire.",
+               "dueOffset" : "T-3 days",
+               "eventId" : "blueprint_dummy",
+               "role" : "Logistics"
+            },
+            {
+               "phase" : "preEvent",
+               "title" : "Procure bonfire snacks (Rewari, Gajak, Popcorn)",
+               "dependsOn" : [],
+               "status" : "pending",
+               "id" : "sys_lohri_task_procure_bonfire_snacks",
+               "role" : "Food Manager",
+               "eventId" : "blueprint_dummy",
+               "dueOffset" : "T-4 days",
+               "description" : "Buy peanuts, popcorn, rewari, and til-gajak for offerings and distribution."
+            },
+            {
+               "status" : "pending",
+               "phase" : "preEvent",
+               "dueOffset" : "T-10 days",
+               "role" : "Program Coordinator",
+               "dependsOn" : [],
+               "id" : "sys_lohri_task_book_dhol_players",
+               "title" : "Book Dhol players and music",
+               "description" : "Hire traditional dhol players to lead the Bhangra and Gidha dancing.",
+               "eventId" : "blueprint_dummy"
+            },
+            {
+               "description" : "Construct the bonfire stack in the center and arrange circular seating/standing space.",
+               "dueOffset" : "Afternoon 04:00 PM",
+               "eventId" : "blueprint_dummy",
+               "role" : "Setup Team",
+               "id" : "sys_lohri_task_setup_bonfire_area",
+               "status" : "pending",
+               "dependsOn" : [],
+               "title" : "Set up bonfire and seating area",
+               "phase" : "eventDay"
+            },
+            {
+               "dueOffset" : "Evening 06:30 PM",
+               "role" : "Organizer",
+               "status" : "pending",
+               "phase" : "eventDay",
+               "description" : "Perform the auspicious lighting of the bonfire at sunset/night.",
+               "eventId" : "blueprint_dummy",
+               "id" : "sys_lohri_task_lighting_ceremony",
+               "dependsOn" : [],
+               "title" : "Lohri Bonfire lighting ceremony"
+            },
+            {
+               "dueOffset" : "Evening 07:00 PM",
+               "description" : "Perform parikrama, throw snacks into the fire, and sing 'Sunder Mundriye'.",
+               "role" : "Organizer",
+               "eventId" : "blueprint_dummy",
+               "status" : "pending",
+               "dependsOn" : [],
+               "id" : "sys_lohri_task_offerings_and_songs",
+               "phase" : "eventDay",
+               "title" : "Conduct fire offerings and folk songs"
+            },
+            {
+               "phase" : "eventDay",
+               "status" : "pending",
+               "role" : "Food Manager",
+               "dueOffset" : "Night 08:30 PM",
+               "title" : "Serve traditional dinner (Saag & Makki di Roti)",
+               "dependsOn" : [],
+               "id" : "sys_lohri_task_serve_dinner",
+               "eventId" : "blueprint_dummy",
+               "description" : "Serve the classic Punjabi winter meal to all guests."
+            },
+            {
+               "role" : "Logistics",
+               "dueOffset" : "T+1 day",
+               "phase" : "postEvent",
+               "status" : "pending",
+               "eventId" : "blueprint_dummy",
+               "description" : "Ensure the fire is extinguished and clean the area after the celebration.",
+               "title" : "Cleanup bonfire area and ash disposal",
+               "dependsOn" : [],
+               "id" : "sys_lohri_task_cleanup_ash"
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "estimatedCost" : 0,
+               "category" : "Miscellaneous",
+               "title" : "Firewood and Bonfire Supplies",
+               "isMandatory" : true,
+               "id" : "sys_lohri_budget_firewood",
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy"
+            },
+            {
+               "title" : "Lohri Snacks (Peanuts, Gajak, Popcorn)",
+               "estimatedCost" : 0,
+               "isMandatory" : true,
+               "id" : "sys_lohri_budget_snacks",
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy",
+               "category" : "Food"
+            },
+            {
+               "category" : "Miscellaneous",
+               "id" : "sys_lohri_budget_dhol",
+               "isMandatory" : true,
+               "estimatedCost" : 0,
+               "title" : "Dhol Players and Music System",
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy"
+            },
+            {
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0,
+               "id" : "sys_lohri_budget_dinner",
+               "isMandatory" : true,
+               "estimatedCost" : 0,
+               "title" : "Traditional Dinner Catering",
+               "category" : "Food"
+            }
+         ],
+         "tags" : [
+            "lohri",
+            "punjabi",
+            "festival",
+            "bonfire",
+            "culture",
+            "winter",
+            "bhangra",
+            "tradition"
+         ],
+         "roleBlueprints" : [
+            {
+               "description" : "Full access to all modules.",
+               "id" : "sys_role_admin",
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "users" : "full",
+                  "roles" : "full",
+                  "guests" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "budget" : "full",
+                  "customFields" : "full",
+                  "chat" : "full",
+                  "contribution" : "full",
+                  "auditLog" : "full",
+                  "tasks" : "full"
+               }
+            },
+            {
+               "moduleAccess" : {
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "guests" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "auditLog" : "view",
+                  "tasks" : "edit",
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "budget" : "edit",
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "contribution" : "edit"
+               },
+               "name" : "Organizer",
+               "id" : "sys_role_organizer",
+               "description" : "Manage most event details."
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "id" : "sys_role_coordinator",
+               "moduleAccess" : {
+                  "location" : "view",
+                  "vendors" : "view",
+                  "budget" : "view",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "edit",
+                  "announcements" : "edit",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "guests" : "view",
+                  "inventory" : "view",
+                  "timeline" : "edit"
+               },
+               "name" : "Coordinator"
+            },
+            {
+               "description" : "Update task progress.",
+               "id" : "sys_role_volunteer",
+               "name" : "Volunteer",
+               "moduleAccess" : {
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "tasks" : "update",
+                  "auditLog" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none"
+               }
+            },
+            {
+               "id" : "sys_role_participant",
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "contribution" : "view",
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none"
+               },
+               "description" : "Regular participant."
+            },
+            {
+               "name" : "Guest",
+               "moduleAccess" : {
+                  "guests" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "customFields" : "none",
+                  "chat" : "none",
+                  "contribution" : "none"
+               },
+               "id" : "sys_role_guest",
+               "description" : "Limited viewing access."
+            },
+            {
+               "description" : "Read-only access.",
+               "moduleAccess" : {
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "view",
+                  "roles" : "view",
+                  "users" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view",
+                  "tasks" : "view",
+                  "auditLog" : "view",
+                  "contribution" : "view",
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view"
+               },
+               "name" : "Viewer",
+               "id" : "sys_role_viewer"
+            }
+         ],
+         "templateName" : "Lohri Celebration",
+         "category" : "communityAndCultural",
+         "defaultFields" : {
+            "amount" : 0,
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "communication",
+               "location",
+               "roles",
+               "inventory",
+               "userManagement",
+               "contribution"
+            ],
+            "contributionType" : "variable"
+         }
+      }
+   ],
+   "schemaVersion" : 2
 }

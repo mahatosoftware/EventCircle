@@ -1,28 +1,269 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_navratri_garba_v1",
-      "templateName": "Navratri Garba Event",
-      "category": "communityAndCultural",
-      "description": "Vibrant Navratri celebration with Garba and Dandiya Raas.",
-      "tags": ["navratri", "garba", "dandiya", "dance", "festival"],
-      "defaultFields": {
-        "contributionType": "fixed",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "roles", "inventory"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_navratri_task_music", "eventId": "blueprint_dummy", "title": "Secure DJ / Live Band", "status": "pending", "phase": "preEvent", "description": "Book music specifically for Garba and Dandiya.", "dueOffset": "T-20 days", "role": "Program Coordinator", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_navratri_budget_sound", "eventId": "blueprint_dummy", "category": "Venue", "title": "Sound & Lighting", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_navratri_timeline_dance", "eventId": "blueprint_dummy", "title": "Garba Session Start", "phase": "eventDay", "timeOrOffset": "08:30 PM", "dayNumber": 1, "description": "Main dance event commences." }
-      ],
-      "version": 1
-    }
-  ]
+   "schemaVersion" : 2,
+   "templates" : [
+      {
+         "defaultFields" : {
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "communication",
+               "roles",
+               "inventory",
+               "userManagement"
+            ],
+            "amount" : 0,
+            "contributionType" : "fixed"
+         },
+         "tags" : [
+            "navratri",
+            "garba",
+            "dandiya",
+            "dance",
+            "festival"
+         ],
+         "budgetBlueprints" : [
+            {
+               "category" : "Venue",
+               "id" : "sys_navratri_budget_sound",
+               "isMandatory" : true,
+               "title" : "Sound & Lighting",
+               "estimatedCost" : 0,
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy"
+            }
+         ],
+         "taskBlueprints" : [
+            {
+               "dueOffset" : "T-20 days",
+               "description" : "Book music specifically for Garba and Dandiya.",
+               "role" : "Program Coordinator",
+               "eventId" : "blueprint_dummy",
+               "dependsOn" : [],
+               "status" : "pending",
+               "id" : "sys_navratri_task_music",
+               "title" : "Secure DJ / Live Band",
+               "phase" : "preEvent"
+            }
+         ],
+         "version" : 2,
+         "category" : "communityAndCultural",
+         "templateName" : "Navratri Garba Event",
+         "roleBlueprints" : [
+            {
+               "description" : "Full access to all modules.",
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "vendors" : "full",
+                  "location" : "full",
+                  "budget" : "full",
+                  "customFields" : "full",
+                  "chat" : "full",
+                  "contribution" : "full",
+                  "auditLog" : "full",
+                  "tasks" : "full",
+                  "users" : "full",
+                  "roles" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "guests" : "full"
+               },
+               "id" : "sys_role_admin"
+            },
+            {
+               "name" : "Organizer",
+               "moduleAccess" : {
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "budget" : "edit",
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "contribution" : "edit",
+                  "auditLog" : "view",
+                  "tasks" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "guests" : "edit"
+               },
+               "id" : "sys_role_organizer",
+               "description" : "Manage most event details."
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "id" : "sys_role_coordinator",
+               "moduleAccess" : {
+                  "timeline" : "edit",
+                  "inventory" : "view",
+                  "guests" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "tasks" : "edit",
+                  "auditLog" : "none",
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view"
+               },
+               "name" : "Coordinator"
+            },
+            {
+               "description" : "Update task progress.",
+               "id" : "sys_role_volunteer",
+               "name" : "Volunteer",
+               "moduleAccess" : {
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "tasks" : "update",
+                  "auditLog" : "none",
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none"
+               }
+            },
+            {
+               "description" : "Regular participant.",
+               "id" : "sys_role_participant",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "contribution" : "view",
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "none"
+               },
+               "name" : "Participant"
+            },
+            {
+               "description" : "Limited viewing access.",
+               "id" : "sys_role_guest",
+               "name" : "Guest",
+               "moduleAccess" : {
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none"
+               }
+            },
+            {
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "guests" : "view",
+                  "users" : "view",
+                  "roles" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "view",
+                  "auditLog" : "view",
+                  "tasks" : "view",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "contribution" : "view",
+                  "customFields" : "view",
+                  "chat" : "view"
+               },
+               "id" : "sys_role_viewer",
+               "description" : "Read-only access."
+            },
+            {
+               "description" : "Board coordination.",
+               "id" : "sys_role_society_admin",
+               "moduleAccess" : {
+                  "users" : "view",
+                  "roles" : "view",
+                  "announcements" : "edit"
+               },
+               "name" : "Society Admin"
+            },
+            {
+               "moduleAccess" : {
+                  "tasks" : "full",
+                  "roles" : "none",
+                  "timeline" : "full",
+                  "chat" : "full",
+                  "users" : "none"
+               },
+               "name" : "Event Coordinator",
+               "id" : "sys_role_coord",
+               "description" : "Overall execution lead."
+            },
+            {
+               "id" : "sys_role_treasurer",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "budget" : "full",
+                  "roles" : "none",
+                  "contribution" : "full"
+               },
+               "name" : "Treasurer",
+               "description" : "Manage funds."
+            },
+            {
+               "description" : "Crowd control.",
+               "id" : "sys_role_security",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "location" : "view",
+                  "roles" : "none",
+                  "chat" : "edit"
+               },
+               "name" : "Security Coordinator"
+            }
+         ],
+         "timelineBlueprints" : [
+            {
+               "dayNumber" : 1,
+               "description" : "Main dance event commences.",
+               "timeOrOffset" : "08:30 PM",
+               "eventId" : "blueprint_dummy",
+               "id" : "sys_navratri_timeline_dance",
+               "title" : "Garba Session Start",
+               "phase" : "eventDay"
+            }
+         ],
+         "templateId" : "sys_navratri_garba_v1",
+         "description" : "Vibrant Navratri celebration with Garba and Dandiya Raas."
+      }
+   ],
+   "version" : 4
 }

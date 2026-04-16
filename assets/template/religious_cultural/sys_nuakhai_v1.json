@@ -1,137 +1,293 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_nuakhai_v1",
-      "templateName": "Nuakhai",
-      "category": "communityAndCultural",
-      "description": "Celebrate the harvest festival of Odisha with the offering of new rice (Nabanna) and Sambalpuri folk traditions.",
-      "tags": [
-        "nuakhai",
-        "odisha",
-        "harvest",
-        "festival",
-        "culture",
-        "nabanna",
-        "sambalpuri",
-        "juhar"
-      ],
-      "defaultFields": {
-        "contributionType": "variable",
-        "amount": 0,
-        "enabledModules": [
-          "task",
-          "budget",
-          "timeline",
-          "guestManagement",
-          "communication",
-          "location",
-          "roles",
-          "inventory",
-          "userManagement",
-          "contribution"
-        ]
-      },
-      "taskBlueprints": [
-        {
-          "id": "sys_nuakhai_task_procure_nabanna",
-          "eventId": "blueprint_dummy",
-          "title": "Procure 'Nabanna' (New Rice)",
-          "status": "pending",
-          "phase": "preEvent",
-          "description": "Arrange for the first harvest rice to be offered as Nabanna.",
-          "dueOffset": "T-3 days",
-          "role": "Logistics"
-        },
-        {
-          "id": "sys_nuakhai_task_prepare_pitha",
-          "eventId": "blueprint_dummy",
-          "title": "Prepare Arisa and Manda Pitha",
-          "status": "pending",
-          "phase": "preEvent",
-          "description": "Prepare traditional Odia pithas (rice cakes) for the community feast.",
-          "dueOffset": "T-1 day",
-          "role": "Food Manager"
-        },
-        {
-          "id": "sys_nuakhai_task_offering_rituals",
-          "eventId": "blueprint_dummy",
-          "title": "Nabanna offering and Puja",
-          "status": "pending",
-          "phase": "eventDay",
-          "description": "Offer the new rice to the deity at the fixed auspicious time (Lagna).",
-          "dueOffset": "Morning 09:30 AM",
-          "role": "Organizer"
-        },
-        {
-          "id": "sys_nuakhai_task_juhar_greeting",
-          "eventId": "blueprint_dummy",
-          "title": "Nuakhai Juhar (Greeting Elders)",
-          "status": "pending",
-          "phase": "eventDay",
-          "description": "Organize the community gathering for elders to bless the youth.",
-          "dueOffset": "Morning 11:00 AM",
-          "role": "Organizer"
-        },
-        {
-          "id": "sys_nuakhai_task_sambalpuri_dance",
-          "eventId": "blueprint_dummy",
-          "title": "Sambalpuri Folk Dance (Dalkhai/Rasarkeli)",
-          "status": "pending",
-          "phase": "eventDay",
-          "description": "Coordinate folk dance performances and community participation.",
-          "dueOffset": "Afternoon 04:00 PM",
-          "role": "Program Coordinator"
-        }
-      ],
-      "budgetBlueprints": [
-        {
-          "id": "sys_nuakhai_budget_nabanna_food",
-          "eventId": "blueprint_dummy",
-          "category": "Food",
-          "title": "Nabanna and Community Feast Items",
-          "estimatedCost": 0.0,
-          "isMandatory": true
-        },
-        {
-          "id": "sys_nuakhai_budget_performers",
-          "eventId": "blueprint_dummy",
-          "category": "Miscellaneous",
-          "title": "Sambalpuri Folk Group Honorarium",
-          "estimatedCost": 0.0,
-          "isMandatory": false
-        }
-      ],
-      "timelineBlueprints": [
-        {
-          "id": "sys_nuakhai_timeline_nabanna",
-          "eventId": "blueprint_dummy",
-          "title": "Nabanna Lagna (Offering)",
-          "phase": "eventDay",
-          "timeOrOffset": "09:45 AM",
-          "dayNumber": 1,
-          "description": "Offering the first rice to the Goddess."
-        },
-        {
-          "id": "sys_nuakhai_timeline_juhar",
-          "eventId": "blueprint_dummy",
-          "title": "Nuakhai Juhar Gathering",
-          "phase": "eventDay",
-          "timeOrOffset": "11:00 AM",
-          "dayNumber": 1,
-          "description": "Exchange of greetings and blessings."
-        },
-        {
-          "id": "sys_nuakhai_timeline_dance",
-          "eventId": "blueprint_dummy",
-          "title": "Sambalpuri Cultural Night",
-          "phase": "eventDay",
-          "timeOrOffset": "06:00 PM",
-          "dayNumber": 1,
-          "description": "Traditional Sambalpuri music and dance."
-        }
-      ]
-    }
-  ]
+   "templates" : [
+      {
+         "tags" : [
+            "nuakhai",
+            "odisha",
+            "harvest",
+            "festival",
+            "culture",
+            "nabanna",
+            "sambalpuri",
+            "juhar"
+         ],
+         "taskBlueprints" : [
+            {
+               "title" : "Procure 'Nabanna' (New Rice)",
+               "id" : "sys_nuakhai_task_procure_nabanna",
+               "eventId" : "blueprint_dummy",
+               "description" : "Arrange for the first harvest rice to be offered as Nabanna.",
+               "phase" : "preEvent",
+               "status" : "pending",
+               "role" : "Logistics",
+               "dueOffset" : "T-3 days"
+            },
+            {
+               "id" : "sys_nuakhai_task_prepare_pitha",
+               "title" : "Prepare Arisa and Manda Pitha",
+               "description" : "Prepare traditional Odia pithas (rice cakes) for the community feast.",
+               "eventId" : "blueprint_dummy",
+               "status" : "pending",
+               "phase" : "preEvent",
+               "dueOffset" : "T-1 day",
+               "role" : "Food Manager"
+            },
+            {
+               "dueOffset" : "Morning 09:30 AM",
+               "description" : "Offer the new rice to the deity at the fixed auspicious time (Lagna).",
+               "role" : "Organizer",
+               "eventId" : "blueprint_dummy",
+               "status" : "pending",
+               "id" : "sys_nuakhai_task_offering_rituals",
+               "phase" : "eventDay",
+               "title" : "Nabanna offering and Puja"
+            },
+            {
+               "status" : "pending",
+               "phase" : "eventDay",
+               "dueOffset" : "Morning 11:00 AM",
+               "role" : "Organizer",
+               "id" : "sys_nuakhai_task_juhar_greeting",
+               "title" : "Nuakhai Juhar (Greeting Elders)",
+               "description" : "Organize the community gathering for elders to bless the youth.",
+               "eventId" : "blueprint_dummy"
+            },
+            {
+               "role" : "Program Coordinator",
+               "eventId" : "blueprint_dummy",
+               "dueOffset" : "Afternoon 04:00 PM",
+               "description" : "Coordinate folk dance performances and community participation.",
+               "title" : "Sambalpuri Folk Dance (Dalkhai/Rasarkeli)",
+               "phase" : "eventDay",
+               "status" : "pending",
+               "id" : "sys_nuakhai_task_sambalpuri_dance"
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "eventId" : "blueprint_dummy",
+               "title" : "Nabanna and Community Feast Items",
+               "estimatedCost" : 0,
+               "id" : "sys_nuakhai_budget_nabanna_food",
+               "isMandatory" : true,
+               "category" : "Food"
+            },
+            {
+               "title" : "Sambalpuri Folk Group Honorarium",
+               "estimatedCost" : 0,
+               "category" : "Miscellaneous",
+               "isMandatory" : false,
+               "id" : "sys_nuakhai_budget_performers",
+               "eventId" : "blueprint_dummy"
+            }
+         ],
+         "timelineBlueprints" : [
+            {
+               "id" : "sys_nuakhai_timeline_nabanna",
+               "title" : "Nabanna Lagna (Offering)",
+               "dayNumber" : 1,
+               "description" : "Offering the first rice to the Goddess.",
+               "timeOrOffset" : "09:45 AM",
+               "eventId" : "blueprint_dummy",
+               "phase" : "eventDay"
+            },
+            {
+               "timeOrOffset" : "11:00 AM",
+               "eventId" : "blueprint_dummy",
+               "dayNumber" : 1,
+               "description" : "Exchange of greetings and blessings.",
+               "phase" : "eventDay",
+               "title" : "Nuakhai Juhar Gathering",
+               "id" : "sys_nuakhai_timeline_juhar"
+            },
+            {
+               "id" : "sys_nuakhai_timeline_dance",
+               "title" : "Sambalpuri Cultural Night",
+               "description" : "Traditional Sambalpuri music and dance.",
+               "dayNumber" : 1,
+               "timeOrOffset" : "06:00 PM",
+               "eventId" : "blueprint_dummy",
+               "phase" : "eventDay"
+            }
+         ],
+         "templateId" : "sys_nuakhai_v1",
+         "description" : "Celebrate the harvest festival of Odisha with the offering of new rice (Nabanna) and Sambalpuri folk traditions.",
+         "defaultFields" : {
+            "amount" : 0,
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "communication",
+               "location",
+               "roles",
+               "inventory",
+               "userManagement",
+               "contribution"
+            ],
+            "contributionType" : "variable"
+         },
+         "category" : "communityAndCultural",
+         "templateName" : "Nuakhai",
+         "roleBlueprints" : [
+            {
+               "id" : "sys_role_admin",
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "auditLog" : "full",
+                  "tasks" : "full",
+                  "location" : "full",
+                  "vendors" : "full",
+                  "budget" : "full",
+                  "customFields" : "full",
+                  "chat" : "full",
+                  "contribution" : "full",
+                  "guests" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "users" : "full",
+                  "roles" : "full"
+               },
+               "description" : "Full access to all modules."
+            },
+            {
+               "description" : "Manage most event details.",
+               "id" : "sys_role_organizer",
+               "moduleAccess" : {
+                  "auditLog" : "view",
+                  "tasks" : "edit",
+                  "budget" : "edit",
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "contribution" : "edit",
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "guests" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "users" : "view",
+                  "roles" : "none"
+               },
+               "name" : "Organizer"
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "id" : "sys_role_coordinator",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "timeline" : "edit",
+                  "inventory" : "view",
+                  "guests" : "view",
+                  "contribution" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "tasks" : "edit",
+                  "auditLog" : "none"
+               },
+               "name" : "Coordinator"
+            },
+            {
+               "id" : "sys_role_volunteer",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "update"
+               },
+               "name" : "Volunteer",
+               "description" : "Update task progress."
+            },
+            {
+               "description" : "Regular participant.",
+               "id" : "sys_role_participant",
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "contribution" : "view",
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none"
+               }
+            },
+            {
+               "id" : "sys_role_guest",
+               "moduleAccess" : {
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "contribution" : "none",
+                  "chat" : "none",
+                  "customFields" : "none"
+               },
+               "name" : "Guest",
+               "description" : "Limited viewing access."
+            },
+            {
+               "description" : "Read-only access.",
+               "moduleAccess" : {
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "view",
+                  "roles" : "view",
+                  "users" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view",
+                  "tasks" : "view",
+                  "auditLog" : "view",
+                  "contribution" : "view",
+                  "customFields" : "view",
+                  "chat" : "view",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view"
+               },
+               "name" : "Viewer",
+               "id" : "sys_role_viewer"
+            }
+         ]
+      }
+   ],
+   "version" : 4,
+   "schemaVersion" : 2
 }

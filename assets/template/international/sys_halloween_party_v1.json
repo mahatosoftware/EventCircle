@@ -1,29 +1,236 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_halloween_party_v1",
-      "templateName": "Halloween Party",
-      "category": "personal",
-      "description": "Fun costume party with themed games, spooky decor, and treats.",
-      "tags": ["halloween", "party", "costume", "spooky", "tricks and treats"],
-      "defaultFields": {
-        "contributionType": "fixed",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "decoration"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_hall_task_decor", "eventId": "blueprint_dummy", "title": "Secure Spooky Decorations", "status": "pending", "phase": "preEvent", "description": "Arrange pumpkins, skeletons, and cobwebs.", "dueOffset": "T-15 days", "role": "Decoration", "dependsOn": [] },
-        { "id": "sys_hall_task_contest", "eventId": "blueprint_dummy", "title": "Organize Costume Contest", "status": "pending", "phase": "preEvent", "description": "Select categories for the costume awards.", "dueOffset": "T-7 days", "role": "Host", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_hall_budget_candy", "eventId": "blueprint_dummy", "category": "Food", "title": "Holiday Candy & Snacks", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_hall_timeline_contest", "eventId": "blueprint_dummy", "title": "Main Costume Contest", "phase": "eventDay", "timeOrOffset": "09:00 PM", "dayNumber": 1, "description": "Showcasing and judging the best costumes." }
-      ],
-      "version": 1
-    }
-  ]
+   "templates" : [
+      {
+         "tags" : [
+            "halloween",
+            "party",
+            "costume",
+            "spooky",
+            "tricks and treats"
+         ],
+         "taskBlueprints" : [
+            {
+               "id" : "sys_hall_task_decor",
+               "status" : "pending",
+               "dependsOn" : [],
+               "title" : "Secure Spooky Decorations",
+               "phase" : "preEvent",
+               "description" : "Arrange pumpkins, skeletons, and cobwebs.",
+               "dueOffset" : "T-15 days",
+               "eventId" : "blueprint_dummy",
+               "role" : "Decoration"
+            },
+            {
+               "dueOffset" : "T-7 days",
+               "description" : "Select categories for the costume awards.",
+               "role" : "Host",
+               "eventId" : "blueprint_dummy",
+               "status" : "pending",
+               "dependsOn" : [],
+               "id" : "sys_hall_task_contest",
+               "title" : "Organize Costume Contest",
+               "phase" : "preEvent"
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy",
+               "title" : "Holiday Candy & Snacks",
+               "estimatedCost" : 0,
+               "id" : "sys_hall_budget_candy",
+               "isMandatory" : true,
+               "category" : "Food"
+            }
+         ],
+         "description" : "Fun costume party with themed games, spooky decor, and treats.",
+         "version" : 2,
+         "timelineBlueprints" : [
+            {
+               "eventId" : "blueprint_dummy",
+               "timeOrOffset" : "09:00 PM",
+               "dayNumber" : 1,
+               "description" : "Showcasing and judging the best costumes.",
+               "title" : "Main Costume Contest",
+               "id" : "sys_hall_timeline_contest",
+               "phase" : "eventDay"
+            }
+         ],
+         "templateId" : "sys_halloween_party_v1",
+         "defaultFields" : {
+            "contributionType" : "fixed",
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "communication",
+               "decoration",
+               "roles",
+               "userManagement"
+            ],
+            "amount" : 0
+         },
+         "category" : "personal",
+         "templateName" : "Halloween Party",
+         "roleBlueprints" : [
+            {
+               "id" : "sys_role_admin",
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "users" : "full",
+                  "roles" : "full",
+                  "guests" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "budget" : "full",
+                  "location" : "full",
+                  "vendors" : "full",
+                  "contribution" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "auditLog" : "full",
+                  "tasks" : "full"
+               },
+               "description" : "Full access to all modules."
+            },
+            {
+               "id" : "sys_role_organizer",
+               "moduleAccess" : {
+                  "guests" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "auditLog" : "view",
+                  "tasks" : "edit",
+                  "budget" : "edit",
+                  "location" : "edit",
+                  "vendors" : "edit",
+                  "contribution" : "edit",
+                  "customFields" : "view",
+                  "chat" : "full"
+               },
+               "name" : "Organizer",
+               "description" : "Manage most event details."
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "inventory" : "view",
+                  "timeline" : "edit",
+                  "guests" : "view",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "edit",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "budget" : "view",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none"
+               },
+               "id" : "sys_role_coordinator"
+            },
+            {
+               "description" : "Update task progress.",
+               "id" : "sys_role_volunteer",
+               "moduleAccess" : {
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "update",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none"
+               },
+               "name" : "Volunteer"
+            },
+            {
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "contribution" : "view",
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none"
+               },
+               "id" : "sys_role_participant",
+               "description" : "Regular participant."
+            },
+            {
+               "description" : "Limited viewing access.",
+               "id" : "sys_role_guest",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "none"
+               },
+               "name" : "Guest"
+            },
+            {
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "location" : "view",
+                  "vendors" : "view",
+                  "budget" : "view",
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "contribution" : "view",
+                  "auditLog" : "view",
+                  "tasks" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "view",
+                  "users" : "view",
+                  "roles" : "view",
+                  "guests" : "view",
+                  "inventory" : "view",
+                  "timeline" : "view"
+               },
+               "id" : "sys_role_viewer",
+               "description" : "Read-only access."
+            }
+         ]
+      }
+   ],
+   "version" : 4,
+   "schemaVersion" : 2
 }

@@ -14,4 +14,6 @@ class AppConstants {
   
   static const borderRadius = 12.0;
   static const borderRadiusLarge = 24.0;
+  
+  static const deepLinkBaseUrl = 'https://eventcircle.mahato.in';
 }

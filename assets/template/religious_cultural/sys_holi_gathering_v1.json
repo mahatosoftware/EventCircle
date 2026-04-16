@@ -1,342 +1,498 @@
 {
-  "schemaVersion": 2,
-  "version": 2,
-  "templates": [
-    {
-      "templateId": "sys_holi_gathering_v1",
-      "templateName": "Holi Gathering",
-      "category": "communityAndCultural",
-      "description": "Festival of colors with music, snacks, and lots of fun.",
-      "tags": [
-        "holi",
-        "colors",
-        "festival",
-        "party",
-        "spring",
-        "tradition",
-        "community"
-      ],
-      "defaultFields": {
-        "contributionType": "variable",
-        "amount": 0,
-        "enabledModules": [
-          "task",
-          "budget",
-          "timeline",
-          "guestManagement",
-          "communication",
-          "location",
-          "roles",
-          "inventory",
-          "userManagement",
-          "contribution"
-        ]
-      },
-      "taskBlueprints": [
-        {
-          "id": "sys_holi_task_finalize_logistics",
-          "eventId": "blueprint_dummy",
-          "title": "Finalize date, time, and venue",
-          "status": "pending",
-          "phase": "preEvent",
-          "description": "Confirm the exact schedule and primary location within the community.",
-          "dueOffset": "T-15 days",
-          "role": "Organizer",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_holi_task_approvals",
-          "eventId": "blueprint_dummy",
-          "title": "Get society approvals and permissions",
-          "status": "pending",
-          "phase": "preEvent",
-          "description": "Obtain written permission from society management or local authorities.",
-          "dueOffset": "T-10 days",
-          "role": "Admin/Legal",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_holi_task_purchase_colors",
-          "eventId": "blueprint_dummy",
-          "title": "Purchase organic colors and supplies",
-          "status": "pending",
-          "phase": "preEvent",
-          "description": "Procure safe, non-toxic colors and other ritual supplies.",
-          "dueOffset": "T-5 days",
-          "role": "Logistics",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_holi_task_dj_setup",
-          "eventId": "blueprint_dummy",
-          "title": "Arrange music / DJ setup",
-          "status": "pending",
-          "phase": "preEvent",
-          "description": "Book a DJ or set up a powerful sound system for festive music.",
-          "dueOffset": "T-7 days",
-          "role": "Program Coordinator",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_holi_task_snacks_refreshments",
-          "eventId": "blueprint_dummy",
-          "title": "Organize snacks and refreshments",
-          "status": "pending",
-          "phase": "preEvent",
-          "description": "Finalize menu and order Thandai, snacks, and traditional sweets.",
-          "dueOffset": "T-5 days",
-          "role": "Food Manager",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_holi_task_water_supply",
-          "eventId": "blueprint_dummy",
-          "title": "Set up water supply / rain dance",
-          "status": "pending",
-          "phase": "preEvent",
-          "description": "Arrange for water tankers and install rain dance nozzles if planned.",
-          "dueOffset": "T-2 days",
-          "role": "Setup Team",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_holi_task_invitations",
-          "eventId": "blueprint_dummy",
-          "title": "Inform residents and send invitations",
-          "status": "pending",
-          "phase": "preEvent",
-          "description": "Send event notices and digital invitations to all residents.",
-          "dueOffset": "T-7 days",
-          "role": "Communication",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_holi_task_volunteers_safety",
-          "eventId": "blueprint_dummy",
-          "title": "Assign volunteers and safety arrangements",
-          "status": "pending",
-          "phase": "preEvent",
-          "description": "Form volunteer teams and ensure first aid/safety kits are ready.",
-          "dueOffset": "T-3 days",
-          "role": "Organizer",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_holi_task_inspect_venue",
-          "eventId": "blueprint_dummy",
-          "title": "Prepare and inspect venue setup",
-          "status": "pending",
-          "phase": "eventDay",
-          "description": "Detailed walk-through to ensure all equipment and areas are ready.",
-          "dueOffset": "Morning 08:30 AM",
-          "role": "Setup Team",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_holi_task_manage_entry",
-          "eventId": "blueprint_dummy",
-          "title": "Manage registration / participant entry",
-          "status": "pending",
-          "phase": "eventDay",
-          "description": "Check invites/registrations and hand out colors if applicable.",
-          "dueOffset": "Morning 10:00 AM",
-          "role": "Host",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_holi_task_coord_music",
-          "eventId": "blueprint_dummy",
-          "title": "Run music and activity coordination",
-          "status": "pending",
-          "phase": "eventDay",
-          "description": "Manage the music flow and announce any scheduled games/activities.",
-          "dueOffset": "Morning 11:00 AM",
-          "role": "Program Coordinator",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_holi_task_serve_food",
-          "eventId": "blueprint_dummy",
-          "title": "Serve food and drinks",
-          "status": "pending",
-          "phase": "eventDay",
-          "description": "Coordinate the distribution of snacks and refreshments.",
-          "dueOffset": "Noon 12:30 PM",
-          "role": "Food Manager",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_holi_task_monitor_safety",
-          "eventId": "blueprint_dummy",
-          "title": "Monitor safety and crowd management",
-          "status": "pending",
-          "phase": "eventDay",
-          "description": "Ensure no rowdy behavior and manage participants around water areas.",
-          "dueOffset": "During Event",
-          "role": "Security Lead",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_holi_task_photos_videos",
-          "eventId": "blueprint_dummy",
-          "title": "Take photos and videos",
-          "status": "pending",
-          "phase": "eventDay",
-          "description": "Capture the highlights and candid moments of the celebration.",
-          "dueOffset": "During Event",
-          "role": "Communication",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_holi_task_clean_ghat",
-          "eventId": "blueprint_dummy",
-          "title": "Clean venue and dispose waste",
-          "status": "pending",
-          "phase": "postEvent",
-          "description": "Ensure color stains and trash are cleared from the venue.",
-          "dueOffset": "T+1 day",
-          "role": "Logistics",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_holi_task_remove_decor",
-          "eventId": "blueprint_dummy",
-          "title": "Remove decorations and equipment",
-          "status": "pending",
-          "phase": "postEvent",
-          "description": "Dismantle tents, sound system, and water setups.",
-          "dueOffset": "T+2 days",
-          "role": "Setup Team",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_holi_task_settle_payments",
-          "eventId": "blueprint_dummy",
-          "title": "Settle vendor payments",
-          "status": "pending",
-          "phase": "postEvent",
-          "description": "Finalize and pay all vendors (DJ, catering, rentals).",
-          "dueOffset": "T+3 days",
-          "role": "Treasurer",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_holi_task_share_photos",
-          "eventId": "blueprint_dummy",
-          "title": "Share event photos with residents",
-          "status": "pending",
-          "phase": "postEvent",
-          "description": "Upload high-quality event photos to the gallery or share via group.",
-          "dueOffset": "T+3 days",
-          "role": "Communication",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_holi_task_expense_summary",
-          "eventId": "blueprint_dummy",
-          "title": "Prepare expense summary and feedback review",
-          "status": "pending",
-          "phase": "postEvent",
-          "description": "Finalize the budget vs actual report and review community feedback.",
-          "dueOffset": "T+7 days",
-          "role": "Treasurer",
-          "dependsOn": []
-        }
-      ],
-      "budgetBlueprints": [
-        {
-          "id": "sys_holi_budget_colors",
-          "eventId": "blueprint_dummy",
-          "category": "Miscellaneous",
-          "title": "Colors & Puja Supplies",
-          "estimatedCost": 0.0,
-          "isMandatory": true,
-          "actualCost": 0.0
-        },
-        {
-          "id": "sys_holi_budget_dj_sound",
-          "eventId": "blueprint_dummy",
-          "category": "Miscellaneous",
-          "title": "DJ, Sound System, and Lighting",
-          "estimatedCost": 0.0,
-          "isMandatory": true,
-          "actualCost": 0.0
-        },
-        {
-          "id": "sys_holi_budget_food",
-          "eventId": "blueprint_dummy",
-          "category": "Food",
-          "title": "Snacks, Thandai, and Traditional Sweets",
-          "estimatedCost": 0.0,
-          "isMandatory": true,
-          "actualCost": 0.0
-        },
-        {
-          "id": "sys_holi_budget_water_tankers",
-          "eventId": "blueprint_dummy",
-          "category": "Venue",
-          "title": "Water Tankers & Rain Dance Setup",
-          "estimatedCost": 0.0,
-          "isMandatory": false,
-          "actualCost": 0.0
-        },
-        {
-          "id": "sys_holi_budget_venue_cleanup",
-          "eventId": "blueprint_dummy",
-          "category": "Miscellaneous",
-          "title": "Post-event Venue Cleanup Service",
-          "estimatedCost": 0.0,
-          "isMandatory": true,
-          "actualCost": 0.0
-        }
-      ],
-      "timelineBlueprints": [
-        {
-          "id": "sys_holi_timeline_start",
-          "eventId": "blueprint_dummy",
-          "title": "Event Commencement & Welcome",
-          "phase": "eventDay",
-          "timeOrOffset": "10:00 AM",
-          "dayNumber": 1,
-          "description": "Gathering of residents and opening address."
-        },
-        {
-          "id": "sys_holi_timeline_color_play",
-          "eventId": "blueprint_dummy",
-          "title": "Color Play & Music Starts",
-          "phase": "eventDay",
-          "timeOrOffset": "10:30 AM",
-          "dayNumber": 1,
-          "description": "Main activity with DJ music."
-        },
-        {
-          "id": "sys_holi_timeline_snacks",
-          "eventId": "blueprint_dummy",
-          "title": "Snacks & Thandai Service",
-          "phase": "eventDay",
-          "timeOrOffset": "12:00 PM",
-          "dayNumber": 1,
-          "description": "Serving refreshments to all participants."
-        },
-        {
-          "id": "sys_holi_timeline_grand_finale",
-          "eventId": "blueprint_dummy",
-          "title": "Grand Rain Dance Finale",
-          "phase": "eventDay",
-          "timeOrOffset": "01:30 PM",
-          "dayNumber": 1,
-          "description": "The high-energy conclusion of the play."
-        },
-        {
-          "id": "sys_holi_timeline_post_cleaning",
-          "eventId": "blueprint_dummy",
-          "title": "Venue Vacation & Cleaning Start",
-          "phase": "eventDay",
-          "timeOrOffset": "02:30 PM",
-          "dayNumber": 1,
-          "description": "End of event activities."
-        }
-      ]
-    }
-  ]
+   "schemaVersion" : 2,
+   "version" : 4,
+   "templates" : [
+      {
+         "templateId" : "sys_holi_gathering_v1",
+         "timelineBlueprints" : [
+            {
+               "phase" : "eventDay",
+               "timeOrOffset" : "10:00 AM",
+               "eventId" : "blueprint_dummy",
+               "description" : "Gathering of residents and opening address.",
+               "dayNumber" : 1,
+               "title" : "Event Commencement & Welcome",
+               "id" : "sys_holi_timeline_start"
+            },
+            {
+               "phase" : "eventDay",
+               "title" : "Color Play & Music Starts",
+               "id" : "sys_holi_timeline_color_play",
+               "timeOrOffset" : "10:30 AM",
+               "eventId" : "blueprint_dummy",
+               "description" : "Main activity with DJ music.",
+               "dayNumber" : 1
+            },
+            {
+               "phase" : "eventDay",
+               "title" : "Snacks & Thandai Service",
+               "id" : "sys_holi_timeline_snacks",
+               "eventId" : "blueprint_dummy",
+               "timeOrOffset" : "12:00 PM",
+               "description" : "Serving refreshments to all participants.",
+               "dayNumber" : 1
+            },
+            {
+               "id" : "sys_holi_timeline_grand_finale",
+               "title" : "Grand Rain Dance Finale",
+               "description" : "The high-energy conclusion of the play.",
+               "dayNumber" : 1,
+               "timeOrOffset" : "01:30 PM",
+               "eventId" : "blueprint_dummy",
+               "phase" : "eventDay"
+            },
+            {
+               "title" : "Venue Vacation & Cleaning Start",
+               "id" : "sys_holi_timeline_post_cleaning",
+               "eventId" : "blueprint_dummy",
+               "timeOrOffset" : "02:30 PM",
+               "dayNumber" : 1,
+               "description" : "End of event activities.",
+               "phase" : "eventDay"
+            }
+         ],
+         "description" : "Festival of colors with music, snacks, and lots of fun.",
+         "tags" : [
+            "holi",
+            "colors",
+            "festival",
+            "party",
+            "spring",
+            "tradition",
+            "community"
+         ],
+         "taskBlueprints" : [
+            {
+               "id" : "sys_holi_task_finalize_logistics",
+               "dependsOn" : [],
+               "status" : "pending",
+               "phase" : "preEvent",
+               "title" : "Finalize date, time, and venue",
+               "description" : "Confirm the exact schedule and primary location within the community.",
+               "dueOffset" : "T-15 days",
+               "eventId" : "blueprint_dummy",
+               "role" : "Organizer"
+            },
+            {
+               "status" : "pending",
+               "phase" : "preEvent",
+               "dueOffset" : "T-10 days",
+               "role" : "Admin/Legal",
+               "dependsOn" : [],
+               "id" : "sys_holi_task_approvals",
+               "title" : "Get society approvals and permissions",
+               "description" : "Obtain written permission from society management or local authorities.",
+               "eventId" : "blueprint_dummy"
+            },
+            {
+               "role" : "Logistics",
+               "eventId" : "blueprint_dummy",
+               "dueOffset" : "T-5 days",
+               "description" : "Procure safe, non-toxic colors and other ritual supplies.",
+               "title" : "Purchase organic colors and supplies",
+               "phase" : "preEvent",
+               "dependsOn" : [],
+               "status" : "pending",
+               "id" : "sys_holi_task_purchase_colors"
+            },
+            {
+               "phase" : "preEvent",
+               "title" : "Arrange music / DJ setup",
+               "dependsOn" : [],
+               "status" : "pending",
+               "id" : "sys_holi_task_dj_setup",
+               "role" : "Program Coordinator",
+               "eventId" : "blueprint_dummy",
+               "dueOffset" : "T-7 days",
+               "description" : "Book a DJ or set up a powerful sound system for festive music."
+            },
+            {
+               "title" : "Organize snacks and refreshments",
+               "id" : "sys_holi_task_snacks_refreshments",
+               "dependsOn" : [],
+               "eventId" : "blueprint_dummy",
+               "description" : "Finalize menu and order Thandai, snacks, and traditional sweets.",
+               "phase" : "preEvent",
+               "status" : "pending",
+               "role" : "Food Manager",
+               "dueOffset" : "T-5 days"
+            },
+            {
+               "phase" : "preEvent",
+               "status" : "pending",
+               "role" : "Setup Team",
+               "dueOffset" : "T-2 days",
+               "title" : "Set up water supply / rain dance",
+               "id" : "sys_holi_task_water_supply",
+               "dependsOn" : [],
+               "eventId" : "blueprint_dummy",
+               "description" : "Arrange for water tankers and install rain dance nozzles if planned."
+            },
+            {
+               "title" : "Inform residents and send invitations",
+               "phase" : "preEvent",
+               "id" : "sys_holi_task_invitations",
+               "dependsOn" : [],
+               "status" : "pending",
+               "eventId" : "blueprint_dummy",
+               "role" : "Communication",
+               "description" : "Send event notices and digital invitations to all residents.",
+               "dueOffset" : "T-7 days"
+            },
+            {
+               "dueOffset" : "T-3 days",
+               "description" : "Form volunteer teams and ensure first aid/safety kits are ready.",
+               "role" : "Organizer",
+               "eventId" : "blueprint_dummy",
+               "dependsOn" : [],
+               "status" : "pending",
+               "id" : "sys_holi_task_volunteers_safety",
+               "title" : "Assign volunteers and safety arrangements",
+               "phase" : "preEvent"
+            },
+            {
+               "role" : "Setup Team",
+               "dueOffset" : "Morning 08:30 AM",
+               "phase" : "eventDay",
+               "status" : "pending",
+               "eventId" : "blueprint_dummy",
+               "description" : "Detailed walk-through to ensure all equipment and areas are ready.",
+               "title" : "Prepare and inspect venue setup",
+               "dependsOn" : [],
+               "id" : "sys_holi_task_inspect_venue"
+            },
+            {
+               "dependsOn" : [],
+               "id" : "sys_holi_task_manage_entry",
+               "title" : "Manage registration / participant entry",
+               "description" : "Check invites/registrations and hand out colors if applicable.",
+               "eventId" : "blueprint_dummy",
+               "status" : "pending",
+               "phase" : "eventDay",
+               "dueOffset" : "Morning 10:00 AM",
+               "role" : "Host"
+            },
+            {
+               "description" : "Manage the music flow and announce any scheduled games/activities.",
+               "eventId" : "blueprint_dummy",
+               "dependsOn" : [],
+               "id" : "sys_holi_task_coord_music",
+               "title" : "Run music and activity coordination",
+               "dueOffset" : "Morning 11:00 AM",
+               "role" : "Program Coordinator",
+               "status" : "pending",
+               "phase" : "eventDay"
+            },
+            {
+               "description" : "Coordinate the distribution of snacks and refreshments.",
+               "eventId" : "blueprint_dummy",
+               "id" : "sys_holi_task_serve_food",
+               "dependsOn" : [],
+               "title" : "Serve food and drinks",
+               "dueOffset" : "Noon 12:30 PM",
+               "role" : "Food Manager",
+               "status" : "pending",
+               "phase" : "eventDay"
+            },
+            {
+               "dependsOn" : [],
+               "id" : "sys_holi_task_monitor_safety",
+               "title" : "Monitor safety and crowd management",
+               "description" : "Ensure no rowdy behavior and manage participants around water areas.",
+               "eventId" : "blueprint_dummy",
+               "status" : "pending",
+               "phase" : "eventDay",
+               "dueOffset" : "During Event",
+               "role" : "Security Lead"
+            },
+            {
+               "dueOffset" : "During Event",
+               "description" : "Capture the highlights and candid moments of the celebration.",
+               "role" : "Communication",
+               "eventId" : "blueprint_dummy",
+               "status" : "pending",
+               "dependsOn" : [],
+               "id" : "sys_holi_task_photos_videos",
+               "phase" : "eventDay",
+               "title" : "Take photos and videos"
+            },
+            {
+               "description" : "Ensure color stains and trash are cleared from the venue.",
+               "eventId" : "blueprint_dummy",
+               "dependsOn" : [],
+               "id" : "sys_holi_task_clean_ghat",
+               "title" : "Clean venue and dispose waste",
+               "dueOffset" : "T+1 day",
+               "role" : "Logistics",
+               "status" : "pending",
+               "phase" : "postEvent"
+            },
+            {
+               "phase" : "postEvent",
+               "status" : "pending",
+               "role" : "Setup Team",
+               "dueOffset" : "T+2 days",
+               "title" : "Remove decorations and equipment",
+               "dependsOn" : [],
+               "id" : "sys_holi_task_remove_decor",
+               "eventId" : "blueprint_dummy",
+               "description" : "Dismantle tents, sound system, and water setups."
+            },
+            {
+               "role" : "Treasurer",
+               "dueOffset" : "T+3 days",
+               "phase" : "postEvent",
+               "status" : "pending",
+               "eventId" : "blueprint_dummy",
+               "description" : "Finalize and pay all vendors (DJ, catering, rentals).",
+               "title" : "Settle vendor payments",
+               "id" : "sys_holi_task_settle_payments",
+               "dependsOn" : []
+            },
+            {
+               "description" : "Upload high-quality event photos to the gallery or share via group.",
+               "eventId" : "blueprint_dummy",
+               "dependsOn" : [],
+               "id" : "sys_holi_task_share_photos",
+               "title" : "Share event photos with residents",
+               "dueOffset" : "T+3 days",
+               "role" : "Communication",
+               "status" : "pending",
+               "phase" : "postEvent"
+            },
+            {
+               "phase" : "postEvent",
+               "status" : "pending",
+               "role" : "Treasurer",
+               "dueOffset" : "T+7 days",
+               "title" : "Prepare expense summary and feedback review",
+               "id" : "sys_holi_task_expense_summary",
+               "dependsOn" : [],
+               "eventId" : "blueprint_dummy",
+               "description" : "Finalize the budget vs actual report and review community feedback."
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "category" : "Miscellaneous",
+               "isMandatory" : true,
+               "id" : "sys_holi_budget_colors",
+               "title" : "Colors & Puja Supplies",
+               "estimatedCost" : 0,
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy"
+            },
+            {
+               "category" : "Miscellaneous",
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0,
+               "id" : "sys_holi_budget_dj_sound",
+               "isMandatory" : true,
+               "estimatedCost" : 0,
+               "title" : "DJ, Sound System, and Lighting"
+            },
+            {
+               "title" : "Snacks, Thandai, and Traditional Sweets",
+               "estimatedCost" : 0,
+               "category" : "Food",
+               "id" : "sys_holi_budget_food",
+               "isMandatory" : true,
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0
+            },
+            {
+               "isMandatory" : false,
+               "id" : "sys_holi_budget_water_tankers",
+               "estimatedCost" : 0,
+               "title" : "Water Tankers & Rain Dance Setup",
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0,
+               "category" : "Venue"
+            },
+            {
+               "category" : "Miscellaneous",
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy",
+               "title" : "Post-event Venue Cleanup Service",
+               "estimatedCost" : 0,
+               "id" : "sys_holi_budget_venue_cleanup",
+               "isMandatory" : true
+            }
+         ],
+         "templateName" : "Holi Gathering",
+         "roleBlueprints" : [
+            {
+               "description" : "Full access to all modules.",
+               "moduleAccess" : {
+                  "auditLog" : "full",
+                  "tasks" : "full",
+                  "location" : "full",
+                  "vendors" : "full",
+                  "budget" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "contribution" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "guests" : "full",
+                  "users" : "full",
+                  "roles" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full"
+               },
+               "name" : "Admin",
+               "id" : "sys_role_admin"
+            },
+            {
+               "description" : "Manage most event details.",
+               "id" : "sys_role_organizer",
+               "moduleAccess" : {
+                  "guests" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "auditLog" : "view",
+                  "tasks" : "edit",
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "budget" : "edit",
+                  "customFields" : "view",
+                  "chat" : "full",
+                  "contribution" : "edit"
+               },
+               "name" : "Organizer"
+            },
+            {
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "budget" : "view",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "contribution" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "auditLog" : "none",
+                  "tasks" : "edit",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "none",
+                  "inventory" : "view",
+                  "timeline" : "edit",
+                  "guests" : "view"
+               },
+               "id" : "sys_role_coordinator",
+               "description" : "Manage tasks and timeline."
+            },
+            {
+               "description" : "Update task progress.",
+               "id" : "sys_role_volunteer",
+               "moduleAccess" : {
+                  "auditLog" : "none",
+                  "tasks" : "update",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none"
+               },
+               "name" : "Volunteer"
+            },
+            {
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "contribution" : "view",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none"
+               },
+               "id" : "sys_role_participant",
+               "description" : "Regular participant."
+            },
+            {
+               "name" : "Guest",
+               "moduleAccess" : {
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "contribution" : "none",
+                  "customFields" : "none",
+                  "chat" : "none",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view"
+               },
+               "id" : "sys_role_guest",
+               "description" : "Limited viewing access."
+            },
+            {
+               "id" : "sys_role_viewer",
+               "moduleAccess" : {
+                  "guests" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view",
+                  "roles" : "view",
+                  "users" : "view",
+                  "tasks" : "view",
+                  "auditLog" : "view",
+                  "contribution" : "view",
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view"
+               },
+               "name" : "Viewer",
+               "description" : "Read-only access."
+            }
+         ],
+         "defaultFields" : {
+            "amount" : 0,
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "communication",
+               "location",
+               "roles",
+               "inventory",
+               "userManagement",
+               "contribution"
+            ],
+            "contributionType" : "variable"
+         },
+         "category" : "communityAndCultural"
+      }
+   ]
 }

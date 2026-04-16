@@ -1,28 +1,271 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_product_launch_v1",
-      "templateName": "Product Launch Event",
-      "category": "corporate",
-      "description": "Event dedicated to introducing a new product or service to the market.",
-      "tags": ["product launch", "marketing", "corporate", "branding", "event"],
-      "defaultFields": {
-        "contributionType": "none",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location", "roles", "media"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_launch_task_demo", "eventId": "blueprint_dummy", "title": "Prepare Product Demo", "status": "pending", "phase": "preEvent", "description": "Ensure the product is ready for a live presentation.", "dueOffset": "T-5 days", "role": "Organizer", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_launch_budget_pr", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "PR & Influencer Outreach", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_launch_timeline_reveal", "eventId": "blueprint_dummy", "title": "Product Reveal", "phase": "eventDay", "timeOrOffset": "06:00 PM", "dayNumber": 1, "description": "Main presentation highlight." }
-      ],
-      "version": 1
-    }
-  ]
+   "version" : 4,
+   "templates" : [
+      {
+         "category" : "corporate",
+         "defaultFields" : {
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "communication",
+               "location",
+               "roles",
+               "media",
+               "userManagement"
+            ],
+            "amount" : 0,
+            "contributionType" : "none"
+         },
+         "roleBlueprints" : [
+            {
+               "description" : "Full access to all modules.",
+               "moduleAccess" : {
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "guests" : "full",
+                  "users" : "full",
+                  "roles" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "auditLog" : "full",
+                  "tasks" : "full",
+                  "budget" : "full",
+                  "location" : "full",
+                  "vendors" : "full",
+                  "contribution" : "full",
+                  "chat" : "full",
+                  "customFields" : "full"
+               },
+               "name" : "Admin",
+               "id" : "sys_role_admin"
+            },
+            {
+               "description" : "Manage most event details.",
+               "moduleAccess" : {
+                  "users" : "view",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "guests" : "edit",
+                  "budget" : "edit",
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "contribution" : "edit",
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "auditLog" : "view",
+                  "tasks" : "edit"
+               },
+               "name" : "Organizer",
+               "id" : "sys_role_organizer"
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view",
+                  "tasks" : "edit",
+                  "auditLog" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "view",
+                  "timeline" : "edit",
+                  "inventory" : "view"
+               },
+               "id" : "sys_role_coordinator"
+            },
+            {
+               "moduleAccess" : {
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "update",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "guests" : "none",
+                  "inventory" : "view",
+                  "timeline" : "view"
+               },
+               "name" : "Volunteer",
+               "id" : "sys_role_volunteer",
+               "description" : "Update task progress."
+            },
+            {
+               "description" : "Regular participant.",
+               "id" : "sys_role_participant",
+               "moduleAccess" : {
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "contribution" : "view",
+                  "customFields" : "none",
+                  "chat" : "edit",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view"
+               },
+               "name" : "Participant"
+            },
+            {
+               "id" : "sys_role_guest",
+               "moduleAccess" : {
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "customFields" : "none",
+                  "chat" : "none",
+                  "contribution" : "none"
+               },
+               "name" : "Guest",
+               "description" : "Limited viewing access."
+            },
+            {
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "roles" : "view",
+                  "users" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "view",
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "contribution" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view",
+                  "tasks" : "view",
+                  "auditLog" : "view"
+               },
+               "id" : "sys_role_viewer",
+               "description" : "Read-only access."
+            },
+            {
+               "moduleAccess" : {
+                  "tasks" : "full",
+                  "budget" : "edit",
+                  "users" : "view",
+                  "vendors" : "full",
+                  "roles" : "none"
+               },
+               "name" : "Event Manager",
+               "id" : "sys_role_manager",
+               "description" : "Corporate execution lead."
+            },
+            {
+               "description" : "Department coordination.",
+               "id" : "sys_role_hr",
+               "name" : "HR Coordinator",
+               "moduleAccess" : {
+                  "users" : "view",
+                  "roles" : "none",
+                  "guests" : "edit",
+                  "announcements" : "edit"
+               }
+            },
+            {
+               "moduleAccess" : {
+                  "location" : "view",
+                  "users" : "none",
+                  "timeline" : "view",
+                  "roles" : "none"
+               },
+               "name" : "Speaker",
+               "id" : "sys_role_speaker",
+               "description" : "Session presenter."
+            },
+            {
+               "id" : "sys_role_sponsor",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "vendors" : "edit",
+                  "location" : "view",
+                  "users" : "view"
+               },
+               "name" : "Sponsor Manager",
+               "description" : "Branding lead."
+            }
+         ],
+         "templateName" : "Product Launch Event",
+         "taskBlueprints" : [
+            {
+               "eventId" : "blueprint_dummy",
+               "description" : "Ensure the product is ready for a live presentation.",
+               "title" : "Prepare Product Demo",
+               "id" : "sys_launch_task_demo",
+               "dependsOn" : [],
+               "role" : "Organizer",
+               "dueOffset" : "T-5 days",
+               "phase" : "preEvent",
+               "status" : "pending"
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "category" : "Miscellaneous",
+               "id" : "sys_launch_budget_pr",
+               "isMandatory" : true,
+               "estimatedCost" : 0,
+               "title" : "PR & Influencer Outreach",
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0
+            }
+         ],
+         "tags" : [
+            "product launch",
+            "marketing",
+            "corporate",
+            "branding",
+            "event"
+         ],
+         "templateId" : "sys_product_launch_v1",
+         "timelineBlueprints" : [
+            {
+               "eventId" : "blueprint_dummy",
+               "timeOrOffset" : "06:00 PM",
+               "dayNumber" : 1,
+               "description" : "Main presentation highlight.",
+               "title" : "Product Reveal",
+               "id" : "sys_launch_timeline_reveal",
+               "phase" : "eventDay"
+            }
+         ],
+         "version" : 2,
+         "description" : "Event dedicated to introducing a new product or service to the market."
+      }
+   ],
+   "schemaVersion" : 2
 }

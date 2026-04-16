@@ -1,29 +1,235 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_baby_shower_v1",
-      "templateName": "Baby Shower",
-      "category": "personal",
-      "description": "Celebrate the upcoming arrival of a new family member.",
-      "tags": ["baby", "shower", "maternity", "celebration", "party"],
-      "defaultFields": {
-        "contributionType": "none",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_baby_shower_task_theme", "eventId": "blueprint_dummy", "title": "Pick a Theme", "status": "pending", "phase": "preEvent", "description": "Decide on color scheme and motif.", "dueOffset": "T-30 days", "role": "Decoration", "dependsOn": [] },
-        { "id": "sys_baby_shower_task_games", "eventId": "blueprint_dummy", "title": "Plan Baby Shower Games", "status": "pending", "phase": "preEvent", "description": "Organize interactive games and prizes.", "dueOffset": "T-15 days", "role": "Host", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_baby_shower_budget_decor", "eventId": "blueprint_dummy", "category": "Decoration", "title": "Theme Decor", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_baby_shower_timeline_games", "eventId": "blueprint_dummy", "title": "Games & Activities", "phase": "eventDay", "timeOrOffset": "04:00 PM", "dayNumber": 1, "description": "Interactive sessions with guests." }
-      ],
-      "version": 1
-    }
-  ]
+   "schemaVersion" : 2,
+   "version" : 4,
+   "templates" : [
+      {
+         "templateName" : "Baby Shower",
+         "roleBlueprints" : [
+            {
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "guests" : "full",
+                  "users" : "full",
+                  "roles" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "auditLog" : "full",
+                  "tasks" : "full",
+                  "budget" : "full",
+                  "location" : "full",
+                  "vendors" : "full",
+                  "contribution" : "full",
+                  "customFields" : "full",
+                  "chat" : "full"
+               },
+               "id" : "sys_role_admin",
+               "description" : "Full access to all modules."
+            },
+            {
+               "description" : "Manage most event details.",
+               "name" : "Organizer",
+               "moduleAccess" : {
+                  "auditLog" : "view",
+                  "tasks" : "edit",
+                  "budget" : "edit",
+                  "location" : "edit",
+                  "vendors" : "edit",
+                  "contribution" : "edit",
+                  "customFields" : "view",
+                  "chat" : "full",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "guests" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "edit"
+               },
+               "id" : "sys_role_organizer"
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "id" : "sys_role_coordinator",
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "timeline" : "edit",
+                  "inventory" : "view",
+                  "guests" : "view",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "budget" : "view",
+                  "tasks" : "edit",
+                  "auditLog" : "none"
+               }
+            },
+            {
+               "id" : "sys_role_volunteer",
+               "moduleAccess" : {
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "update",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "guests" : "none"
+               },
+               "name" : "Volunteer",
+               "description" : "Update task progress."
+            },
+            {
+               "description" : "Regular participant.",
+               "id" : "sys_role_participant",
+               "moduleAccess" : {
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "customFields" : "none",
+                  "chat" : "edit",
+                  "contribution" : "view",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view"
+               },
+               "name" : "Participant"
+            },
+            {
+               "name" : "Guest",
+               "moduleAccess" : {
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "customFields" : "none",
+                  "chat" : "none",
+                  "contribution" : "none",
+                  "guests" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none"
+               },
+               "id" : "sys_role_guest",
+               "description" : "Limited viewing access."
+            },
+            {
+               "id" : "sys_role_viewer",
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "contribution" : "view",
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "auditLog" : "view",
+                  "tasks" : "view",
+                  "users" : "view",
+                  "roles" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "view",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "guests" : "view"
+               },
+               "description" : "Read-only access."
+            }
+         ],
+         "defaultFields" : {
+            "contributionType" : "none",
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "communication",
+               "roles",
+               "userManagement"
+            ],
+            "amount" : 0
+         },
+         "category" : "personal",
+         "timelineBlueprints" : [
+            {
+               "phase" : "eventDay",
+               "description" : "Interactive sessions with guests.",
+               "dayNumber" : 1,
+               "eventId" : "blueprint_dummy",
+               "timeOrOffset" : "04:00 PM",
+               "id" : "sys_baby_shower_timeline_games",
+               "title" : "Games & Activities"
+            }
+         ],
+         "templateId" : "sys_baby_shower_v1",
+         "description" : "Celebrate the upcoming arrival of a new family member.",
+         "version" : 2,
+         "tags" : [
+            "baby",
+            "shower",
+            "maternity",
+            "celebration",
+            "party"
+         ],
+         "budgetBlueprints" : [
+            {
+               "category" : "Decoration",
+               "id" : "sys_baby_shower_budget_decor",
+               "isMandatory" : true,
+               "title" : "Theme Decor",
+               "estimatedCost" : 0,
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy"
+            }
+         ],
+         "taskBlueprints" : [
+            {
+               "dueOffset" : "T-30 days",
+               "role" : "Decoration",
+               "status" : "pending",
+               "phase" : "preEvent",
+               "description" : "Decide on color scheme and motif.",
+               "eventId" : "blueprint_dummy",
+               "id" : "sys_baby_shower_task_theme",
+               "dependsOn" : [],
+               "title" : "Pick a Theme"
+            },
+            {
+               "dueOffset" : "T-15 days",
+               "role" : "Host",
+               "status" : "pending",
+               "phase" : "preEvent",
+               "description" : "Organize interactive games and prizes.",
+               "eventId" : "blueprint_dummy",
+               "id" : "sys_baby_shower_task_games",
+               "dependsOn" : [],
+               "title" : "Plan Baby Shower Games"
+            }
+         ]
+      }
+   ]
 }

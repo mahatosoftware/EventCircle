@@ -1,28 +1,271 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_picnic_v1",
-      "templateName": "Weekend Picnic",
-      "category": "travel",
-      "description": "Short social outing to a scenic spot with food and games.",
-      "tags": ["picnic", "weekend", "travel", "outing", "nature"],
-      "defaultFields": {
-        "contributionType": "fixed",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "location", "roles", "inventory", "contribution"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_picnic_task_location", "eventId": "blueprint_dummy", "title": "Confirm Scenic Spot", "status": "pending", "phase": "preEvent", "description": "Check for facilities like drinking water/park permits.", "dueOffset": "T-10 days", "role": "Logistics", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_picnic_budget_snacks", "eventId": "blueprint_dummy", "category": "Food", "title": "Packed Meals & Snacks", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_picnic_timeline_arrival", "eventId": "blueprint_dummy", "title": "Arrival & Mat Setup", "phase": "eventDay", "timeOrOffset": "09:30 AM", "dayNumber": 1, "description": "Finding a spot and setting up." }
-      ],
-      "version": 1
-    }
-  ]
+   "templates" : [
+      {
+         "roleBlueprints" : [
+            {
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "auditLog" : "full",
+                  "tasks" : "full",
+                  "location" : "full",
+                  "vendors" : "full",
+                  "budget" : "full",
+                  "customFields" : "full",
+                  "chat" : "full",
+                  "contribution" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "guests" : "full",
+                  "users" : "full",
+                  "roles" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full"
+               },
+               "id" : "sys_role_admin",
+               "description" : "Full access to all modules."
+            },
+            {
+               "description" : "Manage most event details.",
+               "name" : "Organizer",
+               "moduleAccess" : {
+                  "auditLog" : "view",
+                  "tasks" : "edit",
+                  "location" : "edit",
+                  "vendors" : "edit",
+                  "budget" : "edit",
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "contribution" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "guests" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "edit"
+               },
+               "id" : "sys_role_organizer"
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "id" : "sys_role_coordinator",
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "edit",
+                  "announcements" : "edit",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "guests" : "view",
+                  "inventory" : "view",
+                  "timeline" : "edit"
+               }
+            },
+            {
+               "name" : "Volunteer",
+               "moduleAccess" : {
+                  "contribution" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "tasks" : "update",
+                  "auditLog" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "view"
+               },
+               "id" : "sys_role_volunteer",
+               "description" : "Update task progress."
+            },
+            {
+               "description" : "Regular participant.",
+               "id" : "sys_role_participant",
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "contribution" : "view",
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view"
+               }
+            },
+            {
+               "moduleAccess" : {
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "guests" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none"
+               },
+               "name" : "Guest",
+               "id" : "sys_role_guest",
+               "description" : "Limited viewing access."
+            },
+            {
+               "moduleAccess" : {
+                  "customFields" : "view",
+                  "chat" : "view",
+                  "contribution" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view",
+                  "tasks" : "view",
+                  "auditLog" : "view",
+                  "roles" : "view",
+                  "users" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "view"
+               },
+               "name" : "Viewer",
+               "id" : "sys_role_viewer",
+               "description" : "Read-only access."
+            },
+            {
+               "description" : "Itinerary lead.",
+               "moduleAccess" : {
+                  "users" : "view",
+                  "budget" : "edit",
+                  "timeline" : "full",
+                  "roles" : "none",
+                  "tasks" : "full"
+               },
+               "name" : "Trip Organizer",
+               "id" : "sys_role_trip_org"
+            },
+            {
+               "name" : "Guide",
+               "moduleAccess" : {
+                  "location" : "view",
+                  "users" : "none",
+                  "roles" : "none",
+                  "chat" : "edit",
+                  "timeline" : "view"
+               },
+               "id" : "sys_role_guide",
+               "description" : "Local trip guide."
+            },
+            {
+               "description" : "Vehicle lead.",
+               "id" : "sys_role_transport",
+               "name" : "Transport Coordinator",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "location" : "edit",
+                  "chat" : "edit",
+                  "roles" : "none"
+               }
+            },
+            {
+               "description" : "Safety lead.",
+               "name" : "Emergency Lead",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "chat" : "full",
+                  "location" : "view",
+                  "users" : "none"
+               },
+               "id" : "sys_role_emergency"
+            }
+         ],
+         "templateName" : "Weekend Picnic",
+         "category" : "travel",
+         "defaultFields" : {
+            "contributionType" : "fixed",
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "location",
+               "roles",
+               "inventory",
+               "contribution",
+               "userManagement"
+            ],
+            "amount" : 0
+         },
+         "version" : 2,
+         "description" : "Short social outing to a scenic spot with food and games.",
+         "timelineBlueprints" : [
+            {
+               "title" : "Arrival & Mat Setup",
+               "id" : "sys_picnic_timeline_arrival",
+               "timeOrOffset" : "09:30 AM",
+               "eventId" : "blueprint_dummy",
+               "dayNumber" : 1,
+               "description" : "Finding a spot and setting up.",
+               "phase" : "eventDay"
+            }
+         ],
+         "templateId" : "sys_picnic_v1",
+         "taskBlueprints" : [
+            {
+               "phase" : "preEvent",
+               "status" : "pending",
+               "role" : "Logistics",
+               "dueOffset" : "T-10 days",
+               "title" : "Confirm Scenic Spot",
+               "id" : "sys_picnic_task_location",
+               "dependsOn" : [],
+               "eventId" : "blueprint_dummy",
+               "description" : "Check for facilities like drinking water/park permits."
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "category" : "Food",
+               "isMandatory" : true,
+               "id" : "sys_picnic_budget_snacks",
+               "estimatedCost" : 0,
+               "title" : "Packed Meals & Snacks",
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0
+            }
+         ],
+         "tags" : [
+            "picnic",
+            "weekend",
+            "travel",
+            "outing",
+            "nature"
+         ]
+      }
+   ],
+   "version" : 4,
+   "schemaVersion" : 2
 }

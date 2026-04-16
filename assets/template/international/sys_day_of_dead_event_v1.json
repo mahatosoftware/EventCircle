@@ -1,28 +1,267 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_day_dead_v1",
-      "templateName": "Day of the Dead (Día de los Muertos)",
-      "category": "communityAndCultural",
-      "description": "Traditional Mexican festival to honor deceased ancestors with altars (ofrendas) and specific foods.",
-      "tags": ["day of the dead", "dia de los muertos", "mexican", "festival", "traditional"],
-      "defaultFields": {
-        "contributionType": "voluntary",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "decoration", "roles"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_dod_task_ofrenda", "eventId": "blueprint_dummy", "title": "Build Final Altar (Ofrenda)", "status": "pending", "phase": "preEvent", "description": "Assemble photos, Marigolds, and favorite items of the deceased.", "dueOffset": "T-2 days", "role": "Decoration", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_dod_budget_flowers", "eventId": "blueprint_dummy", "category": "Decoration", "title": "Cempasúchil (Marigolds) & Candles", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_dod_timeline_offering", "eventId": "blueprint_dummy", "title": "Traditional Grave Visit & Offerings", "phase": "eventDay", "timeOrOffset": "06:00 PM", "dayNumber": 1, "description": "Gathering at the cemetery or community altar." }
-      ],
-      "version": 1
-    }
-  ]
+   "schemaVersion" : 2,
+   "version" : 4,
+   "templates" : [
+      {
+         "description" : "Traditional Mexican festival to honor deceased ancestors with altars (ofrendas) and specific foods.",
+         "templateId" : "sys_day_dead_v1",
+         "timelineBlueprints" : [
+            {
+               "phase" : "eventDay",
+               "timeOrOffset" : "06:00 PM",
+               "eventId" : "blueprint_dummy",
+               "dayNumber" : 1,
+               "description" : "Gathering at the cemetery or community altar.",
+               "title" : "Traditional Grave Visit & Offerings",
+               "id" : "sys_dod_timeline_offering"
+            }
+         ],
+         "category" : "communityAndCultural",
+         "roleBlueprints" : [
+            {
+               "id" : "sys_role_admin",
+               "moduleAccess" : {
+                  "auditLog" : "full",
+                  "tasks" : "full",
+                  "budget" : "full",
+                  "location" : "full",
+                  "vendors" : "full",
+                  "contribution" : "full",
+                  "customFields" : "full",
+                  "chat" : "full",
+                  "guests" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "users" : "full",
+                  "roles" : "full"
+               },
+               "name" : "Admin",
+               "description" : "Full access to all modules."
+            },
+            {
+               "description" : "Manage most event details.",
+               "moduleAccess" : {
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "guests" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "auditLog" : "view",
+                  "tasks" : "edit",
+                  "budget" : "edit",
+                  "location" : "edit",
+                  "vendors" : "edit",
+                  "contribution" : "edit",
+                  "chat" : "full",
+                  "customFields" : "view"
+               },
+               "name" : "Organizer",
+               "id" : "sys_role_organizer"
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "id" : "sys_role_coordinator",
+               "moduleAccess" : {
+                  "timeline" : "edit",
+                  "inventory" : "view",
+                  "guests" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "tasks" : "edit",
+                  "auditLog" : "none",
+                  "contribution" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "budget" : "view",
+                  "location" : "view",
+                  "vendors" : "view"
+               },
+               "name" : "Coordinator"
+            },
+            {
+               "description" : "Update task progress.",
+               "id" : "sys_role_volunteer",
+               "name" : "Volunteer",
+               "moduleAccess" : {
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "tasks" : "update",
+                  "auditLog" : "none",
+                  "contribution" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none"
+               }
+            },
+            {
+               "id" : "sys_role_participant",
+               "moduleAccess" : {
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "contribution" : "view",
+                  "customFields" : "none",
+                  "chat" : "edit"
+               },
+               "name" : "Participant",
+               "description" : "Regular participant."
+            },
+            {
+               "description" : "Limited viewing access.",
+               "id" : "sys_role_guest",
+               "name" : "Guest",
+               "moduleAccess" : {
+                  "contribution" : "none",
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none"
+               }
+            },
+            {
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "tasks" : "view",
+                  "auditLog" : "view",
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "contribution" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "view",
+                  "roles" : "view",
+                  "users" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view"
+               },
+               "id" : "sys_role_viewer",
+               "description" : "Read-only access."
+            },
+            {
+               "id" : "sys_role_society_admin",
+               "name" : "Society Admin",
+               "moduleAccess" : {
+                  "announcements" : "edit",
+                  "roles" : "view",
+                  "users" : "view"
+               },
+               "description" : "Board coordination."
+            },
+            {
+               "description" : "Overall execution lead.",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "roles" : "none",
+                  "timeline" : "full",
+                  "chat" : "full",
+                  "tasks" : "full"
+               },
+               "name" : "Event Coordinator",
+               "id" : "sys_role_coord"
+            },
+            {
+               "description" : "Manage funds.",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "budget" : "full",
+                  "roles" : "none",
+                  "contribution" : "full"
+               },
+               "name" : "Treasurer",
+               "id" : "sys_role_treasurer"
+            },
+            {
+               "id" : "sys_role_security",
+               "moduleAccess" : {
+                  "chat" : "edit",
+                  "roles" : "none",
+                  "location" : "view",
+                  "users" : "none"
+               },
+               "name" : "Security Coordinator",
+               "description" : "Crowd control."
+            }
+         ],
+         "templateName" : "Day of the Dead (Día de los Muertos)",
+         "budgetBlueprints" : [
+            {
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0,
+               "estimatedCost" : 0,
+               "title" : "Cempasúchil (Marigolds) & Candles",
+               "id" : "sys_dod_budget_flowers",
+               "isMandatory" : true,
+               "category" : "Decoration"
+            }
+         ],
+         "taskBlueprints" : [
+            {
+               "phase" : "preEvent",
+               "title" : "Build Final Altar (Ofrenda)",
+               "id" : "sys_dod_task_ofrenda",
+               "dependsOn" : [],
+               "status" : "pending",
+               "eventId" : "blueprint_dummy",
+               "role" : "Decoration",
+               "description" : "Assemble photos, Marigolds, and favorite items of the deceased.",
+               "dueOffset" : "T-2 days"
+            }
+         ],
+         "tags" : [
+            "day of the dead",
+            "dia de los muertos",
+            "mexican",
+            "festival",
+            "traditional"
+         ],
+         "version" : 2,
+         "defaultFields" : {
+            "amount" : 0,
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "decoration",
+               "roles",
+               "userManagement"
+            ],
+            "contributionType" : "voluntary"
+         }
+      }
+   ]
 }

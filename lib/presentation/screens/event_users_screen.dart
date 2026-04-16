@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../core/constants.dart';
 
 import '../../data/models/event_model.dart';
 import '../../data/models/event_role_model.dart';
@@ -204,7 +205,7 @@ class EventUsersScreen extends ConsumerWidget {
               onTap: () async {
                 final user = ref.read(currentUserProvider);
                 final invite = await ref.read(invitationRepositoryProvider).createPreApprovedInvitation(eventId, user?.id ?? 'organizer');
-                final link = 'https://eventcircle.app/join?token=${invite.token}';
+                final link = '${AppConstants.deepLinkBaseUrl}/join?token=${invite.token}';
                 await Share.share('Join my event "${event.title}" directly using this link: $link');
                 if (context.mounted) Navigator.pop(context);
               },
@@ -219,7 +220,7 @@ class EventUsersScreen extends ConsumerWidget {
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Enable Public Joining in settings first.')));
                   return;
                 }
-                final link = 'https://eventcircle.app/event/$eventId/join';
+                final link = '${AppConstants.deepLinkBaseUrl}/event/$eventId/join';
                 await Share.share('Join my event "${event.title}" on EventCircle: $link');
                 if (context.mounted) Navigator.pop(context);
               },
@@ -574,7 +575,7 @@ class _EventUserTile extends ConsumerWidget {
             for (final m in EventModules.all)
               ListTile(
                 dense: true,
-                title: Text(_moduleLabel(m)),
+                title: Text(EventModules.label(m)),
                 trailing: _AccessLevelChip(level: effectiveFor(m)),
               ),
             const SizedBox(height: 12),
@@ -628,26 +629,7 @@ class _EventUserTile extends ConsumerWidget {
     }
   }
 
-  String _moduleLabel(String module) {
-    switch (module) {
-      case EventModules.budget:
-        return 'Budget';
-      case EventModules.contribution:
-        return 'Contribution';
-      case EventModules.tasks:
-        return 'Tasks';
-      case EventModules.users:
-        return 'Users';
-      case EventModules.roles:
-        return 'Roles';
-      case EventModules.guests:
-        return 'Guests';
-      case EventModules.vendors:
-        return 'Vendors';
-      default:
-        return module;
-    }
-  }
+  String _moduleLabel(String module) => EventModules.label(module);
 }
 
 class _RoleChip extends StatelessWidget {

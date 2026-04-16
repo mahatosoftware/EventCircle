@@ -1,29 +1,236 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_christening_v1",
-      "templateName": "Christening Event",
-      "category": "personal",
-      "description": "Sacramental ceremony to officially baptize and welcome a baby into the faith.",
-      "tags": ["christening", "baptism", "baby", "ceremony", "family"],
-      "defaultFields": {
-        "contributionType": "none",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_chr_task_officiant", "eventId": "blueprint_dummy", "title": "Book Officiant / Priest", "status": "pending", "phase": "preEvent", "description": "Secure the dates with the religious authority.", "dueOffset": "T-30 days", "role": "Organizer", "dependsOn": [] },
-        { "id": "sys_chr_task_godparents", "eventId": "blueprint_dummy", "title": "Confirm Godparents", "status": "pending", "phase": "preEvent", "description": "Officially invite and confirm the godparents.", "dueOffset": "T-20 days", "role": "Host", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_chr_budget_church", "eventId": "blueprint_dummy", "category": "Venue", "title": "Ceremony Fee / Offering", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_chr_timeline_ritual", "eventId": "blueprint_dummy", "title": "Main Baptism Ceremony", "phase": "eventDay", "timeOrOffset": "11:00 AM", "dayNumber": 1, "description": "The main religious ritual." }
-      ],
-      "version": 1
-    }
-  ]
+   "version" : 4,
+   "templates" : [
+      {
+         "category" : "personal",
+         "roleBlueprints" : [
+            {
+               "moduleAccess" : {
+                  "tasks" : "full",
+                  "auditLog" : "full",
+                  "contribution" : "full",
+                  "customFields" : "full",
+                  "chat" : "full",
+                  "budget" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "guests" : "full",
+                  "timeline" : "full",
+                  "inventory" : "full",
+                  "ticketing" : "full",
+                  "announcements" : "full",
+                  "roles" : "full",
+                  "users" : "full"
+               },
+               "name" : "Admin",
+               "id" : "sys_role_admin",
+               "description" : "Full access to all modules."
+            },
+            {
+               "name" : "Organizer",
+               "moduleAccess" : {
+                  "users" : "view",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "guests" : "edit",
+                  "budget" : "edit",
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "contribution" : "edit",
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "auditLog" : "view",
+                  "tasks" : "edit"
+               },
+               "id" : "sys_role_organizer",
+               "description" : "Manage most event details."
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "id" : "sys_role_coordinator",
+               "moduleAccess" : {
+                  "tasks" : "edit",
+                  "auditLog" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "budget" : "view",
+                  "timeline" : "edit",
+                  "inventory" : "view",
+                  "guests" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "edit"
+               },
+               "name" : "Coordinator"
+            },
+            {
+               "name" : "Volunteer",
+               "moduleAccess" : {
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "tasks" : "update",
+                  "auditLog" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "view"
+               },
+               "id" : "sys_role_volunteer",
+               "description" : "Update task progress."
+            },
+            {
+               "description" : "Regular participant.",
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "guests" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "contribution" : "view",
+                  "auditLog" : "none",
+                  "tasks" : "none"
+               },
+               "id" : "sys_role_participant"
+            },
+            {
+               "name" : "Guest",
+               "moduleAccess" : {
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "guests" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "contribution" : "none",
+                  "customFields" : "none",
+                  "chat" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "none"
+               },
+               "id" : "sys_role_guest",
+               "description" : "Limited viewing access."
+            },
+            {
+               "id" : "sys_role_viewer",
+               "moduleAccess" : {
+                  "contribution" : "view",
+                  "customFields" : "view",
+                  "chat" : "view",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "tasks" : "view",
+                  "auditLog" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view",
+                  "roles" : "view",
+                  "users" : "view",
+                  "guests" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view"
+               },
+               "name" : "Viewer",
+               "description" : "Read-only access."
+            }
+         ],
+         "templateName" : "Christening Event",
+         "description" : "Sacramental ceremony to officially baptize and welcome a baby into the faith.",
+         "templateId" : "sys_christening_v1",
+         "timelineBlueprints" : [
+            {
+               "phase" : "eventDay",
+               "title" : "Main Baptism Ceremony",
+               "id" : "sys_chr_timeline_ritual",
+               "timeOrOffset" : "11:00 AM",
+               "eventId" : "blueprint_dummy",
+               "dayNumber" : 1,
+               "description" : "The main religious ritual."
+            }
+         ],
+         "defaultFields" : {
+            "contributionType" : "none",
+            "amount" : 0,
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "communication",
+               "location",
+               "roles",
+               "userManagement"
+            ]
+         },
+         "taskBlueprints" : [
+            {
+               "title" : "Book Officiant / Priest",
+               "phase" : "preEvent",
+               "id" : "sys_chr_task_officiant",
+               "dependsOn" : [],
+               "status" : "pending",
+               "eventId" : "blueprint_dummy",
+               "role" : "Organizer",
+               "description" : "Secure the dates with the religious authority.",
+               "dueOffset" : "T-30 days"
+            },
+            {
+               "dueOffset" : "T-20 days",
+               "description" : "Officially invite and confirm the godparents.",
+               "role" : "Host",
+               "eventId" : "blueprint_dummy",
+               "status" : "pending",
+               "dependsOn" : [],
+               "id" : "sys_chr_task_godparents",
+               "phase" : "preEvent",
+               "title" : "Confirm Godparents"
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "category" : "Venue",
+               "estimatedCost" : 0,
+               "title" : "Ceremony Fee / Offering",
+               "isMandatory" : true,
+               "id" : "sys_chr_budget_church",
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0
+            }
+         ],
+         "tags" : [
+            "christening",
+            "baptism",
+            "baby",
+            "ceremony",
+            "family"
+         ],
+         "version" : 2
+      }
+   ],
+   "schemaVersion" : 2
 }

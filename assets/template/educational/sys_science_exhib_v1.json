@@ -1,28 +1,269 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_science_exhib_v1",
-      "templateName": "Science Exhibition",
-      "category": "educational",
-      "description": "Event where students display projects, models, and scientific experiments.",
-      "tags": ["science", "exhibition", "education", "student", "projects"],
-      "defaultFields": {
-        "contributionType": "none",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "location", "roles", "inventory"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_sci_task_projects", "eventId": "blueprint_dummy", "title": "Assign Project Spaces", "status": "pending", "phase": "preEvent", "description": "Allot tables and power sockets for models.", "dueOffset": "T-5 days", "role": "Logistics", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_sci_budget_materials", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Display Boards & Supplies", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_sci_timeline_judging", "eventId": "blueprint_dummy", "title": "Project Judging & Evaluation", "phase": "eventDay", "timeOrOffset": "11:00 AM", "dayNumber": 1, "description": "Panel review of student models." }
-      ],
-      "version": 1
-    }
-  ]
+   "templates" : [
+      {
+         "category" : "educational",
+         "defaultFields" : {
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "location",
+               "roles",
+               "inventory",
+               "userManagement"
+            ],
+            "amount" : 0,
+            "contributionType" : "none"
+         },
+         "roleBlueprints" : [
+            {
+               "description" : "Full access to all modules.",
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "guests" : "full",
+                  "users" : "full",
+                  "roles" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "auditLog" : "full",
+                  "tasks" : "full",
+                  "location" : "full",
+                  "vendors" : "full",
+                  "budget" : "full",
+                  "customFields" : "full",
+                  "chat" : "full",
+                  "contribution" : "full"
+               },
+               "id" : "sys_role_admin"
+            },
+            {
+               "moduleAccess" : {
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "guests" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "auditLog" : "view",
+                  "tasks" : "edit",
+                  "budget" : "edit",
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "contribution" : "edit",
+                  "customFields" : "view",
+                  "chat" : "full"
+               },
+               "name" : "Organizer",
+               "id" : "sys_role_organizer",
+               "description" : "Manage most event details."
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "moduleAccess" : {
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "view",
+                  "timeline" : "edit",
+                  "inventory" : "view",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view",
+                  "tasks" : "edit",
+                  "auditLog" : "none"
+               },
+               "name" : "Coordinator",
+               "id" : "sys_role_coordinator"
+            },
+            {
+               "description" : "Update task progress.",
+               "moduleAccess" : {
+                  "guests" : "none",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "update",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none"
+               },
+               "name" : "Volunteer",
+               "id" : "sys_role_volunteer"
+            },
+            {
+               "moduleAccess" : {
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "customFields" : "none",
+                  "chat" : "edit",
+                  "contribution" : "view",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none"
+               },
+               "name" : "Participant",
+               "id" : "sys_role_participant",
+               "description" : "Regular participant."
+            },
+            {
+               "id" : "sys_role_guest",
+               "name" : "Guest",
+               "moduleAccess" : {
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none"
+               },
+               "description" : "Limited viewing access."
+            },
+            {
+               "id" : "sys_role_viewer",
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "guests" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view",
+                  "roles" : "view",
+                  "users" : "view",
+                  "tasks" : "view",
+                  "auditLog" : "view",
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "contribution" : "view",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "budget" : "view"
+               },
+               "description" : "Read-only access."
+            },
+            {
+               "moduleAccess" : {
+                  "budget" : "view",
+                  "users" : "full",
+                  "roles" : "full",
+                  "announcements" : "edit"
+               },
+               "name" : "Principal/Admin",
+               "id" : "sys_role_principal",
+               "description" : "Institutional oversight."
+            },
+            {
+               "description" : "Academic lead.",
+               "moduleAccess" : {
+                  "tasks" : "edit",
+                  "roles" : "none",
+                  "chat" : "full",
+                  "timeline" : "edit",
+                  "users" : "none"
+               },
+               "name" : "Teacher Coordinator",
+               "id" : "sys_role_teacher"
+            },
+            {
+               "moduleAccess" : {
+                  "users" : "none",
+                  "timeline" : "view",
+                  "chat" : "edit",
+                  "roles" : "none"
+               },
+               "name" : "Student Participant",
+               "id" : "sys_role_student",
+               "description" : "Performing students."
+            },
+            {
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "timeline" : "view",
+                  "users" : "none",
+                  "tasks" : "view"
+               },
+               "name" : "Judge",
+               "id" : "sys_role_judge",
+               "description" : "Evaluating competitions."
+            }
+         ],
+         "templateName" : "Science Exhibition",
+         "taskBlueprints" : [
+            {
+               "status" : "pending",
+               "dependsOn" : [],
+               "id" : "sys_sci_task_projects",
+               "title" : "Assign Project Spaces",
+               "phase" : "preEvent",
+               "dueOffset" : "T-5 days",
+               "description" : "Allot tables and power sockets for models.",
+               "role" : "Logistics",
+               "eventId" : "blueprint_dummy"
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "category" : "Miscellaneous",
+               "title" : "Display Boards & Supplies",
+               "estimatedCost" : 0,
+               "isMandatory" : true,
+               "id" : "sys_sci_budget_materials",
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0
+            }
+         ],
+         "tags" : [
+            "science",
+            "exhibition",
+            "education",
+            "student",
+            "projects"
+         ],
+         "timelineBlueprints" : [
+            {
+               "id" : "sys_sci_timeline_judging",
+               "title" : "Project Judging & Evaluation",
+               "dayNumber" : 1,
+               "description" : "Panel review of student models.",
+               "timeOrOffset" : "11:00 AM",
+               "eventId" : "blueprint_dummy",
+               "phase" : "eventDay"
+            }
+         ],
+         "templateId" : "sys_science_exhib_v1",
+         "version" : 2,
+         "description" : "Event where students display projects, models, and scientific experiments."
+      }
+   ],
+   "version" : 4,
+   "schemaVersion" : 2
 }

@@ -1,28 +1,225 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_hajj_sendoff_v1",
-      "templateName": "Hajj Send-off Event",
-      "category": "personal",
-      "description": "Gathering to bid farewell and offer prayers for family or community members embarking on the Hajj pilgrimage.",
-      "tags": ["hajj", "pilgrimage", "send-off", "farewell", "spiritual", "family"],
-      "defaultFields": {
-        "contributionType": "none",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_hso_task_prayers", "eventId": "blueprint_dummy", "title": "Coordinate Group Prayers / Duas", "status": "pending", "phase": "preEvent", "description": "Ensure the spiritual program is organized.", "dueOffset": "T-3 days", "role": "Host", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_hso_budget_hosting", "eventId": "blueprint_dummy", "category": "Food", "title": "Refreshments for Guests", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_hso_timeline_dua", "eventId": "blueprint_dummy", "title": "Special Prayer Session (Dua)", "phase": "eventDay", "timeOrOffset": "05:30 PM", "dayNumber": 1, "description": "Group prayer for the pilgrims." }
-      ],
-      "version": 1
-    }
-  ]
+   "version" : 4,
+   "templates" : [
+      {
+         "category" : "personal",
+         "roleBlueprints" : [
+            {
+               "id" : "sys_role_admin",
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "guests" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "users" : "full",
+                  "roles" : "full",
+                  "auditLog" : "full",
+                  "tasks" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "budget" : "full",
+                  "customFields" : "full",
+                  "chat" : "full",
+                  "contribution" : "full"
+               },
+               "description" : "Full access to all modules."
+            },
+            {
+               "description" : "Manage most event details.",
+               "name" : "Organizer",
+               "moduleAccess" : {
+                  "contribution" : "edit",
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "budget" : "edit",
+                  "location" : "edit",
+                  "vendors" : "edit",
+                  "tasks" : "edit",
+                  "auditLog" : "view",
+                  "ticketing" : "edit",
+                  "announcements" : "edit",
+                  "roles" : "none",
+                  "users" : "view",
+                  "guests" : "edit",
+                  "timeline" : "edit",
+                  "inventory" : "edit"
+               },
+               "id" : "sys_role_organizer"
+            },
+            {
+               "id" : "sys_role_coordinator",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "timeline" : "edit",
+                  "inventory" : "view",
+                  "guests" : "view",
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "tasks" : "edit",
+                  "auditLog" : "none"
+               },
+               "name" : "Coordinator",
+               "description" : "Manage tasks and timeline."
+            },
+            {
+               "id" : "sys_role_volunteer",
+               "name" : "Volunteer",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "tasks" : "update",
+                  "auditLog" : "none"
+               },
+               "description" : "Update task progress."
+            },
+            {
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "contribution" : "view",
+                  "guests" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none"
+               },
+               "id" : "sys_role_participant",
+               "description" : "Regular participant."
+            },
+            {
+               "id" : "sys_role_guest",
+               "name" : "Guest",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "none"
+               },
+               "description" : "Limited viewing access."
+            },
+            {
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "view",
+                  "roles" : "view",
+                  "users" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view",
+                  "tasks" : "view",
+                  "auditLog" : "view",
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "contribution" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view"
+               },
+               "id" : "sys_role_viewer",
+               "description" : "Read-only access."
+            }
+         ],
+         "templateName" : "Hajj Send-off Event",
+         "description" : "Gathering to bid farewell and offer prayers for family or community members embarking on the Hajj pilgrimage.",
+         "timelineBlueprints" : [
+            {
+               "id" : "sys_hso_timeline_dua",
+               "title" : "Special Prayer Session (Dua)",
+               "description" : "Group prayer for the pilgrims.",
+               "dayNumber" : 1,
+               "eventId" : "blueprint_dummy",
+               "timeOrOffset" : "05:30 PM",
+               "phase" : "eventDay"
+            }
+         ],
+         "templateId" : "sys_hajj_sendoff_v1",
+         "defaultFields" : {
+            "contributionType" : "none",
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "communication",
+               "roles",
+               "userManagement"
+            ],
+            "amount" : 0
+         },
+         "budgetBlueprints" : [
+            {
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0,
+               "estimatedCost" : 0,
+               "title" : "Refreshments for Guests",
+               "isMandatory" : true,
+               "id" : "sys_hso_budget_hosting",
+               "category" : "Food"
+            }
+         ],
+         "taskBlueprints" : [
+            {
+               "phase" : "preEvent",
+               "title" : "Coordinate Group Prayers / Duas",
+               "status" : "pending",
+               "dependsOn" : [],
+               "id" : "sys_hso_task_prayers",
+               "role" : "Host",
+               "eventId" : "blueprint_dummy",
+               "dueOffset" : "T-3 days",
+               "description" : "Ensure the spiritual program is organized."
+            }
+         ],
+         "tags" : [
+            "hajj",
+            "pilgrimage",
+            "send-off",
+            "farewell",
+            "spiritual",
+            "family"
+         ],
+         "version" : 2
+      }
+   ],
+   "schemaVersion" : 2
 }

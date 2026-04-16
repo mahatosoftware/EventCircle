@@ -1,29 +1,280 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_black_friday_v1",
-      "templateName": "Black Friday Sale Event",
-      "category": "corporate",
-      "description": "Large scale commercial sale event featuring heavy discounts and marketing.",
-      "tags": ["black friday", "sale", "corporate", "marketing", "discounts"],
-      "defaultFields": {
-        "contributionType": "fixed",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "roles", "inventory", "media"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_bf_task_discounts", "eventId": "blueprint_dummy", "title": "Finalize Product Discount List", "status": "pending", "phase": "preEvent", "description": "Select items and discount percentages.", "dueOffset": "T-30 days", "role": "Organizer", "dependsOn": [] },
-        { "id": "sys_bf_task_ads", "eventId": "blueprint_dummy", "title": "Prepare Ad Campaigns", "status": "pending", "phase": "preEvent", "description": "Design graphics and schedules for the sale.", "dueOffset": "T-15 days", "role": "Media", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_bf_budget_marketing", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Ads & Digital Marketing", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_bf_timeline_launch", "eventId": "blueprint_dummy", "title": "Main Sale Commencement", "phase": "eventDay", "timeOrOffset": "06:00 AM", "dayNumber": 1, "description": "Door-busting start of the sale." }
-      ],
-      "version": 1
-    }
-  ]
+   "schemaVersion" : 2,
+   "version" : 4,
+   "templates" : [
+      {
+         "budgetBlueprints" : [
+            {
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0,
+               "isMandatory" : true,
+               "id" : "sys_bf_budget_marketing",
+               "title" : "Ads & Digital Marketing",
+               "estimatedCost" : 0,
+               "category" : "Miscellaneous"
+            }
+         ],
+         "taskBlueprints" : [
+            {
+               "id" : "sys_bf_task_discounts",
+               "status" : "pending",
+               "dependsOn" : [],
+               "title" : "Finalize Product Discount List",
+               "phase" : "preEvent",
+               "description" : "Select items and discount percentages.",
+               "dueOffset" : "T-30 days",
+               "eventId" : "blueprint_dummy",
+               "role" : "Organizer"
+            },
+            {
+               "description" : "Design graphics and schedules for the sale.",
+               "dueOffset" : "T-15 days",
+               "eventId" : "blueprint_dummy",
+               "role" : "Media",
+               "id" : "sys_bf_task_ads",
+               "dependsOn" : [],
+               "status" : "pending",
+               "phase" : "preEvent",
+               "title" : "Prepare Ad Campaigns"
+            }
+         ],
+         "tags" : [
+            "black friday",
+            "sale",
+            "corporate",
+            "marketing",
+            "discounts"
+         ],
+         "version" : 2,
+         "defaultFields" : {
+            "contributionType" : "fixed",
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "roles",
+               "inventory",
+               "media",
+               "userManagement"
+            ],
+            "amount" : 0
+         },
+         "description" : "Large scale commercial sale event featuring heavy discounts and marketing.",
+         "timelineBlueprints" : [
+            {
+               "id" : "sys_bf_timeline_launch",
+               "title" : "Main Sale Commencement",
+               "description" : "Door-busting start of the sale.",
+               "dayNumber" : 1,
+               "eventId" : "blueprint_dummy",
+               "timeOrOffset" : "06:00 AM",
+               "phase" : "eventDay"
+            }
+         ],
+         "templateId" : "sys_black_friday_v1",
+         "category" : "corporate",
+         "roleBlueprints" : [
+            {
+               "id" : "sys_role_admin",
+               "moduleAccess" : {
+                  "tasks" : "full",
+                  "auditLog" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "contribution" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "budget" : "full",
+                  "timeline" : "full",
+                  "inventory" : "full",
+                  "guests" : "full",
+                  "roles" : "full",
+                  "users" : "full",
+                  "ticketing" : "full",
+                  "announcements" : "full"
+               },
+               "name" : "Admin",
+               "description" : "Full access to all modules."
+            },
+            {
+               "description" : "Manage most event details.",
+               "moduleAccess" : {
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "guests" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "auditLog" : "view",
+                  "tasks" : "edit",
+                  "budget" : "edit",
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "contribution" : "edit",
+                  "chat" : "full",
+                  "customFields" : "view"
+               },
+               "name" : "Organizer",
+               "id" : "sys_role_organizer"
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "moduleAccess" : {
+                  "tasks" : "edit",
+                  "auditLog" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view",
+                  "guests" : "view",
+                  "timeline" : "edit",
+                  "inventory" : "view",
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "roles" : "none",
+                  "users" : "none"
+               },
+               "name" : "Coordinator",
+               "id" : "sys_role_coordinator"
+            },
+            {
+               "description" : "Update task progress.",
+               "moduleAccess" : {
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "tasks" : "update",
+                  "auditLog" : "none",
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none"
+               },
+               "name" : "Volunteer",
+               "id" : "sys_role_volunteer"
+            },
+            {
+               "description" : "Regular participant.",
+               "id" : "sys_role_participant",
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "contribution" : "view",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none"
+               }
+            },
+            {
+               "id" : "sys_role_guest",
+               "moduleAccess" : {
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "contribution" : "none",
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none"
+               },
+               "name" : "Guest",
+               "description" : "Limited viewing access."
+            },
+            {
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "guests" : "view",
+                  "users" : "view",
+                  "roles" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "view",
+                  "auditLog" : "view",
+                  "tasks" : "view",
+                  "budget" : "view",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "contribution" : "view",
+                  "chat" : "view",
+                  "customFields" : "view"
+               },
+               "id" : "sys_role_viewer",
+               "description" : "Read-only access."
+            },
+            {
+               "description" : "Corporate execution lead.",
+               "id" : "sys_role_manager",
+               "name" : "Event Manager",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "budget" : "edit",
+                  "vendors" : "full",
+                  "users" : "view",
+                  "tasks" : "full"
+               }
+            },
+            {
+               "id" : "sys_role_hr",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "users" : "view",
+                  "announcements" : "edit",
+                  "guests" : "edit"
+               },
+               "name" : "HR Coordinator",
+               "description" : "Department coordination."
+            },
+            {
+               "description" : "Session presenter.",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "timeline" : "view",
+                  "location" : "view",
+                  "users" : "none"
+               },
+               "name" : "Speaker",
+               "id" : "sys_role_speaker"
+            },
+            {
+               "id" : "sys_role_sponsor",
+               "moduleAccess" : {
+                  "vendors" : "edit",
+                  "users" : "view",
+                  "location" : "view",
+                  "roles" : "none"
+               },
+               "name" : "Sponsor Manager",
+               "description" : "Branding lead."
+            }
+         ],
+         "templateName" : "Black Friday Sale Event"
+      }
+   ]
 }

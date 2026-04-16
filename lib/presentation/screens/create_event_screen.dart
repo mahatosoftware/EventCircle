@@ -205,160 +205,99 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
     final total = _blueprintWriteCount(template);
     if (total == 0) return;
 
-    int done = 0;
-    int inBatch = 0;
-    WriteBatch batch = db.batch();
-    int lastUiDone = -1;
-    DateTime lastUiAt = DateTime.fromMillisecondsSinceEpoch(0);
-
-    _setSubmitStatus('Setup 0/$total');
-
-    Future<void> flush(String label) async {
-      if (inBatch == 0) return;
-      _setSubmitStatus('Setup $done/$total');
-      await _commitBatch(batch, label: label);
-      batch = db.batch();
-      inBatch = 0;
-      // Yield to the UI thread between commits so the app doesn't look frozen.
-      await Future<void>.delayed(Duration.zero);
+    _setSubmitStatus('Preparing modules…');
+    
+    // 1) Collect all document writes into a list of actions
+    final actions = <void Function(WriteBatch batch)>[];
+    
+    // Helper to generate IDs and prepare writes
+    void queueWrite(CollectionReference col, String id, Map<String, dynamic> data) {
+      actions.add((batch) => batch.set(col.doc(id), data));
     }
 
-    Future<void> addWrite(void Function(WriteBatch b) write) async {
-      write(batch);
-      done++;
-      inBatch++;
-
-      final now = DateTime.now();
-      final shouldUpdate =
-          done == 1 || done == total || (done - lastUiDone) >= 10 || now.difference(lastUiAt).inMilliseconds >= 250;
-      if (shouldUpdate) {
-        lastUiDone = done;
-        lastUiAt = now;
-        _setSubmitStatus('Setup $done/$total');
-      }
-
-      // Allow the UI to paint intermediate progress, especially when total is small
-      // (otherwise all writes run before the first await/flush).
-      if (shouldUpdate) {
-        await Future<void>.delayed(Duration.zero);
-      }
-
-      if (inBatch >= _maxWritesPerBatch) {
-        // Commit boundary handled by callers (loop awaits flush()).
-      }
-    }
-
-    // Task Blueprints (global tasks collection)
+    // Tasks
     for (final task in template.taskBlueprints) {
-      final taskId = uuid.v4();
-      await addWrite((b) => b.set(
-            db.collection('tasks').doc(taskId),
-            task.copyWith(id: taskId, eventId: eventId).toJson(),
-          ));
-      if (inBatch >= _maxWritesPerBatch) await flush('tasks');
+      final id = uuid.v4();
+      queueWrite(db.collection('tasks'), id, task.copyWith(id: id, eventId: eventId).toJson());
     }
-
-    // Timeline Blueprints
+    // Timeline
     for (final item in template.timelineBlueprints) {
-      final itemId = uuid.v4();
-      await addWrite((b) => b.set(
-            db.collection('events').doc(eventId).collection('timeline').doc(itemId),
-            item.copyWith(id: itemId, eventId: eventId).toJson(),
-          ));
-      if (inBatch >= _maxWritesPerBatch) await flush('timeline');
+      final id = uuid.v4();
+      queueWrite(db.collection('events').doc(eventId).collection('timeline'), id, item.copyWith(id: id, eventId: eventId).toJson());
     }
-
-    // Vendor Blueprints
+    // Vendors
     for (final vendor in template.vendorBlueprints) {
-      final vendorId = uuid.v4();
-      await addWrite((b) => b.set(
-            db.collection('events').doc(eventId).collection('vendors').doc(vendorId),
-            vendor.copyWith(id: vendorId, eventId: eventId).toJson(),
-          ));
-      if (inBatch >= _maxWritesPerBatch) await flush('vendors');
+      final id = uuid.v4();
+      queueWrite(db.collection('events').doc(eventId).collection('vendors'), id, vendor.copyWith(id: id, eventId: eventId).toJson());
     }
-
-    // Inventory Blueprints
+    // Inventory
     for (final item in template.inventoryBlueprints) {
-      final itemId = uuid.v4();
-      await addWrite((b) => b.set(
-            db.collection('events').doc(eventId).collection('inventory').doc(itemId),
-            item.copyWith(id: itemId, eventId: eventId).toJson(),
-          ));
-      if (inBatch >= _maxWritesPerBatch) await flush('inventory');
+      final id = uuid.v4();
+      queueWrite(db.collection('events').doc(eventId).collection('inventory'), id, item.copyWith(id: id, eventId: eventId).toJson());
     }
-
-    // Role Blueprints
+    // Roles
     for (final def in template.roleBlueprints) {
-      final roleId = uuid.v4();
+      final id = uuid.v4();
       final role = EventRoleModel(
-        id: roleId,
+        id: id,
         eventId: eventId,
         name: def.name,
         description: def.description,
         moduleAccess: def.moduleAccess,
         userIds: const [],
       );
-      await addWrite((b) => b.set(
-            db.collection('events').doc(eventId).collection('roles').doc(roleId),
-            role.toJson(),
-          ));
-      if (inBatch >= _maxWritesPerBatch) await flush('roles');
+      queueWrite(db.collection('events').doc(eventId).collection('roles'), id, role.toJson());
     }
-
-    // Venue Blueprints
+    // Venues
     for (final venue in template.venueBlueprints) {
-      final venueId = uuid.v4();
-      await addWrite((b) => b.set(
-            db.collection('events').doc(eventId).collection('venues').doc(venueId),
-            venue.copyWith(id: venueId, eventId: eventId).toJson(),
-          ));
-      if (inBatch >= _maxWritesPerBatch) await flush('venues');
+      final id = uuid.v4();
+      queueWrite(db.collection('events').doc(eventId).collection('venues'), id, venue.copyWith(id: id, eventId: eventId).toJson());
     }
-
-    // Ticket Blueprints
+    // Tickets
     for (final ticket in template.ticketBlueprints) {
-      final ticketId = uuid.v4();
-      await addWrite((b) => b.set(
-            db.collection('events').doc(eventId).collection('tickets').doc(ticketId),
-            ticket.copyWith(id: ticketId, eventId: eventId).toJson(),
-          ));
-      if (inBatch >= _maxWritesPerBatch) await flush('tickets');
+      final id = uuid.v4();
+      queueWrite(db.collection('events').doc(eventId).collection('tickets'), id, ticket.copyWith(id: id, eventId: eventId).toJson());
     }
-
     // Custom Fields
     for (final field in template.customFieldBlueprints) {
-      final fieldId = uuid.v4();
-      await addWrite((b) => b.set(
-            db.collection('events').doc(eventId).collection('customFields').doc(fieldId),
-            field.copyWith(id: fieldId, eventId: eventId).toJson(),
-          ));
-      if (inBatch >= _maxWritesPerBatch) await flush('customFields');
+      final id = uuid.v4();
+      queueWrite(db.collection('events').doc(eventId).collection('customFields'), id, field.copyWith(id: id, eventId: eventId).toJson());
     }
-
     // Announcements
     for (final announcement in template.announcementBlueprints) {
-      final announcementId = uuid.v4();
-      await addWrite((b) => b.set(
-            db.collection('events').doc(eventId).collection('announcements').doc(announcementId),
-            announcement
-                .copyWith(id: announcementId, eventId: eventId, createdAt: DateTime.now())
-                .toJson(),
-          ));
-      if (inBatch >= _maxWritesPerBatch) await flush('announcements');
+      final id = uuid.v4();
+      queueWrite(db.collection('events').doc(eventId).collection('announcements'), id, announcement.copyWith(id: id, eventId: eventId, createdAt: DateTime.now()).toJson());
     }
-
     // Budget
     for (final item in template.budgetBlueprints) {
-      final itemId = uuid.v4();
-      await addWrite((b) => b.set(
-            db.collection('events').doc(eventId).collection('budget').doc(itemId),
-            item.copyWith(id: itemId, eventId: eventId).toJson(),
-          ));
-      if (inBatch >= _maxWritesPerBatch) await flush('budget');
+      final id = uuid.v4();
+      queueWrite(db.collection('events').doc(eventId).collection('budget'), id, item.copyWith(id: id, eventId: eventId).toJson());
     }
 
-    await flush('final');
+    // 2) Chunk and commit in parallel
+    // We use a slightly smaller chunk size (300) to keep individual request sizes smaller for slow networks.
+    const chunkSize = 300; 
+    final List<Future<void>> commitFutures = [];
+    int batchCount = (actions.length / chunkSize).ceil();
+    int finishedBatches = 0;
+
+    for (int i = 0; i < actions.length; i += chunkSize) {
+      final end = (i + chunkSize < actions.length) ? i + chunkSize : actions.length;
+      final chunk = actions.sublist(i, end);
+      final batch = db.batch();
+      for (final action in chunk) {
+        action(batch);
+      }
+      
+      final label = 'Batch ${(i ~/ chunkSize) + 1}/$batchCount';
+      commitFutures.add(_commitBatch(batch, label: label).then((_) {
+        finishedBatches++;
+        _setSubmitStatus('Setup $finishedBatches/$batchCount…');
+      }));
+    }
+
+    _setSubmitStatus('Committing ${commitFutures.length} batches…');
+    await Future.wait(commitFutures);
     _setSubmitStatus(null);
   }
 
@@ -1133,22 +1072,37 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
   }
 
   String _getModuleSummary(TemplateModule module) {
+    if (_selectedTemplate == null) return '';
     switch (module) {
-      case TemplateModule.task: return '${_selectedTemplate!.taskBlueprints.length} tasks pre-filled';
+      case TemplateModule.task:
+        return '${_selectedTemplate!.taskBlueprints.length} tasks pre-filled';
       case TemplateModule.budget:
-      case TemplateModule.expenses: return 'Budget items & Expense workflow';
-      case TemplateModule.contribution: return 'Auto-configured targets';
-      case TemplateModule.userManagement: return 'Team members can be added';
-      case TemplateModule.guestManagement: return 'RSVP & Categories active';
-      case TemplateModule.timeline: return '${_selectedTemplate!.timelineBlueprints.length} phases';
-      case TemplateModule.vendor: return '${_selectedTemplate!.vendorBlueprints.length} vendor roles';
-      case TemplateModule.inventory: return '${_selectedTemplate!.inventoryBlueprints.length} items';
-      case TemplateModule.communication: return 'Group messaging enabled';
-      case TemplateModule.roles: return 'Team hierarchy set';
-      case TemplateModule.location: return 'Venue ground blueprints';
-      case TemplateModule.ticketing: return 'Standard ticket tiers';
-      case TemplateModule.customFields: return 'Metadata fields active';
-      case TemplateModule.announcements: return 'Welcome alerts ready';
+      case TemplateModule.expenses:
+        return '${_selectedTemplate!.budgetBlueprints.length} budget items';
+      case TemplateModule.contribution:
+        return 'Auto-configured targets';
+      case TemplateModule.userManagement:
+        return 'Team members can be added';
+      case TemplateModule.guestManagement:
+        return 'RSVP & Categories active';
+      case TemplateModule.timeline:
+        return '${_selectedTemplate!.timelineBlueprints.length} phases';
+      case TemplateModule.vendor:
+        return '${_selectedTemplate!.vendorBlueprints.length} vendor roles';
+      case TemplateModule.inventory:
+        return '${_selectedTemplate!.inventoryBlueprints.length} items';
+      case TemplateModule.communication:
+        return 'Group messaging enabled';
+      case TemplateModule.roles:
+        return '${_selectedTemplate!.roleBlueprints.length} roles pre-defined';
+      case TemplateModule.location:
+        return 'Venue ground blueprints';
+      case TemplateModule.ticketing:
+        return '${_selectedTemplate!.ticketBlueprints.length} ticket tiers';
+      case TemplateModule.customFields:
+        return '${_selectedTemplate!.customFieldBlueprints.length} fields active';
+      case TemplateModule.announcements:
+        return '${_selectedTemplate!.announcementBlueprints.length} alerts ready';
     }
   }
 }

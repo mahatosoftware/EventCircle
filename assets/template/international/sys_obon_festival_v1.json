@@ -1,28 +1,267 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_obon_fest_v1",
-      "templateName": "Obon Festival",
-      "category": "communityAndCultural",
-      "description": "Japanese Buddhist custom to honor early spirits of one's ancestors.",
-      "tags": ["obon", "festival", "ancestors", "traditional", "cultural"],
-      "defaultFields": {
-        "contributionType": "voluntary",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "roles", "inventory"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_obon_task_lanterns", "eventId": "blueprint_dummy", "title": "Buy Floating/Display Lanterns", "status": "pending", "phase": "preEvent", "description": "Secure specific lanterns for the ritual.", "dueOffset": "T-10 days", "role": "Logistics", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_obon_budget_ritual", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Ritual Supplies & Offerings", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_obon_timeline_dance", "eventId": "blueprint_dummy", "title": "Bon Odori Dance Session", "phase": "eventDay", "timeOrOffset": "07:00 PM", "dayNumber": 1, "description": "Communal ritual dancing." }
-      ],
-      "version": 1
-    }
-  ]
+   "version" : 4,
+   "templates" : [
+      {
+         "templateId" : "sys_obon_fest_v1",
+         "timelineBlueprints" : [
+            {
+               "dayNumber" : 1,
+               "description" : "Communal ritual dancing.",
+               "timeOrOffset" : "07:00 PM",
+               "eventId" : "blueprint_dummy",
+               "id" : "sys_obon_timeline_dance",
+               "title" : "Bon Odori Dance Session",
+               "phase" : "eventDay"
+            }
+         ],
+         "version" : 2,
+         "description" : "Japanese Buddhist custom to honor early spirits of one's ancestors.",
+         "taskBlueprints" : [
+            {
+               "title" : "Buy Floating/Display Lanterns",
+               "phase" : "preEvent",
+               "dependsOn" : [],
+               "status" : "pending",
+               "id" : "sys_obon_task_lanterns",
+               "role" : "Logistics",
+               "eventId" : "blueprint_dummy",
+               "dueOffset" : "T-10 days",
+               "description" : "Secure specific lanterns for the ritual."
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "category" : "Miscellaneous",
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0,
+               "title" : "Ritual Supplies & Offerings",
+               "estimatedCost" : 0,
+               "isMandatory" : true,
+               "id" : "sys_obon_budget_ritual"
+            }
+         ],
+         "tags" : [
+            "obon",
+            "festival",
+            "ancestors",
+            "traditional",
+            "cultural"
+         ],
+         "roleBlueprints" : [
+            {
+               "description" : "Full access to all modules.",
+               "id" : "sys_role_admin",
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "auditLog" : "full",
+                  "tasks" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "budget" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "contribution" : "full",
+                  "guests" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "users" : "full",
+                  "roles" : "full"
+               }
+            },
+            {
+               "id" : "sys_role_organizer",
+               "name" : "Organizer",
+               "moduleAccess" : {
+                  "tasks" : "edit",
+                  "auditLog" : "view",
+                  "contribution" : "edit",
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "budget" : "edit",
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "timeline" : "edit",
+                  "inventory" : "edit",
+                  "guests" : "edit",
+                  "roles" : "none",
+                  "users" : "view",
+                  "ticketing" : "edit",
+                  "announcements" : "edit"
+               },
+               "description" : "Manage most event details."
+            },
+            {
+               "moduleAccess" : {
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "none",
+                  "inventory" : "view",
+                  "timeline" : "edit",
+                  "guests" : "view",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "edit"
+               },
+               "name" : "Coordinator",
+               "id" : "sys_role_coordinator",
+               "description" : "Manage tasks and timeline."
+            },
+            {
+               "description" : "Update task progress.",
+               "moduleAccess" : {
+                  "auditLog" : "none",
+                  "tasks" : "update",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "guests" : "none",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none"
+               },
+               "name" : "Volunteer",
+               "id" : "sys_role_volunteer"
+            },
+            {
+               "description" : "Regular participant.",
+               "id" : "sys_role_participant",
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "contribution" : "view",
+                  "customFields" : "none",
+                  "chat" : "edit",
+                  "guests" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none"
+               }
+            },
+            {
+               "description" : "Limited viewing access.",
+               "id" : "sys_role_guest",
+               "name" : "Guest",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "contribution" : "none",
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "none"
+               }
+            },
+            {
+               "description" : "Read-only access.",
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "guests" : "view",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "view",
+                  "users" : "view",
+                  "roles" : "view",
+                  "auditLog" : "view",
+                  "tasks" : "view",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "budget" : "view",
+                  "customFields" : "view",
+                  "chat" : "view",
+                  "contribution" : "view"
+               },
+               "id" : "sys_role_viewer"
+            },
+            {
+               "moduleAccess" : {
+                  "announcements" : "edit",
+                  "roles" : "view",
+                  "users" : "view"
+               },
+               "name" : "Society Admin",
+               "id" : "sys_role_society_admin",
+               "description" : "Board coordination."
+            },
+            {
+               "id" : "sys_role_coord",
+               "name" : "Event Coordinator",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "roles" : "none",
+                  "timeline" : "full",
+                  "chat" : "full",
+                  "tasks" : "full"
+               },
+               "description" : "Overall execution lead."
+            },
+            {
+               "description" : "Manage funds.",
+               "id" : "sys_role_treasurer",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "contribution" : "full",
+                  "users" : "none",
+                  "budget" : "full"
+               },
+               "name" : "Treasurer"
+            },
+            {
+               "description" : "Crowd control.",
+               "moduleAccess" : {
+                  "chat" : "edit",
+                  "roles" : "none",
+                  "location" : "view",
+                  "users" : "none"
+               },
+               "name" : "Security Coordinator",
+               "id" : "sys_role_security"
+            }
+         ],
+         "templateName" : "Obon Festival",
+         "category" : "communityAndCultural",
+         "defaultFields" : {
+            "contributionType" : "voluntary",
+            "amount" : 0,
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "roles",
+               "inventory",
+               "userManagement"
+            ]
+         }
+      }
+   ],
+   "schemaVersion" : 2
 }

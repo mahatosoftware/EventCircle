@@ -1,29 +1,282 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_new_year_v1",
-      "templateName": "New Year Party",
-      "category": "communityAndCultural",
-      "description": "Grand celebration to welcome the new year with music, food, and countdown.",
-      "tags": ["new year", "party", "celebration", "countdown", "midnight"],
-      "defaultFields": {
-        "contributionType": "fixed",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "location", "roles", "inventory", "contribution"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_ny_task_venue", "eventId": "blueprint_dummy", "title": "Book Party Venue", "status": "pending", "phase": "preEvent", "description": "Secure a hall or restaurant for the celebration.", "dueOffset": "T-45 days", "role": "Organizer", "dependsOn": [] },
-        { "id": "sys_ny_task_dj", "eventId": "blueprint_dummy", "title": "Secure DJ and Music System", "status": "pending", "phase": "preEvent", "description": "Ensure music for the party and countdown.", "dueOffset": "T-20 days", "role": "Program Coordinator", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_ny_budget_catering", "eventId": "blueprint_dummy", "category": "Food", "title": "Party Snacks & Dinner", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_ny_timeline_countdown", "eventId": "blueprint_dummy", "title": "Midnight Countdown", "phase": "eventDay", "timeOrOffset": "11:59 PM", "dayNumber": 1, "description": "Group countdown to the new year." }
-      ],
-      "version": 1
-    }
-  ]
+   "schemaVersion" : 2,
+   "version" : 4,
+   "templates" : [
+      {
+         "defaultFields" : {
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "communication",
+               "location",
+               "roles",
+               "inventory",
+               "contribution",
+               "userManagement"
+            ],
+            "amount" : 0,
+            "contributionType" : "fixed"
+         },
+         "tags" : [
+            "new year",
+            "party",
+            "celebration",
+            "countdown",
+            "midnight"
+         ],
+         "budgetBlueprints" : [
+            {
+               "category" : "Food",
+               "isMandatory" : true,
+               "id" : "sys_ny_budget_catering",
+               "title" : "Party Snacks & Dinner",
+               "estimatedCost" : 0,
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0
+            }
+         ],
+         "taskBlueprints" : [
+            {
+               "role" : "Organizer",
+               "dueOffset" : "T-45 days",
+               "phase" : "preEvent",
+               "status" : "pending",
+               "eventId" : "blueprint_dummy",
+               "description" : "Secure a hall or restaurant for the celebration.",
+               "title" : "Book Party Venue",
+               "dependsOn" : [],
+               "id" : "sys_ny_task_venue"
+            },
+            {
+               "role" : "Program Coordinator",
+               "dueOffset" : "T-20 days",
+               "phase" : "preEvent",
+               "status" : "pending",
+               "eventId" : "blueprint_dummy",
+               "description" : "Ensure music for the party and countdown.",
+               "title" : "Secure DJ and Music System",
+               "id" : "sys_ny_task_dj",
+               "dependsOn" : []
+            }
+         ],
+         "version" : 3,
+         "category" : "communityAndCultural",
+         "templateName" : "New Year Party",
+         "roleBlueprints" : [
+            {
+               "description" : "Full access to all modules.",
+               "id" : "sys_role_admin",
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "auditLog" : "full",
+                  "tasks" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "budget" : "full",
+                  "customFields" : "full",
+                  "chat" : "full",
+                  "contribution" : "full",
+                  "guests" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "users" : "full",
+                  "roles" : "full"
+               }
+            },
+            {
+               "description" : "Manage most event details.",
+               "id" : "sys_role_organizer",
+               "moduleAccess" : {
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "guests" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "budget" : "edit",
+                  "location" : "edit",
+                  "vendors" : "edit",
+                  "contribution" : "edit",
+                  "customFields" : "view",
+                  "chat" : "full",
+                  "auditLog" : "view",
+                  "tasks" : "edit"
+               },
+               "name" : "Organizer"
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "id" : "sys_role_coordinator",
+               "moduleAccess" : {
+                  "inventory" : "view",
+                  "timeline" : "edit",
+                  "guests" : "view",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "edit",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none"
+               },
+               "name" : "Coordinator"
+            },
+            {
+               "description" : "Update task progress.",
+               "id" : "sys_role_volunteer",
+               "moduleAccess" : {
+                  "guests" : "none",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "update",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "contribution" : "none",
+                  "customFields" : "none",
+                  "chat" : "full"
+               },
+               "name" : "Volunteer"
+            },
+            {
+               "description" : "Regular participant.",
+               "id" : "sys_role_participant",
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "contribution" : "view",
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "none"
+               }
+            },
+            {
+               "moduleAccess" : {
+                  "customFields" : "none",
+                  "chat" : "none",
+                  "contribution" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none"
+               },
+               "name" : "Guest",
+               "id" : "sys_role_guest",
+               "description" : "Limited viewing access."
+            },
+            {
+               "moduleAccess" : {
+                  "tasks" : "view",
+                  "auditLog" : "view",
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "contribution" : "view",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "budget" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "view",
+                  "roles" : "view",
+                  "users" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view"
+               },
+               "name" : "Viewer",
+               "id" : "sys_role_viewer",
+               "description" : "Read-only access."
+            },
+            {
+               "id" : "sys_role_society_admin",
+               "moduleAccess" : {
+                  "roles" : "view",
+                  "users" : "view",
+                  "announcements" : "edit"
+               },
+               "name" : "Society Admin",
+               "description" : "Board coordination."
+            },
+            {
+               "description" : "Overall execution lead.",
+               "name" : "Event Coordinator",
+               "moduleAccess" : {
+                  "tasks" : "full",
+                  "roles" : "none",
+                  "timeline" : "full",
+                  "chat" : "full",
+                  "users" : "none"
+               },
+               "id" : "sys_role_coord"
+            },
+            {
+               "description" : "Manage funds.",
+               "name" : "Treasurer",
+               "moduleAccess" : {
+                  "contribution" : "full",
+                  "roles" : "none",
+                  "users" : "none",
+                  "budget" : "full"
+               },
+               "id" : "sys_role_treasurer"
+            },
+            {
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "chat" : "edit",
+                  "users" : "none",
+                  "location" : "view"
+               },
+               "name" : "Security Coordinator",
+               "id" : "sys_role_security",
+               "description" : "Crowd control."
+            }
+         ],
+         "timelineBlueprints" : [
+            {
+               "timeOrOffset" : "11:59 PM",
+               "eventId" : "blueprint_dummy",
+               "description" : "Group countdown to the new year.",
+               "dayNumber" : 1,
+               "title" : "Midnight Countdown",
+               "id" : "sys_ny_timeline_countdown",
+               "phase" : "eventDay"
+            }
+         ],
+         "templateId" : "sys_new_year_v1",
+         "description" : "Grand celebration to welcome the new year with music, food, and countdown."
+      }
+   ]
 }

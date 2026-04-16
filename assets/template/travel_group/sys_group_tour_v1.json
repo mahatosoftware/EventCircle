@@ -1,28 +1,272 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_group_tour_v1",
-      "templateName": "Group Tour Planning",
-      "category": "travel",
-      "description": "Large scale multi-day travel with a group (Seniors/Students/Clubs).",
-      "tags": ["group tour", "travel", "itinerary", "guided", "bus tour"],
-      "defaultFields": {
-        "contributionType": "fixed",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "roles", "inventory", "contribution", "userManagement"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_tour_task_guide", "eventId": "blueprint_dummy", "title": "Book Certified Tour Guide", "status": "pending", "phase": "preEvent", "description": "Secure expert services for site explanations.", "dueOffset": "T-20 days", "role": "Logistics", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_tour_budget_hotel", "eventId": "blueprint_dummy", "category": "Venue", "title": "Hotel/Accommodation", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_tour_timeline_briefing", "eventId": "blueprint_dummy", "title": "Morning Tour Briefing", "phase": "eventDay", "timeOrOffset": "07:30 AM", "dayNumber": 1, "description": "Overview of daily schedule." }
-      ],
-      "version": 1
-    }
-  ]
+   "schemaVersion" : 2,
+   "version" : 4,
+   "templates" : [
+      {
+         "tags" : [
+            "group tour",
+            "travel",
+            "itinerary",
+            "guided",
+            "bus tour"
+         ],
+         "taskBlueprints" : [
+            {
+               "dueOffset" : "T-20 days",
+               "description" : "Secure expert services for site explanations.",
+               "role" : "Logistics",
+               "eventId" : "blueprint_dummy",
+               "status" : "pending",
+               "dependsOn" : [],
+               "id" : "sys_tour_task_guide",
+               "title" : "Book Certified Tour Guide",
+               "phase" : "preEvent"
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "category" : "Venue",
+               "estimatedCost" : 0,
+               "title" : "Hotel/Accommodation",
+               "id" : "sys_tour_budget_hotel",
+               "isMandatory" : true,
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy"
+            }
+         ],
+         "version" : 2,
+         "defaultFields" : {
+            "contributionType" : "fixed",
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "communication",
+               "roles",
+               "inventory",
+               "contribution",
+               "userManagement"
+            ],
+            "amount" : 0
+         },
+         "description" : "Large scale multi-day travel with a group (Seniors/Students/Clubs).",
+         "templateId" : "sys_group_tour_v1",
+         "timelineBlueprints" : [
+            {
+               "phase" : "eventDay",
+               "id" : "sys_tour_timeline_briefing",
+               "title" : "Morning Tour Briefing",
+               "description" : "Overview of daily schedule.",
+               "dayNumber" : 1,
+               "eventId" : "blueprint_dummy",
+               "timeOrOffset" : "07:30 AM"
+            }
+         ],
+         "category" : "travel",
+         "templateName" : "Group Tour Planning",
+         "roleBlueprints" : [
+            {
+               "description" : "Full access to all modules.",
+               "id" : "sys_role_admin",
+               "moduleAccess" : {
+                  "roles" : "full",
+                  "users" : "full",
+                  "ticketing" : "full",
+                  "announcements" : "full",
+                  "timeline" : "full",
+                  "inventory" : "full",
+                  "guests" : "full",
+                  "contribution" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "budget" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "tasks" : "full",
+                  "auditLog" : "full"
+               },
+               "name" : "Admin"
+            },
+            {
+               "id" : "sys_role_organizer",
+               "moduleAccess" : {
+                  "tasks" : "edit",
+                  "auditLog" : "view",
+                  "customFields" : "view",
+                  "chat" : "full",
+                  "contribution" : "edit",
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "budget" : "edit",
+                  "timeline" : "edit",
+                  "inventory" : "edit",
+                  "guests" : "edit",
+                  "roles" : "none",
+                  "users" : "view",
+                  "ticketing" : "edit",
+                  "announcements" : "edit"
+               },
+               "name" : "Organizer",
+               "description" : "Manage most event details."
+            },
+            {
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "announcements" : "edit",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "guests" : "view",
+                  "inventory" : "view",
+                  "timeline" : "edit",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "budget" : "view",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "edit"
+               },
+               "id" : "sys_role_coordinator",
+               "description" : "Manage tasks and timeline."
+            },
+            {
+               "id" : "sys_role_volunteer",
+               "name" : "Volunteer",
+               "moduleAccess" : {
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "update",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "guests" : "none",
+                  "inventory" : "view",
+                  "timeline" : "view"
+               },
+               "description" : "Update task progress."
+            },
+            {
+               "description" : "Regular participant.",
+               "id" : "sys_role_participant",
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "contribution" : "view",
+                  "customFields" : "none",
+                  "chat" : "edit",
+                  "auditLog" : "none",
+                  "tasks" : "none"
+               }
+            },
+            {
+               "id" : "sys_role_guest",
+               "moduleAccess" : {
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "contribution" : "none",
+                  "customFields" : "none",
+                  "chat" : "none",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none"
+               },
+               "name" : "Guest",
+               "description" : "Limited viewing access."
+            },
+            {
+               "description" : "Read-only access.",
+               "id" : "sys_role_viewer",
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "guests" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view",
+                  "roles" : "view",
+                  "users" : "view",
+                  "tasks" : "view",
+                  "auditLog" : "view",
+                  "contribution" : "view",
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view"
+               }
+            },
+            {
+               "description" : "Itinerary lead.",
+               "id" : "sys_role_trip_org",
+               "name" : "Trip Organizer",
+               "moduleAccess" : {
+                  "budget" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "timeline" : "full",
+                  "tasks" : "full"
+               }
+            },
+            {
+               "description" : "Local trip guide.",
+               "id" : "sys_role_guide",
+               "name" : "Guide",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "location" : "view",
+                  "chat" : "edit",
+                  "timeline" : "view",
+                  "roles" : "none"
+               }
+            },
+            {
+               "description" : "Vehicle lead.",
+               "id" : "sys_role_transport",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "chat" : "edit",
+                  "location" : "edit",
+                  "users" : "none"
+               },
+               "name" : "Transport Coordinator"
+            },
+            {
+               "id" : "sys_role_emergency",
+               "name" : "Emergency Lead",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "chat" : "full",
+                  "users" : "none",
+                  "location" : "view"
+               },
+               "description" : "Safety lead."
+            }
+         ]
+      }
+   ]
 }

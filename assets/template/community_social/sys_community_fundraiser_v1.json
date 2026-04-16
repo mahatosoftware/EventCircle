@@ -1,29 +1,193 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_community_fundraiser_v1",
-      "templateName": "Community Fundraiser",
-      "category": "charityAndFundraising",
-      "description": "Collect contributions, track expenses, and keep members informed.",
-      "tags": [
-        "fundraiser",
-        "fundraising",
-        "donation",
-        "donations",
-        "charity",
-        "contribution",
-        "volunteers",
-        "sponsors",
-        "campaign"
-      ],
-      "defaultFields": {
-        "contributionType": "voluntary",
-        "amount": 0,
-        "enabledModules": ["contribution", "budget", "expenses", "guestManagement", "communication", "roles", "userManagement"]
-      },
-      "version": 1
-    }
-  ]
+   "templates" : [
+      {
+         "templateName" : "Community Fundraiser",
+         "roleBlueprints" : [
+            {
+               "description" : "Full access to all modules.",
+               "moduleAccess" : {
+                  "budget" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "contribution" : "full",
+                  "customFields" : "full",
+                  "chat" : "full",
+                  "auditLog" : "full",
+                  "tasks" : "full",
+                  "users" : "full",
+                  "roles" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "guests" : "full"
+               },
+               "name" : "Admin",
+               "id" : "sys_role_admin"
+            },
+            {
+               "description" : "Manage most event details.",
+               "id" : "sys_role_organizer",
+               "name" : "Organizer",
+               "moduleAccess" : {
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "guests" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "budget" : "edit",
+                  "location" : "edit",
+                  "vendors" : "edit",
+                  "contribution" : "edit",
+                  "customFields" : "view",
+                  "chat" : "full",
+                  "auditLog" : "view",
+                  "tasks" : "edit"
+               }
+            },
+            {
+               "id" : "sys_role_coordinator",
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "auditLog" : "none",
+                  "tasks" : "edit",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "budget" : "view",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "guests" : "view",
+                  "inventory" : "view",
+                  "timeline" : "edit",
+                  "announcements" : "edit",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none"
+               },
+               "description" : "Manage tasks and timeline."
+            },
+            {
+               "description" : "Update task progress.",
+               "id" : "sys_role_volunteer",
+               "moduleAccess" : {
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "update",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "contribution" : "none"
+               },
+               "name" : "Volunteer"
+            },
+            {
+               "description" : "Regular participant.",
+               "id" : "sys_role_participant",
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "guests" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "contribution" : "view",
+                  "customFields" : "none",
+                  "chat" : "edit"
+               }
+            },
+            {
+               "description" : "Limited viewing access.",
+               "name" : "Guest",
+               "moduleAccess" : {
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none"
+               },
+               "id" : "sys_role_guest"
+            },
+            {
+               "description" : "Read-only access.",
+               "moduleAccess" : {
+                  "guests" : "view",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "view",
+                  "users" : "view",
+                  "roles" : "view",
+                  "auditLog" : "view",
+                  "tasks" : "view",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "contribution" : "view",
+                  "chat" : "view",
+                  "customFields" : "view"
+               },
+               "name" : "Viewer",
+               "id" : "sys_role_viewer"
+            }
+         ],
+         "defaultFields" : {
+            "amount" : 0,
+            "enabledModules" : [
+               "contribution",
+               "budget",
+               "expenses",
+               "guestManagement",
+               "communication",
+               "roles",
+               "userManagement"
+            ],
+            "contributionType" : "voluntary"
+         },
+         "category" : "charityAndFundraising",
+         "version" : 2,
+         "description" : "Collect contributions, track expenses, and keep members informed.",
+         "templateId" : "sys_community_fundraiser_v1",
+         "tags" : [
+            "fundraiser",
+            "fundraising",
+            "donation",
+            "donations",
+            "charity",
+            "contribution",
+            "volunteers",
+            "sponsors",
+            "campaign"
+         ]
+      }
+   ],
+   "version" : 4,
+   "schemaVersion" : 2
 }

@@ -1,264 +1,420 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_pongal_celebration_v1",
-      "templateName": "Pongal Celebration",
-      "category": "communityAndCultural",
-      "description": "Celebrate the Tamil harvest festival with traditional Kolam, cooking the sweet Pongal in clay pots, and community games.",
-      "tags": [
-        "pongal",
-        "tamil",
-        "festival",
-        "harvest",
-        "kolam",
-        "culture",
-        "community",
-        "tradition"
-      ],
-      "defaultFields": {
-        "contributionType": "variable",
-        "amount": 0,
-        "enabledModules": [
-          "task",
-          "budget",
-          "timeline",
-          "guestManagement",
-          "communication",
-          "location",
-          "roles",
-          "inventory",
-          "userManagement",
-          "contribution"
-        ]
-      },
-      "taskBlueprints": [
-        {
-          "id": "sys_pongal_task_finalize_date_venue",
-          "eventId": "blueprint_dummy",
-          "title": "Finalize Pongal date and outdoor venue",
-          "status": "pending",
-          "phase": "preEvent",
-          "description": "Secure a venue with an outdoor space for traditional Pongal cooking.",
-          "dueOffset": "T-15 days",
-          "role": "Organizer",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_pongal_task_procure_clay_pots_sugarcane",
-          "eventId": "blueprint_dummy",
-          "title": "Procure clay pots, sugarcane, and turmeric",
-          "status": "pending",
-          "phase": "preEvent",
-          "description": "Purchase earthen pots, fresh sugarcane stalks, and turmeric plants for decoration.",
-          "dueOffset": "T-4 days",
-          "role": "Logistics",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_pongal_task_purchase_ingredients",
-          "eventId": "blueprint_dummy",
-          "title": "Purchase ingredients for Pongal (Sweet/Venn)",
-          "status": "pending",
-          "phase": "preEvent",
-          "description": "Buy raw rice, jaggery, moong dal, ghee, cashews, and milk.",
-          "dueOffset": "T-3 days",
-          "role": "Food Manager",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_pongal_task_plan_kolam_designs",
-          "eventId": "blueprint_dummy",
-          "title": "Plan Kolam designs and competition",
-          "status": "pending",
-          "phase": "preEvent",
-          "description": "Outline areas for Kolam (Rangoli) and define rules for the competition.",
-          "dueOffset": "T-5 days",
-          "role": "Decoration",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_pongal_task_draw_kolam",
-          "eventId": "blueprint_dummy",
-          "title": "Draw traditional Kolams",
-          "status": "pending",
-          "phase": "eventDay",
-          "description": "Decorate the entrance and cooking area with elaborate rice flour Kolams.",
-          "dueOffset": "Early Morning 05:30 AM",
-          "role": "Decoration",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_pongal_task_setup_cooking_stove",
-          "eventId": "blueprint_dummy",
-          "title": "Set up traditional firewood/gas stove",
-          "status": "pending",
-          "phase": "eventDay",
-          "description": "Arrange the stove and pots in the ritual area; decorate pots with ginger/turmeric.",
-          "dueOffset": "Morning 07:30 AM",
-          "role": "Setup Team",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_pongal_task_cook_pongal",
-          "eventId": "blueprint_dummy",
-          "title": "Cook Sweet Pongal (Pongalo Pongal!)",
-          "status": "pending",
-          "phase": "eventDay",
-          "description": "Boil milk and rice; celebrate when it overflows with the 'Pongalo Pongal' chant.",
-          "dueOffset": "Morning 09:00 AM",
-          "role": "Food Manager",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_pongal_task_offer_sun_god",
-          "eventId": "blueprint_dummy",
-          "title": "Ritual offerings to the Sun God",
-          "status": "pending",
-          "phase": "eventDay",
-          "description": "Perform prayers and offer Pongal and sugarcane to the Sun.",
-          "dueOffset": "Morning 10:00 AM",
-          "role": "Organizer",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_pongal_task_organize_village_sports",
-          "eventId": "blueprint_dummy",
-          "title": "Organize traditional sports (Uriadi, etc.)",
-          "status": "pending",
-          "phase": "eventDay",
-          "description": "Conduct Uriadi (breaking the pot) and other community games.",
-          "dueOffset": "Afternoon 02:30 PM",
-          "role": "Event Coordinator",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_pongal_task_distribute_food",
-          "eventId": "blueprint_dummy",
-          "title": "Distribute Pongal and serve traditional lunch",
-          "status": "pending",
-          "phase": "eventDay",
-          "description": "Distribute the prepared Pongal to all guests and serve lunch.",
-          "dueOffset": "Afternoon 12:30 PM",
-          "role": "Food Manager",
-          "dependsOn": []
-        },
-        {
-          "id": "sys_pongal_task_cleanup",
-          "eventId": "blueprint_dummy",
-          "title": "Clean up venue and store reusable decor",
-          "status": "pending",
-          "phase": "postEvent",
-          "description": "Clear the cooking area and dispose of organic waste properly.",
-          "dueOffset": "T+1 day",
-          "role": "Logistics",
-          "dependsOn": []
-        }
-      ],
-      "budgetBlueprints": [
-        {
-          "id": "sys_pongal_budget_pots_firewood",
-          "eventId": "blueprint_dummy",
-          "category": "Miscellaneous",
-          "title": "Clay Pots, Turmeric Plants, and Firewood",
-          "estimatedCost": 0.0,
-          "isMandatory": true,
-          "actualCost": 0.0
-        },
-        {
-          "id": "sys_pongal_budget_sugarcane",
-          "eventId": "blueprint_dummy",
-          "category": "Decoration",
-          "title": "Sugarcane Stalks",
-          "estimatedCost": 0.0,
-          "isMandatory": true,
-          "actualCost": 0.0
-        },
-        {
-          "id": "sys_pongal_budget_ingredients",
-          "eventId": "blueprint_dummy",
-          "category": "Food",
-          "title": "Pongal Ingredients and Lunch",
-          "estimatedCost": 0.0,
-          "isMandatory": true,
-          "actualCost": 0.0
-        },
-        {
-          "id": "sys_pongal_budget_venue",
-          "eventId": "blueprint_dummy",
-          "category": "Venue",
-          "title": "Venue Rental / Outdoor Setup",
-          "estimatedCost": 0.0,
-          "isMandatory": true,
-          "actualCost": 0.0
-        },
-        {
-          "id": "sys_pongal_budget_prizes",
-          "eventId": "blueprint_dummy",
-          "category": "Miscellaneous",
-          "title": "Prizes for Kolam/Uriadi",
-          "estimatedCost": 0.0,
-          "isMandatory": false,
-          "actualCost": 0.0
-        }
-      ],
-      "timelineBlueprints": [
-        {
-          "id": "sys_pongal_timeline_kolam",
-          "eventId": "blueprint_dummy",
-          "title": "Kolam Unveiling",
-          "phase": "eventDay",
-          "timeOrOffset": "07:00 AM",
-          "dayNumber": 1,
-          "description": "Traditional Kolams completed at the entrance."
-        },
-        {
-          "id": "sys_pongal_timeline_cooking",
-          "eventId": "blueprint_dummy",
-          "title": "Pongal Preparation ritual",
-          "phase": "eventDay",
-          "timeOrOffset": "08:30 AM",
-          "dayNumber": 1,
-          "description": "Lighting the stove and starting the cooking process."
-        },
-        {
-          "id": "sys_pongal_timeline_overflow",
-          "eventId": "blueprint_dummy",
-          "title": "The Overlow (Pongalo Pongal!)",
-          "phase": "eventDay",
-          "timeOrOffset": "09:30 AM",
-          "dayNumber": 1,
-          "description": "Celebrating the milk boiling over, symbolizing prosperity."
-        },
-        {
-          "id": "sys_pongal_timeline_pooja",
-          "eventId": "blueprint_dummy",
-          "title": "Surya Pooja & Offerings",
-          "phase": "eventDay",
-          "timeOrOffset": "10:30 AM",
-          "dayNumber": 1,
-          "description": "Offering the first batch of Pongal to the Sun."
-        },
-        {
-          "id": "sys_pongal_timeline_lunch",
-          "eventId": "blueprint_dummy",
-          "title": "Traditional Festival Lunch",
-          "phase": "eventDay",
-          "timeOrOffset": "12:30 PM",
-          "dayNumber": 1,
-          "description": "Serving Pongal and lunch to all participants."
-        },
-        {
-          "id": "sys_pongal_timeline_games",
-          "eventId": "blueprint_dummy",
-          "title": "Uriadi and Cultural Games",
-          "phase": "eventDay",
-          "timeOrOffset": "03:00 PM",
-          "dayNumber": 1,
-          "description": "Traditional sports and fun group activities."
-        }
-      ]
-    }
-  ]
+   "schemaVersion" : 2,
+   "templates" : [
+      {
+         "tags" : [
+            "pongal",
+            "tamil",
+            "festival",
+            "harvest",
+            "kolam",
+            "culture",
+            "community",
+            "tradition"
+         ],
+         "budgetBlueprints" : [
+            {
+               "category" : "Miscellaneous",
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0,
+               "id" : "sys_pongal_budget_pots_firewood",
+               "isMandatory" : true,
+               "title" : "Clay Pots, Turmeric Plants, and Firewood",
+               "estimatedCost" : 0
+            },
+            {
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0,
+               "isMandatory" : true,
+               "id" : "sys_pongal_budget_sugarcane",
+               "estimatedCost" : 0,
+               "title" : "Sugarcane Stalks",
+               "category" : "Decoration"
+            },
+            {
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy",
+               "title" : "Pongal Ingredients and Lunch",
+               "estimatedCost" : 0,
+               "category" : "Food",
+               "isMandatory" : true,
+               "id" : "sys_pongal_budget_ingredients"
+            },
+            {
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy",
+               "estimatedCost" : 0,
+               "title" : "Venue Rental / Outdoor Setup",
+               "isMandatory" : true,
+               "id" : "sys_pongal_budget_venue",
+               "category" : "Venue"
+            },
+            {
+               "category" : "Miscellaneous",
+               "title" : "Prizes for Kolam/Uriadi",
+               "estimatedCost" : 0,
+               "id" : "sys_pongal_budget_prizes",
+               "isMandatory" : false,
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy"
+            }
+         ],
+         "taskBlueprints" : [
+            {
+               "status" : "pending",
+               "phase" : "preEvent",
+               "dueOffset" : "T-15 days",
+               "role" : "Organizer",
+               "id" : "sys_pongal_task_finalize_date_venue",
+               "dependsOn" : [],
+               "title" : "Finalize Pongal date and outdoor venue",
+               "description" : "Secure a venue with an outdoor space for traditional Pongal cooking.",
+               "eventId" : "blueprint_dummy"
+            },
+            {
+               "dependsOn" : [],
+               "id" : "sys_pongal_task_procure_clay_pots_sugarcane",
+               "title" : "Procure clay pots, sugarcane, and turmeric",
+               "description" : "Purchase earthen pots, fresh sugarcane stalks, and turmeric plants for decoration.",
+               "eventId" : "blueprint_dummy",
+               "status" : "pending",
+               "phase" : "preEvent",
+               "dueOffset" : "T-4 days",
+               "role" : "Logistics"
+            },
+            {
+               "phase" : "preEvent",
+               "title" : "Purchase ingredients for Pongal (Sweet/Venn)",
+               "id" : "sys_pongal_task_purchase_ingredients",
+               "dependsOn" : [],
+               "status" : "pending",
+               "eventId" : "blueprint_dummy",
+               "role" : "Food Manager",
+               "description" : "Buy raw rice, jaggery, moong dal, ghee, cashews, and milk.",
+               "dueOffset" : "T-3 days"
+            },
+            {
+               "description" : "Outline areas for Kolam (Rangoli) and define rules for the competition.",
+               "dueOffset" : "T-5 days",
+               "eventId" : "blueprint_dummy",
+               "role" : "Decoration",
+               "id" : "sys_pongal_task_plan_kolam_designs",
+               "status" : "pending",
+               "dependsOn" : [],
+               "phase" : "preEvent",
+               "title" : "Plan Kolam designs and competition"
+            },
+            {
+               "eventId" : "blueprint_dummy",
+               "description" : "Decorate the entrance and cooking area with elaborate rice flour Kolams.",
+               "title" : "Draw traditional Kolams",
+               "id" : "sys_pongal_task_draw_kolam",
+               "dependsOn" : [],
+               "role" : "Decoration",
+               "dueOffset" : "Early Morning 05:30 AM",
+               "phase" : "eventDay",
+               "status" : "pending"
+            },
+            {
+               "status" : "pending",
+               "dependsOn" : [],
+               "id" : "sys_pongal_task_setup_cooking_stove",
+               "phase" : "eventDay",
+               "title" : "Set up traditional firewood/gas stove",
+               "dueOffset" : "Morning 07:30 AM",
+               "description" : "Arrange the stove and pots in the ritual area; decorate pots with ginger/turmeric.",
+               "role" : "Setup Team",
+               "eventId" : "blueprint_dummy"
+            },
+            {
+               "phase" : "eventDay",
+               "title" : "Cook Sweet Pongal (Pongalo Pongal!)",
+               "id" : "sys_pongal_task_cook_pongal",
+               "dependsOn" : [],
+               "status" : "pending",
+               "eventId" : "blueprint_dummy",
+               "role" : "Food Manager",
+               "description" : "Boil milk and rice; celebrate when it overflows with the 'Pongalo Pongal' chant.",
+               "dueOffset" : "Morning 09:00 AM"
+            },
+            {
+               "eventId" : "blueprint_dummy",
+               "role" : "Organizer",
+               "description" : "Perform prayers and offer Pongal and sugarcane to the Sun.",
+               "dueOffset" : "Morning 10:00 AM",
+               "title" : "Ritual offerings to the Sun God",
+               "phase" : "eventDay",
+               "id" : "sys_pongal_task_offer_sun_god",
+               "status" : "pending",
+               "dependsOn" : []
+            },
+            {
+               "phase" : "eventDay",
+               "status" : "pending",
+               "role" : "Event Coordinator",
+               "dueOffset" : "Afternoon 02:30 PM",
+               "title" : "Organize traditional sports (Uriadi, etc.)",
+               "dependsOn" : [],
+               "id" : "sys_pongal_task_organize_village_sports",
+               "eventId" : "blueprint_dummy",
+               "description" : "Conduct Uriadi (breaking the pot) and other community games."
+            },
+            {
+               "status" : "pending",
+               "phase" : "eventDay",
+               "dueOffset" : "Afternoon 12:30 PM",
+               "role" : "Food Manager",
+               "dependsOn" : [],
+               "id" : "sys_pongal_task_distribute_food",
+               "title" : "Distribute Pongal and serve traditional lunch",
+               "description" : "Distribute the prepared Pongal to all guests and serve lunch.",
+               "eventId" : "blueprint_dummy"
+            },
+            {
+               "role" : "Logistics",
+               "dueOffset" : "T+1 day",
+               "phase" : "postEvent",
+               "status" : "pending",
+               "eventId" : "blueprint_dummy",
+               "description" : "Clear the cooking area and dispose of organic waste properly.",
+               "title" : "Clean up venue and store reusable decor",
+               "id" : "sys_pongal_task_cleanup",
+               "dependsOn" : []
+            }
+         ],
+         "templateId" : "sys_pongal_celebration_v1",
+         "timelineBlueprints" : [
+            {
+               "phase" : "eventDay",
+               "title" : "Kolam Unveiling",
+               "id" : "sys_pongal_timeline_kolam",
+               "timeOrOffset" : "07:00 AM",
+               "eventId" : "blueprint_dummy",
+               "description" : "Traditional Kolams completed at the entrance.",
+               "dayNumber" : 1
+            },
+            {
+               "phase" : "eventDay",
+               "dayNumber" : 1,
+               "description" : "Lighting the stove and starting the cooking process.",
+               "timeOrOffset" : "08:30 AM",
+               "eventId" : "blueprint_dummy",
+               "id" : "sys_pongal_timeline_cooking",
+               "title" : "Pongal Preparation ritual"
+            },
+            {
+               "title" : "The Overlow (Pongalo Pongal!)",
+               "id" : "sys_pongal_timeline_overflow",
+               "eventId" : "blueprint_dummy",
+               "timeOrOffset" : "09:30 AM",
+               "dayNumber" : 1,
+               "description" : "Celebrating the milk boiling over, symbolizing prosperity.",
+               "phase" : "eventDay"
+            },
+            {
+               "phase" : "eventDay",
+               "description" : "Offering the first batch of Pongal to the Sun.",
+               "dayNumber" : 1,
+               "timeOrOffset" : "10:30 AM",
+               "eventId" : "blueprint_dummy",
+               "id" : "sys_pongal_timeline_pooja",
+               "title" : "Surya Pooja & Offerings"
+            },
+            {
+               "id" : "sys_pongal_timeline_lunch",
+               "title" : "Traditional Festival Lunch",
+               "description" : "Serving Pongal and lunch to all participants.",
+               "dayNumber" : 1,
+               "eventId" : "blueprint_dummy",
+               "timeOrOffset" : "12:30 PM",
+               "phase" : "eventDay"
+            },
+            {
+               "id" : "sys_pongal_timeline_games",
+               "title" : "Uriadi and Cultural Games",
+               "dayNumber" : 1,
+               "description" : "Traditional sports and fun group activities.",
+               "timeOrOffset" : "03:00 PM",
+               "eventId" : "blueprint_dummy",
+               "phase" : "eventDay"
+            }
+         ],
+         "description" : "Celebrate the Tamil harvest festival with traditional Kolam, cooking the sweet Pongal in clay pots, and community games.",
+         "defaultFields" : {
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "communication",
+               "location",
+               "roles",
+               "inventory",
+               "userManagement",
+               "contribution"
+            ],
+            "amount" : 0,
+            "contributionType" : "variable"
+         },
+         "category" : "communityAndCultural",
+         "templateName" : "Pongal Celebration",
+         "roleBlueprints" : [
+            {
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "guests" : "full",
+                  "timeline" : "full",
+                  "inventory" : "full",
+                  "ticketing" : "full",
+                  "announcements" : "full",
+                  "roles" : "full",
+                  "users" : "full",
+                  "tasks" : "full",
+                  "auditLog" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "contribution" : "full",
+                  "location" : "full",
+                  "vendors" : "full",
+                  "budget" : "full"
+               },
+               "id" : "sys_role_admin",
+               "description" : "Full access to all modules."
+            },
+            {
+               "id" : "sys_role_organizer",
+               "name" : "Organizer",
+               "moduleAccess" : {
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "guests" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "location" : "edit",
+                  "vendors" : "edit",
+                  "budget" : "edit",
+                  "customFields" : "view",
+                  "chat" : "full",
+                  "contribution" : "edit",
+                  "auditLog" : "view",
+                  "tasks" : "edit"
+               },
+               "description" : "Manage most event details."
+            },
+            {
+               "id" : "sys_role_coordinator",
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "timeline" : "edit",
+                  "inventory" : "view",
+                  "guests" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "tasks" : "edit",
+                  "auditLog" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view"
+               },
+               "description" : "Manage tasks and timeline."
+            },
+            {
+               "name" : "Volunteer",
+               "moduleAccess" : {
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "tasks" : "update",
+                  "auditLog" : "none"
+               },
+               "id" : "sys_role_volunteer",
+               "description" : "Update task progress."
+            },
+            {
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "customFields" : "none",
+                  "chat" : "edit",
+                  "contribution" : "view",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none"
+               },
+               "id" : "sys_role_participant",
+               "description" : "Regular participant."
+            },
+            {
+               "moduleAccess" : {
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "customFields" : "none",
+                  "chat" : "none",
+                  "contribution" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none"
+               },
+               "name" : "Guest",
+               "id" : "sys_role_guest",
+               "description" : "Limited viewing access."
+            },
+            {
+               "id" : "sys_role_viewer",
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "tasks" : "view",
+                  "auditLog" : "view",
+                  "contribution" : "view",
+                  "customFields" : "view",
+                  "chat" : "view",
+                  "budget" : "view",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "guests" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view",
+                  "roles" : "view",
+                  "users" : "view"
+               },
+               "description" : "Read-only access."
+            }
+         ]
+      }
+   ],
+   "version" : 4
 }

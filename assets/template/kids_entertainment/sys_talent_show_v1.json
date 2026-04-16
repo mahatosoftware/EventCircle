@@ -1,28 +1,259 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_talent_show_v1",
-      "templateName": "Talent Show",
-      "category": "kids",
-      "description": "Opportunity for individuals to showcase their unique skills and talents.",
-      "tags": ["talent show", "kids", "performance", "stage", "creative"],
-      "defaultFields": {
-        "contributionType": "none",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "roles", "media"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_talent_task_sound", "eventId": "blueprint_dummy", "title": "Test Audio/Video for Shows", "status": "pending", "phase": "preEvent", "description": "Ensure tracks and mics are working.", "dueOffset": "T-1 day", "role": "Setup Team", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_talent_budget_stage", "eventId": "blueprint_dummy", "category": "Venue", "title": "Stage Lights & Decor", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_talent_timeline_magic", "eventId": "blueprint_dummy", "title": "Variety Performances Round", "phase": "eventDay", "timeOrOffset": "06:30 PM", "dayNumber": 1, "description": "Sequence of talent showcases." }
-      ],
-      "version": 1
-    }
-  ]
+   "version" : 4,
+   "templates" : [
+      {
+         "defaultFields" : {
+            "amount" : 0,
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "roles",
+               "media",
+               "userManagement"
+            ],
+            "contributionType" : "none"
+         },
+         "taskBlueprints" : [
+            {
+               "eventId" : "blueprint_dummy",
+               "description" : "Ensure tracks and mics are working.",
+               "title" : "Test Audio/Video for Shows",
+               "id" : "sys_talent_task_sound",
+               "dependsOn" : [],
+               "role" : "Setup Team",
+               "dueOffset" : "T-1 day",
+               "phase" : "preEvent",
+               "status" : "pending"
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy",
+               "isMandatory" : true,
+               "id" : "sys_talent_budget_stage",
+               "title" : "Stage Lights & Decor",
+               "estimatedCost" : 0,
+               "category" : "Venue"
+            }
+         ],
+         "tags" : [
+            "talent show",
+            "kids",
+            "performance",
+            "stage",
+            "creative"
+         ],
+         "version" : 2,
+         "category" : "kids",
+         "roleBlueprints" : [
+            {
+               "description" : "Full access to all modules.",
+               "id" : "sys_role_admin",
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "roles" : "full",
+                  "users" : "full",
+                  "ticketing" : "full",
+                  "announcements" : "full",
+                  "timeline" : "full",
+                  "inventory" : "full",
+                  "guests" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "contribution" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "budget" : "full",
+                  "tasks" : "full",
+                  "auditLog" : "full"
+               }
+            },
+            {
+               "description" : "Manage most event details.",
+               "name" : "Organizer",
+               "moduleAccess" : {
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "contribution" : "edit",
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "budget" : "edit",
+                  "tasks" : "edit",
+                  "auditLog" : "view",
+                  "ticketing" : "edit",
+                  "announcements" : "edit",
+                  "roles" : "none",
+                  "users" : "view",
+                  "guests" : "edit",
+                  "timeline" : "edit",
+                  "inventory" : "edit"
+               },
+               "id" : "sys_role_organizer"
+            },
+            {
+               "moduleAccess" : {
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "budget" : "view",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "tasks" : "edit",
+                  "auditLog" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "view",
+                  "timeline" : "edit",
+                  "inventory" : "view"
+               },
+               "name" : "Coordinator",
+               "id" : "sys_role_coordinator",
+               "description" : "Manage tasks and timeline."
+            },
+            {
+               "description" : "Update task progress.",
+               "id" : "sys_role_volunteer",
+               "name" : "Volunteer",
+               "moduleAccess" : {
+                  "tasks" : "update",
+                  "auditLog" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view"
+               }
+            },
+            {
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "guests" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "contribution" : "view",
+                  "customFields" : "none",
+                  "chat" : "edit"
+               },
+               "id" : "sys_role_participant",
+               "description" : "Regular participant."
+            },
+            {
+               "description" : "Limited viewing access.",
+               "id" : "sys_role_guest",
+               "name" : "Guest",
+               "moduleAccess" : {
+                  "customFields" : "none",
+                  "chat" : "none",
+                  "contribution" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none"
+               }
+            },
+            {
+               "description" : "Read-only access.",
+               "id" : "sys_role_viewer",
+               "moduleAccess" : {
+                  "guests" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view",
+                  "roles" : "view",
+                  "users" : "view",
+                  "tasks" : "view",
+                  "auditLog" : "view",
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "contribution" : "view",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "budget" : "view"
+               },
+               "name" : "Viewer"
+            },
+            {
+               "description" : "Activity lead.",
+               "name" : "Event Host",
+               "moduleAccess" : {
+                  "tasks" : "full",
+                  "timeline" : "full",
+                  "chat" : "full",
+                  "roles" : "none",
+                  "users" : "view"
+               },
+               "id" : "sys_role_host"
+            },
+            {
+               "id" : "sys_role_guardian",
+               "name" : "Parent Guardian",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "location" : "view",
+                  "roles" : "none",
+                  "timeline" : "view",
+                  "chat" : "edit"
+               },
+               "description" : "Responsible for kids."
+            },
+            {
+               "name" : "Trainer",
+               "moduleAccess" : {
+                  "tasks" : "view",
+                  "chat" : "edit",
+                  "timeline" : "view",
+                  "roles" : "none",
+                  "users" : "none"
+               },
+               "id" : "sys_role_trainer",
+               "description" : "Activity coach."
+            }
+         ],
+         "templateName" : "Talent Show",
+         "templateId" : "sys_talent_show_v1",
+         "timelineBlueprints" : [
+            {
+               "eventId" : "blueprint_dummy",
+               "timeOrOffset" : "06:30 PM",
+               "description" : "Sequence of talent showcases.",
+               "dayNumber" : 1,
+               "phase" : "eventDay",
+               "title" : "Variety Performances Round",
+               "id" : "sys_talent_timeline_magic"
+            }
+         ],
+         "description" : "Opportunity for individuals to showcase their unique skills and talents."
+      }
+   ],
+   "schemaVersion" : 2
 }

@@ -1,28 +1,271 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_pilgrimage_v1",
-      "templateName": "Pilgrimage Trip",
-      "category": "travel",
-      "description": "Plan a spiritual journey with group travel and religious ceremonies.",
-      "tags": ["pilgrimage", "spiritual", "travel", "religious", "temple"],
-      "defaultFields": {
-        "contributionType": "variable",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "roles", "contribution"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_pilgrimage_task_darshan", "eventId": "blueprint_dummy", "title": "Book Darshan / Puja Tickets", "status": "pending", "phase": "preEvent", "description": "Arrange priority entry at the shrine.", "dueOffset": "T-45 days", "role": "Organizer", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_pilgrimage_budget_offering", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Puja / Offerings", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_pilgrimage_timeline_prayer", "eventId": "blueprint_dummy", "title": "Main Prayer Session", "phase": "eventDay", "timeOrOffset": "05:00 AM", "dayNumber": 1, "description": "Special morning ritual/darshan." }
-      ],
-      "version": 1
-    }
-  ]
+   "version" : 4,
+   "templates" : [
+      {
+         "tags" : [
+            "pilgrimage",
+            "spiritual",
+            "travel",
+            "religious",
+            "temple"
+         ],
+         "taskBlueprints" : [
+            {
+               "role" : "Organizer",
+               "dueOffset" : "T-45 days",
+               "phase" : "preEvent",
+               "status" : "pending",
+               "eventId" : "blueprint_dummy",
+               "description" : "Arrange priority entry at the shrine.",
+               "title" : "Book Darshan / Puja Tickets",
+               "dependsOn" : [],
+               "id" : "sys_pilgrimage_task_darshan"
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "isMandatory" : true,
+               "id" : "sys_pilgrimage_budget_offering",
+               "estimatedCost" : 0,
+               "title" : "Puja / Offerings",
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0,
+               "category" : "Miscellaneous"
+            }
+         ],
+         "timelineBlueprints" : [
+            {
+               "description" : "Special morning ritual/darshan.",
+               "dayNumber" : 1,
+               "eventId" : "blueprint_dummy",
+               "timeOrOffset" : "05:00 AM",
+               "id" : "sys_pilgrimage_timeline_prayer",
+               "title" : "Main Prayer Session",
+               "phase" : "eventDay"
+            }
+         ],
+         "templateId" : "sys_pilgrimage_v1",
+         "description" : "Plan a spiritual journey with group travel and religious ceremonies.",
+         "version" : 2,
+         "defaultFields" : {
+            "contributionType" : "variable",
+            "amount" : 0,
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "communication",
+               "roles",
+               "contribution",
+               "userManagement"
+            ]
+         },
+         "category" : "travel",
+         "templateName" : "Pilgrimage Trip",
+         "roleBlueprints" : [
+            {
+               "description" : "Full access to all modules.",
+               "moduleAccess" : {
+                  "guests" : "full",
+                  "timeline" : "full",
+                  "inventory" : "full",
+                  "ticketing" : "full",
+                  "announcements" : "full",
+                  "roles" : "full",
+                  "users" : "full",
+                  "tasks" : "full",
+                  "auditLog" : "full",
+                  "contribution" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "budget" : "full",
+                  "vendors" : "full",
+                  "location" : "full"
+               },
+               "name" : "Admin",
+               "id" : "sys_role_admin"
+            },
+            {
+               "id" : "sys_role_organizer",
+               "name" : "Organizer",
+               "moduleAccess" : {
+                  "auditLog" : "view",
+                  "tasks" : "edit",
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "budget" : "edit",
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "contribution" : "edit",
+                  "guests" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "users" : "view",
+                  "roles" : "none"
+               },
+               "description" : "Manage most event details."
+            },
+            {
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "none",
+                  "inventory" : "view",
+                  "timeline" : "edit",
+                  "guests" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "edit"
+               },
+               "id" : "sys_role_coordinator",
+               "description" : "Manage tasks and timeline."
+            },
+            {
+               "name" : "Volunteer",
+               "moduleAccess" : {
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "tasks" : "update",
+                  "auditLog" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "view"
+               },
+               "id" : "sys_role_volunteer",
+               "description" : "Update task progress."
+            },
+            {
+               "description" : "Regular participant.",
+               "id" : "sys_role_participant",
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "customFields" : "none",
+                  "chat" : "edit",
+                  "contribution" : "view",
+                  "guests" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none"
+               }
+            },
+            {
+               "id" : "sys_role_guest",
+               "name" : "Guest",
+               "moduleAccess" : {
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "contribution" : "none",
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view"
+               },
+               "description" : "Limited viewing access."
+            },
+            {
+               "moduleAccess" : {
+                  "roles" : "view",
+                  "users" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "view",
+                  "contribution" : "view",
+                  "customFields" : "view",
+                  "chat" : "view",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "tasks" : "view",
+                  "auditLog" : "view"
+               },
+               "name" : "Viewer",
+               "id" : "sys_role_viewer",
+               "description" : "Read-only access."
+            },
+            {
+               "description" : "Itinerary lead.",
+               "id" : "sys_role_trip_org",
+               "name" : "Trip Organizer",
+               "moduleAccess" : {
+                  "tasks" : "full",
+                  "budget" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "timeline" : "full"
+               }
+            },
+            {
+               "id" : "sys_role_guide",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "chat" : "edit",
+                  "timeline" : "view",
+                  "location" : "view",
+                  "users" : "none"
+               },
+               "name" : "Guide",
+               "description" : "Local trip guide."
+            },
+            {
+               "id" : "sys_role_transport",
+               "name" : "Transport Coordinator",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "chat" : "edit",
+                  "location" : "edit",
+                  "users" : "none"
+               },
+               "description" : "Vehicle lead."
+            },
+            {
+               "name" : "Emergency Lead",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "location" : "view",
+                  "chat" : "full",
+                  "roles" : "none"
+               },
+               "id" : "sys_role_emergency",
+               "description" : "Safety lead."
+            }
+         ]
+      }
+   ],
+   "schemaVersion" : 2
 }

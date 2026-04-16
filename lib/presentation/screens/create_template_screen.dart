@@ -441,7 +441,14 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
     if (_selectedModules[TemplateModule.userManagement] == true) modules.add(EventModules.users);
     if (_selectedModules[TemplateModule.guestManagement] == true) modules.add(EventModules.guests);
     if (_selectedModules[TemplateModule.vendor] == true) modules.add(EventModules.vendors);
+    if (_selectedModules[TemplateModule.inventory] == true) modules.add(EventModules.inventory);
     if (_selectedModules[TemplateModule.roles] == true) modules.add(EventModules.roles);
+    if (_selectedModules[TemplateModule.timeline] == true) modules.add(EventModules.timeline);
+    if (_selectedModules[TemplateModule.location] == true) modules.add(EventModules.location);
+    if (_selectedModules[TemplateModule.ticketing] == true) modules.add(EventModules.ticketing);
+    if (_selectedModules[TemplateModule.announcements] == true) modules.add(EventModules.announcements);
+    if (_selectedModules[TemplateModule.customFields] == true) modules.add(EventModules.customFields);
+    if (_selectedModules[TemplateModule.communication] == true) modules.add(EventModules.chat);
     return modules;
   }
 
@@ -459,8 +466,22 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
         return 'Guests';
       case EventModules.vendors:
         return 'Vendors';
+      case EventModules.inventory:
+        return 'Inventory';
       case EventModules.roles:
         return 'Roles';
+      case EventModules.timeline:
+        return 'Timeline';
+      case EventModules.location:
+        return 'Venues & Location';
+      case EventModules.ticketing:
+        return 'Ticketing';
+      case EventModules.announcements:
+        return 'Announcements';
+      case EventModules.customFields:
+        return 'Custom Fields';
+      case EventModules.chat:
+        return 'Communication & Chat';
       default:
         return module;
     }

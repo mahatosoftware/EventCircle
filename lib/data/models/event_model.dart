@@ -13,7 +13,10 @@ enum EventCategory {
   entertainment('Entertainment'),
   religiousAndSpiritual('Religious & Spiritual'),
   charityAndFundraising('Charity & Fundraising'),
-  commercialAndExhibition('Commercial & Exhibition');
+  commercialAndExhibition('Commercial & Exhibition'),
+  travel('Travel & Group Trips'),
+  kids('Kids & Entertainment'),
+  personal('Personal');
 
   final String displayName;
   const EventCategory(this.displayName);

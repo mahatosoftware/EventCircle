@@ -1,29 +1,234 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_shichigosan_v1",
-      "templateName": "Shichi-Go-San",
-      "category": "personal",
-      "description": "Japanese traditional rite of passage and festival for girls and boys.",
-      "tags": ["shichigosan", "ritual", "baby", "tradition", "cultural"],
-      "defaultFields": {
-        "contributionType": "none",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_sgs_task_attire", "eventId": "blueprint_dummy", "title": "Secure Traditional Kimono/Attire", "status": "pending", "phase": "preEvent", "description": "Rent or buy formal clothes for the child.", "dueOffset": "T-30 days", "role": "Organizer", "dependsOn": [] },
-        { "id": "sys_sgs_task_shrine", "eventId": "blueprint_dummy", "title": "Schedule Shrine Visit", "status": "pending", "phase": "preEvent", "description": "Coordinate timing with the local shrine.", "dueOffset": "T-15 days", "role": "Host", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_sgs_budget_attire", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Traditional Costume Rental", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_sgs_timeline_visit", "eventId": "blueprint_dummy", "title": "Shrine Blessing Ceremony", "phase": "eventDay", "timeOrOffset": "10:00 AM", "dayNumber": 1, "description": "The peak religious moment for the child." }
-      ],
-      "version": 1
-    }
-  ]
+   "schemaVersion" : 2,
+   "version" : 4,
+   "templates" : [
+      {
+         "roleBlueprints" : [
+            {
+               "description" : "Full access to all modules.",
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "guests" : "full",
+                  "timeline" : "full",
+                  "inventory" : "full",
+                  "ticketing" : "full",
+                  "announcements" : "full",
+                  "roles" : "full",
+                  "users" : "full",
+                  "tasks" : "full",
+                  "auditLog" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "contribution" : "full",
+                  "location" : "full",
+                  "vendors" : "full",
+                  "budget" : "full"
+               },
+               "id" : "sys_role_admin"
+            },
+            {
+               "moduleAccess" : {
+                  "tasks" : "edit",
+                  "auditLog" : "view",
+                  "contribution" : "edit",
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "budget" : "edit",
+                  "location" : "edit",
+                  "vendors" : "edit",
+                  "guests" : "edit",
+                  "timeline" : "edit",
+                  "inventory" : "edit",
+                  "ticketing" : "edit",
+                  "announcements" : "edit",
+                  "roles" : "none",
+                  "users" : "view"
+               },
+               "name" : "Organizer",
+               "id" : "sys_role_organizer",
+               "description" : "Manage most event details."
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "budget" : "view",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "tasks" : "edit",
+                  "auditLog" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "view",
+                  "timeline" : "edit",
+                  "inventory" : "view"
+               },
+               "id" : "sys_role_coordinator"
+            },
+            {
+               "description" : "Update task progress.",
+               "id" : "sys_role_volunteer",
+               "moduleAccess" : {
+                  "tasks" : "update",
+                  "auditLog" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view"
+               },
+               "name" : "Volunteer"
+            },
+            {
+               "description" : "Regular participant.",
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "contribution" : "view",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none"
+               },
+               "id" : "sys_role_participant"
+            },
+            {
+               "id" : "sys_role_guest",
+               "moduleAccess" : {
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "contribution" : "none",
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view"
+               },
+               "name" : "Guest",
+               "description" : "Limited viewing access."
+            },
+            {
+               "id" : "sys_role_viewer",
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "users" : "view",
+                  "roles" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "view",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "guests" : "view",
+                  "budget" : "view",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "contribution" : "view",
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "auditLog" : "view",
+                  "tasks" : "view"
+               },
+               "description" : "Read-only access."
+            }
+         ],
+         "templateName" : "Shichi-Go-San",
+         "category" : "personal",
+         "defaultFields" : {
+            "contributionType" : "none",
+            "amount" : 0,
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "roles",
+               "userManagement"
+            ]
+         },
+         "timelineBlueprints" : [
+            {
+               "phase" : "eventDay",
+               "title" : "Shrine Blessing Ceremony",
+               "id" : "sys_sgs_timeline_visit",
+               "timeOrOffset" : "10:00 AM",
+               "eventId" : "blueprint_dummy",
+               "description" : "The peak religious moment for the child.",
+               "dayNumber" : 1
+            }
+         ],
+         "templateId" : "sys_shichigosan_v1",
+         "version" : 2,
+         "description" : "Japanese traditional rite of passage and festival for girls and boys.",
+         "taskBlueprints" : [
+            {
+               "id" : "sys_sgs_task_attire",
+               "dependsOn" : [],
+               "title" : "Secure Traditional Kimono/Attire",
+               "description" : "Rent or buy formal clothes for the child.",
+               "eventId" : "blueprint_dummy",
+               "status" : "pending",
+               "phase" : "preEvent",
+               "dueOffset" : "T-30 days",
+               "role" : "Organizer"
+            },
+            {
+               "status" : "pending",
+               "phase" : "preEvent",
+               "dueOffset" : "T-15 days",
+               "role" : "Host",
+               "dependsOn" : [],
+               "id" : "sys_sgs_task_shrine",
+               "title" : "Schedule Shrine Visit",
+               "description" : "Coordinate timing with the local shrine.",
+               "eventId" : "blueprint_dummy"
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "category" : "Miscellaneous",
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0,
+               "isMandatory" : true,
+               "id" : "sys_sgs_budget_attire",
+               "estimatedCost" : 0,
+               "title" : "Traditional Costume Rental"
+            }
+         ],
+         "tags" : [
+            "shichigosan",
+            "ritual",
+            "baby",
+            "tradition",
+            "cultural"
+         ]
+      }
+   ]
 }

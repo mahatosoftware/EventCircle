@@ -1,83 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+export 'event_module.dart';
+import 'event_module.dart';
 
 part 'event_role_model.freezed.dart';
 part 'event_role_model.g.dart';
-
-/// Module-level permissions with a small set of access levels.
-///
-/// - `full`: Create/Edit/Delete/Manage
-/// - `edit`: Create + Modify
-/// - `update`: Modify existing only
-/// - `view`: Read-only
-/// - `none`: Hidden / no access
-enum ModuleAccessLevel { full, edit, update, view, none }
-
-class EventModules {
-  static const String budget = 'budget';
-  static const String contribution = 'contribution';
-  static const String tasks = 'tasks';
-  static const String guests = 'guests';
-  static const String vendors = 'vendors';
-  static const String users = 'users';
-  static const String roles = 'roles';
-
-  static const List<String> all = [budget, contribution, tasks, guests, vendors, users, roles];
-}
-
-int accessRank(ModuleAccessLevel level) {
-  switch (level) {
-    case ModuleAccessLevel.full:
-      return 4;
-    case ModuleAccessLevel.edit:
-      return 3;
-    case ModuleAccessLevel.update:
-      return 2;
-    case ModuleAccessLevel.view:
-      return 1;
-    case ModuleAccessLevel.none:
-      return 0;
-  }
-}
-
-String accessLevelLabel(ModuleAccessLevel level) {
-  switch (level) {
-    case ModuleAccessLevel.full:
-      return 'Full';
-    case ModuleAccessLevel.edit:
-      return 'Edit';
-    case ModuleAccessLevel.update:
-      return 'Update';
-    case ModuleAccessLevel.view:
-      return 'View';
-    case ModuleAccessLevel.none:
-      return 'No Access';
-  }
-}
-
-bool hasAtLeastAccess(ModuleAccessLevel actual, ModuleAccessLevel required) {
-  return accessRank(actual) >= accessRank(required);
-}
-
-Map<String, ModuleAccessLevel> _decodeModuleAccess(dynamic raw) {
-  if (raw is! Map) return {};
-  final out = <String, ModuleAccessLevel>{};
-  for (final entry in raw.entries) {
-    final k = entry.key?.toString();
-    if (k == null || k.isEmpty) continue;
-    final v = entry.value;
-    if (v is String) {
-      out[k] = ModuleAccessLevel.values.firstWhere(
-        (lvl) => lvl.name == v,
-        orElse: () => ModuleAccessLevel.none,
-      );
-    }
-  }
-  return out;
-}
-
-Map<String, String> _encodeModuleAccess(Map<String, ModuleAccessLevel> access) {
-  return access.map((k, v) => MapEntry(k, v.name));
-}
 
 Map<String, String> defaultModuleAccessJsonForOwner() {
   return {
@@ -125,8 +51,8 @@ Map<String, dynamic> _migrateRoleJson(Map<String, dynamic> json) {
   }
   migrated['description'] ??= '';
 
-  final access = _decodeModuleAccess(migrated['moduleAccess']);
-  migrated['moduleAccess'] = _encodeModuleAccess(access);
+  final access = decodeModuleAccess(migrated['moduleAccess']);
+  migrated['moduleAccess'] = encodeModuleAccess(access);
 
   migrated['userIds'] ??= const <String>[];
   migrated['userResponsibilities'] ??= const <String, String>{};

@@ -1,28 +1,267 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_blood_donation_v1",
-      "templateName": "Blood Donation Camp",
-      "category": "communityAndCultural",
-      "description": "Organize a community blood donation drive in partnership with local hospitals.",
-      "tags": ["blood donation", "health", "community service", "camp"],
-      "defaultFields": {
-        "contributionType": "none",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "location", "roles", "inventory"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_blood_task_hospital", "eventId": "blueprint_dummy", "title": "Partner with Blood Bank/Hospital", "status": "pending", "phase": "preEvent", "description": "Confirm medical team and equipment support.", "dueOffset": "T-20 days", "role": "Logistics", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_blood_budget_refreshments", "eventId": "blueprint_dummy", "category": "Food", "title": "Refreshments for Donors", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_blood_timeline_start", "eventId": "blueprint_dummy", "title": "Camp Commencement", "phase": "eventDay", "timeOrOffset": "09:00 AM", "dayNumber": 1, "description": "Medical team setup and donor arrival." }
-      ],
-      "version": 1
-    }
-  ]
+   "version" : 4,
+   "templates" : [
+      {
+         "templateName" : "Blood Donation Camp",
+         "roleBlueprints" : [
+            {
+               "description" : "Full access to all modules.",
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "users" : "full",
+                  "roles" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "guests" : "full",
+                  "budget" : "full",
+                  "location" : "full",
+                  "vendors" : "full",
+                  "contribution" : "full",
+                  "customFields" : "full",
+                  "chat" : "full",
+                  "auditLog" : "full",
+                  "tasks" : "full"
+               },
+               "id" : "sys_role_admin"
+            },
+            {
+               "description" : "Manage most event details.",
+               "id" : "sys_role_organizer",
+               "name" : "Organizer",
+               "moduleAccess" : {
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "guests" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "budget" : "edit",
+                  "customFields" : "view",
+                  "chat" : "full",
+                  "contribution" : "edit",
+                  "auditLog" : "view",
+                  "tasks" : "edit"
+               }
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "view",
+                  "timeline" : "edit",
+                  "inventory" : "view",
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "budget" : "view",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "tasks" : "edit",
+                  "auditLog" : "none"
+               },
+               "id" : "sys_role_coordinator"
+            },
+            {
+               "moduleAccess" : {
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "tasks" : "update",
+                  "auditLog" : "none"
+               },
+               "name" : "Volunteer",
+               "id" : "sys_role_volunteer",
+               "description" : "Update task progress."
+            },
+            {
+               "id" : "sys_role_participant",
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "contribution" : "view",
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none"
+               },
+               "description" : "Regular participant."
+            },
+            {
+               "moduleAccess" : {
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "guests" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none"
+               },
+               "name" : "Guest",
+               "id" : "sys_role_guest",
+               "description" : "Limited viewing access."
+            },
+            {
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "contribution" : "view",
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "tasks" : "view",
+                  "auditLog" : "view",
+                  "roles" : "view",
+                  "users" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "view"
+               },
+               "id" : "sys_role_viewer",
+               "description" : "Read-only access."
+            },
+            {
+               "description" : "Board coordination.",
+               "id" : "sys_role_society_admin",
+               "name" : "Society Admin",
+               "moduleAccess" : {
+                  "announcements" : "edit",
+                  "roles" : "view",
+                  "users" : "view"
+               }
+            },
+            {
+               "description" : "Overall execution lead.",
+               "name" : "Event Coordinator",
+               "moduleAccess" : {
+                  "tasks" : "full",
+                  "users" : "none",
+                  "roles" : "none",
+                  "chat" : "full",
+                  "timeline" : "full"
+               },
+               "id" : "sys_role_coord"
+            },
+            {
+               "description" : "Manage funds.",
+               "name" : "Treasurer",
+               "moduleAccess" : {
+                  "budget" : "full",
+                  "users" : "none",
+                  "contribution" : "full",
+                  "roles" : "none"
+               },
+               "id" : "sys_role_treasurer"
+            },
+            {
+               "description" : "Crowd control.",
+               "id" : "sys_role_security",
+               "moduleAccess" : {
+                  "chat" : "edit",
+                  "roles" : "none",
+                  "location" : "view",
+                  "users" : "none"
+               },
+               "name" : "Security Coordinator"
+            }
+         ],
+         "defaultFields" : {
+            "amount" : 0,
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "location",
+               "roles",
+               "inventory",
+               "userManagement"
+            ],
+            "contributionType" : "none"
+         },
+         "category" : "communityAndCultural",
+         "timelineBlueprints" : [
+            {
+               "id" : "sys_blood_timeline_start",
+               "title" : "Camp Commencement",
+               "phase" : "eventDay",
+               "dayNumber" : 1,
+               "description" : "Medical team setup and donor arrival.",
+               "timeOrOffset" : "09:00 AM",
+               "eventId" : "blueprint_dummy"
+            }
+         ],
+         "templateId" : "sys_blood_donation_v1",
+         "description" : "Organize a community blood donation drive in partnership with local hospitals.",
+         "version" : 2,
+         "tags" : [
+            "blood donation",
+            "health",
+            "community service",
+            "camp"
+         ],
+         "budgetBlueprints" : [
+            {
+               "category" : "Food",
+               "title" : "Refreshments for Donors",
+               "estimatedCost" : 0,
+               "id" : "sys_blood_budget_refreshments",
+               "isMandatory" : true,
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy"
+            }
+         ],
+         "taskBlueprints" : [
+            {
+               "role" : "Logistics",
+               "eventId" : "blueprint_dummy",
+               "dueOffset" : "T-20 days",
+               "description" : "Confirm medical team and equipment support.",
+               "title" : "Partner with Blood Bank/Hospital",
+               "phase" : "preEvent",
+               "dependsOn" : [],
+               "status" : "pending",
+               "id" : "sys_blood_task_hospital"
+            }
+         ]
+      }
+   ],
+   "schemaVersion" : 2
 }

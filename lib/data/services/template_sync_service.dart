@@ -41,7 +41,10 @@ class TemplateSyncService {
     return hasUpdate;
   }
 
-  Future<void> syncTemplates({bool force = false}) async {
+  Future<void> syncTemplates({
+    bool force = false,
+    void Function(int current, int total)? onProgress,
+  }) async {
     final pack = await source.loadPack();
     if (pack == null) {
       debugPrint('TemplateSyncService: System templates JSON missing/corrupt. Sync skipped.');
@@ -64,19 +67,22 @@ class TemplateSyncService {
     int created = 0;
     int updated = 0;
     int skipped = 0;
+    int failed = 0;
 
     debugPrint('TemplateSyncService: Sync start (installed=$installed, asset=${pack.version}, templates=${pack.templates.length})');
 
-    for (final def in pack.templates) {
+    int current = 0;
+    final total = pack.templates.length;
+
+    final results = await Future.wait(pack.templates.map((def) async {
       try {
         final incoming = def.toTemplateModel(systemCreatedBy: systemTemplateCreatedBy);
         final existing = await dao.getTemplateById(incoming.id);
 
-        // Preserve user-created templates (should not collide, but be safe).
         if (existing != null && existing.createdBy != systemTemplateCreatedBy) {
-          skipped++;
           debugPrint('TemplateSyncService: Skip "${incoming.id}" (existing createdBy=${existing.createdBy})');
-          continue;
+          _reportProgress(++current, total, onProgress);
+          return 'skipped';
         }
 
         final toWrite = _mergePreservingStats(incoming, existing);
@@ -88,19 +94,28 @@ class TemplateSyncService {
             'systemSchemaVersion': pack.schemaVersion,
           },
         );
-        if (existing == null) {
-          created++;
-        } else {
-          updated++;
-        }
+        _reportProgress(++current, total, onProgress);
+        return existing == null ? 'created' : 'updated';
       } catch (e, st) {
-        skipped++;
         debugPrint('TemplateSyncService: Failed to sync template "${def.templateId}": $e\n$st');
+        _reportProgress(++current, total, onProgress);
+        return 'failed';
       }
+    }));
+
+    for (final res in results) {
+      if (res == 'created') created++;
+      else if (res == 'updated') updated++;
+      else if (res == 'skipped') skipped++;
+      else failed++;
     }
 
     await versionManager.setInstalledVersion(pack.version);
-    debugPrint('TemplateSyncService: Sync done (created=$created updated=$updated skipped=$skipped version=${pack.version})');
+    debugPrint('TemplateSyncService: Sync done (created=$created updated=$updated skipped=$skipped failed=$failed version=${pack.version})');
+  }
+
+  void _reportProgress(int current, int total, void Function(int, int)? onProgress) {
+    onProgress?.call(current, total);
   }
 
   TemplateModel _mergePreservingStats(TemplateModel incoming, TemplateModel? existing) {

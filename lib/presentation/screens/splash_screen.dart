@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../providers/template_sync_provider.dart';
-
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
 
@@ -19,16 +17,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   }
 
   Future<void> _bootstrap() async {
-    // Seed / sync system templates in the background before user reaches template selection.
-    try {
-      final sync = ref.read(templateSyncServiceProvider);
-      await sync.loadTemplatesIfNeeded().timeout(const Duration(seconds: 12));
-      await sync.syncTemplates().timeout(const Duration(seconds: 12));
-    } catch (e) {
-      // Non-fatal: templates can still be used if already present, and network may be offline.
-      debugPrint('SplashScreen: Template sync skipped/failed: $e');
-    }
-
     await Future.delayed(const Duration(seconds: 2));
     if (!mounted) return;
     

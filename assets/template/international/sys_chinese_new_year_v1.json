@@ -1,29 +1,279 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_chinese_ny_v1",
-      "templateName": "Chinese New Year",
-      "category": "communityAndCultural",
-      "description": "Lunar New Year celebration featuring red decor, traditional meals, and lucky symbols.",
-      "tags": ["chinese new year", "lunar new year", "festival", "traditional", "cultural"],
-      "defaultFields": {
-        "contributionType": "voluntary",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "roles", "inventory"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_cny_task_decor", "eventId": "blueprint_dummy", "title": "Secure Red Decor & Lanterns", "status": "pending", "phase": "preEvent", "description": "Ensure auspicious decorations are ready.", "dueOffset": "T-10 days", "role": "Decoration", "dependsOn": [] },
-        { "id": "sys_cny_task_envelopes", "eventId": "blueprint_dummy", "title": "Prepare Red Envelopes (Hong Bao)", "status": "pending", "phase": "preEvent", "description": "Prepare lucky money for children and guests.", "dueOffset": "T-3 days", "role": "Host", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_cny_budget_feast", "eventId": "blueprint_dummy", "category": "Food", "title": "Traditional Lunar Feast", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_cny_timeline_dinner", "eventId": "blueprint_dummy", "title": "Reunion Dinner", "phase": "eventDay", "timeOrOffset": "07:30 PM", "dayNumber": 1, "description": "The main family meal highlight." }
-      ],
-      "version": 1
-    }
-  ]
+   "templates" : [
+      {
+         "budgetBlueprints" : [
+            {
+               "category" : "Food",
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy",
+               "isMandatory" : true,
+               "id" : "sys_cny_budget_feast",
+               "title" : "Traditional Lunar Feast",
+               "estimatedCost" : 0
+            }
+         ],
+         "taskBlueprints" : [
+            {
+               "phase" : "preEvent",
+               "status" : "pending",
+               "role" : "Decoration",
+               "dueOffset" : "T-10 days",
+               "title" : "Secure Red Decor & Lanterns",
+               "id" : "sys_cny_task_decor",
+               "dependsOn" : [],
+               "eventId" : "blueprint_dummy",
+               "description" : "Ensure auspicious decorations are ready."
+            },
+            {
+               "dependsOn" : [],
+               "id" : "sys_cny_task_envelopes",
+               "title" : "Prepare Red Envelopes (Hong Bao)",
+               "description" : "Prepare lucky money for children and guests.",
+               "eventId" : "blueprint_dummy",
+               "status" : "pending",
+               "phase" : "preEvent",
+               "dueOffset" : "T-3 days",
+               "role" : "Host"
+            }
+         ],
+         "tags" : [
+            "chinese new year",
+            "lunar new year",
+            "festival",
+            "traditional",
+            "cultural"
+         ],
+         "timelineBlueprints" : [
+            {
+               "phase" : "eventDay",
+               "timeOrOffset" : "07:30 PM",
+               "eventId" : "blueprint_dummy",
+               "dayNumber" : 1,
+               "description" : "The main family meal highlight.",
+               "title" : "Reunion Dinner",
+               "id" : "sys_cny_timeline_dinner"
+            }
+         ],
+         "templateId" : "sys_chinese_ny_v1",
+         "version" : 2,
+         "description" : "Lunar New Year celebration featuring red decor, traditional meals, and lucky symbols.",
+         "category" : "communityAndCultural",
+         "defaultFields" : {
+            "amount" : 0,
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "roles",
+               "inventory",
+               "userManagement"
+            ],
+            "contributionType" : "voluntary"
+         },
+         "roleBlueprints" : [
+            {
+               "id" : "sys_role_admin",
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "users" : "full",
+                  "roles" : "full",
+                  "guests" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "budget" : "full",
+                  "location" : "full",
+                  "vendors" : "full",
+                  "contribution" : "full",
+                  "customFields" : "full",
+                  "chat" : "full",
+                  "auditLog" : "full",
+                  "tasks" : "full"
+               },
+               "description" : "Full access to all modules."
+            },
+            {
+               "id" : "sys_role_organizer",
+               "moduleAccess" : {
+                  "guests" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "auditLog" : "view",
+                  "tasks" : "edit",
+                  "budget" : "edit",
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "contribution" : "edit",
+                  "chat" : "full",
+                  "customFields" : "view"
+               },
+               "name" : "Organizer",
+               "description" : "Manage most event details."
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "id" : "sys_role_coordinator",
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "edit",
+                  "announcements" : "edit",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "guests" : "view",
+                  "inventory" : "view",
+                  "timeline" : "edit"
+               }
+            },
+            {
+               "description" : "Update task progress.",
+               "id" : "sys_role_volunteer",
+               "moduleAccess" : {
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "update",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none"
+               },
+               "name" : "Volunteer"
+            },
+            {
+               "description" : "Regular participant.",
+               "id" : "sys_role_participant",
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "guests" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "customFields" : "none",
+                  "chat" : "edit",
+                  "contribution" : "view"
+               }
+            },
+            {
+               "description" : "Limited viewing access.",
+               "id" : "sys_role_guest",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none",
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "tasks" : "none",
+                  "auditLog" : "none"
+               },
+               "name" : "Guest"
+            },
+            {
+               "description" : "Read-only access.",
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "auditLog" : "view",
+                  "tasks" : "view",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "contribution" : "view",
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "guests" : "view",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "view",
+                  "users" : "view",
+                  "roles" : "view"
+               },
+               "id" : "sys_role_viewer"
+            },
+            {
+               "id" : "sys_role_society_admin",
+               "name" : "Society Admin",
+               "moduleAccess" : {
+                  "users" : "view",
+                  "roles" : "view",
+                  "announcements" : "edit"
+               },
+               "description" : "Board coordination."
+            },
+            {
+               "description" : "Overall execution lead.",
+               "id" : "sys_role_coord",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "timeline" : "full",
+                  "chat" : "full",
+                  "roles" : "none",
+                  "tasks" : "full"
+               },
+               "name" : "Event Coordinator"
+            },
+            {
+               "description" : "Manage funds.",
+               "name" : "Treasurer",
+               "moduleAccess" : {
+                  "contribution" : "full",
+                  "roles" : "none",
+                  "budget" : "full",
+                  "users" : "none"
+               },
+               "id" : "sys_role_treasurer"
+            },
+            {
+               "description" : "Crowd control.",
+               "id" : "sys_role_security",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "chat" : "edit",
+                  "location" : "view",
+                  "users" : "none"
+               },
+               "name" : "Security Coordinator"
+            }
+         ],
+         "templateName" : "Chinese New Year"
+      }
+   ],
+   "version" : 4,
+   "schemaVersion" : 2
 }

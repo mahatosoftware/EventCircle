@@ -1,28 +1,271 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_family_trip_v1",
-      "templateName": "Family Trip Planner",
-      "category": "travel",
-      "description": "Comprehensive planning for family vacations, including logistics and itinerary.",
-      "tags": ["travel", "family", "vacation", "trip", "itinerary"],
-      "defaultFields": {
-        "contributionType": "variable",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "location", "roles", "inventory", "contribution"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_trip_task_itinerary", "eventId": "blueprint_dummy", "title": "Create Daily Itinerary", "status": "pending", "phase": "preEvent", "description": "Draft sightseeing and travel plan for each day.", "dueOffset": "T-30 days", "role": "Travel Coordinator", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_trip_budget_tickets", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Travel Tickets (Bus/Train/Flight)", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_trip_timeline_packing", "eventId": "blueprint_dummy", "title": "Final Packing Check", "phase": "preEvent", "timeOrOffset": "06:00 PM", "dayNumber": 0, "description": "Ensure essentials like medications/passports are ready." }
-      ],
-      "version": 1
-    }
-  ]
+   "templates" : [
+      {
+         "taskBlueprints" : [
+            {
+               "phase" : "preEvent",
+               "status" : "pending",
+               "role" : "Travel Coordinator",
+               "dueOffset" : "T-30 days",
+               "title" : "Create Daily Itinerary",
+               "dependsOn" : [],
+               "id" : "sys_trip_task_itinerary",
+               "eventId" : "blueprint_dummy",
+               "description" : "Draft sightseeing and travel plan for each day."
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "category" : "Miscellaneous",
+               "isMandatory" : true,
+               "id" : "sys_trip_budget_tickets",
+               "title" : "Travel Tickets (Bus/Train/Flight)",
+               "estimatedCost" : 0,
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0
+            }
+         ],
+         "tags" : [
+            "travel",
+            "family",
+            "vacation",
+            "trip",
+            "itinerary"
+         ],
+         "templateId" : "sys_family_trip_v1",
+         "timelineBlueprints" : [
+            {
+               "id" : "sys_trip_timeline_packing",
+               "phase" : "preEvent",
+               "title" : "Final Packing Check",
+               "dayNumber" : 0,
+               "description" : "Ensure essentials like medications/passports are ready.",
+               "timeOrOffset" : "06:00 PM",
+               "eventId" : "blueprint_dummy"
+            }
+         ],
+         "version" : 3,
+         "description" : "Comprehensive planning for family vacations, including logistics and itinerary.",
+         "category" : "travel",
+         "defaultFields" : {
+            "contributionType" : "variable",
+            "amount" : 0,
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "location",
+               "roles",
+               "inventory",
+               "contribution",
+               "userManagement"
+            ]
+         },
+         "roleBlueprints" : [
+            {
+               "description" : "Full access to all modules.",
+               "id" : "sys_role_admin",
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "tasks" : "full",
+                  "auditLog" : "full",
+                  "contribution" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "budget" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "timeline" : "full",
+                  "inventory" : "full",
+                  "guests" : "full",
+                  "roles" : "full",
+                  "users" : "full",
+                  "ticketing" : "full",
+                  "announcements" : "full"
+               }
+            },
+            {
+               "moduleAccess" : {
+                  "tasks" : "edit",
+                  "auditLog" : "view",
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "contribution" : "edit",
+                  "location" : "edit",
+                  "vendors" : "edit",
+                  "budget" : "edit",
+                  "guests" : "edit",
+                  "timeline" : "edit",
+                  "inventory" : "edit",
+                  "ticketing" : "edit",
+                  "announcements" : "edit",
+                  "roles" : "none",
+                  "users" : "view"
+               },
+               "name" : "Organizer",
+               "id" : "sys_role_organizer",
+               "description" : "Manage most event details."
+            },
+            {
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "guests" : "view",
+                  "timeline" : "edit",
+                  "inventory" : "view",
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "roles" : "none",
+                  "users" : "none",
+                  "tasks" : "edit",
+                  "auditLog" : "none",
+                  "contribution" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view"
+               },
+               "id" : "sys_role_coordinator",
+               "description" : "Manage tasks and timeline."
+            },
+            {
+               "description" : "Update task progress.",
+               "id" : "sys_role_volunteer",
+               "name" : "Volunteer",
+               "moduleAccess" : {
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "update",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "contribution" : "none"
+               }
+            },
+            {
+               "description" : "Regular participant.",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "contribution" : "view",
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "none"
+               },
+               "name" : "Participant",
+               "id" : "sys_role_participant"
+            },
+            {
+               "description" : "Limited viewing access.",
+               "moduleAccess" : {
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none"
+               },
+               "name" : "Guest",
+               "id" : "sys_role_guest"
+            },
+            {
+               "description" : "Read-only access.",
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "auditLog" : "view",
+                  "tasks" : "view",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "contribution" : "view",
+                  "customFields" : "view",
+                  "chat" : "view",
+                  "guests" : "view",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "view",
+                  "users" : "view",
+                  "roles" : "view"
+               },
+               "id" : "sys_role_viewer"
+            },
+            {
+               "id" : "sys_role_trip_org",
+               "name" : "Trip Organizer",
+               "moduleAccess" : {
+                  "timeline" : "full",
+                  "roles" : "none",
+                  "users" : "view",
+                  "budget" : "edit",
+                  "tasks" : "full"
+               },
+               "description" : "Itinerary lead."
+            },
+            {
+               "description" : "Local trip guide.",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "timeline" : "view",
+                  "chat" : "edit",
+                  "location" : "view",
+                  "users" : "none"
+               },
+               "name" : "Guide",
+               "id" : "sys_role_guide"
+            },
+            {
+               "description" : "Vehicle lead.",
+               "id" : "sys_role_transport",
+               "name" : "Transport Coordinator",
+               "moduleAccess" : {
+                  "chat" : "edit",
+                  "roles" : "none",
+                  "location" : "edit",
+                  "users" : "none"
+               }
+            },
+            {
+               "id" : "sys_role_emergency",
+               "moduleAccess" : {
+                  "location" : "view",
+                  "users" : "none",
+                  "chat" : "full",
+                  "roles" : "none"
+               },
+               "name" : "Emergency Lead",
+               "description" : "Safety lead."
+            }
+         ],
+         "templateName" : "Family Trip Planner"
+      }
+   ],
+   "version" : 4,
+   "schemaVersion" : 2
 }

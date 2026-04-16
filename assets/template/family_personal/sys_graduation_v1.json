@@ -1,28 +1,224 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_graduation_v1",
-      "templateName": "Graduation Celebration",
-      "category": "personal",
-      "description": "Celebrate educational achievements with friends and family.",
-      "tags": ["graduation", "degree", "party", "success", "academic"],
-      "defaultFields": {
-        "contributionType": "none",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_graduation_task_decor", "eventId": "blueprint_dummy", "title": "Graduation Themed Decor", "status": "pending", "phase": "preEvent", "description": "Arrange caps, gowns, and diploma motifs.", "dueOffset": "T-10 days", "role": "Decoration", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_graduation_budget_party", "eventId": "blueprint_dummy", "category": "Food", "title": "Party Snacks & Food", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_graduation_timeline_photos", "eventId": "blueprint_dummy", "title": "Photo Session with Gowns", "phase": "eventDay", "timeOrOffset": "05:00 PM", "dayNumber": 1, "description": "Capturing memories with friends." }
-      ],
-      "version": 1
-    }
-  ]
+   "schemaVersion" : 2,
+   "templates" : [
+      {
+         "taskBlueprints" : [
+            {
+               "title" : "Graduation Themed Decor",
+               "dependsOn" : [],
+               "id" : "sys_graduation_task_decor",
+               "eventId" : "blueprint_dummy",
+               "description" : "Arrange caps, gowns, and diploma motifs.",
+               "phase" : "preEvent",
+               "status" : "pending",
+               "role" : "Decoration",
+               "dueOffset" : "T-10 days"
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "title" : "Party Snacks & Food",
+               "estimatedCost" : 0,
+               "category" : "Food",
+               "id" : "sys_graduation_budget_party",
+               "isMandatory" : true,
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy"
+            }
+         ],
+         "tags" : [
+            "graduation",
+            "degree",
+            "party",
+            "success",
+            "academic"
+         ],
+         "templateId" : "sys_graduation_v1",
+         "timelineBlueprints" : [
+            {
+               "phase" : "eventDay",
+               "eventId" : "blueprint_dummy",
+               "timeOrOffset" : "05:00 PM",
+               "dayNumber" : 1,
+               "description" : "Capturing memories with friends.",
+               "title" : "Photo Session with Gowns",
+               "id" : "sys_graduation_timeline_photos"
+            }
+         ],
+         "version" : 2,
+         "description" : "Celebrate educational achievements with friends and family.",
+         "category" : "personal",
+         "defaultFields" : {
+            "amount" : 0,
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "communication",
+               "roles",
+               "userManagement"
+            ],
+            "contributionType" : "none"
+         },
+         "roleBlueprints" : [
+            {
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "ticketing" : "full",
+                  "announcements" : "full",
+                  "roles" : "full",
+                  "users" : "full",
+                  "guests" : "full",
+                  "timeline" : "full",
+                  "inventory" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "contribution" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "budget" : "full",
+                  "tasks" : "full",
+                  "auditLog" : "full"
+               },
+               "id" : "sys_role_admin",
+               "description" : "Full access to all modules."
+            },
+            {
+               "description" : "Manage most event details.",
+               "id" : "sys_role_organizer",
+               "name" : "Organizer",
+               "moduleAccess" : {
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "guests" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "budget" : "edit",
+                  "location" : "edit",
+                  "vendors" : "edit",
+                  "contribution" : "edit",
+                  "customFields" : "view",
+                  "chat" : "full",
+                  "auditLog" : "view",
+                  "tasks" : "edit"
+               }
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "id" : "sys_role_coordinator",
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "budget" : "view",
+                  "tasks" : "edit",
+                  "auditLog" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "timeline" : "edit",
+                  "inventory" : "view",
+                  "guests" : "view"
+               }
+            },
+            {
+               "id" : "sys_role_volunteer",
+               "name" : "Volunteer",
+               "moduleAccess" : {
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "update",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "guests" : "none"
+               },
+               "description" : "Update task progress."
+            },
+            {
+               "moduleAccess" : {
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "contribution" : "view",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none"
+               },
+               "name" : "Participant",
+               "id" : "sys_role_participant",
+               "description" : "Regular participant."
+            },
+            {
+               "description" : "Limited viewing access.",
+               "moduleAccess" : {
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "guests" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "customFields" : "none",
+                  "chat" : "none",
+                  "contribution" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "none"
+               },
+               "name" : "Guest",
+               "id" : "sys_role_guest"
+            },
+            {
+               "moduleAccess" : {
+                  "budget" : "view",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "contribution" : "view",
+                  "customFields" : "view",
+                  "chat" : "view",
+                  "auditLog" : "view",
+                  "tasks" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "view",
+                  "users" : "view",
+                  "roles" : "view",
+                  "guests" : "view",
+                  "inventory" : "view",
+                  "timeline" : "view"
+               },
+               "name" : "Viewer",
+               "id" : "sys_role_viewer",
+               "description" : "Read-only access."
+            }
+         ],
+         "templateName" : "Graduation Celebration"
+      }
+   ],
+   "version" : 4
 }

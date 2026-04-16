@@ -28,6 +28,7 @@ import '../presentation/screens/chat_screen.dart';
 import '../presentation/screens/roles_screen.dart';
 import '../presentation/screens/event_users_screen.dart';
 import '../presentation/screens/audit_log_screen.dart';
+import '../presentation/screens/template_manager_screen.dart';
 import '../presentation/widgets/app_footer.dart';
 
 import '../providers/auth_provider.dart';
@@ -103,6 +104,10 @@ final routerProvider = Provider<GoRouter>((ref) {
           GoRoute(
             path: '/contact-us',
             builder: (context, state) => const ContactUsScreen(),
+          ),
+          GoRoute(
+            path: '/template-manager',
+            builder: (context, state) => const TemplateManagerScreen(),
           ),
           GoRoute(
             path: '/create-event',

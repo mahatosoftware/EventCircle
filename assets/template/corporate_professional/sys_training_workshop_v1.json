@@ -1,28 +1,269 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_training_workshop_v1",
-      "templateName": "Training Workshop",
-      "category": "corporate",
-      "description": "Educational session designed to teach specific skills or provide training.",
-      "tags": ["training", "workshop", "professional development", "education", "corporate"],
-      "defaultFields": {
-        "contributionType": "none",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "roles", "inventory"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_workshop_task_materials", "eventId": "blueprint_dummy", "title": "Prepare Training Kits", "status": "pending", "phase": "preEvent", "description": "Print handouts and assemble kits for participants.", "dueOffset": "T-3 days", "role": "Program Coordinator", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_workshop_budget_trainer", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Trainer Fees", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_workshop_timeline_handson", "eventId": "blueprint_dummy", "title": "Hands-on Exercise", "phase": "eventDay", "timeOrOffset": "02:00 PM", "dayNumber": 1, "description": "Interactive practical session." }
-      ],
-      "version": 1
-    }
-  ]
+   "schemaVersion" : 2,
+   "version" : 4,
+   "templates" : [
+      {
+         "tags" : [
+            "training",
+            "workshop",
+            "professional development",
+            "education",
+            "corporate"
+         ],
+         "budgetBlueprints" : [
+            {
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy",
+               "id" : "sys_workshop_budget_trainer",
+               "isMandatory" : true,
+               "estimatedCost" : 0,
+               "title" : "Trainer Fees",
+               "category" : "Miscellaneous"
+            }
+         ],
+         "taskBlueprints" : [
+            {
+               "role" : "Program Coordinator",
+               "dueOffset" : "T-3 days",
+               "phase" : "preEvent",
+               "status" : "pending",
+               "eventId" : "blueprint_dummy",
+               "description" : "Print handouts and assemble kits for participants.",
+               "title" : "Prepare Training Kits",
+               "dependsOn" : [],
+               "id" : "sys_workshop_task_materials"
+            }
+         ],
+         "version" : 2,
+         "defaultFields" : {
+            "contributionType" : "none",
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "roles",
+               "inventory",
+               "userManagement"
+            ],
+            "amount" : 0
+         },
+         "description" : "Educational session designed to teach specific skills or provide training.",
+         "templateId" : "sys_training_workshop_v1",
+         "timelineBlueprints" : [
+            {
+               "eventId" : "blueprint_dummy",
+               "timeOrOffset" : "02:00 PM",
+               "description" : "Interactive practical session.",
+               "dayNumber" : 1,
+               "title" : "Hands-on Exercise",
+               "id" : "sys_workshop_timeline_handson",
+               "phase" : "eventDay"
+            }
+         ],
+         "category" : "corporate",
+         "templateName" : "Training Workshop",
+         "roleBlueprints" : [
+            {
+               "description" : "Full access to all modules.",
+               "id" : "sys_role_admin",
+               "moduleAccess" : {
+                  "roles" : "full",
+                  "users" : "full",
+                  "ticketing" : "full",
+                  "announcements" : "full",
+                  "timeline" : "full",
+                  "inventory" : "full",
+                  "guests" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "contribution" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "budget" : "full",
+                  "tasks" : "full",
+                  "auditLog" : "full"
+               },
+               "name" : "Admin"
+            },
+            {
+               "description" : "Manage most event details.",
+               "name" : "Organizer",
+               "moduleAccess" : {
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "contribution" : "edit",
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "budget" : "edit",
+                  "tasks" : "edit",
+                  "auditLog" : "view",
+                  "ticketing" : "edit",
+                  "announcements" : "edit",
+                  "roles" : "none",
+                  "users" : "view",
+                  "guests" : "edit",
+                  "timeline" : "edit",
+                  "inventory" : "edit"
+               },
+               "id" : "sys_role_organizer"
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "id" : "sys_role_coordinator",
+               "moduleAccess" : {
+                  "timeline" : "edit",
+                  "inventory" : "view",
+                  "guests" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "tasks" : "edit",
+                  "auditLog" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view"
+               },
+               "name" : "Coordinator"
+            },
+            {
+               "description" : "Update task progress.",
+               "name" : "Volunteer",
+               "moduleAccess" : {
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "tasks" : "update",
+                  "auditLog" : "none",
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none"
+               },
+               "id" : "sys_role_volunteer"
+            },
+            {
+               "id" : "sys_role_participant",
+               "moduleAccess" : {
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "customFields" : "none",
+                  "chat" : "edit",
+                  "contribution" : "view",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none"
+               },
+               "name" : "Participant",
+               "description" : "Regular participant."
+            },
+            {
+               "description" : "Limited viewing access.",
+               "id" : "sys_role_guest",
+               "name" : "Guest",
+               "moduleAccess" : {
+                  "contribution" : "none",
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none"
+               }
+            },
+            {
+               "id" : "sys_role_viewer",
+               "moduleAccess" : {
+                  "ticketing" : "view",
+                  "announcements" : "view",
+                  "roles" : "view",
+                  "users" : "view",
+                  "guests" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "customFields" : "view",
+                  "chat" : "view",
+                  "contribution" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view",
+                  "tasks" : "view",
+                  "auditLog" : "view"
+               },
+               "name" : "Viewer",
+               "description" : "Read-only access."
+            },
+            {
+               "name" : "Event Manager",
+               "moduleAccess" : {
+                  "tasks" : "full",
+                  "roles" : "none",
+                  "users" : "view",
+                  "vendors" : "full",
+                  "budget" : "edit"
+               },
+               "id" : "sys_role_manager",
+               "description" : "Corporate execution lead."
+            },
+            {
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "users" : "view",
+                  "guests" : "edit",
+                  "announcements" : "edit"
+               },
+               "name" : "HR Coordinator",
+               "id" : "sys_role_hr",
+               "description" : "Department coordination."
+            },
+            {
+               "id" : "sys_role_speaker",
+               "name" : "Speaker",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "timeline" : "view",
+                  "users" : "none",
+                  "location" : "view"
+               },
+               "description" : "Session presenter."
+            },
+            {
+               "description" : "Branding lead.",
+               "id" : "sys_role_sponsor",
+               "name" : "Sponsor Manager",
+               "moduleAccess" : {
+                  "location" : "view",
+                  "users" : "view",
+                  "vendors" : "edit",
+                  "roles" : "none"
+               }
+            }
+         ]
+      }
+   ]
 }

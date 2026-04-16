@@ -1,29 +1,279 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_korean_ny_v1",
-      "templateName": "Korean New Year (Seollal)",
-      "category": "communityAndCultural",
-      "description": "Seollal celebration featuring deep bows (Sebae), traditional dress (Hanbok), and rice cake soup (Tteokguk).",
-      "tags": ["seollal", "korean new year", "festival", "traditional", "hanbok"],
-      "defaultFields": {
-        "contributionType": "voluntary",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "kids"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_kny_task_tteokguk", "eventId": "blueprint_dummy", "title": "Prepare Tteokguk (Rice Cake Soup)", "status": "pending", "phase": "eventDay", "description": "Ensure the traditional soup is ready for family members.", "dueOffset": "Event Morning", "role": "Food Manager", "dependsOn": [] },
-        { "id": "sys_kny_task_hanbok", "eventId": "blueprint_dummy", "title": "Coordinate Hanbok Attire", "status": "pending", "phase": "preEvent", "description": "Ensure family members have their traditional dress ready.", "dueOffset": "T-10 days", "role": "Host", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_kny_budget_gifts", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "New Year Lucky Money & Gifts", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_kny_timeline_sebae", "eventId": "blueprint_dummy", "title": "Sebae (Formal Greetings & Bows)", "phase": "eventDay", "timeOrOffset": "10:00 AM", "dayNumber": 1, "description": "Children performing formal bows to elders." }
-      ],
-      "version": 1
-    }
-  ]
+   "schemaVersion" : 2,
+   "templates" : [
+      {
+         "defaultFields" : {
+            "contributionType" : "voluntary",
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "kids",
+               "roles",
+               "userManagement"
+            ],
+            "amount" : 0
+         },
+         "category" : "communityAndCultural",
+         "templateName" : "Korean New Year (Seollal)",
+         "roleBlueprints" : [
+            {
+               "id" : "sys_role_admin",
+               "moduleAccess" : {
+                  "tasks" : "full",
+                  "auditLog" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "contribution" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "budget" : "full",
+                  "timeline" : "full",
+                  "inventory" : "full",
+                  "guests" : "full",
+                  "roles" : "full",
+                  "users" : "full",
+                  "ticketing" : "full",
+                  "announcements" : "full"
+               },
+               "name" : "Admin",
+               "description" : "Full access to all modules."
+            },
+            {
+               "description" : "Manage most event details.",
+               "moduleAccess" : {
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "budget" : "edit",
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "contribution" : "edit",
+                  "auditLog" : "view",
+                  "tasks" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "guests" : "edit"
+               },
+               "name" : "Organizer",
+               "id" : "sys_role_organizer"
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "id" : "sys_role_coordinator",
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "edit",
+                  "announcements" : "edit",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "guests" : "view",
+                  "inventory" : "view",
+                  "timeline" : "edit"
+               }
+            },
+            {
+               "description" : "Update task progress.",
+               "moduleAccess" : {
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "tasks" : "update",
+                  "auditLog" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none"
+               },
+               "name" : "Volunteer",
+               "id" : "sys_role_volunteer"
+            },
+            {
+               "description" : "Regular participant.",
+               "id" : "sys_role_participant",
+               "moduleAccess" : {
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "customFields" : "none",
+                  "chat" : "edit",
+                  "contribution" : "view",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none"
+               },
+               "name" : "Participant"
+            },
+            {
+               "id" : "sys_role_guest",
+               "name" : "Guest",
+               "moduleAccess" : {
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "contribution" : "none",
+                  "customFields" : "none",
+                  "chat" : "none",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view"
+               },
+               "description" : "Limited viewing access."
+            },
+            {
+               "description" : "Read-only access.",
+               "id" : "sys_role_viewer",
+               "moduleAccess" : {
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "guests" : "view",
+                  "users" : "view",
+                  "roles" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "view",
+                  "auditLog" : "view",
+                  "tasks" : "view",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "contribution" : "view",
+                  "customFields" : "view",
+                  "chat" : "view"
+               },
+               "name" : "Viewer"
+            },
+            {
+               "id" : "sys_role_society_admin",
+               "name" : "Society Admin",
+               "moduleAccess" : {
+                  "announcements" : "edit",
+                  "roles" : "view",
+                  "users" : "view"
+               },
+               "description" : "Board coordination."
+            },
+            {
+               "id" : "sys_role_coord",
+               "name" : "Event Coordinator",
+               "moduleAccess" : {
+                  "timeline" : "full",
+                  "chat" : "full",
+                  "roles" : "none",
+                  "users" : "none",
+                  "tasks" : "full"
+               },
+               "description" : "Overall execution lead."
+            },
+            {
+               "description" : "Manage funds.",
+               "moduleAccess" : {
+                  "budget" : "full",
+                  "users" : "none",
+                  "roles" : "none",
+                  "contribution" : "full"
+               },
+               "name" : "Treasurer",
+               "id" : "sys_role_treasurer"
+            },
+            {
+               "description" : "Crowd control.",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "chat" : "edit",
+                  "location" : "view",
+                  "users" : "none"
+               },
+               "name" : "Security Coordinator",
+               "id" : "sys_role_security"
+            }
+         ],
+         "tags" : [
+            "seollal",
+            "korean new year",
+            "festival",
+            "traditional",
+            "hanbok"
+         ],
+         "budgetBlueprints" : [
+            {
+               "category" : "Miscellaneous",
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0,
+               "estimatedCost" : 0,
+               "title" : "New Year Lucky Money & Gifts",
+               "id" : "sys_kny_budget_gifts",
+               "isMandatory" : true
+            }
+         ],
+         "taskBlueprints" : [
+            {
+               "title" : "Prepare Tteokguk (Rice Cake Soup)",
+               "phase" : "eventDay",
+               "id" : "sys_kny_task_tteokguk",
+               "dependsOn" : [],
+               "status" : "pending",
+               "eventId" : "blueprint_dummy",
+               "role" : "Food Manager",
+               "description" : "Ensure the traditional soup is ready for family members.",
+               "dueOffset" : "Event Morning"
+            },
+            {
+               "dependsOn" : [],
+               "id" : "sys_kny_task_hanbok",
+               "title" : "Coordinate Hanbok Attire",
+               "description" : "Ensure family members have their traditional dress ready.",
+               "eventId" : "blueprint_dummy",
+               "status" : "pending",
+               "phase" : "preEvent",
+               "dueOffset" : "T-10 days",
+               "role" : "Host"
+            }
+         ],
+         "timelineBlueprints" : [
+            {
+               "title" : "Sebae (Formal Greetings & Bows)",
+               "id" : "sys_kny_timeline_sebae",
+               "eventId" : "blueprint_dummy",
+               "timeOrOffset" : "10:00 AM",
+               "description" : "Children performing formal bows to elders.",
+               "dayNumber" : 1,
+               "phase" : "eventDay"
+            }
+         ],
+         "templateId" : "sys_korean_ny_v1",
+         "description" : "Seollal celebration featuring deep bows (Sebae), traditional dress (Hanbok), and rice cake soup (Tteokguk).",
+         "version" : 2
+      }
+   ],
+   "version" : 4
 }

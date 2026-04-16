@@ -1,29 +1,283 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_durga_puja_v1",
-      "templateName": "Durga Puja",
-      "category": "communityAndCultural",
-      "description": "Grand celebration of Durga Puja with multi-day events, aarti, and community feast.",
-      "tags": ["durga", "puja", "pujo", "festival", "community", "aarti", "pandal"],
-      "defaultFields": {
-        "contributionType": "fixed",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "communication", "roles", "inventory", "contribution", "userManagement"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_durga_task_pandal", "eventId": "blueprint_dummy", "title": "Pandal Construction & Decor", "status": "pending", "phase": "preEvent", "description": "Coordinate setup of the pujo pandal and idol.", "dueOffset": "T-30 days", "role": "Setup Team", "dependsOn": [] },
-        { "id": "sys_durga_task_cultural", "eventId": "blueprint_dummy", "title": "Plan Cultural Programs", "status": "pending", "phase": "preEvent", "description": "Organize music, dance, and drama performances.", "dueOffset": "T-15 days", "role": "Program Coordinator", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_durga_budget_idol", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Durga Idol & Decor", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_durga_timeline_shasthi", "eventId": "blueprint_dummy", "title": "Bodhon & Shasthi Puja", "phase": "eventDay", "timeOrOffset": "06:00 PM", "dayNumber": 1, "description": "Commencement of the main festival." }
-      ],
-      "version": 1
-    }
-  ]
+   "schemaVersion" : 2,
+   "templates" : [
+      {
+         "version" : 2,
+         "description" : "Grand celebration of Durga Puja with multi-day events, aarti, and community feast.",
+         "timelineBlueprints" : [
+            {
+               "timeOrOffset" : "06:00 PM",
+               "eventId" : "blueprint_dummy",
+               "dayNumber" : 1,
+               "description" : "Commencement of the main festival.",
+               "title" : "Bodhon & Shasthi Puja",
+               "id" : "sys_durga_timeline_shasthi",
+               "phase" : "eventDay"
+            }
+         ],
+         "templateId" : "sys_durga_puja_v1",
+         "tags" : [
+            "durga",
+            "puja",
+            "pujo",
+            "festival",
+            "community",
+            "aarti",
+            "pandal"
+         ],
+         "taskBlueprints" : [
+            {
+               "eventId" : "blueprint_dummy",
+               "description" : "Coordinate setup of the pujo pandal and idol.",
+               "title" : "Pandal Construction & Decor",
+               "id" : "sys_durga_task_pandal",
+               "dependsOn" : [],
+               "role" : "Setup Team",
+               "dueOffset" : "T-30 days",
+               "phase" : "preEvent",
+               "status" : "pending"
+            },
+            {
+               "id" : "sys_durga_task_cultural",
+               "status" : "pending",
+               "dependsOn" : [],
+               "title" : "Plan Cultural Programs",
+               "phase" : "preEvent",
+               "description" : "Organize music, dance, and drama performances.",
+               "dueOffset" : "T-15 days",
+               "eventId" : "blueprint_dummy",
+               "role" : "Program Coordinator"
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "category" : "Miscellaneous",
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0,
+               "isMandatory" : true,
+               "id" : "sys_durga_budget_idol",
+               "estimatedCost" : 0,
+               "title" : "Durga Idol & Decor"
+            }
+         ],
+         "templateName" : "Durga Puja",
+         "roleBlueprints" : [
+            {
+               "id" : "sys_role_admin",
+               "moduleAccess" : {
+                  "timeline" : "full",
+                  "inventory" : "full",
+                  "guests" : "full",
+                  "roles" : "full",
+                  "users" : "full",
+                  "ticketing" : "full",
+                  "announcements" : "full",
+                  "tasks" : "full",
+                  "auditLog" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "contribution" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "budget" : "full"
+               },
+               "name" : "Admin",
+               "description" : "Full access to all modules."
+            },
+            {
+               "description" : "Manage most event details.",
+               "id" : "sys_role_organizer",
+               "moduleAccess" : {
+                  "guests" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "auditLog" : "view",
+                  "tasks" : "edit",
+                  "location" : "edit",
+                  "vendors" : "edit",
+                  "budget" : "edit",
+                  "customFields" : "view",
+                  "chat" : "full",
+                  "contribution" : "edit"
+               },
+               "name" : "Organizer"
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "id" : "sys_role_coordinator",
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "budget" : "view",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "contribution" : "none",
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "auditLog" : "none",
+                  "tasks" : "edit",
+                  "announcements" : "edit",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "guests" : "view",
+                  "inventory" : "view",
+                  "timeline" : "edit"
+               }
+            },
+            {
+               "id" : "sys_role_volunteer",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "update"
+               },
+               "name" : "Volunteer",
+               "description" : "Update task progress."
+            },
+            {
+               "description" : "Regular participant.",
+               "id" : "sys_role_participant",
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "contribution" : "view",
+                  "customFields" : "none",
+                  "chat" : "edit",
+                  "budget" : "none",
+                  "location" : "view",
+                  "vendors" : "none"
+               }
+            },
+            {
+               "description" : "Limited viewing access.",
+               "id" : "sys_role_guest",
+               "name" : "Guest",
+               "moduleAccess" : {
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none"
+               }
+            },
+            {
+               "description" : "Read-only access.",
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "tasks" : "view",
+                  "auditLog" : "view",
+                  "contribution" : "view",
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "view",
+                  "roles" : "view",
+                  "users" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view"
+               },
+               "id" : "sys_role_viewer"
+            },
+            {
+               "id" : "sys_role_society_admin",
+               "name" : "Society Admin",
+               "moduleAccess" : {
+                  "users" : "view",
+                  "roles" : "view",
+                  "announcements" : "edit"
+               },
+               "description" : "Board coordination."
+            },
+            {
+               "description" : "Overall execution lead.",
+               "id" : "sys_role_coord",
+               "moduleAccess" : {
+                  "tasks" : "full",
+                  "timeline" : "full",
+                  "chat" : "full",
+                  "roles" : "none",
+                  "users" : "none"
+               },
+               "name" : "Event Coordinator"
+            },
+            {
+               "description" : "Manage funds.",
+               "moduleAccess" : {
+                  "contribution" : "full",
+                  "roles" : "none",
+                  "users" : "none",
+                  "budget" : "full"
+               },
+               "name" : "Treasurer",
+               "id" : "sys_role_treasurer"
+            },
+            {
+               "description" : "Crowd control.",
+               "id" : "sys_role_security",
+               "moduleAccess" : {
+                  "location" : "view",
+                  "users" : "none",
+                  "roles" : "none",
+                  "chat" : "edit"
+               },
+               "name" : "Security Coordinator"
+            }
+         ],
+         "defaultFields" : {
+            "contributionType" : "fixed",
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "communication",
+               "roles",
+               "inventory",
+               "contribution",
+               "userManagement"
+            ],
+            "amount" : 0
+         },
+         "category" : "communityAndCultural"
+      }
+   ],
+   "version" : 4
 }

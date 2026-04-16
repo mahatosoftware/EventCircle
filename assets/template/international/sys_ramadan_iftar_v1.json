@@ -1,29 +1,278 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_ramadan_iftar_v1",
-      "templateName": "Ramadan Iftar",
-      "category": "communityAndCultural",
-      "description": "Daily communal meal to break the fast during the holy month of Ramadan.",
-      "tags": ["ramadan", "iftar", "fasting", "communal meal", "spiritual"],
-      "defaultFields": {
-        "contributionType": "voluntary",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "location", "roles"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_iftar_task_dates", "eventId": "blueprint_dummy", "title": "Secure Dates & Water for Opening", "status": "pending", "phase": "eventDay", "description": "Ensure the traditional items to break the fast are ready.", "dueOffset": "Event Evening", "role": "Food Manager", "dependsOn": [] },
-        { "id": "sys_iftar_task_venue", "eventId": "blueprint_dummy", "title": "Arrange Group Seating & Prayer Area", "status": "pending", "phase": "preEvent", "description": "Ensure the venue can accommodate group dining and prayer.", "dueOffset": "T-3 days", "role": "Logistics", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_iftar_budget_food", "eventId": "blueprint_dummy", "category": "Food", "title": "Main Iftar Feast", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_iftar_timeline_breaking", "eventId": "blueprint_dummy", "title": "Breaking the Fast & Maghrib Prayer", "phase": "eventDay", "timeOrOffset": "Sunset", "dayNumber": 1, "description": "The peak spiritual and social moment." }
-      ],
-      "version": 1
-    }
-  ]
+   "templates" : [
+      {
+         "tags" : [
+            "ramadan",
+            "iftar",
+            "fasting",
+            "communal meal",
+            "spiritual"
+         ],
+         "taskBlueprints" : [
+            {
+               "title" : "Secure Dates & Water for Opening",
+               "id" : "sys_iftar_task_dates",
+               "dependsOn" : [],
+               "eventId" : "blueprint_dummy",
+               "description" : "Ensure the traditional items to break the fast are ready.",
+               "phase" : "eventDay",
+               "status" : "pending",
+               "role" : "Food Manager",
+               "dueOffset" : "Event Evening"
+            },
+            {
+               "role" : "Logistics",
+               "dueOffset" : "T-3 days",
+               "phase" : "preEvent",
+               "status" : "pending",
+               "eventId" : "blueprint_dummy",
+               "description" : "Ensure the venue can accommodate group dining and prayer.",
+               "title" : "Arrange Group Seating & Prayer Area",
+               "id" : "sys_iftar_task_venue",
+               "dependsOn" : []
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "isMandatory" : true,
+               "id" : "sys_iftar_budget_food",
+               "title" : "Main Iftar Feast",
+               "category" : "Food",
+               "estimatedCost" : 0,
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0
+            }
+         ],
+         "templateId" : "sys_ramadan_iftar_v1",
+         "timelineBlueprints" : [
+            {
+               "title" : "Breaking the Fast & Maghrib Prayer",
+               "phase" : "eventDay",
+               "id" : "sys_iftar_timeline_breaking",
+               "timeOrOffset" : "Sunset",
+               "eventId" : "blueprint_dummy",
+               "dayNumber" : 1,
+               "description" : "The peak spiritual and social moment."
+            }
+         ],
+         "description" : "Daily communal meal to break the fast during the holy month of Ramadan.",
+         "version" : 2,
+         "defaultFields" : {
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "location",
+               "roles",
+               "userManagement"
+            ],
+            "amount" : 0,
+            "contributionType" : "voluntary"
+         },
+         "category" : "communityAndCultural",
+         "templateName" : "Ramadan Iftar",
+         "roleBlueprints" : [
+            {
+               "description" : "Full access to all modules.",
+               "id" : "sys_role_admin",
+               "name" : "Admin",
+               "moduleAccess" : {
+                  "auditLog" : "full",
+                  "tasks" : "full",
+                  "budget" : "full",
+                  "location" : "full",
+                  "vendors" : "full",
+                  "contribution" : "full",
+                  "customFields" : "full",
+                  "chat" : "full",
+                  "guests" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "users" : "full",
+                  "roles" : "full"
+               }
+            },
+            {
+               "description" : "Manage most event details.",
+               "id" : "sys_role_organizer",
+               "moduleAccess" : {
+                  "contribution" : "edit",
+                  "customFields" : "view",
+                  "chat" : "full",
+                  "budget" : "edit",
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "tasks" : "edit",
+                  "auditLog" : "view",
+                  "roles" : "none",
+                  "users" : "view",
+                  "ticketing" : "edit",
+                  "announcements" : "edit",
+                  "timeline" : "edit",
+                  "inventory" : "edit",
+                  "guests" : "edit"
+               },
+               "name" : "Organizer"
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "id" : "sys_role_coordinator",
+               "moduleAccess" : {
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "budget" : "view",
+                  "tasks" : "edit",
+                  "auditLog" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "timeline" : "edit",
+                  "inventory" : "view",
+                  "guests" : "view"
+               },
+               "name" : "Coordinator"
+            },
+            {
+               "id" : "sys_role_volunteer",
+               "moduleAccess" : {
+                  "customFields" : "none",
+                  "chat" : "full",
+                  "contribution" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "tasks" : "update",
+                  "auditLog" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "none"
+               },
+               "name" : "Volunteer",
+               "description" : "Update task progress."
+            },
+            {
+               "id" : "sys_role_participant",
+               "moduleAccess" : {
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "guests" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "contribution" : "view",
+                  "auditLog" : "none",
+                  "tasks" : "none"
+               },
+               "name" : "Participant",
+               "description" : "Regular participant."
+            },
+            {
+               "description" : "Limited viewing access.",
+               "id" : "sys_role_guest",
+               "name" : "Guest",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "customFields" : "none",
+                  "chat" : "none",
+                  "contribution" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "none"
+               }
+            },
+            {
+               "moduleAccess" : {
+                  "budget" : "view",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "contribution" : "view",
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "auditLog" : "view",
+                  "tasks" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "view",
+                  "users" : "view",
+                  "roles" : "view",
+                  "guests" : "view",
+                  "inventory" : "view",
+                  "timeline" : "view"
+               },
+               "name" : "Viewer",
+               "id" : "sys_role_viewer",
+               "description" : "Read-only access."
+            },
+            {
+               "description" : "Board coordination.",
+               "moduleAccess" : {
+                  "announcements" : "edit",
+                  "users" : "view",
+                  "roles" : "view"
+               },
+               "name" : "Society Admin",
+               "id" : "sys_role_society_admin"
+            },
+            {
+               "description" : "Overall execution lead.",
+               "moduleAccess" : {
+                  "tasks" : "full",
+                  "users" : "none",
+                  "timeline" : "full",
+                  "chat" : "full",
+                  "roles" : "none"
+               },
+               "name" : "Event Coordinator",
+               "id" : "sys_role_coord"
+            },
+            {
+               "description" : "Manage funds.",
+               "id" : "sys_role_treasurer",
+               "name" : "Treasurer",
+               "moduleAccess" : {
+                  "budget" : "full",
+                  "users" : "none",
+                  "roles" : "none",
+                  "contribution" : "full"
+               }
+            },
+            {
+               "id" : "sys_role_security",
+               "moduleAccess" : {
+                  "location" : "view",
+                  "users" : "none",
+                  "chat" : "edit",
+                  "roles" : "none"
+               },
+               "name" : "Security Coordinator",
+               "description" : "Crowd control."
+            }
+         ]
+      }
+   ],
+   "version" : 4,
+   "schemaVersion" : 2
 }

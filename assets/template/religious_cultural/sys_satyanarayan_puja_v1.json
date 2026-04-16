@@ -1,32 +1,311 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_satyanarayan_puja_v1",
-      "templateName": "Satyanarayan Puja",
-      "category": "communityAndCultural",
-      "description": "A traditional puja dedicated to Lord Vishnu, often performed for thanksgiving or housewarming.",
-      "tags": ["puja", "pooja", "satyanarayan", "vishnu", "ritual", "prasad", "home"],
-      "defaultFields": {
-        "contributionType": "variable",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "roles", "inventory", "contribution"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_satya_task_priest", "eventId": "blueprint_dummy", "title": "Book Priest / Pandit", "status": "pending", "phase": "preEvent", "description": "Confirm the priest for the specific date and timing.", "dueOffset": "T-10 days", "role": "Organizer", "dependsOn": [] },
-        { "id": "sys_satya_task_samagri", "eventId": "blueprint_dummy", "title": "Purchase Puja Samagri", "status": "pending", "phase": "preEvent", "description": "Buy fruits, flowers, incense, and specific ritual items.", "dueOffset": "T-3 days", "role": "Logistics", "dependsOn": [] },
-        { "id": "sys_satya_task_prasad", "eventId": "blueprint_dummy", "title": "Prepare Sinni / Prasad", "status": "pending", "phase": "eventDay", "description": "Prepare the sacred food offering.", "dueOffset": "Event Morning", "role": "Food Manager", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_satya_budget_dakshina", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Priest Dakshina", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 },
-        { "id": "sys_satya_budget_samagri", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Puja Materials", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_satya_timeline_start", "eventId": "blueprint_dummy", "title": "Puja Commencement", "phase": "eventDay", "timeOrOffset": "10:30 AM", "dayNumber": 1, "description": "Start of the main rituals." },
-        { "id": "sys_satya_timeline_katha", "eventId": "blueprint_dummy", "title": "Satyanarayan Katha", "phase": "eventDay", "timeOrOffset": "11:30 AM", "dayNumber": 1, "description": "Reading the sacred story." }
-      ],
-      "version": 1
-    }
-  ]
+   "version" : 4,
+   "templates" : [
+      {
+         "roleBlueprints" : [
+            {
+               "moduleAccess" : {
+                  "ticketing" : "full",
+                  "announcements" : "full",
+                  "roles" : "full",
+                  "users" : "full",
+                  "guests" : "full",
+                  "timeline" : "full",
+                  "inventory" : "full",
+                  "contribution" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "budget" : "full",
+                  "location" : "full",
+                  "vendors" : "full",
+                  "tasks" : "full",
+                  "auditLog" : "full"
+               },
+               "name" : "Admin",
+               "id" : "sys_role_admin",
+               "description" : "Full access to all modules."
+            },
+            {
+               "description" : "Manage most event details.",
+               "id" : "sys_role_organizer",
+               "moduleAccess" : {
+                  "announcements" : "edit",
+                  "ticketing" : "edit",
+                  "users" : "view",
+                  "roles" : "none",
+                  "guests" : "edit",
+                  "inventory" : "edit",
+                  "timeline" : "edit",
+                  "vendors" : "edit",
+                  "location" : "edit",
+                  "budget" : "edit",
+                  "customFields" : "view",
+                  "chat" : "full",
+                  "contribution" : "edit",
+                  "auditLog" : "view",
+                  "tasks" : "edit"
+               },
+               "name" : "Organizer"
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "id" : "sys_role_coordinator",
+               "moduleAccess" : {
+                  "announcements" : "edit",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "guests" : "view",
+                  "inventory" : "view",
+                  "timeline" : "edit",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "edit"
+               },
+               "name" : "Coordinator"
+            },
+            {
+               "description" : "Update task progress.",
+               "name" : "Volunteer",
+               "moduleAccess" : {
+                  "guests" : "none",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "update",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "contribution" : "none"
+               },
+               "id" : "sys_role_volunteer"
+            },
+            {
+               "moduleAccess" : {
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "contribution" : "view",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none"
+               },
+               "name" : "Participant",
+               "id" : "sys_role_participant",
+               "description" : "Regular participant."
+            },
+            {
+               "moduleAccess" : {
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none"
+               },
+               "name" : "Guest",
+               "id" : "sys_role_guest",
+               "description" : "Limited viewing access."
+            },
+            {
+               "moduleAccess" : {
+                  "roles" : "view",
+                  "users" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "view",
+                  "contribution" : "view",
+                  "customFields" : "view",
+                  "chat" : "view",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "tasks" : "view",
+                  "auditLog" : "view"
+               },
+               "name" : "Viewer",
+               "id" : "sys_role_viewer",
+               "description" : "Read-only access."
+            },
+            {
+               "description" : "Board coordination.",
+               "id" : "sys_role_society_admin",
+               "name" : "Society Admin",
+               "moduleAccess" : {
+                  "roles" : "view",
+                  "users" : "view",
+                  "announcements" : "edit"
+               }
+            },
+            {
+               "id" : "sys_role_coord",
+               "name" : "Event Coordinator",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "chat" : "full",
+                  "timeline" : "full",
+                  "roles" : "none",
+                  "tasks" : "full"
+               },
+               "description" : "Overall execution lead."
+            },
+            {
+               "description" : "Manage funds.",
+               "id" : "sys_role_treasurer",
+               "moduleAccess" : {
+                  "contribution" : "full",
+                  "roles" : "none",
+                  "users" : "none",
+                  "budget" : "full"
+               },
+               "name" : "Treasurer"
+            },
+            {
+               "description" : "Crowd control.",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "chat" : "edit",
+                  "users" : "none",
+                  "location" : "view"
+               },
+               "name" : "Security Coordinator",
+               "id" : "sys_role_security"
+            }
+         ],
+         "templateName" : "Satyanarayan Puja",
+         "category" : "communityAndCultural",
+         "defaultFields" : {
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "roles",
+               "inventory",
+               "contribution",
+               "userManagement"
+            ],
+            "amount" : 0,
+            "contributionType" : "variable"
+         },
+         "version" : 2,
+         "description" : "A traditional puja dedicated to Lord Vishnu, often performed for thanksgiving or housewarming.",
+         "templateId" : "sys_satyanarayan_puja_v1",
+         "timelineBlueprints" : [
+            {
+               "phase" : "eventDay",
+               "description" : "Start of the main rituals.",
+               "dayNumber" : 1,
+               "eventId" : "blueprint_dummy",
+               "timeOrOffset" : "10:30 AM",
+               "id" : "sys_satya_timeline_start",
+               "title" : "Puja Commencement"
+            },
+            {
+               "phase" : "eventDay",
+               "timeOrOffset" : "11:30 AM",
+               "eventId" : "blueprint_dummy",
+               "dayNumber" : 1,
+               "description" : "Reading the sacred story.",
+               "title" : "Satyanarayan Katha",
+               "id" : "sys_satya_timeline_katha"
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "category" : "Miscellaneous",
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0,
+               "estimatedCost" : 0,
+               "title" : "Priest Dakshina",
+               "id" : "sys_satya_budget_dakshina",
+               "isMandatory" : true
+            },
+            {
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy",
+               "estimatedCost" : 0,
+               "title" : "Puja Materials",
+               "id" : "sys_satya_budget_samagri",
+               "isMandatory" : true,
+               "category" : "Miscellaneous"
+            }
+         ],
+         "taskBlueprints" : [
+            {
+               "role" : "Organizer",
+               "eventId" : "blueprint_dummy",
+               "dueOffset" : "T-10 days",
+               "description" : "Confirm the priest for the specific date and timing.",
+               "title" : "Book Priest / Pandit",
+               "phase" : "preEvent",
+               "dependsOn" : [],
+               "status" : "pending",
+               "id" : "sys_satya_task_priest"
+            },
+            {
+               "eventId" : "blueprint_dummy",
+               "description" : "Buy fruits, flowers, incense, and specific ritual items.",
+               "title" : "Purchase Puja Samagri",
+               "id" : "sys_satya_task_samagri",
+               "dependsOn" : [],
+               "role" : "Logistics",
+               "dueOffset" : "T-3 days",
+               "phase" : "preEvent",
+               "status" : "pending"
+            },
+            {
+               "title" : "Prepare Sinni / Prasad",
+               "dependsOn" : [],
+               "id" : "sys_satya_task_prasad",
+               "eventId" : "blueprint_dummy",
+               "description" : "Prepare the sacred food offering.",
+               "phase" : "eventDay",
+               "status" : "pending",
+               "role" : "Food Manager",
+               "dueOffset" : "Event Morning"
+            }
+         ],
+         "tags" : [
+            "puja",
+            "pooja",
+            "satyanarayan",
+            "vishnu",
+            "ritual",
+            "prasad",
+            "home"
+         ]
+      }
+   ],
+   "schemaVersion" : 2
 }

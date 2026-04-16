@@ -1,28 +1,268 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_easter_celebration_v1",
-      "templateName": "Easter Celebration",
-      "category": "communityAndCultural",
-      "description": "Holiday celebration with egg hunts, festive meals, and family activities.",
-      "tags": ["easter", "egg hunt", "holiday", "family", "spring"],
-      "defaultFields": {
-        "contributionType": "voluntary",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "kids"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_easter_task_hunt", "eventId": "blueprint_dummy", "title": "Organize Easter Egg Hunt", "status": "pending", "phase": "preEvent", "description": "Prepare and hide eggs for children.", "dueOffset": "T-1 day", "role": "Kids Coordinator", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_easter_budget_eggs", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Eggs & Decorations", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_easter_timeline_hunt", "eventId": "blueprint_dummy", "title": "Main Egg Hunt Event", "phase": "eventDay", "timeOrOffset": "10:30 AM", "dayNumber": 1, "description": "The main activity for children." }
-      ],
-      "version": 1
-    }
-  ]
+   "schemaVersion" : 2,
+   "templates" : [
+      {
+         "taskBlueprints" : [
+            {
+               "eventId" : "blueprint_dummy",
+               "description" : "Prepare and hide eggs for children.",
+               "title" : "Organize Easter Egg Hunt",
+               "id" : "sys_easter_task_hunt",
+               "dependsOn" : [],
+               "role" : "Kids Coordinator",
+               "dueOffset" : "T-1 day",
+               "phase" : "preEvent",
+               "status" : "pending"
+            }
+         ],
+         "budgetBlueprints" : [
+            {
+               "isMandatory" : true,
+               "id" : "sys_easter_budget_eggs",
+               "title" : "Eggs & Decorations",
+               "estimatedCost" : 0,
+               "category" : "Miscellaneous",
+               "actualCost" : 0,
+               "eventId" : "blueprint_dummy"
+            }
+         ],
+         "tags" : [
+            "easter",
+            "egg hunt",
+            "holiday",
+            "family",
+            "spring"
+         ],
+         "timelineBlueprints" : [
+            {
+               "title" : "Main Egg Hunt Event",
+               "id" : "sys_easter_timeline_hunt",
+               "timeOrOffset" : "10:30 AM",
+               "eventId" : "blueprint_dummy",
+               "description" : "The main activity for children.",
+               "dayNumber" : 1,
+               "phase" : "eventDay"
+            }
+         ],
+         "templateId" : "sys_easter_celebration_v1",
+         "version" : 2,
+         "description" : "Holiday celebration with egg hunts, festive meals, and family activities.",
+         "category" : "communityAndCultural",
+         "defaultFields" : {
+            "contributionType" : "voluntary",
+            "amount" : 0,
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "kids",
+               "roles",
+               "userManagement"
+            ]
+         },
+         "roleBlueprints" : [
+            {
+               "description" : "Full access to all modules.",
+               "moduleAccess" : {
+                  "tasks" : "full",
+                  "auditLog" : "full",
+                  "customFields" : "full",
+                  "chat" : "full",
+                  "contribution" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "budget" : "full",
+                  "guests" : "full",
+                  "timeline" : "full",
+                  "inventory" : "full",
+                  "ticketing" : "full",
+                  "announcements" : "full",
+                  "roles" : "full",
+                  "users" : "full"
+               },
+               "name" : "Admin",
+               "id" : "sys_role_admin"
+            },
+            {
+               "id" : "sys_role_organizer",
+               "name" : "Organizer",
+               "moduleAccess" : {
+                  "timeline" : "edit",
+                  "inventory" : "edit",
+                  "guests" : "edit",
+                  "roles" : "none",
+                  "users" : "view",
+                  "ticketing" : "edit",
+                  "announcements" : "edit",
+                  "tasks" : "edit",
+                  "auditLog" : "view",
+                  "contribution" : "edit",
+                  "chat" : "full",
+                  "customFields" : "view",
+                  "budget" : "edit",
+                  "location" : "edit",
+                  "vendors" : "edit"
+               },
+               "description" : "Manage most event details."
+            },
+            {
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "location" : "view",
+                  "vendors" : "view",
+                  "budget" : "view",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "edit",
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "edit",
+                  "ticketing" : "none",
+                  "inventory" : "view",
+                  "timeline" : "edit",
+                  "guests" : "view"
+               },
+               "id" : "sys_role_coordinator",
+               "description" : "Manage tasks and timeline."
+            },
+            {
+               "moduleAccess" : {
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "auditLog" : "none",
+                  "tasks" : "update",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none",
+                  "guests" : "none",
+                  "inventory" : "view",
+                  "timeline" : "view"
+               },
+               "name" : "Volunteer",
+               "id" : "sys_role_volunteer",
+               "description" : "Update task progress."
+            },
+            {
+               "description" : "Regular participant.",
+               "moduleAccess" : {
+                  "users" : "none",
+                  "roles" : "none",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "guests" : "none",
+                  "location" : "view",
+                  "vendors" : "none",
+                  "budget" : "none",
+                  "chat" : "edit",
+                  "customFields" : "none",
+                  "contribution" : "view",
+                  "auditLog" : "none",
+                  "tasks" : "none"
+               },
+               "name" : "Participant",
+               "id" : "sys_role_participant"
+            },
+            {
+               "moduleAccess" : {
+                  "auditLog" : "none",
+                  "tasks" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none",
+                  "customFields" : "none",
+                  "chat" : "none",
+                  "contribution" : "none",
+                  "guests" : "none",
+                  "inventory" : "none",
+                  "timeline" : "view",
+                  "announcements" : "view",
+                  "ticketing" : "none",
+                  "users" : "none",
+                  "roles" : "none"
+               },
+               "name" : "Guest",
+               "id" : "sys_role_guest",
+               "description" : "Limited viewing access."
+            },
+            {
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "announcements" : "view",
+                  "ticketing" : "view",
+                  "users" : "view",
+                  "roles" : "view",
+                  "guests" : "view",
+                  "inventory" : "view",
+                  "timeline" : "view",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "contribution" : "view",
+                  "customFields" : "view",
+                  "chat" : "view",
+                  "auditLog" : "view",
+                  "tasks" : "view"
+               },
+               "id" : "sys_role_viewer",
+               "description" : "Read-only access."
+            },
+            {
+               "description" : "Board coordination.",
+               "name" : "Society Admin",
+               "moduleAccess" : {
+                  "announcements" : "edit",
+                  "users" : "view",
+                  "roles" : "view"
+               },
+               "id" : "sys_role_society_admin"
+            },
+            {
+               "name" : "Event Coordinator",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "chat" : "full",
+                  "timeline" : "full",
+                  "users" : "none",
+                  "tasks" : "full"
+               },
+               "id" : "sys_role_coord",
+               "description" : "Overall execution lead."
+            },
+            {
+               "description" : "Manage funds.",
+               "id" : "sys_role_treasurer",
+               "name" : "Treasurer",
+               "moduleAccess" : {
+                  "budget" : "full",
+                  "users" : "none",
+                  "contribution" : "full",
+                  "roles" : "none"
+               }
+            },
+            {
+               "id" : "sys_role_security",
+               "name" : "Security Coordinator",
+               "moduleAccess" : {
+                  "location" : "view",
+                  "users" : "none",
+                  "chat" : "edit",
+                  "roles" : "none"
+               },
+               "description" : "Crowd control."
+            }
+         ],
+         "templateName" : "Easter Celebration"
+      }
+   ],
+   "version" : 4
 }

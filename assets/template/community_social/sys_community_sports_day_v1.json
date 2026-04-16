@@ -1,28 +1,269 @@
 {
-  "schemaVersion": 2,
-  "version": 1,
-  "templates": [
-    {
-      "templateId": "sys_community_sports_day_v1",
-      "templateName": "Community Sports Day",
-      "category": "communityAndCultural",
-      "description": "A day of athletic competitions and fun games for the whole community.",
-      "tags": ["sports", "community", "games", "fitness", "fun"],
-      "defaultFields": {
-        "contributionType": "fixed",
-        "amount": 0,
-        "enabledModules": ["task", "budget", "timeline", "guestManagement", "roles", "inventory", "contribution"]
-      },
-      "taskBlueprints": [
-        { "id": "sys_sports_task_equipment", "eventId": "blueprint_dummy", "title": "Rent Sports Equipment", "status": "pending", "phase": "preEvent", "description": "Arrange for kits, balls, Nets, and field markers.", "dueOffset": "T-7 days", "role": "Logistics", "dependsOn": [] }
-      ],
-      "budgetBlueprints": [
-        { "id": "sys_sports_budget_prizes", "eventId": "blueprint_dummy", "category": "Miscellaneous", "title": "Medals & Trophies", "estimatedCost": 0.0, "isMandatory": true, "actualCost": 0.0 }
-      ],
-      "timelineBlueprints": [
-        { "id": "sys_sports_timeline_race", "eventId": "blueprint_dummy", "title": "Main Track Events", "phase": "eventDay", "timeOrOffset": "10:30 AM", "dayNumber": 1, "description": "Races and field competitions." }
-      ],
-      "version": 1
-    }
-  ]
+   "schemaVersion" : 2,
+   "templates" : [
+      {
+         "tags" : [
+            "sports",
+            "community",
+            "games",
+            "fitness",
+            "fun"
+         ],
+         "budgetBlueprints" : [
+            {
+               "category" : "Miscellaneous",
+               "eventId" : "blueprint_dummy",
+               "actualCost" : 0,
+               "id" : "sys_sports_budget_prizes",
+               "isMandatory" : true,
+               "title" : "Medals & Trophies",
+               "estimatedCost" : 0
+            }
+         ],
+         "taskBlueprints" : [
+            {
+               "id" : "sys_sports_task_equipment",
+               "dependsOn" : [],
+               "title" : "Rent Sports Equipment",
+               "description" : "Arrange for kits, balls, Nets, and field markers.",
+               "eventId" : "blueprint_dummy",
+               "status" : "pending",
+               "phase" : "preEvent",
+               "dueOffset" : "T-7 days",
+               "role" : "Logistics"
+            }
+         ],
+         "timelineBlueprints" : [
+            {
+               "phase" : "eventDay",
+               "dayNumber" : 1,
+               "description" : "Races and field competitions.",
+               "timeOrOffset" : "10:30 AM",
+               "eventId" : "blueprint_dummy",
+               "id" : "sys_sports_timeline_race",
+               "title" : "Main Track Events"
+            }
+         ],
+         "templateId" : "sys_community_sports_day_v1",
+         "version" : 2,
+         "description" : "A day of athletic competitions and fun games for the whole community.",
+         "defaultFields" : {
+            "contributionType" : "fixed",
+            "enabledModules" : [
+               "task",
+               "budget",
+               "timeline",
+               "guestManagement",
+               "roles",
+               "inventory",
+               "contribution",
+               "userManagement"
+            ],
+            "amount" : 0
+         },
+         "category" : "communityAndCultural",
+         "templateName" : "Community Sports Day",
+         "roleBlueprints" : [
+            {
+               "description" : "Full access to all modules.",
+               "moduleAccess" : {
+                  "users" : "full",
+                  "roles" : "full",
+                  "announcements" : "full",
+                  "ticketing" : "full",
+                  "inventory" : "full",
+                  "timeline" : "full",
+                  "guests" : "full",
+                  "budget" : "full",
+                  "vendors" : "full",
+                  "location" : "full",
+                  "contribution" : "full",
+                  "chat" : "full",
+                  "customFields" : "full",
+                  "auditLog" : "full",
+                  "tasks" : "full"
+               },
+               "name" : "Admin",
+               "id" : "sys_role_admin"
+            },
+            {
+               "id" : "sys_role_organizer",
+               "name" : "Organizer",
+               "moduleAccess" : {
+                  "tasks" : "edit",
+                  "auditLog" : "view",
+                  "contribution" : "edit",
+                  "customFields" : "view",
+                  "chat" : "full",
+                  "budget" : "edit",
+                  "location" : "edit",
+                  "vendors" : "edit",
+                  "timeline" : "edit",
+                  "inventory" : "edit",
+                  "guests" : "edit",
+                  "roles" : "none",
+                  "users" : "view",
+                  "ticketing" : "edit",
+                  "announcements" : "edit"
+               },
+               "description" : "Manage most event details."
+            },
+            {
+               "description" : "Manage tasks and timeline.",
+               "id" : "sys_role_coordinator",
+               "name" : "Coordinator",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "edit",
+                  "timeline" : "edit",
+                  "inventory" : "view",
+                  "guests" : "view",
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "budget" : "view",
+                  "vendors" : "view",
+                  "location" : "view",
+                  "tasks" : "edit",
+                  "auditLog" : "none"
+               }
+            },
+            {
+               "moduleAccess" : {
+                  "contribution" : "none",
+                  "chat" : "full",
+                  "customFields" : "none",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "tasks" : "update",
+                  "auditLog" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "view"
+               },
+               "name" : "Volunteer",
+               "id" : "sys_role_volunteer",
+               "description" : "Update task progress."
+            },
+            {
+               "name" : "Participant",
+               "moduleAccess" : {
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "roles" : "none",
+                  "users" : "none",
+                  "guests" : "none",
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "contribution" : "view",
+                  "customFields" : "none",
+                  "chat" : "edit",
+                  "budget" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "tasks" : "none",
+                  "auditLog" : "none"
+               },
+               "id" : "sys_role_participant",
+               "description" : "Regular participant."
+            },
+            {
+               "id" : "sys_role_guest",
+               "moduleAccess" : {
+                  "timeline" : "view",
+                  "inventory" : "none",
+                  "guests" : "none",
+                  "roles" : "none",
+                  "users" : "none",
+                  "ticketing" : "none",
+                  "announcements" : "view",
+                  "tasks" : "none",
+                  "auditLog" : "none",
+                  "chat" : "none",
+                  "customFields" : "none",
+                  "contribution" : "none",
+                  "vendors" : "none",
+                  "location" : "view",
+                  "budget" : "none"
+               },
+               "name" : "Guest",
+               "description" : "Limited viewing access."
+            },
+            {
+               "name" : "Viewer",
+               "moduleAccess" : {
+                  "chat" : "view",
+                  "customFields" : "view",
+                  "contribution" : "view",
+                  "location" : "view",
+                  "vendors" : "view",
+                  "budget" : "view",
+                  "tasks" : "view",
+                  "auditLog" : "view",
+                  "roles" : "view",
+                  "users" : "view",
+                  "ticketing" : "view",
+                  "announcements" : "view",
+                  "timeline" : "view",
+                  "inventory" : "view",
+                  "guests" : "view"
+               },
+               "id" : "sys_role_viewer",
+               "description" : "Read-only access."
+            },
+            {
+               "description" : "Board coordination.",
+               "moduleAccess" : {
+                  "announcements" : "edit",
+                  "users" : "view",
+                  "roles" : "view"
+               },
+               "name" : "Society Admin",
+               "id" : "sys_role_society_admin"
+            },
+            {
+               "description" : "Overall execution lead.",
+               "id" : "sys_role_coord",
+               "name" : "Event Coordinator",
+               "moduleAccess" : {
+                  "chat" : "full",
+                  "timeline" : "full",
+                  "roles" : "none",
+                  "users" : "none",
+                  "tasks" : "full"
+               }
+            },
+            {
+               "description" : "Manage funds.",
+               "id" : "sys_role_treasurer",
+               "moduleAccess" : {
+                  "roles" : "none",
+                  "contribution" : "full",
+                  "users" : "none",
+                  "budget" : "full"
+               },
+               "name" : "Treasurer"
+            },
+            {
+               "name" : "Security Coordinator",
+               "moduleAccess" : {
+                  "chat" : "edit",
+                  "roles" : "none",
+                  "users" : "none",
+                  "location" : "view"
+               },
+               "id" : "sys_role_security",
+               "description" : "Crowd control."
+            }
+         ]
+      }
+   ],
+   "version" : 4
 }
