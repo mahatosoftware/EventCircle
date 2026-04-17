@@ -141,9 +141,19 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
                           secondary: Icon(_getModuleIcon(module), color: _selectedModules[module]! ? Colors.blue.shade700 : Colors.grey),
                           value: _selectedModules[module],
                           onChanged: (val) => setState(() {
-                            _selectedModules[module] = val!;
+                            final newVal = val ?? false;
+                            if (module == TemplateModule.location && !newVal && _selectedModules[TemplateModule.invitation] == true) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Location module is required for Invitation & RSVP')),
+                              );
+                              return;
+                            }
+                            _selectedModules[module] = newVal;
                             if (module == TemplateModule.budget) {
-                              _selectedModules[TemplateModule.expenses] = val;
+                              _selectedModules[TemplateModule.expenses] = newVal;
+                            }
+                            if (module == TemplateModule.invitation && newVal) {
+                              _selectedModules[TemplateModule.location] = true;
                             }
                           }),
                           contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
@@ -311,6 +321,7 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
       case TemplateModule.roles: return Icons.badge_outlined;
       case TemplateModule.location: return Icons.location_on_outlined;
       case TemplateModule.ticketing: return Icons.confirmation_number_outlined;
+      case TemplateModule.invitation: return Icons.mail_outline;
     }
   }
 

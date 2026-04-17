@@ -2,7 +2,7 @@
    "templates": [
       {
          "description": "Organize Ganesh Puja with pre-event planning, event-day execution, and post-event wrap-up.",
-         "version": 10,
+         "version": 11,
          "templateId": "sys_ganesh_puja_v1",
          "timelineBlueprints": [
             {
@@ -849,7 +849,8 @@
                "roles",
                "inventory",
                "userManagement",
-               "contribution"
+               "contribution",
+               "invitation"
             ],
             "amount": 0,
             "contributionType": "variable"
@@ -857,6 +858,6 @@
          "category": "communityAndCultural"
       }
    ],
-   "version": 10,
+   "version": 11,
    "schemaVersion": 2
 }

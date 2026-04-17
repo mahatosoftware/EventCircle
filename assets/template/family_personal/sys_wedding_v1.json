@@ -1,6 +1,6 @@
 {
    "schemaVersion": 2,
-   "version": 11,
+   "version": 12,
    "templates": [
       {
          "templateName": "Wedding Ceremony",
@@ -182,7 +182,8 @@
                "location",
                "roles",
                "inventory",
-               "userManagement"
+               "userManagement",
+               "invitation"
             ],
             "amount": 0
          },

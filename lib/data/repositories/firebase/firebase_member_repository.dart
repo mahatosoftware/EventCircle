@@ -41,4 +41,9 @@ class FirebaseMemberRepository implements MemberRepository {
     }
     await batch.commit();
   }
+
+  @override
+  Stream<MemberModel?> getMember(String memberId) {
+    return _firestore.collection(_collection).doc(memberId).snapshots().map((doc) => doc.exists ? MemberModel.fromJson(doc.data()!) : null);
+  }
 }

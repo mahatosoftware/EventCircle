@@ -24,7 +24,8 @@ enum TemplateModule {
   roles('ROLES & PERMISSIONS'),
   expenses('EXPENSE TRACKING'),
   location('LOCATION '),
-  ticketing('TICKETING');
+  ticketing('TICKETING'),
+  invitation('INVITATION & RSVP');
 
   final String displayName;
   const TemplateModule(this.displayName);

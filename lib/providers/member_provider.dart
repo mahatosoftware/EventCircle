@@ -58,4 +58,16 @@ class _GuardedMemberRepository implements MemberRepository {
   Future<void> bulkUploadMembers(String eventId, List<MemberModel> members) {
     return _requireEdit(eventId).then((_) => _delegate.bulkUploadMembers(eventId, members));
   }
+
+  @override
+  Stream<MemberModel?> getMember(String memberId) => _delegate.getMember(memberId);
 }
+
+final membersProvider = StreamProvider.family<List<MemberModel>, String>((ref, eventId) {
+  return ref.watch(memberRepositoryProvider).getMembers(eventId);
+});
+
+final memberByIdProvider = StreamProvider.family<MemberModel?, (String, String)>((ref, arg) {
+  // We use (eventId, memberId) for consistency, though repository only needs memberId
+  return ref.watch(memberRepositoryProvider).getMember(arg.$2);
+});

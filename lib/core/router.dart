@@ -14,6 +14,8 @@ import '../presentation/screens/public_dashboard_screen.dart';
 import '../presentation/screens/profile_screen.dart';
 import '../presentation/screens/contact_us_screen.dart';
 
+import '../presentation/screens/audit_log_screen.dart';
+import '../presentation/screens/template_manager_screen.dart';
 import '../presentation/screens/tasks_screen.dart';
 import '../presentation/screens/create_template_screen.dart';
 import '../presentation/screens/finance_settings_screen.dart';
@@ -24,8 +26,9 @@ import '../presentation/screens/venues_screen.dart';
 import '../presentation/screens/ticketing_screen.dart';
 import '../presentation/screens/roles_screen.dart';
 import '../presentation/screens/event_users_screen.dart';
-import '../presentation/screens/audit_log_screen.dart';
-import '../presentation/screens/template_manager_screen.dart';
+import '../presentation/screens/invitation_dashboard_screen.dart';
+import '../presentation/screens/invitation_editor_screen.dart';
+import '../presentation/screens/guest_invitation_screen.dart';
 import '../presentation/widgets/app_footer.dart';
 
 import '../providers/auth_provider.dart';
@@ -236,10 +239,32 @@ final routerProvider = Provider<GoRouter>((ref) {
             },
           ),
           GoRoute(
+            path: '/event/:eventId/invitation',
+            builder: (context, state) {
+              final eventId = state.pathParameters['eventId']!;
+              return InvitationDashboardScreen(eventId: eventId);
+            },
+          ),
+          GoRoute(
+            path: '/event/:eventId/invitation/edit',
+            builder: (context, state) {
+              final eventId = state.pathParameters['eventId']!;
+              return InvitationEditorScreen(eventId: eventId);
+            },
+          ),
+          GoRoute(
             path: '/public/:eventId',
             builder: (context, state) {
               final eventId = state.pathParameters['eventId']!;
               return PublicDashboardScreen(eventId: eventId);
+            },
+          ),
+          GoRoute(
+            path: '/public/invite/:eventId/:memberId',
+            builder: (context, state) {
+              final eventId = state.pathParameters['eventId']!;
+              final memberId = state.pathParameters['memberId']!;
+              return GuestInvitationScreen(eventId: eventId, memberId: memberId);
             },
           ),
         ],

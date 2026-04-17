@@ -6,4 +6,5 @@ abstract class MemberRepository {
   Future<void> updateMember(MemberModel member);
   Future<void> deleteMember(String id);
   Future<void> bulkUploadMembers(String eventId, List<MemberModel> members);
+  Stream<MemberModel?> getMember(String memberId);
 }

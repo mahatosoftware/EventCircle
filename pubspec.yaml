@@ -59,6 +59,9 @@ dependencies:
   path_provider: ^2.1.5
   csv: ^8.0.0
   crypto: ^3.0.3
+  fast_contacts: ^5.0.1
+  permission_handler: ^11.3.1
+  url_launcher: ^6.3.0
 
 dev_dependencies:
   flutter_test:

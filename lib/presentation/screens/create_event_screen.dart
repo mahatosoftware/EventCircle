@@ -1082,6 +1082,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
       case TemplateModule.roles: return Icons.badge_outlined;
       case TemplateModule.location: return Icons.location_on_outlined;
       case TemplateModule.ticketing: return Icons.confirmation_number_outlined;
+      case TemplateModule.invitation: return Icons.mail_outline;
     }
   }
 
@@ -1111,6 +1112,8 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
         return 'Venue ground blueprints';
       case TemplateModule.ticketing:
         return '${_selectedTemplate!.ticketBlueprints.length} ticket tiers';
+      case TemplateModule.invitation:
+        return 'Digital invitations & RSVP support';
     }
   }
 }

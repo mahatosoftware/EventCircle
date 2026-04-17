@@ -43,7 +43,8 @@
                "location",
                "roles",
                "inventory",
-               "userManagement"
+               "userManagement",
+               "invitation"
             ],
             "amount": 0
          },
@@ -243,6 +244,6 @@
          ]
       }
    ],
-   "version": 4,
+   "version": 5,
    "schemaVersion": 2
 }

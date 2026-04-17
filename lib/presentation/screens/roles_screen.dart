@@ -200,6 +200,9 @@ class RolesScreen extends ConsumerWidget {
         case TemplateModule.ticketing:
           out.add(EventModules.ticketing);
           break;
+        case TemplateModule.invitation:
+          out.add(EventModules.invitation);
+          break;
         default:
           break;
       }

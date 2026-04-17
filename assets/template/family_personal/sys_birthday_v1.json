@@ -1,5 +1,5 @@
 {
-   "version": 4,
+   "version": 6,
    "templates": [
       {
          "tags": [
@@ -176,7 +176,7 @@
                "dependsOn": []
             }
          ],
-         "version": 3,
+         "version": 4,
          "description": "Plan a birthday celebration with tasks grouped by phase.",
          "templateId": "sys_birthday_v1",
          "defaultFields": {
@@ -186,7 +186,9 @@
                "timeline",
                "guestManagement",
                "roles",
-               "userManagement"
+               "userManagement",
+               "invitation",
+               "location"
             ],
             "amount": 0,
             "contributionType": "none"

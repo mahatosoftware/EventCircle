@@ -6,6 +6,7 @@ import '../../data/models/venue_ticketing_model.dart';
 import '../../data/models/event_model.dart';
 import '../../data/services/event_template_service.dart';
 import 'package:uuid/uuid.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class VenuesScreen extends ConsumerWidget {
   final String eventId;
@@ -89,12 +90,12 @@ class VenuesScreen extends ConsumerWidget {
                 Expanded(child: Text(venue.address, style: const TextStyle(color: Colors.grey))),
               ],
             ),
-            if (venue.parkingInfo != null) ...[
+            if (venue.parkingInfo != null && venue.parkingInfo!.isNotEmpty) ...[
               const SizedBox(height: 12),
               const Text('Parking Info:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13)),
               Text(venue.parkingInfo!, style: const TextStyle(fontSize: 13)),
             ],
-            if (venue.instructions != null) ...[
+            if (venue.instructions != null && venue.instructions!.isNotEmpty) ...[
               const SizedBox(height: 12),
               const Text('Instructions:', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: Colors.blue)),
               Text(venue.instructions!, style: const TextStyle(fontSize: 13)),
@@ -103,8 +104,33 @@ class VenuesScreen extends ConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                if (venue.mapLink != null)
-                   TextButton.icon(onPressed: () {}, icon: const Icon(Icons.map_outlined, size: 18), label: const Text('Open Map')),
+                if (venue.mapLink != null && venue.mapLink!.trim().isNotEmpty)
+                  TextButton.icon(
+                    onPressed: () async {
+                      final url = venue.mapLink!.trim();
+                      final uri = Uri.parse(url);
+                      try {
+                        if (await canLaunchUrl(uri)) {
+                          await launchUrl(uri, mode: LaunchMode.externalApplication);
+                        } else {
+                          if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Could not open map link')),
+                            );
+                          }
+                        }
+                      } catch (e) {
+                         if (context.mounted) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Invalid map link: $e')),
+                            );
+                          }
+                      }
+                    },
+                    icon: const Icon(Icons.map_outlined, size: 18),
+                    label: const Text('Open Map'),
+                  ),
+                const SizedBox(width: 8),
                 TextButton.icon(
                   onPressed: () => _showEditVenueDialog(context, ref, venue),
                   icon: const Icon(Icons.edit_outlined, size: 18),
@@ -131,6 +157,7 @@ class VenuesScreen extends ConsumerWidget {
     final addrController = TextEditingController(text: existing?.address);
     final parkController = TextEditingController(text: existing?.parkingInfo);
     final instController = TextEditingController(text: existing?.instructions);
+    final mapLinkController = TextEditingController(text: existing?.mapLink);
     bool isMain = existing?.isMainVenue ?? false;
 
     showDialog(
@@ -144,22 +171,27 @@ class VenuesScreen extends ConsumerWidget {
               children: [
                 TextField(
                   controller: nameController,
-                  decoration: InputDecoration(labelText: 'Venue Name', prefixIcon: Icon(Icons.business_outlined)),
+                  decoration: const InputDecoration(labelText: 'Venue Name', prefixIcon: Icon(Icons.business_outlined)),
                 ),
                 const SizedBox(height: 8),
                 TextField(
                   controller: addrController,
-                  decoration: InputDecoration(labelText: 'Address', prefixIcon: Icon(Icons.location_on_outlined)),
+                  decoration: const InputDecoration(labelText: 'Address', prefixIcon: Icon(Icons.location_on_outlined)),
+                ),
+                const SizedBox(height: 8),
+                TextField(
+                  controller: mapLinkController,
+                  decoration: const InputDecoration(labelText: 'Map Location (URL)', prefixIcon: Icon(Icons.map_outlined)),
                 ),
                 const SizedBox(height: 8),
                 TextField(
                   controller: parkController,
-                  decoration: InputDecoration(labelText: 'Parking Information', prefixIcon: Icon(Icons.local_parking_outlined)),
+                  decoration: const InputDecoration(labelText: 'Parking Information', prefixIcon: Icon(Icons.local_parking_outlined)),
                 ),
                 const SizedBox(height: 8),
                 TextField(
                   controller: instController,
-                  decoration: InputDecoration(labelText: 'Additional Instructions', prefixIcon: Icon(Icons.notes_outlined)),
+                  decoration: const InputDecoration(labelText: 'Additional Instructions', prefixIcon: Icon(Icons.notes_outlined)),
                 ),
                 const SizedBox(height: 16),
                 SwitchListTile(
@@ -207,6 +239,7 @@ class VenuesScreen extends ConsumerWidget {
                   eventId: eventId,
                   name: nameController.text,
                   address: addrController.text,
+                  mapLink: mapLinkController.text,
                   parkingInfo: parkController.text,
                   instructions: instController.text,
                   isMainVenue: isMain,

@@ -8,6 +8,8 @@ import '../../data/models/event_model.dart';
 import '../../data/models/event_role_model.dart';
 import '../../data/services/event_template_service.dart';
 import 'package:uuid/uuid.dart';
+import 'package:fast_contacts/fast_contacts.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class MembersScreen extends ConsumerStatefulWidget {
   final String eventId;
@@ -19,6 +21,39 @@ class MembersScreen extends ConsumerStatefulWidget {
 
 class _MembersScreenState extends ConsumerState<MembersScreen> {
   bool _isSubmitting = false;
+
+  Future<void> _pickFromContacts(
+    BuildContext context,
+    TextEditingController nameCtrl,
+    TextEditingController phoneCtrl,
+    void Function(void Function()) setDialogState,
+  ) async {
+    final status = await Permission.contacts.request();
+    if (!status.isGranted) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Contact permission required')),
+        );
+      }
+      return;
+    }
+
+    if (!context.mounted) return;
+
+    final contact = await showDialog<Contact>(
+      context: context,
+      builder: (context) => const _ContactPickerListDialog(),
+    );
+
+    if (contact != null) {
+      setDialogState(() {
+        nameCtrl.text = contact.displayName;
+        if (contact.phones.isNotEmpty) {
+          phoneCtrl.text = contact.phones.first.number;
+        }
+      });
+    }
+  }
 
   void _showGuestSettings(BuildContext context, EventModel event, {required bool canEdit}) {
     final maxGuestsController = TextEditingController(text: event.maxGuests?.toString() ?? '');
@@ -306,8 +341,16 @@ class _MembersScreenState extends ConsumerState<MembersScreen> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              TextField(controller: nameController, decoration: const InputDecoration(labelText: 'Name')),
-              TextField(controller: phoneController, decoration: const InputDecoration(labelText: 'Phone')),
+              Row(
+                children: [
+                  Expanded(child: TextField(controller: nameController, decoration: const InputDecoration(labelText: 'Name'))),
+                  IconButton(
+                    icon: const Icon(Icons.contact_phone_outlined, color: Colors.blue),
+                    onPressed: () => _pickFromContacts(context, nameController, phoneController, setDialogState),
+                  ),
+                ],
+              ),
+              TextField(controller: phoneController, decoration: const InputDecoration(labelText: 'Phone'), keyboardType: TextInputType.phone),
               TextField(controller: identifierController, decoration: const InputDecoration(labelText: 'ID / Flat (Optional)')),
               if (categories.isNotEmpty) ...[
                 const SizedBox(height: 12),
@@ -379,6 +422,80 @@ class _MembersScreenState extends ConsumerState<MembersScreen> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class _ContactPickerListDialog extends StatefulWidget {
+  const _ContactPickerListDialog();
+
+  @override
+  State<_ContactPickerListDialog> createState() => _ContactPickerListDialogState();
+}
+
+class _ContactPickerListDialogState extends State<_ContactPickerListDialog> {
+  String _searchQuery = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: const Text('Select Contact'),
+      content: SizedBox(
+        width: double.maxFinite,
+        height: 400,
+        child: Column(
+          children: [
+            TextField(
+              decoration: const InputDecoration(
+                hintText: 'Search contacts...',
+                prefixIcon: Icon(Icons.search),
+              ),
+              onChanged: (val) => setState(() => _searchQuery = val),
+            ),
+            const SizedBox(height: 8),
+            Expanded(
+              child: FutureBuilder<List<Contact>>(
+                future: FastContacts.getAllContacts(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  }
+                  
+                  final contacts = snapshot.data ?? [];
+                  final filtered = contacts.where((c) => 
+                    c.displayName.toLowerCase().contains(_searchQuery.toLowerCase()) ||
+                    c.phones.any((p) => p.number.contains(_searchQuery))
+                  ).toList();
+
+                  if (filtered.isEmpty) {
+                    return const Center(child: Text('No contacts found'));
+                  }
+
+                  return ListView.builder(
+                    itemCount: filtered.length,
+                    itemBuilder: (context, index) {
+                      final contact = filtered[index];
+                      final displayName = contact.displayName.isNotEmpty ? contact.displayName : 'Unnamed';
+                      return ListTile(
+                        leading: CircleAvatar(child: Text(displayName.isNotEmpty ? displayName[0] : '?')),
+                        title: Text(displayName),
+                        subtitle: Text(contact.phones.isNotEmpty ? contact.phones.first.number : 'No phone'),
+                        onTap: () => Navigator.pop(context, contact),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+      actions: [
+        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Close')),
+      ],
     );
   }
 }

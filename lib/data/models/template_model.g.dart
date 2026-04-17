@@ -145,4 +145,5 @@ const _$TemplateModuleEnumMap = {
   TemplateModule.expenses: 'expenses',
   TemplateModule.location: 'location',
   TemplateModule.ticketing: 'ticketing',
+  TemplateModule.invitation: 'invitation',
 };

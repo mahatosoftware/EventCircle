@@ -21,6 +21,7 @@ class EventModules {
   static const String timeline = 'timeline';
   static const String location = 'location';
   static const String ticketing = 'ticketing';
+  static const String invitation = 'invitation';
   static const String auditLog = 'auditLog';
 
   static const List<String> all = [
@@ -35,6 +36,7 @@ class EventModules {
     timeline,
     location,
     ticketing,
+    invitation,
     auditLog,
   ];
 

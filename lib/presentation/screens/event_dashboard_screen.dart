@@ -927,6 +927,7 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
       case TemplateModule.roles: return Icons.badge_outlined;
       case TemplateModule.location: return Icons.location_on_outlined;
       case TemplateModule.ticketing: return Icons.confirmation_number_outlined;
+      case TemplateModule.invitation: return Icons.mail_outline;
     }
   }
 
@@ -1001,10 +1002,11 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
       case TemplateModule.timeline: return '/event/$eventId/timeline';
       case TemplateModule.vendor: return '/event/$eventId/vendors';
       case TemplateModule.inventory: return '/event/$eventId/inventory';
+      case TemplateModule.ticketing: return '/event/$eventId/ticketing';
       case TemplateModule.roles: return '/event/$eventId/roles';
+      case TemplateModule.invitation: return '/event/$eventId/invitation';
       case TemplateModule.expenses: return '/event/$eventId/expenses';
       case TemplateModule.location: return '/event/$eventId/venues';
-      case TemplateModule.ticketing: return '/event/$eventId/ticketing';
     }
   }
 
