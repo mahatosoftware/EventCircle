@@ -3,7 +3,6 @@ import '../models/vendor_model.dart';
 import '../models/inventory_model.dart';
 import '../models/role_definition_model.dart';
 import '../models/venue_ticketing_model.dart';
-import '../models/custom_announcement_model.dart';
 import 'package:uuid/uuid.dart';
 import '../models/task_model.dart';
 import '../models/event_model.dart';
@@ -71,95 +70,6 @@ class EventTemplateService {
           approvalRequired: false,
         );
     }
-  }
-
-  static List<CustomFieldDefinitionModel> getSuggestedCustomFields(String eventId, EventCategory category) {
-    final uuid = const Uuid();
-    
-    switch (category) {
-      case EventCategory.socialAndPersonal:
-        return [
-          CustomFieldDefinitionModel(
-            id: uuid.v4(),
-            eventId: eventId,
-            name: 'Food Preference',
-            type: CustomFieldType.dropdown,
-            options: ['Veg', 'Non-Veg', 'Vegan', 'Jain'],
-          ),
-          CustomFieldDefinitionModel(
-            id: uuid.v4(),
-            eventId: eventId,
-            name: 'Allergies',
-            type: CustomFieldType.text,
-            isRequired: false,
-          ),
-        ];
-
-      case EventCategory.corporate:
-        return [
-          CustomFieldDefinitionModel(
-            id: uuid.v4(),
-            eventId: eventId,
-            name: 'Company Name',
-            type: CustomFieldType.text,
-            isRequired: true,
-          ),
-          CustomFieldDefinitionModel(
-            id: uuid.v4(),
-            eventId: eventId,
-            name: 'Job Title',
-            type: CustomFieldType.text,
-            isRequired: true,
-          ),
-        ];
-
-      case EventCategory.communityAndCultural:
-        return [
-          CustomFieldDefinitionModel(
-            id: uuid.v4(),
-            eventId: eventId,
-            name: 'Volunteer Group',
-            type: CustomFieldType.dropdown,
-            options: ['Logistics', 'Reception', 'Technical', 'Security'],
-          ),
-          CustomFieldDefinitionModel(
-            id: uuid.v4(),
-            eventId: eventId,
-            name: 'T-Shirt Size',
-            type: CustomFieldType.dropdown,
-            options: ['S', 'M', 'L', 'XL', 'XXL'],
-          ),
-        ];
-
-      default:
-        return [];
-    }
-  }
-
-  static List<AnnouncementModel> getSuggestedAnnouncements(String eventId, EventCategory category) {
-    final uuid = const Uuid();
-    final now = DateTime.now();
-
-    return [
-      AnnouncementModel(
-        id: uuid.v4(),
-        eventId: eventId,
-        title: 'Welcome to the Event!',
-        message: 'We are thrilled to have you here. Stay tuned for more updates.',
-        category: AnnouncementCategory.general,
-        createdAt: now,
-        postedBy: 'System',
-      ),
-      AnnouncementModel(
-        id: uuid.v4(),
-        eventId: eventId,
-        title: 'Event Orientation Guide',
-        message: 'Please check the schedule and venue details before arriving.',
-        category: AnnouncementCategory.logistics,
-        createdAt: now.add(const Duration(minutes: 5)),
-        postedBy: 'System',
-      ),
-    ];
   }
 
   static List<LocationModel> getSuggestedVenues(String eventId, EventCategory category) {
@@ -550,16 +460,6 @@ class EventTemplateService {
             phase: TaskPhase.preEvent,
             dueOffset: 'T-25 days',
             role: 'Organizer',
-          ),
-          TaskModel(
-            id: uuid.v4(),
-            eventId: eventId,
-            title: 'Send Invitations',
-            description: 'Dispatch digital and physical invites to the guest list.',
-            status: TaskStatus.pending,
-            phase: TaskPhase.preEvent,
-            dueOffset: 'T-15 days',
-            role: 'Communication',
           ),
           TaskModel(
             id: uuid.v4(),

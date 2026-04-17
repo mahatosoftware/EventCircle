@@ -1,342 +1,320 @@
 {
-   "schemaVersion" : 2,
-   "version" : 4,
-   "templates" : [
+   "schemaVersion": 2,
+   "version": 4,
+   "templates": [
       {
-         "category" : "communityAndCultural",
-         "defaultFields" : {
-            "enabledModules" : [
+         "category": "communityAndCultural",
+         "defaultFields": {
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
                "guestManagement",
-               "communication",
                "location",
                "roles",
                "inventory",
                "userManagement",
                "contribution"
             ],
-            "amount" : 0,
-            "contributionType" : "variable"
+            "amount": 0,
+            "contributionType": "variable"
          },
-         "roleBlueprints" : [
+         "roleBlueprints": [
             {
-               "moduleAccess" : {
-                  "location" : "full",
-                  "vendors" : "full",
-                  "budget" : "full",
-                  "chat" : "full",
-                  "customFields" : "full",
-                  "contribution" : "full",
-                  "auditLog" : "full",
-                  "tasks" : "full",
-                  "users" : "full",
-                  "roles" : "full",
-                  "announcements" : "full",
-                  "ticketing" : "full",
-                  "inventory" : "full",
-                  "timeline" : "full",
-                  "guests" : "full"
+               "moduleAccess": {
+                  "location": "full",
+                  "vendors": "full",
+                  "budget": "full",
+                  "contribution": "full",
+                  "auditLog": "full",
+                  "tasks": "full",
+                  "users": "full",
+                  "roles": "full",
+                  "ticketing": "full",
+                  "inventory": "full",
+                  "timeline": "full",
+                  "guests": "full"
                },
-               "name" : "Admin",
-               "id" : "sys_role_admin",
-               "description" : "Full access to all modules."
+               "name": "Admin",
+               "id": "sys_role_admin",
+               "description": "Full access to all modules."
             },
             {
-               "description" : "Manage most event details.",
-               "id" : "sys_role_organizer",
-               "name" : "Organizer",
-               "moduleAccess" : {
-                  "guests" : "edit",
-                  "inventory" : "edit",
-                  "timeline" : "edit",
-                  "announcements" : "edit",
-                  "ticketing" : "edit",
-                  "users" : "view",
-                  "roles" : "none",
-                  "auditLog" : "view",
-                  "tasks" : "edit",
-                  "budget" : "edit",
-                  "vendors" : "edit",
-                  "location" : "edit",
-                  "contribution" : "edit",
-                  "customFields" : "view",
-                  "chat" : "full"
+               "description": "Manage most event details.",
+               "id": "sys_role_organizer",
+               "name": "Organizer",
+               "moduleAccess": {
+                  "guests": "edit",
+                  "inventory": "edit",
+                  "timeline": "edit",
+                  "ticketing": "edit",
+                  "users": "view",
+                  "roles": "none",
+                  "auditLog": "view",
+                  "tasks": "edit",
+                  "budget": "edit",
+                  "vendors": "edit",
+                  "location": "edit",
+                  "contribution": "edit"
                }
             },
             {
-               "id" : "sys_role_coordinator",
-               "moduleAccess" : {
-                  "timeline" : "edit",
-                  "inventory" : "view",
-                  "guests" : "view",
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "edit",
-                  "tasks" : "edit",
-                  "auditLog" : "none",
-                  "contribution" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "budget" : "view",
-                  "location" : "view",
-                  "vendors" : "view"
+               "id": "sys_role_coordinator",
+               "moduleAccess": {
+                  "timeline": "edit",
+                  "inventory": "view",
+                  "guests": "view",
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none",
+                  "tasks": "edit",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "budget": "view",
+                  "location": "view",
+                  "vendors": "view"
                },
-               "name" : "Coordinator",
-               "description" : "Manage tasks and timeline."
+               "name": "Coordinator",
+               "description": "Manage tasks and timeline."
             },
             {
-               "id" : "sys_role_volunteer",
-               "name" : "Volunteer",
-               "moduleAccess" : {
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "guests" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none",
-                  "chat" : "full",
-                  "customFields" : "none",
-                  "contribution" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "update"
+               "id": "sys_role_volunteer",
+               "name": "Volunteer",
+               "moduleAccess": {
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "inventory": "view",
+                  "timeline": "view",
+                  "guests": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "update"
                },
-               "description" : "Update task progress."
+               "description": "Update task progress."
             },
             {
-               "moduleAccess" : {
-                  "contribution" : "view",
-                  "chat" : "edit",
-                  "customFields" : "none",
-                  "budget" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none",
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "none"
+               "moduleAccess": {
+                  "contribution": "view",
+                  "budget": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "none"
                },
-               "name" : "Participant",
-               "id" : "sys_role_participant",
-               "description" : "Regular participant."
+               "name": "Participant",
+               "id": "sys_role_participant",
+               "description": "Regular participant."
             },
             {
-               "moduleAccess" : {
-                  "guests" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none",
-                  "customFields" : "none",
-                  "chat" : "none",
-                  "contribution" : "none"
+               "moduleAccess": {
+                  "guests": "none",
+                  "inventory": "none",
+                  "timeline": "view",
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "auditLog": "none",
+                  "tasks": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none",
+                  "contribution": "none"
                },
-               "name" : "Guest",
-               "id" : "sys_role_guest",
-               "description" : "Limited viewing access."
+               "name": "Guest",
+               "id": "sys_role_guest",
+               "description": "Limited viewing access."
             },
             {
-               "description" : "Read-only access.",
-               "moduleAccess" : {
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "guests" : "view",
-                  "roles" : "view",
-                  "users" : "view",
-                  "ticketing" : "view",
-                  "announcements" : "view",
-                  "tasks" : "view",
-                  "auditLog" : "view",
-                  "contribution" : "view",
-                  "chat" : "view",
-                  "customFields" : "view",
-                  "budget" : "view",
-                  "vendors" : "view",
-                  "location" : "view"
+               "description": "Read-only access.",
+               "moduleAccess": {
+                  "timeline": "view",
+                  "inventory": "view",
+                  "guests": "view",
+                  "roles": "view",
+                  "users": "view",
+                  "ticketing": "view",
+                  "tasks": "view",
+                  "auditLog": "view",
+                  "contribution": "view",
+                  "budget": "view",
+                  "vendors": "view",
+                  "location": "view"
                },
-               "name" : "Viewer",
-               "id" : "sys_role_viewer"
+               "name": "Viewer",
+               "id": "sys_role_viewer"
             }
          ],
-         "templateName" : "Ugadi Celebration",
-         "budgetBlueprints" : [
+         "templateName": "Ugadi Celebration",
+         "budgetBlueprints": [
             {
-               "category" : "Food",
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "id" : "sys_ugadi_budget_pachadi_ingredients",
-               "isMandatory" : true,
-               "estimatedCost" : 0,
-               "title" : "Pachadi Ingredients and Neem Flowers"
+               "category": "Food",
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "id": "sys_ugadi_budget_pachadi_ingredients",
+               "isMandatory": true,
+               "estimatedCost": 0,
+               "title": "Pachadi Ingredients and Neem Flowers"
             },
             {
-               "category" : "Decoration",
-               "eventId" : "blueprint_dummy",
-               "actualCost" : 0,
-               "id" : "sys_ugadi_budget_thoralu_decor",
-               "isMandatory" : true,
-               "title" : "Mango Leaves and Decoration Materials",
-               "estimatedCost" : 0
+               "category": "Decoration",
+               "eventId": "blueprint_dummy",
+               "actualCost": 0,
+               "id": "sys_ugadi_budget_thoralu_decor",
+               "isMandatory": true,
+               "title": "Mango Leaves and Decoration Materials",
+               "estimatedCost": 0
             },
             {
-               "category" : "Food",
-               "isMandatory" : true,
-               "id" : "sys_ugadi_budget_lunch_catering",
-               "estimatedCost" : 0,
-               "title" : "Grand Festival Lunch Catering",
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy"
+               "category": "Food",
+               "isMandatory": true,
+               "id": "sys_ugadi_budget_lunch_catering",
+               "estimatedCost": 0,
+               "title": "Grand Festival Lunch Catering",
+               "actualCost": 0,
+               "eventId": "blueprint_dummy"
             },
             {
-               "category" : "Miscellaneous",
-               "title" : "Honorarium for Panchanga Speaker/Priest",
-               "estimatedCost" : 0,
-               "id" : "sys_ugadi_budget_honorarium",
-               "isMandatory" : true,
-               "eventId" : "blueprint_dummy",
-               "actualCost" : 0
+               "category": "Miscellaneous",
+               "title": "Honorarium for Panchanga Speaker/Priest",
+               "estimatedCost": 0,
+               "id": "sys_ugadi_budget_honorarium",
+               "isMandatory": true,
+               "eventId": "blueprint_dummy",
+               "actualCost": 0
             },
             {
-               "category" : "Miscellaneous",
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "estimatedCost" : 0,
-               "title" : "Cultural Program Logistics",
-               "isMandatory" : false,
-               "id" : "sys_ugadi_budget_cultural_expenses"
+               "category": "Miscellaneous",
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "estimatedCost": 0,
+               "title": "Cultural Program Logistics",
+               "isMandatory": false,
+               "id": "sys_ugadi_budget_cultural_expenses"
             }
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "eventId" : "blueprint_dummy",
-               "role" : "Organizer",
-               "description" : "Select a community hall or home venue and set the schedule for the day.",
-               "dueOffset" : "T-10 days",
-               "phase" : "preEvent",
-               "title" : "Finalize venue and event time",
-               "id" : "sys_ugadi_task_finalize_venue_time",
-               "status" : "pending",
-               "dependsOn" : []
+               "eventId": "blueprint_dummy",
+               "role": "Organizer",
+               "description": "Select a community hall or home venue and set the schedule for the day.",
+               "dueOffset": "T-10 days",
+               "phase": "preEvent",
+               "title": "Finalize venue and event time",
+               "id": "sys_ugadi_task_finalize_venue_time",
+               "status": "pending",
+               "dependsOn": []
             },
             {
-               "dueOffset" : "T-2 days",
-               "description" : "Purchase fresh mango leaves for Thorana and neem flowers for the Pachadi.",
-               "role" : "Logistics",
-               "eventId" : "blueprint_dummy",
-               "dependsOn" : [],
-               "status" : "pending",
-               "id" : "sys_ugadi_task_procure_mango_leaves_neem",
-               "phase" : "preEvent",
-               "title" : "Procure mango leaves and neem flowers"
+               "dueOffset": "T-2 days",
+               "description": "Purchase fresh mango leaves for Thorana and neem flowers for the Pachadi.",
+               "role": "Logistics",
+               "eventId": "blueprint_dummy",
+               "dependsOn": [],
+               "status": "pending",
+               "id": "sys_ugadi_task_procure_mango_leaves_neem",
+               "phase": "preEvent",
+               "title": "Procure mango leaves and neem flowers"
             },
             {
-               "role" : "Food Manager",
-               "dueOffset" : "T-3 days",
-               "phase" : "preEvent",
-               "status" : "pending",
-               "eventId" : "blueprint_dummy",
-               "description" : "Buy raw mangoes, jaggery, tamarind, green chillies, and salt (representing the 6 flavors).",
-               "title" : "Purchase Ugadi Pachadi ingredients",
-               "id" : "sys_ugadi_task_purchase_pachadi_ingredients",
-               "dependsOn" : []
+               "role": "Food Manager",
+               "dueOffset": "T-3 days",
+               "phase": "preEvent",
+               "status": "pending",
+               "eventId": "blueprint_dummy",
+               "description": "Buy raw mangoes, jaggery, tamarind, green chillies, and salt (representing the 6 flavors).",
+               "title": "Purchase Ugadi Pachadi ingredients",
+               "id": "sys_ugadi_task_purchase_pachadi_ingredients",
+               "dependsOn": []
             },
             {
-               "title" : "Book priest/expert for Panchanga Sravanam",
-               "dependsOn" : [],
-               "id" : "sys_ugadi_task_book_panchanga_speaker",
-               "eventId" : "blueprint_dummy",
-               "description" : "Invite an expert or priest to read the yearly forecast from the new almanac.",
-               "phase" : "preEvent",
-               "status" : "pending",
-               "role" : "Program Coordinator",
-               "dueOffset" : "T-15 days"
+               "title": "Book priest/expert for Panchanga Sravanam",
+               "dependsOn": [],
+               "id": "sys_ugadi_task_book_panchanga_speaker",
+               "eventId": "blueprint_dummy",
+               "description": "Invite an expert or priest to read the yearly forecast from the new almanac.",
+               "phase": "preEvent",
+               "status": "pending",
+               "role": "Program Coordinator",
+               "dueOffset": "T-15 days"
             },
             {
-               "dependsOn" : [],
-               "id" : "sys_ugadi_task_decorate_entrance",
-               "title" : "Decorate entrance with Thorana and Muggulu",
-               "description" : "Tie mango leaf garlands (Thorana) and draw traditional patterns (Muggulu) at the entrance.",
-               "eventId" : "blueprint_dummy",
-               "status" : "eventDay",
-               "phase" : "eventDay",
-               "dueOffset" : "Morning 07:00 AM",
-               "role" : "Decoration"
+               "dependsOn": [],
+               "id": "sys_ugadi_task_decorate_entrance",
+               "title": "Decorate entrance with Thorana and Muggulu",
+               "description": "Tie mango leaf garlands (Thorana) and draw traditional patterns (Muggulu) at the entrance.",
+               "eventId": "blueprint_dummy",
+               "status": "eventDay",
+               "phase": "eventDay",
+               "dueOffset": "Morning 07:00 AM",
+               "role": "Decoration"
             },
             {
-               "phase" : "eventDay",
-               "title" : "Prepare and serve Ugadi Pachadi",
-               "status" : "pending",
-               "dependsOn" : [],
-               "id" : "sys_ugadi_task_prepare_pachadi",
-               "role" : "Food Manager",
-               "eventId" : "blueprint_dummy",
-               "dueOffset" : "Morning 09:00 AM",
-               "description" : "Prepare the ritualistic 6-flavor dish and serve to all guests as the first offering."
+               "phase": "eventDay",
+               "title": "Prepare and serve Ugadi Pachadi",
+               "status": "pending",
+               "dependsOn": [],
+               "id": "sys_ugadi_task_prepare_pachadi",
+               "role": "Food Manager",
+               "eventId": "blueprint_dummy",
+               "dueOffset": "Morning 09:00 AM",
+               "description": "Prepare the ritualistic 6-flavor dish and serve to all guests as the first offering."
             },
             {
-               "eventId" : "blueprint_dummy",
-               "role" : "Program Coordinator",
-               "description" : "Organize the reading of the yearly forecast and distribute copies if applicable.",
-               "dueOffset" : "Morning 10:30 AM",
-               "phase" : "eventDay",
-               "title" : "Conduct Panchanga Sravanam session",
-               "id" : "sys_ugadi_task_conduct_panchanga_session",
-               "dependsOn" : [],
-               "status" : "pending"
+               "eventId": "blueprint_dummy",
+               "role": "Program Coordinator",
+               "description": "Organize the reading of the yearly forecast and distribute copies if applicable.",
+               "dueOffset": "Morning 10:30 AM",
+               "phase": "eventDay",
+               "title": "Conduct Panchanga Sravanam session",
+               "id": "sys_ugadi_task_conduct_panchanga_session",
+               "dependsOn": [],
+               "status": "pending"
             },
             {
-               "id" : "sys_ugadi_task_serve_traditional_lunch",
-               "dependsOn" : [],
-               "status" : "pending",
-               "phase" : "eventDay",
-               "title" : "Serve grand Ugadi lunch with Holige/Puran Poli",
-               "description" : "Coordinate the festival lunch serving traditional delicacies.",
-               "dueOffset" : "Afternoon 12:30 PM",
-               "eventId" : "blueprint_dummy",
-               "role" : "Food Manager"
+               "id": "sys_ugadi_task_serve_traditional_lunch",
+               "dependsOn": [],
+               "status": "pending",
+               "phase": "eventDay",
+               "title": "Serve grand Ugadi lunch with Holige/Puran Poli",
+               "description": "Coordinate the festival lunch serving traditional delicacies.",
+               "dueOffset": "Afternoon 12:30 PM",
+               "eventId": "blueprint_dummy",
+               "role": "Food Manager"
             },
             {
-               "role" : "Program Coordinator",
-               "dueOffset" : "Afternoon 03:00 PM",
-               "phase" : "eventDay",
-               "status" : "pending",
-               "eventId" : "blueprint_dummy",
-               "description" : "Hold poetry readings, music performances, or community discussions.",
-               "title" : "Organize Kavi Sammelan / Cultural program",
-               "id" : "sys_ugadi_task_organize_cultural_meet",
-               "dependsOn" : []
+               "role": "Program Coordinator",
+               "dueOffset": "Afternoon 03:00 PM",
+               "phase": "eventDay",
+               "status": "pending",
+               "eventId": "blueprint_dummy",
+               "description": "Hold poetry readings, music performances, or community discussions.",
+               "title": "Organize Kavi Sammelan / Cultural program",
+               "id": "sys_ugadi_task_organize_cultural_meet",
+               "dependsOn": []
             },
             {
-               "phase" : "postEvent",
-               "title" : "Settle honorarium and vendor payments",
-               "id" : "sys_ugadi_task_settle_honorarium",
-               "status" : "pending",
-               "dependsOn" : [],
-               "eventId" : "blueprint_dummy",
-               "role" : "Treasurer",
-               "description" : "Pay the priest/speaker and settle catering/venue bills.",
-               "dueOffset" : "T+2 days"
+               "phase": "postEvent",
+               "title": "Settle honorarium and vendor payments",
+               "id": "sys_ugadi_task_settle_honorarium",
+               "status": "pending",
+               "dependsOn": [],
+               "eventId": "blueprint_dummy",
+               "role": "Treasurer",
+               "description": "Pay the priest/speaker and settle catering/venue bills.",
+               "dueOffset": "T+2 days"
             }
          ],
-         "tags" : [
+         "tags": [
             "ugadi",
             "new year",
             "telugu",
@@ -347,55 +325,55 @@
             "panchanga",
             "tradition"
          ],
-         "timelineBlueprints" : [
+         "timelineBlueprints": [
             {
-               "id" : "sys_ugadi_timeline_thorana",
-               "title" : "Entrance Decoration (Thorana)",
-               "dayNumber" : 1,
-               "description" : "Tying mango leaves and drawing Muggulu at the entrance.",
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "07:30 AM",
-               "phase" : "eventDay"
+               "id": "sys_ugadi_timeline_thorana",
+               "title": "Entrance Decoration (Thorana)",
+               "dayNumber": 1,
+               "description": "Tying mango leaves and drawing Muggulu at the entrance.",
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "07:30 AM",
+               "phase": "eventDay"
             },
             {
-               "title" : "Ugadi Pachadi Distribution",
-               "id" : "sys_ugadi_timeline_pachadi_distribution",
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "09:30 AM",
-               "dayNumber" : 1,
-               "description" : "First tasting of the bitter-sweet mixture to start the year.",
-               "phase" : "eventDay"
+               "title": "Ugadi Pachadi Distribution",
+               "id": "sys_ugadi_timeline_pachadi_distribution",
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "09:30 AM",
+               "dayNumber": 1,
+               "description": "First tasting of the bitter-sweet mixture to start the year.",
+               "phase": "eventDay"
             },
             {
-               "phase" : "eventDay",
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "10:30 AM",
-               "description" : "Listening to the yearly forecast from the new almanac.",
-               "dayNumber" : 1,
-               "title" : "Panchanga Sravanam",
-               "id" : "sys_ugadi_timeline_panchanga"
+               "phase": "eventDay",
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "10:30 AM",
+               "description": "Listening to the yearly forecast from the new almanac.",
+               "dayNumber": 1,
+               "title": "Panchanga Sravanam",
+               "id": "sys_ugadi_timeline_panchanga"
             },
             {
-               "description" : "Enjoying traditional Telugu/Kannada delicacies.",
-               "dayNumber" : 1,
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "12:30 PM",
-               "id" : "sys_ugadi_timeline_lunch",
-               "title" : "Festival Feast (Grand Lunch)",
-               "phase" : "eventDay"
+               "description": "Enjoying traditional Telugu/Kannada delicacies.",
+               "dayNumber": 1,
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "12:30 PM",
+               "id": "sys_ugadi_timeline_lunch",
+               "title": "Festival Feast (Grand Lunch)",
+               "phase": "eventDay"
             },
             {
-               "timeOrOffset" : "04:00 PM",
-               "eventId" : "blueprint_dummy",
-               "description" : "Poetry recitals and community cultural exchange.",
-               "dayNumber" : 1,
-               "title" : "Kavi Sammelan / Cultural Hour",
-               "id" : "sys_ugadi_timeline_cultural",
-               "phase" : "eventDay"
+               "timeOrOffset": "04:00 PM",
+               "eventId": "blueprint_dummy",
+               "description": "Poetry recitals and community cultural exchange.",
+               "dayNumber": 1,
+               "title": "Kavi Sammelan / Cultural Hour",
+               "id": "sys_ugadi_timeline_cultural",
+               "phase": "eventDay"
             }
          ],
-         "templateId" : "sys_ugadi_celebration_v1",
-         "description" : "Celebrate the Telugu and Kannada New Year with Ugadi Pachadi, mango leaf decorations, and Panchanga Sravanam."
+         "templateId": "sys_ugadi_celebration_v1",
+         "description": "Celebrate the Telugu and Kannada New Year with Ugadi Pachadi, mango leaf decorations, and Panchanga Sravanam."
       }
    ]
 }

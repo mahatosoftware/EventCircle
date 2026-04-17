@@ -21,9 +21,6 @@ class EventModules {
   static const String timeline = 'timeline';
   static const String location = 'location';
   static const String ticketing = 'ticketing';
-  static const String announcements = 'announcements';
-  static const String customFields = 'customFields';
-  static const String chat = 'chat';
   static const String auditLog = 'auditLog';
 
   static const List<String> all = [
@@ -38,9 +35,6 @@ class EventModules {
     timeline,
     location,
     ticketing,
-    announcements,
-    customFields,
-    chat,
     auditLog,
   ];
 
@@ -68,12 +62,6 @@ class EventModules {
         return 'Location';
       case ticketing:
         return 'Ticketing';
-      case announcements:
-        return 'Announcements';
-      case customFields:
-        return 'Custom Fields';
-      case chat:
-        return 'Chat';
       case auditLog:
         return 'Audit Log';
       default:
@@ -105,12 +93,6 @@ class EventModules {
         return Icons.location_on_outlined;
       case ticketing:
         return Icons.confirmation_number_outlined;
-      case announcements:
-        return Icons.campaign_outlined;
-      case customFields:
-        return Icons.dynamic_form_outlined;
-      case chat:
-        return Icons.chat_outlined;
       case auditLog:
         return Icons.history_outlined;
       default:

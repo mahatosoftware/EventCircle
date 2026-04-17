@@ -1,8 +1,8 @@
 {
-   "templates" : [
+   "templates": [
       {
-         "defaultFields" : {
-            "enabledModules" : [
+         "defaultFields": {
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
@@ -10,258 +10,234 @@
                "inventory",
                "userManagement"
             ],
-            "amount" : 0,
-            "contributionType" : "voluntary"
+            "amount": 0,
+            "contributionType": "voluntary"
          },
-         "budgetBlueprints" : [
+         "budgetBlueprints": [
             {
-               "category" : "Decoration",
-               "eventId" : "blueprint_dummy",
-               "actualCost" : 0,
-               "estimatedCost" : 0,
-               "title" : "Grand Display Lanterns",
-               "id" : "sys_lf_budget_decor",
-               "isMandatory" : true
+               "category": "Decoration",
+               "eventId": "blueprint_dummy",
+               "actualCost": 0,
+               "estimatedCost": 0,
+               "title": "Grand Display Lanterns",
+               "id": "sys_lf_budget_decor",
+               "isMandatory": true
             }
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "id" : "sys_lf_task_materials",
-               "dependsOn" : [],
-               "status" : "pending",
-               "title" : "Buy Lantern Making Supplies",
-               "phase" : "preEvent",
-               "description" : "Ensure paper, wire, and lights are ready for workshops.",
-               "dueOffset" : "T-7 days",
-               "eventId" : "blueprint_dummy",
-               "role" : "Logistics"
+               "id": "sys_lf_task_materials",
+               "dependsOn": [],
+               "status": "pending",
+               "title": "Buy Lantern Making Supplies",
+               "phase": "preEvent",
+               "description": "Ensure paper, wire, and lights are ready for workshops.",
+               "dueOffset": "T-7 days",
+               "eventId": "blueprint_dummy",
+               "role": "Logistics"
             }
          ],
-         "tags" : [
+         "tags": [
             "lantern festival",
             "festival",
             "cultrual",
             "traditional",
             "lights"
          ],
-         "version" : 2,
-         "category" : "communityAndCultural",
-         "roleBlueprints" : [
+         "version": 2,
+         "category": "communityAndCultural",
+         "roleBlueprints": [
             {
-               "moduleAccess" : {
-                  "guests" : "full",
-                  "timeline" : "full",
-                  "inventory" : "full",
-                  "ticketing" : "full",
-                  "announcements" : "full",
-                  "roles" : "full",
-                  "users" : "full",
-                  "tasks" : "full",
-                  "auditLog" : "full",
-                  "chat" : "full",
-                  "customFields" : "full",
-                  "contribution" : "full",
-                  "vendors" : "full",
-                  "location" : "full",
-                  "budget" : "full"
+               "moduleAccess": {
+                  "guests": "full",
+                  "timeline": "full",
+                  "inventory": "full",
+                  "ticketing": "full",
+                  "roles": "full",
+                  "users": "full",
+                  "tasks": "full",
+                  "auditLog": "full",
+                  "contribution": "full",
+                  "vendors": "full",
+                  "location": "full",
+                  "budget": "full"
                },
-               "name" : "Admin",
-               "id" : "sys_role_admin",
-               "description" : "Full access to all modules."
+               "name": "Admin",
+               "id": "sys_role_admin",
+               "description": "Full access to all modules."
             },
             {
-               "name" : "Organizer",
-               "moduleAccess" : {
-                  "tasks" : "edit",
-                  "auditLog" : "view",
-                  "contribution" : "edit",
-                  "customFields" : "view",
-                  "chat" : "full",
-                  "budget" : "edit",
-                  "vendors" : "edit",
-                  "location" : "edit",
-                  "guests" : "edit",
-                  "timeline" : "edit",
-                  "inventory" : "edit",
-                  "ticketing" : "edit",
-                  "announcements" : "edit",
-                  "roles" : "none",
-                  "users" : "view"
+               "name": "Organizer",
+               "moduleAccess": {
+                  "tasks": "edit",
+                  "auditLog": "view",
+                  "contribution": "edit",
+                  "budget": "edit",
+                  "vendors": "edit",
+                  "location": "edit",
+                  "guests": "edit",
+                  "timeline": "edit",
+                  "inventory": "edit",
+                  "ticketing": "edit",
+                  "roles": "none",
+                  "users": "view"
                },
-               "id" : "sys_role_organizer",
-               "description" : "Manage most event details."
+               "id": "sys_role_organizer",
+               "description": "Manage most event details."
             },
             {
-               "id" : "sys_role_coordinator",
-               "name" : "Coordinator",
-               "moduleAccess" : {
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "edit",
-                  "ticketing" : "none",
-                  "inventory" : "view",
-                  "timeline" : "edit",
-                  "guests" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "budget" : "view",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "contribution" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "edit"
+               "id": "sys_role_coordinator",
+               "name": "Coordinator",
+               "moduleAccess": {
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "inventory": "view",
+                  "timeline": "edit",
+                  "guests": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "budget": "view",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "edit"
                },
-               "description" : "Manage tasks and timeline."
+               "description": "Manage tasks and timeline."
             },
             {
-               "description" : "Update task progress.",
-               "id" : "sys_role_volunteer",
-               "moduleAccess" : {
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "guests" : "none",
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "tasks" : "update",
-                  "auditLog" : "none",
-                  "chat" : "full",
-                  "customFields" : "none",
-                  "contribution" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none"
+               "description": "Update task progress.",
+               "id": "sys_role_volunteer",
+               "moduleAccess": {
+                  "timeline": "view",
+                  "inventory": "view",
+                  "guests": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none",
+                  "tasks": "update",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none"
                },
-               "name" : "Volunteer"
+               "name": "Volunteer"
             },
             {
-               "description" : "Regular participant.",
-               "name" : "Participant",
-               "moduleAccess" : {
-                  "budget" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "contribution" : "view",
-                  "customFields" : "none",
-                  "chat" : "edit",
-                  "auditLog" : "none",
-                  "tasks" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "guests" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view"
+               "description": "Regular participant.",
+               "name": "Participant",
+               "moduleAccess": {
+                  "budget": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "contribution": "view",
+                  "auditLog": "none",
+                  "tasks": "none",
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "guests": "none",
+                  "inventory": "none",
+                  "timeline": "view"
                },
-               "id" : "sys_role_participant"
+               "id": "sys_role_participant"
             },
             {
-               "description" : "Limited viewing access.",
-               "id" : "sys_role_guest",
-               "name" : "Guest",
-               "moduleAccess" : {
-                  "contribution" : "none",
-                  "chat" : "none",
-                  "customFields" : "none",
-                  "budget" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none",
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "none"
+               "description": "Limited viewing access.",
+               "id": "sys_role_guest",
+               "name": "Guest",
+               "moduleAccess": {
+                  "contribution": "none",
+                  "budget": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "none"
                }
             },
             {
-               "description" : "Read-only access.",
-               "name" : "Viewer",
-               "moduleAccess" : {
-                  "roles" : "view",
-                  "users" : "view",
-                  "ticketing" : "view",
-                  "announcements" : "view",
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "guests" : "view",
-                  "customFields" : "view",
-                  "chat" : "view",
-                  "contribution" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "budget" : "view",
-                  "tasks" : "view",
-                  "auditLog" : "view"
+               "description": "Read-only access.",
+               "name": "Viewer",
+               "moduleAccess": {
+                  "roles": "view",
+                  "users": "view",
+                  "ticketing": "view",
+                  "timeline": "view",
+                  "inventory": "view",
+                  "guests": "view",
+                  "contribution": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "budget": "view",
+                  "tasks": "view",
+                  "auditLog": "view"
                },
-               "id" : "sys_role_viewer"
+               "id": "sys_role_viewer"
             },
             {
-               "description" : "Board coordination.",
-               "moduleAccess" : {
-                  "users" : "view",
-                  "roles" : "view",
-                  "announcements" : "edit"
+               "description": "Board coordination.",
+               "moduleAccess": {
+                  "users": "view",
+                  "roles": "view"
                },
-               "name" : "Society Admin",
-               "id" : "sys_role_society_admin"
+               "name": "Society Admin",
+               "id": "sys_role_society_admin"
             },
             {
-               "description" : "Overall execution lead.",
-               "id" : "sys_role_coord",
-               "name" : "Event Coordinator",
-               "moduleAccess" : {
-                  "roles" : "none",
-                  "timeline" : "full",
-                  "chat" : "full",
-                  "users" : "none",
-                  "tasks" : "full"
+               "description": "Overall execution lead.",
+               "id": "sys_role_coord",
+               "name": "Event Coordinator",
+               "moduleAccess": {
+                  "roles": "none",
+                  "timeline": "full",
+                  "users": "none",
+                  "tasks": "full"
                }
             },
             {
-               "id" : "sys_role_treasurer",
-               "name" : "Treasurer",
-               "moduleAccess" : {
-                  "users" : "none",
-                  "budget" : "full",
-                  "contribution" : "full",
-                  "roles" : "none"
+               "id": "sys_role_treasurer",
+               "name": "Treasurer",
+               "moduleAccess": {
+                  "users": "none",
+                  "budget": "full",
+                  "contribution": "full",
+                  "roles": "none"
                },
-               "description" : "Manage funds."
+               "description": "Manage funds."
             },
             {
-               "description" : "Crowd control.",
-               "id" : "sys_role_security",
-               "name" : "Security Coordinator",
-               "moduleAccess" : {
-                  "location" : "view",
-                  "users" : "none",
-                  "roles" : "none",
-                  "chat" : "edit"
+               "description": "Crowd control.",
+               "id": "sys_role_security",
+               "name": "Security Coordinator",
+               "moduleAccess": {
+                  "location": "view",
+                  "users": "none",
+                  "roles": "none"
                }
             }
          ],
-         "templateName" : "Lantern Festival",
-         "timelineBlueprints" : [
+         "templateName": "Lantern Festival",
+         "timelineBlueprints": [
             {
-               "description" : "The moment all lanterns are lit.",
-               "dayNumber" : 1,
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "08:00 PM",
-               "id" : "sys_lf_timeline_lighting",
-               "phase" : "eventDay",
-               "title" : "Main Lighting Event"
+               "description": "The moment all lanterns are lit.",
+               "dayNumber": 1,
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "08:00 PM",
+               "id": "sys_lf_timeline_lighting",
+               "phase": "eventDay",
+               "title": "Main Lighting Event"
             }
          ],
-         "templateId" : "sys_lantern_fest_v1",
-         "description" : "Decorative festival focused on the lighting of lanterns and community gatherings."
+         "templateId": "sys_lantern_fest_v1",
+         "description": "Decorative festival focused on the lighting of lanterns and community gatherings."
       }
    ],
-   "version" : 4,
-   "schemaVersion" : 2
+   "version": 4,
+   "schemaVersion": 2
 }

@@ -1,66 +1,66 @@
 {
-   "templates" : [
+   "templates": [
       {
-         "budgetBlueprints" : [
+         "budgetBlueprints": [
             {
-               "category" : "Food",
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "isMandatory" : true,
-               "id" : "sys_cny_budget_feast",
-               "title" : "Traditional Lunar Feast",
-               "estimatedCost" : 0
+               "category": "Food",
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "isMandatory": true,
+               "id": "sys_cny_budget_feast",
+               "title": "Traditional Lunar Feast",
+               "estimatedCost": 0
             }
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "phase" : "preEvent",
-               "status" : "pending",
-               "role" : "Decoration",
-               "dueOffset" : "T-10 days",
-               "title" : "Secure Red Decor & Lanterns",
-               "id" : "sys_cny_task_decor",
-               "dependsOn" : [],
-               "eventId" : "blueprint_dummy",
-               "description" : "Ensure auspicious decorations are ready."
+               "phase": "preEvent",
+               "status": "pending",
+               "role": "Decoration",
+               "dueOffset": "T-10 days",
+               "title": "Secure Red Decor & Lanterns",
+               "id": "sys_cny_task_decor",
+               "dependsOn": [],
+               "eventId": "blueprint_dummy",
+               "description": "Ensure auspicious decorations are ready."
             },
             {
-               "dependsOn" : [],
-               "id" : "sys_cny_task_envelopes",
-               "title" : "Prepare Red Envelopes (Hong Bao)",
-               "description" : "Prepare lucky money for children and guests.",
-               "eventId" : "blueprint_dummy",
-               "status" : "pending",
-               "phase" : "preEvent",
-               "dueOffset" : "T-3 days",
-               "role" : "Host"
+               "dependsOn": [],
+               "id": "sys_cny_task_envelopes",
+               "title": "Prepare Red Envelopes (Hong Bao)",
+               "description": "Prepare lucky money for children and guests.",
+               "eventId": "blueprint_dummy",
+               "status": "pending",
+               "phase": "preEvent",
+               "dueOffset": "T-3 days",
+               "role": "Host"
             }
          ],
-         "tags" : [
+         "tags": [
             "chinese new year",
             "lunar new year",
             "festival",
             "traditional",
             "cultural"
          ],
-         "timelineBlueprints" : [
+         "timelineBlueprints": [
             {
-               "phase" : "eventDay",
-               "timeOrOffset" : "07:30 PM",
-               "eventId" : "blueprint_dummy",
-               "dayNumber" : 1,
-               "description" : "The main family meal highlight.",
-               "title" : "Reunion Dinner",
-               "id" : "sys_cny_timeline_dinner"
+               "phase": "eventDay",
+               "timeOrOffset": "07:30 PM",
+               "eventId": "blueprint_dummy",
+               "dayNumber": 1,
+               "description": "The main family meal highlight.",
+               "title": "Reunion Dinner",
+               "id": "sys_cny_timeline_dinner"
             }
          ],
-         "templateId" : "sys_chinese_ny_v1",
-         "version" : 2,
-         "description" : "Lunar New Year celebration featuring red decor, traditional meals, and lucky symbols.",
-         "category" : "communityAndCultural",
-         "defaultFields" : {
-            "amount" : 0,
-            "enabledModules" : [
+         "templateId": "sys_chinese_ny_v1",
+         "version": 2,
+         "description": "Lunar New Year celebration featuring red decor, traditional meals, and lucky symbols.",
+         "category": "communityAndCultural",
+         "defaultFields": {
+            "amount": 0,
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
@@ -69,211 +69,187 @@
                "inventory",
                "userManagement"
             ],
-            "contributionType" : "voluntary"
+            "contributionType": "voluntary"
          },
-         "roleBlueprints" : [
+         "roleBlueprints": [
             {
-               "id" : "sys_role_admin",
-               "name" : "Admin",
-               "moduleAccess" : {
-                  "announcements" : "full",
-                  "ticketing" : "full",
-                  "users" : "full",
-                  "roles" : "full",
-                  "guests" : "full",
-                  "inventory" : "full",
-                  "timeline" : "full",
-                  "budget" : "full",
-                  "location" : "full",
-                  "vendors" : "full",
-                  "contribution" : "full",
-                  "customFields" : "full",
-                  "chat" : "full",
-                  "auditLog" : "full",
-                  "tasks" : "full"
+               "id": "sys_role_admin",
+               "name": "Admin",
+               "moduleAccess": {
+                  "ticketing": "full",
+                  "users": "full",
+                  "roles": "full",
+                  "guests": "full",
+                  "inventory": "full",
+                  "timeline": "full",
+                  "budget": "full",
+                  "location": "full",
+                  "vendors": "full",
+                  "contribution": "full",
+                  "auditLog": "full",
+                  "tasks": "full"
                },
-               "description" : "Full access to all modules."
+               "description": "Full access to all modules."
             },
             {
-               "id" : "sys_role_organizer",
-               "moduleAccess" : {
-                  "guests" : "edit",
-                  "inventory" : "edit",
-                  "timeline" : "edit",
-                  "announcements" : "edit",
-                  "ticketing" : "edit",
-                  "users" : "view",
-                  "roles" : "none",
-                  "auditLog" : "view",
-                  "tasks" : "edit",
-                  "budget" : "edit",
-                  "vendors" : "edit",
-                  "location" : "edit",
-                  "contribution" : "edit",
-                  "chat" : "full",
-                  "customFields" : "view"
+               "id": "sys_role_organizer",
+               "moduleAccess": {
+                  "guests": "edit",
+                  "inventory": "edit",
+                  "timeline": "edit",
+                  "ticketing": "edit",
+                  "users": "view",
+                  "roles": "none",
+                  "auditLog": "view",
+                  "tasks": "edit",
+                  "budget": "edit",
+                  "vendors": "edit",
+                  "location": "edit",
+                  "contribution": "edit"
                },
-               "name" : "Organizer",
-               "description" : "Manage most event details."
+               "name": "Organizer",
+               "description": "Manage most event details."
             },
             {
-               "description" : "Manage tasks and timeline.",
-               "id" : "sys_role_coordinator",
-               "name" : "Coordinator",
-               "moduleAccess" : {
-                  "vendors" : "view",
-                  "location" : "view",
-                  "budget" : "view",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "contribution" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "edit",
-                  "announcements" : "edit",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "guests" : "view",
-                  "inventory" : "view",
-                  "timeline" : "edit"
+               "description": "Manage tasks and timeline.",
+               "id": "sys_role_coordinator",
+               "name": "Coordinator",
+               "moduleAccess": {
+                  "vendors": "view",
+                  "location": "view",
+                  "budget": "view",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "edit",
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "guests": "view",
+                  "inventory": "view",
+                  "timeline": "edit"
                }
             },
             {
-               "description" : "Update task progress.",
-               "id" : "sys_role_volunteer",
-               "moduleAccess" : {
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "guests" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "update",
-                  "budget" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "contribution" : "none",
-                  "chat" : "full",
-                  "customFields" : "none"
+               "description": "Update task progress.",
+               "id": "sys_role_volunteer",
+               "moduleAccess": {
+                  "inventory": "view",
+                  "timeline": "view",
+                  "guests": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "auditLog": "none",
+                  "tasks": "update",
+                  "budget": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "contribution": "none"
                },
-               "name" : "Volunteer"
+               "name": "Volunteer"
             },
             {
-               "description" : "Regular participant.",
-               "id" : "sys_role_participant",
-               "name" : "Participant",
-               "moduleAccess" : {
-                  "guests" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none",
-                  "customFields" : "none",
-                  "chat" : "edit",
-                  "contribution" : "view"
+               "description": "Regular participant.",
+               "id": "sys_role_participant",
+               "name": "Participant",
+               "moduleAccess": {
+                  "guests": "none",
+                  "inventory": "none",
+                  "timeline": "view",
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "auditLog": "none",
+                  "tasks": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none",
+                  "contribution": "view"
                }
             },
             {
-               "description" : "Limited viewing access.",
-               "id" : "sys_role_guest",
-               "moduleAccess" : {
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "guests" : "none",
-                  "chat" : "none",
-                  "customFields" : "none",
-                  "contribution" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "budget" : "none",
-                  "tasks" : "none",
-                  "auditLog" : "none"
+               "description": "Limited viewing access.",
+               "id": "sys_role_guest",
+               "moduleAccess": {
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "guests": "none",
+                  "contribution": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "budget": "none",
+                  "tasks": "none",
+                  "auditLog": "none"
                },
-               "name" : "Guest"
+               "name": "Guest"
             },
             {
-               "description" : "Read-only access.",
-               "name" : "Viewer",
-               "moduleAccess" : {
-                  "auditLog" : "view",
-                  "tasks" : "view",
-                  "budget" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "contribution" : "view",
-                  "chat" : "view",
-                  "customFields" : "view",
-                  "guests" : "view",
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "announcements" : "view",
-                  "ticketing" : "view",
-                  "users" : "view",
-                  "roles" : "view"
+               "description": "Read-only access.",
+               "name": "Viewer",
+               "moduleAccess": {
+                  "auditLog": "view",
+                  "tasks": "view",
+                  "budget": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "contribution": "view",
+                  "guests": "view",
+                  "inventory": "view",
+                  "timeline": "view",
+                  "ticketing": "view",
+                  "users": "view",
+                  "roles": "view"
                },
-               "id" : "sys_role_viewer"
+               "id": "sys_role_viewer"
             },
             {
-               "id" : "sys_role_society_admin",
-               "name" : "Society Admin",
-               "moduleAccess" : {
-                  "users" : "view",
-                  "roles" : "view",
-                  "announcements" : "edit"
+               "id": "sys_role_society_admin",
+               "name": "Society Admin",
+               "moduleAccess": {
+                  "users": "view",
+                  "roles": "view"
                },
-               "description" : "Board coordination."
+               "description": "Board coordination."
             },
             {
-               "description" : "Overall execution lead.",
-               "id" : "sys_role_coord",
-               "moduleAccess" : {
-                  "users" : "none",
-                  "timeline" : "full",
-                  "chat" : "full",
-                  "roles" : "none",
-                  "tasks" : "full"
+               "description": "Overall execution lead.",
+               "id": "sys_role_coord",
+               "moduleAccess": {
+                  "users": "none",
+                  "timeline": "full",
+                  "roles": "none",
+                  "tasks": "full"
                },
-               "name" : "Event Coordinator"
+               "name": "Event Coordinator"
             },
             {
-               "description" : "Manage funds.",
-               "name" : "Treasurer",
-               "moduleAccess" : {
-                  "contribution" : "full",
-                  "roles" : "none",
-                  "budget" : "full",
-                  "users" : "none"
+               "description": "Manage funds.",
+               "name": "Treasurer",
+               "moduleAccess": {
+                  "contribution": "full",
+                  "roles": "none",
+                  "budget": "full",
+                  "users": "none"
                },
-               "id" : "sys_role_treasurer"
+               "id": "sys_role_treasurer"
             },
             {
-               "description" : "Crowd control.",
-               "id" : "sys_role_security",
-               "moduleAccess" : {
-                  "roles" : "none",
-                  "chat" : "edit",
-                  "location" : "view",
-                  "users" : "none"
+               "description": "Crowd control.",
+               "id": "sys_role_security",
+               "moduleAccess": {
+                  "roles": "none",
+                  "location": "view",
+                  "users": "none"
                },
-               "name" : "Security Coordinator"
+               "name": "Security Coordinator"
             }
          ],
-         "templateName" : "Chinese New Year"
+         "templateName": "Chinese New Year"
       }
    ],
-   "version" : 4,
-   "schemaVersion" : 2
+   "version": 4,
+   "schemaVersion": 2
 }

@@ -1,215 +1,192 @@
 {
-   "schemaVersion" : 2,
-   "version" : 11,
-   "templates" : [
+   "schemaVersion": 2,
+   "version": 11,
+   "templates": [
       {
-         "templateName" : "Wedding Ceremony",
-         "roleBlueprints" : [
+         "templateName": "Wedding Ceremony",
+         "roleBlueprints": [
             {
-               "description" : "Full access to all modules.",
-               "moduleAccess" : {
-                  "auditLog" : "full",
-                  "tasks" : "full",
-                  "budget" : "full",
-                  "vendors" : "full",
-                  "location" : "full",
-                  "contribution" : "full",
-                  "customFields" : "full",
-                  "chat" : "full",
-                  "inventory" : "full",
-                  "timeline" : "full",
-                  "guests" : "full",
-                  "users" : "full",
-                  "roles" : "full",
-                  "announcements" : "full",
-                  "ticketing" : "full"
+               "description": "Full access to all modules.",
+               "moduleAccess": {
+                  "auditLog": "full",
+                  "tasks": "full",
+                  "budget": "full",
+                  "vendors": "full",
+                  "location": "full",
+                  "contribution": "full",
+                  "inventory": "full",
+                  "timeline": "full",
+                  "guests": "full",
+                  "users": "full",
+                  "roles": "full",
+                  "ticketing": "full"
                },
-               "name" : "Admin",
-               "id" : "sys_role_admin"
+               "name": "Admin",
+               "id": "sys_role_admin"
             },
             {
-               "name" : "Organizer",
-               "moduleAccess" : {
-                  "users" : "view",
-                  "roles" : "none",
-                  "announcements" : "edit",
-                  "ticketing" : "edit",
-                  "inventory" : "edit",
-                  "timeline" : "edit",
-                  "guests" : "edit",
-                  "vendors" : "edit",
-                  "location" : "edit",
-                  "budget" : "edit",
-                  "customFields" : "view",
-                  "chat" : "full",
-                  "contribution" : "edit",
-                  "auditLog" : "view",
-                  "tasks" : "edit"
+               "name": "Organizer",
+               "moduleAccess": {
+                  "users": "view",
+                  "roles": "none",
+                  "ticketing": "edit",
+                  "inventory": "edit",
+                  "timeline": "edit",
+                  "guests": "edit",
+                  "vendors": "edit",
+                  "location": "edit",
+                  "budget": "edit",
+                  "contribution": "edit",
+                  "auditLog": "view",
+                  "tasks": "edit"
                },
-               "id" : "sys_role_organizer",
-               "description" : "Manage most event details."
+               "id": "sys_role_organizer",
+               "description": "Manage most event details."
             },
             {
-               "description" : "Manage tasks and timeline.",
-               "moduleAccess" : {
-                  "guests" : "view",
-                  "timeline" : "edit",
-                  "inventory" : "view",
-                  "ticketing" : "none",
-                  "announcements" : "edit",
-                  "roles" : "none",
-                  "users" : "none",
-                  "tasks" : "edit",
-                  "auditLog" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "contribution" : "none",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "budget" : "view"
+               "description": "Manage tasks and timeline.",
+               "moduleAccess": {
+                  "guests": "view",
+                  "timeline": "edit",
+                  "inventory": "view",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "tasks": "edit",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "vendors": "view",
+                  "location": "view",
+                  "budget": "view"
                },
-               "name" : "Coordinator",
-               "id" : "sys_role_coordinator"
+               "name": "Coordinator",
+               "id": "sys_role_coordinator"
             },
             {
-               "description" : "Update task progress.",
-               "name" : "Volunteer",
-               "moduleAccess" : {
-                  "budget" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "contribution" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "auditLog" : "none",
-                  "tasks" : "update",
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "guests" : "none"
+               "description": "Update task progress.",
+               "name": "Volunteer",
+               "moduleAccess": {
+                  "budget": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "update",
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "inventory": "view",
+                  "timeline": "view",
+                  "guests": "none"
                },
-               "id" : "sys_role_volunteer"
+               "id": "sys_role_volunteer"
             },
             {
-               "description" : "Regular participant.",
-               "moduleAccess" : {
-                  "vendors" : "none",
-                  "location" : "view",
-                  "budget" : "none",
-                  "chat" : "edit",
-                  "customFields" : "none",
-                  "contribution" : "view",
-                  "auditLog" : "none",
-                  "tasks" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "guests" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view"
+               "description": "Regular participant.",
+               "moduleAccess": {
+                  "vendors": "none",
+                  "location": "view",
+                  "budget": "none",
+                  "contribution": "view",
+                  "auditLog": "none",
+                  "tasks": "none",
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "guests": "none",
+                  "inventory": "none",
+                  "timeline": "view"
                },
-               "name" : "Participant",
-               "id" : "sys_role_participant"
+               "name": "Participant",
+               "id": "sys_role_participant"
             },
             {
-               "moduleAccess" : {
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "guests" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view",
-                  "budget" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "contribution" : "none",
-                  "customFields" : "none",
-                  "chat" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "none"
+               "moduleAccess": {
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "guests": "none",
+                  "inventory": "none",
+                  "timeline": "view",
+                  "budget": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "none"
                },
-               "name" : "Guest",
-               "id" : "sys_role_guest",
-               "description" : "Limited viewing access."
+               "name": "Guest",
+               "id": "sys_role_guest",
+               "description": "Limited viewing access."
             },
             {
-               "id" : "sys_role_viewer",
-               "name" : "Viewer",
-               "moduleAccess" : {
-                  "contribution" : "view",
-                  "customFields" : "view",
-                  "chat" : "view",
-                  "budget" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "tasks" : "view",
-                  "auditLog" : "view",
-                  "ticketing" : "view",
-                  "announcements" : "view",
-                  "roles" : "view",
-                  "users" : "view",
-                  "guests" : "view",
-                  "timeline" : "view",
-                  "inventory" : "view"
+               "id": "sys_role_viewer",
+               "name": "Viewer",
+               "moduleAccess": {
+                  "contribution": "view",
+                  "budget": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "tasks": "view",
+                  "auditLog": "view",
+                  "ticketing": "view",
+                  "roles": "view",
+                  "users": "view",
+                  "guests": "view",
+                  "timeline": "view",
+                  "inventory": "view"
                },
-               "description" : "Read-only access."
+               "description": "Read-only access."
             }
          ],
-         "category" : "personal",
-         "version" : 4,
-         "description" : "Comprehensive planning for a wedding ceremony and reception.",
-         "timelineBlueprints" : [
+         "category": "personal",
+         "version": 3,
+         "description": "Comprehensive planning for a wedding ceremony and reception.",
+         "timelineBlueprints": [
             {
-               "id" : "sys_wedding_timeline_arrival",
-               "title" : "Guest Arrival & Welcome",
-               "phase" : "eventDay",
-               "dayNumber" : 1,
-               "description" : "Welcoming guests at the venue entrance.",
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "10:00 AM"
+               "id": "sys_wedding_timeline_arrival",
+               "title": "Guest Arrival & Welcome",
+               "phase": "eventDay",
+               "dayNumber": 1,
+               "description": "Welcoming guests at the venue entrance.",
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "10:00 AM"
             },
             {
-               "dayNumber" : 1,
-               "description" : "Wedding vows and traditions.",
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "11:30 AM",
-               "id" : "sys_wedding_timeline_rituals",
-               "title" : "Main Wedding Rituals",
-               "phase" : "eventDay"
+               "dayNumber": 1,
+               "description": "Wedding vows and traditions.",
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "11:30 AM",
+               "id": "sys_wedding_timeline_rituals",
+               "title": "Main Wedding Rituals",
+               "phase": "eventDay"
             },
             {
-               "phase" : "eventDay",
-               "title" : "Wedding Lunch/Dinner",
-               "id" : "sys_wedding_timeline_lunch",
-               "timeOrOffset" : "01:30 PM",
-               "eventId" : "blueprint_dummy",
-               "dayNumber" : 1,
-               "description" : "Main meal service for guests."
+               "phase": "eventDay",
+               "title": "Wedding Lunch/Dinner",
+               "id": "sys_wedding_timeline_lunch",
+               "timeOrOffset": "01:30 PM",
+               "eventId": "blueprint_dummy",
+               "dayNumber": 1,
+               "description": "Main meal service for guests."
             }
          ],
-         "templateId" : "sys_wedding_v1",
-         "defaultFields" : {
-            "contributionType" : "none",
-            "enabledModules" : [
+         "templateId": "sys_wedding_v1",
+         "defaultFields": {
+            "contributionType": "none",
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
                "guestManagement",
-               "communication",
                "location",
                "roles",
                "inventory",
                "userManagement"
             ],
-            "amount" : 0
+            "amount": 0
          },
-         "version" : 3,
-         "tags" : [
+         "tags": [
             "wedding",
             "marriage",
             "reception",
@@ -218,143 +195,143 @@
             "groom",
             "party"
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "phase" : "preEvent",
-               "status" : "pending",
-               "role" : "Organizer",
-               "dueOffset" : "T-180 days",
-               "title" : "Book Wedding & Reception Venue",
-               "id" : "sys_wedding_task_venue",
-               "dependsOn" : [],
-               "eventId" : "blueprint_dummy",
-               "description" : "Secure the dates and venue for all major ceremonies."
+               "phase": "preEvent",
+               "status": "pending",
+               "role": "Organizer",
+               "dueOffset": "T-180 days",
+               "title": "Book Wedding & Reception Venue",
+               "id": "sys_wedding_task_venue",
+               "dependsOn": [],
+               "eventId": "blueprint_dummy",
+               "description": "Secure the dates and venue for all major ceremonies."
             },
             {
-               "id" : "sys_wedding_task_catering",
-               "dependsOn" : [],
-               "status" : "pending",
-               "title" : "Finalize Catering Service",
-               "phase" : "preEvent",
-               "description" : "Select caterer and decide on the menu for all events.",
-               "dueOffset" : "T-120 days",
-               "eventId" : "blueprint_dummy",
-               "role" : "Food Manager"
+               "id": "sys_wedding_task_catering",
+               "dependsOn": [],
+               "status": "pending",
+               "title": "Finalize Catering Service",
+               "phase": "preEvent",
+               "description": "Select caterer and decide on the menu for all events.",
+               "dueOffset": "T-120 days",
+               "eventId": "blueprint_dummy",
+               "role": "Food Manager"
             },
             {
-               "id" : "sys_wedding_task_invites",
-               "dependsOn" : [],
-               "status" : "pending",
-               "phase" : "preEvent",
-               "title" : "Design and Send Invitations",
-               "description" : "Finalize guest list and send out physical or digital invites.",
-               "dueOffset" : "T-60 days",
-               "eventId" : "blueprint_dummy",
-               "role" : "Communication"
+               "id": "sys_wedding_task_invites",
+               "dependsOn": [],
+               "status": "pending",
+               "phase": "preEvent",
+               "title": "Design and Send Invitations",
+               "description": "Finalize guest list and send out physical or digital invites.",
+               "dueOffset": "T-60 days",
+               "eventId": "blueprint_dummy",
+               "role": "Communication"
             },
             {
-               "id" : "sys_wedding_task_decor",
-               "dependsOn" : [],
-               "status" : "pending",
-               "title" : "Assign Decorator and Theme",
-               "phase" : "preEvent",
-               "description" : "Choose floral and lighting themes for the wedding stage and venue.",
-               "dueOffset" : "T-45 days",
-               "eventId" : "blueprint_dummy",
-               "role" : "Decoration"
+               "id": "sys_wedding_task_decor",
+               "dependsOn": [],
+               "status": "pending",
+               "title": "Assign Decorator and Theme",
+               "phase": "preEvent",
+               "description": "Choose floral and lighting themes for the wedding stage and venue.",
+               "dueOffset": "T-45 days",
+               "eventId": "blueprint_dummy",
+               "role": "Decoration"
             },
             {
-               "description" : "Complete fittings for the bride, groom, and immediate family.",
-               "eventId" : "blueprint_dummy",
-               "dependsOn" : [],
-               "id" : "sys_wedding_task_attire",
-               "title" : "Finalize Wedding Attire",
-               "dueOffset" : "T-30 days",
-               "role" : "Organizer",
-               "status" : "pending",
-               "phase" : "preEvent"
+               "description": "Complete fittings for the bride, groom, and immediate family.",
+               "eventId": "blueprint_dummy",
+               "dependsOn": [],
+               "id": "sys_wedding_task_attire",
+               "title": "Finalize Wedding Attire",
+               "dueOffset": "T-30 days",
+               "role": "Organizer",
+               "status": "pending",
+               "phase": "preEvent"
             },
             {
-               "description" : "Secure professional media services for the event.",
-               "dueOffset" : "T-90 days",
-               "eventId" : "blueprint_dummy",
-               "role" : "Media",
-               "id" : "sys_wedding_task_photo",
-               "status" : "pending",
-               "dependsOn" : [],
-               "phase" : "preEvent",
-               "title" : "Book Photographer & Videographer"
+               "description": "Secure professional media services for the event.",
+               "dueOffset": "T-90 days",
+               "eventId": "blueprint_dummy",
+               "role": "Media",
+               "id": "sys_wedding_task_photo",
+               "status": "pending",
+               "dependsOn": [],
+               "phase": "preEvent",
+               "title": "Book Photographer & Videographer"
             },
             {
-               "eventId" : "blueprint_dummy",
-               "description" : "Ensure সব decorations and seating are in place.",
-               "title" : "Venue Setup Verification",
-               "id" : "sys_wedding_task_setup",
-               "dependsOn" : [],
-               "role" : "Setup Team",
-               "dueOffset" : "Event Morning",
-               "phase" : "eventDay",
-               "status" : "pending"
+               "eventId": "blueprint_dummy",
+               "description": "Ensure \u09b8\u09ac decorations and seating are in place.",
+               "title": "Venue Setup Verification",
+               "id": "sys_wedding_task_setup",
+               "dependsOn": [],
+               "role": "Setup Team",
+               "dueOffset": "Event Morning",
+               "phase": "eventDay",
+               "status": "pending"
             },
             {
-               "status" : "pending",
-               "phase" : "eventDay",
-               "dueOffset" : "Event Start",
-               "role" : "Organizer",
-               "dependsOn" : [],
-               "id" : "sys_wedding_task_ceremony",
-               "title" : "Coordinate Main Ceremony",
-               "description" : "Oversee the rituals and timing with the officiant.",
-               "eventId" : "blueprint_dummy"
+               "status": "pending",
+               "phase": "eventDay",
+               "dueOffset": "Event Start",
+               "role": "Organizer",
+               "dependsOn": [],
+               "id": "sys_wedding_task_ceremony",
+               "title": "Coordinate Main Ceremony",
+               "description": "Oversee the rituals and timing with the officiant.",
+               "eventId": "blueprint_dummy"
             },
             {
-               "dueOffset" : "T+7 days",
-               "description" : "Complete all financial transactions with service providers.",
-               "role" : "Treasurer",
-               "eventId" : "blueprint_dummy",
-               "dependsOn" : [],
-               "status" : "pending",
-               "id" : "sys_wedding_task_payments",
-               "phase" : "postEvent",
-               "title" : "Settle Final Vendor Payments"
+               "dueOffset": "T+7 days",
+               "description": "Complete all financial transactions with service providers.",
+               "role": "Treasurer",
+               "eventId": "blueprint_dummy",
+               "dependsOn": [],
+               "status": "pending",
+               "id": "sys_wedding_task_payments",
+               "phase": "postEvent",
+               "title": "Settle Final Vendor Payments"
             }
          ],
-         "budgetBlueprints" : [
+         "budgetBlueprints": [
             {
-               "eventId" : "blueprint_dummy",
-               "actualCost" : 0,
-               "id" : "sys_wedding_budget_venue",
-               "isMandatory" : true,
-               "title" : "Venue Rental",
-               "estimatedCost" : 0,
-               "category" : "Venue"
+               "eventId": "blueprint_dummy",
+               "actualCost": 0,
+               "id": "sys_wedding_budget_venue",
+               "isMandatory": true,
+               "title": "Venue Rental",
+               "estimatedCost": 0,
+               "category": "Venue"
             },
             {
-               "category" : "Food",
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "id" : "sys_wedding_budget_food",
-               "isMandatory" : true,
-               "title" : "Catering per plate",
-               "estimatedCost" : 0
+               "category": "Food",
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "id": "sys_wedding_budget_food",
+               "isMandatory": true,
+               "title": "Catering per plate",
+               "estimatedCost": 0
             },
             {
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "id" : "sys_wedding_budget_decor",
-               "isMandatory" : true,
-               "title" : "Decoration & Lighting",
-               "estimatedCost" : 0,
-               "category" : "Decoration"
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "id": "sys_wedding_budget_decor",
+               "isMandatory": true,
+               "title": "Decoration & Lighting",
+               "estimatedCost": 0,
+               "category": "Decoration"
             },
             {
-               "category" : "Miscellaneous",
-               "isMandatory" : true,
-               "id" : "sys_wedding_budget_media",
-               "estimatedCost" : 0,
-               "title" : "Photography & Video",
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy"
+               "category": "Miscellaneous",
+               "isMandatory": true,
+               "id": "sys_wedding_budget_media",
+               "estimatedCost": 0,
+               "title": "Photography & Video",
+               "actualCost": 0,
+               "eventId": "blueprint_dummy"
             }
          ]
       }

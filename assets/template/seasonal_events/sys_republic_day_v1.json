@@ -1,57 +1,57 @@
 {
-   "schemaVersion" : 2,
-   "templates" : [
+   "schemaVersion": 2,
+   "templates": [
       {
-         "budgetBlueprints" : [
+         "budgetBlueprints": [
             {
-               "category" : "Miscellaneous",
-               "isMandatory" : true,
-               "id" : "sys_rd_budget_prizes",
-               "title" : "Medals for Parade Participants",
-               "estimatedCost" : 0,
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy"
+               "category": "Miscellaneous",
+               "isMandatory": true,
+               "id": "sys_rd_budget_prizes",
+               "title": "Medals for Parade Participants",
+               "estimatedCost": 0,
+               "actualCost": 0,
+               "eventId": "blueprint_dummy"
             }
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "phase" : "preEvent",
-               "status" : "pending",
-               "role" : "Decoration",
-               "dueOffset" : "T-2 days",
-               "title" : "Tri-color Patriotic Decor",
-               "dependsOn" : [],
-               "id" : "sys_rd_task_decoration",
-               "eventId" : "blueprint_dummy",
-               "description" : "Ensure the venue represents the national theme."
+               "phase": "preEvent",
+               "status": "pending",
+               "role": "Decoration",
+               "dueOffset": "T-2 days",
+               "title": "Tri-color Patriotic Decor",
+               "dependsOn": [],
+               "id": "sys_rd_task_decoration",
+               "eventId": "blueprint_dummy",
+               "description": "Ensure the venue represents the national theme."
             }
          ],
-         "tags" : [
+         "tags": [
             "republic day",
             "celebration",
             "flag hoisting",
             "patriotism",
             "constitution"
          ],
-         "templateId" : "sys_republic_day_v1",
-         "timelineBlueprints" : [
+         "templateId": "sys_republic_day_v1",
+         "timelineBlueprints": [
             {
-               "phase" : "eventDay",
-               "id" : "sys_rd_timeline_speech",
-               "title" : "Patriotic Speeches",
-               "description" : "Talk on national achievements.",
-               "dayNumber" : 1,
-               "timeOrOffset" : "09:30 AM",
-               "eventId" : "blueprint_dummy"
+               "phase": "eventDay",
+               "id": "sys_rd_timeline_speech",
+               "title": "Patriotic Speeches",
+               "description": "Talk on national achievements.",
+               "dayNumber": 1,
+               "timeOrOffset": "09:30 AM",
+               "eventId": "blueprint_dummy"
             }
          ],
-         "description" : "National day celebration involving flag hoisting, speeches, and patriotic performances.",
-         "version" : 2,
-         "category" : "communityAndCultural",
-         "defaultFields" : {
-            "contributionType" : "voluntary",
-            "amount" : 0,
-            "enabledModules" : [
+         "description": "National day celebration involving flag hoisting, speeches, and patriotic performances.",
+         "version": 2,
+         "category": "communityAndCultural",
+         "defaultFields": {
+            "contributionType": "voluntary",
+            "amount": 0,
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
@@ -60,208 +60,184 @@
                "userManagement"
             ]
          },
-         "roleBlueprints" : [
+         "roleBlueprints": [
             {
-               "description" : "Full access to all modules.",
-               "name" : "Admin",
-               "moduleAccess" : {
-                  "auditLog" : "full",
-                  "tasks" : "full",
-                  "location" : "full",
-                  "vendors" : "full",
-                  "budget" : "full",
-                  "chat" : "full",
-                  "customFields" : "full",
-                  "contribution" : "full",
-                  "inventory" : "full",
-                  "timeline" : "full",
-                  "guests" : "full",
-                  "users" : "full",
-                  "roles" : "full",
-                  "announcements" : "full",
-                  "ticketing" : "full"
+               "description": "Full access to all modules.",
+               "name": "Admin",
+               "moduleAccess": {
+                  "auditLog": "full",
+                  "tasks": "full",
+                  "location": "full",
+                  "vendors": "full",
+                  "budget": "full",
+                  "contribution": "full",
+                  "inventory": "full",
+                  "timeline": "full",
+                  "guests": "full",
+                  "users": "full",
+                  "roles": "full",
+                  "ticketing": "full"
                },
-               "id" : "sys_role_admin"
+               "id": "sys_role_admin"
             },
             {
-               "description" : "Manage most event details.",
-               "id" : "sys_role_organizer",
-               "moduleAccess" : {
-                  "guests" : "edit",
-                  "inventory" : "edit",
-                  "timeline" : "edit",
-                  "announcements" : "edit",
-                  "ticketing" : "edit",
-                  "users" : "view",
-                  "roles" : "none",
-                  "auditLog" : "view",
-                  "tasks" : "edit",
-                  "location" : "edit",
-                  "vendors" : "edit",
-                  "budget" : "edit",
-                  "chat" : "full",
-                  "customFields" : "view",
-                  "contribution" : "edit"
+               "description": "Manage most event details.",
+               "id": "sys_role_organizer",
+               "moduleAccess": {
+                  "guests": "edit",
+                  "inventory": "edit",
+                  "timeline": "edit",
+                  "ticketing": "edit",
+                  "users": "view",
+                  "roles": "none",
+                  "auditLog": "view",
+                  "tasks": "edit",
+                  "location": "edit",
+                  "vendors": "edit",
+                  "budget": "edit",
+                  "contribution": "edit"
                },
-               "name" : "Organizer"
+               "name": "Organizer"
             },
             {
-               "name" : "Coordinator",
-               "moduleAccess" : {
-                  "guests" : "view",
-                  "timeline" : "edit",
-                  "inventory" : "view",
-                  "ticketing" : "none",
-                  "announcements" : "edit",
-                  "roles" : "none",
-                  "users" : "none",
-                  "tasks" : "edit",
-                  "auditLog" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "contribution" : "none",
-                  "location" : "view",
-                  "vendors" : "view",
-                  "budget" : "view"
+               "name": "Coordinator",
+               "moduleAccess": {
+                  "guests": "view",
+                  "timeline": "edit",
+                  "inventory": "view",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "tasks": "edit",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "location": "view",
+                  "vendors": "view",
+                  "budget": "view"
                },
-               "id" : "sys_role_coordinator",
-               "description" : "Manage tasks and timeline."
+               "id": "sys_role_coordinator",
+               "description": "Manage tasks and timeline."
             },
             {
-               "description" : "Update task progress.",
-               "name" : "Volunteer",
-               "moduleAccess" : {
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none",
-                  "tasks" : "update",
-                  "auditLog" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "contribution" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "budget" : "none"
+               "description": "Update task progress.",
+               "name": "Volunteer",
+               "moduleAccess": {
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "view",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "tasks": "update",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "budget": "none"
                },
-               "id" : "sys_role_volunteer"
+               "id": "sys_role_volunteer"
             },
             {
-               "description" : "Regular participant.",
-               "id" : "sys_role_participant",
-               "moduleAccess" : {
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "chat" : "edit",
-                  "customFields" : "none",
-                  "contribution" : "view",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "budget" : "none",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "guests" : "none",
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view"
+               "description": "Regular participant.",
+               "id": "sys_role_participant",
+               "moduleAccess": {
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "contribution": "view",
+                  "vendors": "none",
+                  "location": "view",
+                  "budget": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "guests": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none"
                },
-               "name" : "Participant"
+               "name": "Participant"
             },
             {
-               "name" : "Guest",
-               "moduleAccess" : {
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "chat" : "none",
-                  "customFields" : "none",
-                  "contribution" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none",
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none"
+               "name": "Guest",
+               "moduleAccess": {
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none",
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none"
                },
-               "id" : "sys_role_guest",
-               "description" : "Limited viewing access."
+               "id": "sys_role_guest",
+               "description": "Limited viewing access."
             },
             {
-               "id" : "sys_role_viewer",
-               "moduleAccess" : {
-                  "location" : "view",
-                  "vendors" : "view",
-                  "budget" : "view",
-                  "chat" : "view",
-                  "customFields" : "view",
-                  "contribution" : "view",
-                  "auditLog" : "view",
-                  "tasks" : "view",
-                  "users" : "view",
-                  "roles" : "view",
-                  "announcements" : "view",
-                  "ticketing" : "view",
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "guests" : "view"
+               "id": "sys_role_viewer",
+               "moduleAccess": {
+                  "location": "view",
+                  "vendors": "view",
+                  "budget": "view",
+                  "contribution": "view",
+                  "auditLog": "view",
+                  "tasks": "view",
+                  "users": "view",
+                  "roles": "view",
+                  "ticketing": "view",
+                  "inventory": "view",
+                  "timeline": "view",
+                  "guests": "view"
                },
-               "name" : "Viewer",
-               "description" : "Read-only access."
+               "name": "Viewer",
+               "description": "Read-only access."
             },
             {
-               "description" : "Board coordination.",
-               "name" : "Society Admin",
-               "moduleAccess" : {
-                  "announcements" : "edit",
-                  "users" : "view",
-                  "roles" : "view"
+               "description": "Board coordination.",
+               "name": "Society Admin",
+               "moduleAccess": {
+                  "users": "view",
+                  "roles": "view"
                },
-               "id" : "sys_role_society_admin"
+               "id": "sys_role_society_admin"
             },
             {
-               "description" : "Overall execution lead.",
-               "name" : "Event Coordinator",
-               "moduleAccess" : {
-                  "users" : "none",
-                  "roles" : "none",
-                  "chat" : "full",
-                  "timeline" : "full",
-                  "tasks" : "full"
+               "description": "Overall execution lead.",
+               "name": "Event Coordinator",
+               "moduleAccess": {
+                  "users": "none",
+                  "roles": "none",
+                  "timeline": "full",
+                  "tasks": "full"
                },
-               "id" : "sys_role_coord"
+               "id": "sys_role_coord"
             },
             {
-               "description" : "Manage funds.",
-               "id" : "sys_role_treasurer",
-               "moduleAccess" : {
-                  "contribution" : "full",
-                  "roles" : "none",
-                  "budget" : "full",
-                  "users" : "none"
+               "description": "Manage funds.",
+               "id": "sys_role_treasurer",
+               "moduleAccess": {
+                  "contribution": "full",
+                  "roles": "none",
+                  "budget": "full",
+                  "users": "none"
                },
-               "name" : "Treasurer"
+               "name": "Treasurer"
             },
             {
-               "description" : "Crowd control.",
-               "name" : "Security Coordinator",
-               "moduleAccess" : {
-                  "roles" : "none",
-                  "chat" : "edit",
-                  "location" : "view",
-                  "users" : "none"
+               "description": "Crowd control.",
+               "name": "Security Coordinator",
+               "moduleAccess": {
+                  "roles": "none",
+                  "location": "view",
+                  "users": "none"
                },
-               "id" : "sys_role_security"
+               "id": "sys_role_security"
             }
          ],
-         "templateName" : "Republic Day Event"
+         "templateName": "Republic Day Event"
       }
    ],
-   "version" : 4
+   "version": 4
 }

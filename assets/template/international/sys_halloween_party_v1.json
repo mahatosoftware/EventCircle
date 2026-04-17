@@ -1,236 +1,214 @@
 {
-   "templates" : [
+   "templates": [
       {
-         "tags" : [
+         "tags": [
             "halloween",
             "party",
             "costume",
             "spooky",
             "tricks and treats"
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "id" : "sys_hall_task_decor",
-               "status" : "pending",
-               "dependsOn" : [],
-               "title" : "Secure Spooky Decorations",
-               "phase" : "preEvent",
-               "description" : "Arrange pumpkins, skeletons, and cobwebs.",
-               "dueOffset" : "T-15 days",
-               "eventId" : "blueprint_dummy",
-               "role" : "Decoration"
+               "id": "sys_hall_task_decor",
+               "status": "pending",
+               "dependsOn": [],
+               "title": "Secure Spooky Decorations",
+               "phase": "preEvent",
+               "description": "Arrange pumpkins, skeletons, and cobwebs.",
+               "dueOffset": "T-15 days",
+               "eventId": "blueprint_dummy",
+               "role": "Decoration"
             },
             {
-               "dueOffset" : "T-7 days",
-               "description" : "Select categories for the costume awards.",
-               "role" : "Host",
-               "eventId" : "blueprint_dummy",
-               "status" : "pending",
-               "dependsOn" : [],
-               "id" : "sys_hall_task_contest",
-               "title" : "Organize Costume Contest",
-               "phase" : "preEvent"
+               "dueOffset": "T-7 days",
+               "description": "Select categories for the costume awards.",
+               "role": "Host",
+               "eventId": "blueprint_dummy",
+               "status": "pending",
+               "dependsOn": [],
+               "id": "sys_hall_task_contest",
+               "title": "Organize Costume Contest",
+               "phase": "preEvent"
             }
          ],
-         "budgetBlueprints" : [
+         "budgetBlueprints": [
             {
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "title" : "Holiday Candy & Snacks",
-               "estimatedCost" : 0,
-               "id" : "sys_hall_budget_candy",
-               "isMandatory" : true,
-               "category" : "Food"
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "title": "Holiday Candy & Snacks",
+               "estimatedCost": 0,
+               "id": "sys_hall_budget_candy",
+               "isMandatory": true,
+               "category": "Food"
             }
          ],
-         "description" : "Fun costume party with themed games, spooky decor, and treats.",
-         "version" : 2,
-         "timelineBlueprints" : [
+         "description": "Fun costume party with themed games, spooky decor, and treats.",
+         "version": 2,
+         "timelineBlueprints": [
             {
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "09:00 PM",
-               "dayNumber" : 1,
-               "description" : "Showcasing and judging the best costumes.",
-               "title" : "Main Costume Contest",
-               "id" : "sys_hall_timeline_contest",
-               "phase" : "eventDay"
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "09:00 PM",
+               "dayNumber": 1,
+               "description": "Showcasing and judging the best costumes.",
+               "title": "Main Costume Contest",
+               "id": "sys_hall_timeline_contest",
+               "phase": "eventDay"
             }
          ],
-         "templateId" : "sys_halloween_party_v1",
-         "defaultFields" : {
-            "contributionType" : "fixed",
-            "enabledModules" : [
+         "templateId": "sys_halloween_party_v1",
+         "defaultFields": {
+            "contributionType": "fixed",
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
                "guestManagement",
-               "communication",
                "decoration",
                "roles",
                "userManagement"
             ],
-            "amount" : 0
+            "amount": 0
          },
-         "category" : "personal",
-         "templateName" : "Halloween Party",
-         "roleBlueprints" : [
+         "category": "personal",
+         "templateName": "Halloween Party",
+         "roleBlueprints": [
             {
-               "id" : "sys_role_admin",
-               "name" : "Admin",
-               "moduleAccess" : {
-                  "announcements" : "full",
-                  "ticketing" : "full",
-                  "users" : "full",
-                  "roles" : "full",
-                  "guests" : "full",
-                  "inventory" : "full",
-                  "timeline" : "full",
-                  "budget" : "full",
-                  "location" : "full",
-                  "vendors" : "full",
-                  "contribution" : "full",
-                  "chat" : "full",
-                  "customFields" : "full",
-                  "auditLog" : "full",
-                  "tasks" : "full"
+               "id": "sys_role_admin",
+               "name": "Admin",
+               "moduleAccess": {
+                  "ticketing": "full",
+                  "users": "full",
+                  "roles": "full",
+                  "guests": "full",
+                  "inventory": "full",
+                  "timeline": "full",
+                  "budget": "full",
+                  "location": "full",
+                  "vendors": "full",
+                  "contribution": "full",
+                  "auditLog": "full",
+                  "tasks": "full"
                },
-               "description" : "Full access to all modules."
+               "description": "Full access to all modules."
             },
             {
-               "id" : "sys_role_organizer",
-               "moduleAccess" : {
-                  "guests" : "edit",
-                  "inventory" : "edit",
-                  "timeline" : "edit",
-                  "announcements" : "edit",
-                  "ticketing" : "edit",
-                  "users" : "view",
-                  "roles" : "none",
-                  "auditLog" : "view",
-                  "tasks" : "edit",
-                  "budget" : "edit",
-                  "location" : "edit",
-                  "vendors" : "edit",
-                  "contribution" : "edit",
-                  "customFields" : "view",
-                  "chat" : "full"
+               "id": "sys_role_organizer",
+               "moduleAccess": {
+                  "guests": "edit",
+                  "inventory": "edit",
+                  "timeline": "edit",
+                  "ticketing": "edit",
+                  "users": "view",
+                  "roles": "none",
+                  "auditLog": "view",
+                  "tasks": "edit",
+                  "budget": "edit",
+                  "location": "edit",
+                  "vendors": "edit",
+                  "contribution": "edit"
                },
-               "name" : "Organizer",
-               "description" : "Manage most event details."
+               "name": "Organizer",
+               "description": "Manage most event details."
             },
             {
-               "description" : "Manage tasks and timeline.",
-               "name" : "Coordinator",
-               "moduleAccess" : {
-                  "inventory" : "view",
-                  "timeline" : "edit",
-                  "guests" : "view",
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "edit",
-                  "ticketing" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "edit",
-                  "location" : "view",
-                  "vendors" : "view",
-                  "budget" : "view",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "contribution" : "none"
+               "description": "Manage tasks and timeline.",
+               "name": "Coordinator",
+               "moduleAccess": {
+                  "inventory": "view",
+                  "timeline": "edit",
+                  "guests": "view",
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "auditLog": "none",
+                  "tasks": "edit",
+                  "location": "view",
+                  "vendors": "view",
+                  "budget": "view",
+                  "contribution": "none"
                },
-               "id" : "sys_role_coordinator"
+               "id": "sys_role_coordinator"
             },
             {
-               "description" : "Update task progress.",
-               "id" : "sys_role_volunteer",
-               "moduleAccess" : {
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "guests" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "update",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "contribution" : "none"
+               "description": "Update task progress.",
+               "id": "sys_role_volunteer",
+               "moduleAccess": {
+                  "inventory": "view",
+                  "timeline": "view",
+                  "guests": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "auditLog": "none",
+                  "tasks": "update",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none",
+                  "contribution": "none"
                },
-               "name" : "Volunteer"
+               "name": "Volunteer"
             },
             {
-               "name" : "Participant",
-               "moduleAccess" : {
-                  "contribution" : "view",
-                  "chat" : "edit",
-                  "customFields" : "none",
-                  "budget" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none",
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "none"
+               "name": "Participant",
+               "moduleAccess": {
+                  "contribution": "view",
+                  "budget": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "none"
                },
-               "id" : "sys_role_participant",
-               "description" : "Regular participant."
+               "id": "sys_role_participant",
+               "description": "Regular participant."
             },
             {
-               "description" : "Limited viewing access.",
-               "id" : "sys_role_guest",
-               "moduleAccess" : {
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view",
-                  "guests" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none",
-                  "chat" : "none",
-                  "customFields" : "none",
-                  "contribution" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "none"
+               "description": "Limited viewing access.",
+               "id": "sys_role_guest",
+               "moduleAccess": {
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "inventory": "none",
+                  "timeline": "view",
+                  "guests": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "none"
                },
-               "name" : "Guest"
+               "name": "Guest"
             },
             {
-               "name" : "Viewer",
-               "moduleAccess" : {
-                  "location" : "view",
-                  "vendors" : "view",
-                  "budget" : "view",
-                  "chat" : "view",
-                  "customFields" : "view",
-                  "contribution" : "view",
-                  "auditLog" : "view",
-                  "tasks" : "view",
-                  "announcements" : "view",
-                  "ticketing" : "view",
-                  "users" : "view",
-                  "roles" : "view",
-                  "guests" : "view",
-                  "inventory" : "view",
-                  "timeline" : "view"
+               "name": "Viewer",
+               "moduleAccess": {
+                  "location": "view",
+                  "vendors": "view",
+                  "budget": "view",
+                  "contribution": "view",
+                  "auditLog": "view",
+                  "tasks": "view",
+                  "ticketing": "view",
+                  "users": "view",
+                  "roles": "view",
+                  "guests": "view",
+                  "inventory": "view",
+                  "timeline": "view"
                },
-               "id" : "sys_role_viewer",
-               "description" : "Read-only access."
+               "id": "sys_role_viewer",
+               "description": "Read-only access."
             }
          ]
       }
    ],
-   "version" : 4,
-   "schemaVersion" : 2
+   "version": 4,
+   "schemaVersion": 2
 }

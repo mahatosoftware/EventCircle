@@ -1,236 +1,214 @@
 {
-   "templates" : [
+   "templates": [
       {
-         "defaultFields" : {
-            "contributionType" : "none",
-            "enabledModules" : [
+         "defaultFields": {
+            "contributionType": "none",
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
                "guestManagement",
-               "communication",
                "decoration",
                "roles",
                "userManagement"
             ],
-            "amount" : 0
+            "amount": 0
          },
-         "version" : 2,
-         "budgetBlueprints" : [
+         "version": 2,
+         "budgetBlueprints": [
             {
-               "estimatedCost" : 0,
-               "title" : "Themed Reveal Cake",
-               "isMandatory" : true,
-               "id" : "sys_gr_budget_cake",
-               "eventId" : "blueprint_dummy",
-               "actualCost" : 0,
-               "category" : "Food"
+               "estimatedCost": 0,
+               "title": "Themed Reveal Cake",
+               "isMandatory": true,
+               "id": "sys_gr_budget_cake",
+               "eventId": "blueprint_dummy",
+               "actualCost": 0,
+               "category": "Food"
             }
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "status" : "pending",
-               "phase" : "preEvent",
-               "dueOffset" : "T-10 days",
-               "role" : "Logistics",
-               "id" : "sys_gr_task_confetti",
-               "dependsOn" : [],
-               "title" : "Secure Reveal Method",
-               "description" : "Arrange smoke, balloon, or confetti with the correct color.",
-               "eventId" : "blueprint_dummy"
+               "status": "pending",
+               "phase": "preEvent",
+               "dueOffset": "T-10 days",
+               "role": "Logistics",
+               "id": "sys_gr_task_confetti",
+               "dependsOn": [],
+               "title": "Secure Reveal Method",
+               "description": "Arrange smoke, balloon, or confetti with the correct color.",
+               "eventId": "blueprint_dummy"
             },
             {
-               "description" : "Ensure the venue is decorated in the gender theme colors.",
-               "dueOffset" : "T-5 days",
-               "eventId" : "blueprint_dummy",
-               "role" : "Decoration",
-               "id" : "sys_gr_task_theme",
-               "status" : "pending",
-               "dependsOn" : [],
-               "title" : "Pink & Blue Themed Decor",
-               "phase" : "preEvent"
+               "description": "Ensure the venue is decorated in the gender theme colors.",
+               "dueOffset": "T-5 days",
+               "eventId": "blueprint_dummy",
+               "role": "Decoration",
+               "id": "sys_gr_task_theme",
+               "status": "pending",
+               "dependsOn": [],
+               "title": "Pink & Blue Themed Decor",
+               "phase": "preEvent"
             }
          ],
-         "tags" : [
+         "tags": [
             "baby",
             "gender reveal",
             "party",
             "revelation",
             "family"
          ],
-         "roleBlueprints" : [
+         "roleBlueprints": [
             {
-               "description" : "Full access to all modules.",
-               "name" : "Admin",
-               "moduleAccess" : {
-                  "ticketing" : "full",
-                  "announcements" : "full",
-                  "roles" : "full",
-                  "users" : "full",
-                  "guests" : "full",
-                  "timeline" : "full",
-                  "inventory" : "full",
-                  "customFields" : "full",
-                  "chat" : "full",
-                  "contribution" : "full",
-                  "location" : "full",
-                  "vendors" : "full",
-                  "budget" : "full",
-                  "tasks" : "full",
-                  "auditLog" : "full"
+               "description": "Full access to all modules.",
+               "name": "Admin",
+               "moduleAccess": {
+                  "ticketing": "full",
+                  "roles": "full",
+                  "users": "full",
+                  "guests": "full",
+                  "timeline": "full",
+                  "inventory": "full",
+                  "contribution": "full",
+                  "location": "full",
+                  "vendors": "full",
+                  "budget": "full",
+                  "tasks": "full",
+                  "auditLog": "full"
                },
-               "id" : "sys_role_admin"
+               "id": "sys_role_admin"
             },
             {
-               "description" : "Manage most event details.",
-               "moduleAccess" : {
-                  "ticketing" : "edit",
-                  "announcements" : "edit",
-                  "roles" : "none",
-                  "users" : "view",
-                  "guests" : "edit",
-                  "timeline" : "edit",
-                  "inventory" : "edit",
-                  "customFields" : "view",
-                  "chat" : "full",
-                  "contribution" : "edit",
-                  "vendors" : "edit",
-                  "location" : "edit",
-                  "budget" : "edit",
-                  "tasks" : "edit",
-                  "auditLog" : "view"
+               "description": "Manage most event details.",
+               "moduleAccess": {
+                  "ticketing": "edit",
+                  "roles": "none",
+                  "users": "view",
+                  "guests": "edit",
+                  "timeline": "edit",
+                  "inventory": "edit",
+                  "contribution": "edit",
+                  "vendors": "edit",
+                  "location": "edit",
+                  "budget": "edit",
+                  "tasks": "edit",
+                  "auditLog": "view"
                },
-               "name" : "Organizer",
-               "id" : "sys_role_organizer"
+               "name": "Organizer",
+               "id": "sys_role_organizer"
             },
             {
-               "name" : "Coordinator",
-               "moduleAccess" : {
-                  "location" : "view",
-                  "vendors" : "view",
-                  "budget" : "view",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "contribution" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "edit",
-                  "announcements" : "edit",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "guests" : "view",
-                  "inventory" : "view",
-                  "timeline" : "edit"
+               "name": "Coordinator",
+               "moduleAccess": {
+                  "location": "view",
+                  "vendors": "view",
+                  "budget": "view",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "edit",
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "guests": "view",
+                  "inventory": "view",
+                  "timeline": "edit"
                },
-               "id" : "sys_role_coordinator",
-               "description" : "Manage tasks and timeline."
+               "id": "sys_role_coordinator",
+               "description": "Manage tasks and timeline."
             },
             {
-               "id" : "sys_role_volunteer",
-               "name" : "Volunteer",
-               "moduleAccess" : {
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "guests" : "none",
-                  "contribution" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "budget" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "tasks" : "update",
-                  "auditLog" : "none"
+               "id": "sys_role_volunteer",
+               "name": "Volunteer",
+               "moduleAccess": {
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none",
+                  "timeline": "view",
+                  "inventory": "view",
+                  "guests": "none",
+                  "contribution": "none",
+                  "budget": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "tasks": "update",
+                  "auditLog": "none"
                },
-               "description" : "Update task progress."
+               "description": "Update task progress."
             },
             {
-               "id" : "sys_role_participant",
-               "name" : "Participant",
-               "moduleAccess" : {
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "customFields" : "none",
-                  "chat" : "edit",
-                  "contribution" : "view",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "budget" : "none",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "guests" : "none",
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view"
+               "id": "sys_role_participant",
+               "name": "Participant",
+               "moduleAccess": {
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "contribution": "view",
+                  "vendors": "none",
+                  "location": "view",
+                  "budget": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "guests": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none"
                },
-               "description" : "Regular participant."
+               "description": "Regular participant."
             },
             {
-               "id" : "sys_role_guest",
-               "name" : "Guest",
-               "moduleAccess" : {
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none",
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "chat" : "none",
-                  "customFields" : "none",
-                  "contribution" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "budget" : "none"
+               "id": "sys_role_guest",
+               "name": "Guest",
+               "moduleAccess": {
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "budget": "none"
                },
-               "description" : "Limited viewing access."
+               "description": "Limited viewing access."
             },
             {
-               "id" : "sys_role_viewer",
-               "name" : "Viewer",
-               "moduleAccess" : {
-                  "customFields" : "view",
-                  "chat" : "view",
-                  "contribution" : "view",
-                  "location" : "view",
-                  "vendors" : "view",
-                  "budget" : "view",
-                  "tasks" : "view",
-                  "auditLog" : "view",
-                  "ticketing" : "view",
-                  "announcements" : "view",
-                  "roles" : "view",
-                  "users" : "view",
-                  "guests" : "view",
-                  "timeline" : "view",
-                  "inventory" : "view"
+               "id": "sys_role_viewer",
+               "name": "Viewer",
+               "moduleAccess": {
+                  "contribution": "view",
+                  "location": "view",
+                  "vendors": "view",
+                  "budget": "view",
+                  "tasks": "view",
+                  "auditLog": "view",
+                  "ticketing": "view",
+                  "roles": "view",
+                  "users": "view",
+                  "guests": "view",
+                  "timeline": "view",
+                  "inventory": "view"
                },
-               "description" : "Read-only access."
+               "description": "Read-only access."
             }
          ],
-         "templateName" : "Baby Gender Reveal",
-         "category" : "personal",
-         "timelineBlueprints" : [
+         "templateName": "Baby Gender Reveal",
+         "category": "personal",
+         "timelineBlueprints": [
             {
-               "phase" : "eventDay",
-               "title" : "The Grand Reveal",
-               "id" : "sys_gr_timeline_reveal",
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "04:30 PM",
-               "dayNumber" : 1,
-               "description" : "The main reveal moment of the ceremony."
+               "phase": "eventDay",
+               "title": "The Grand Reveal",
+               "id": "sys_gr_timeline_reveal",
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "04:30 PM",
+               "dayNumber": 1,
+               "description": "The main reveal moment of the ceremony."
             }
          ],
-         "templateId" : "sys_gender_reveal_v1",
-         "description" : "Special gathering to reveal the gender of the upcoming new family member."
+         "templateId": "sys_gender_reveal_v1",
+         "description": "Special gathering to reveal the gender of the upcoming new family member."
       }
    ],
-   "version" : 4,
-   "schemaVersion" : 2
+   "version": 4,
+   "schemaVersion": 2
 }

@@ -309,8 +309,6 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
         template.roleBlueprints.length +
         template.venueBlueprints.length +
         template.ticketBlueprints.length +
-        template.customFieldBlueprints.length +
-        template.announcementBlueprints.length +
         template.budgetBlueprints.length;
   }
 
@@ -404,16 +402,6 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
     for (final ticket in template.ticketBlueprints) {
       final id = uuid.v4();
       queueWrite(db.collection('events').doc(eventId).collection('tickets'), id, ticket.copyWith(id: id, eventId: eventId).toJson());
-    }
-    // Custom Fields
-    for (final field in template.customFieldBlueprints) {
-      final id = uuid.v4();
-      queueWrite(db.collection('events').doc(eventId).collection('customFields'), id, field.copyWith(id: id, eventId: eventId).toJson());
-    }
-    // Announcements
-    for (final announcement in template.announcementBlueprints) {
-      final id = uuid.v4();
-      queueWrite(db.collection('events').doc(eventId).collection('announcements'), id, announcement.copyWith(id: id, eventId: eventId, createdAt: DateTime.now()).toJson());
     }
     // Budget
     for (final item in template.budgetBlueprints) {
@@ -936,12 +924,9 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
       case TemplateModule.timeline: return Icons.schedule_outlined;
       case TemplateModule.vendor: return Icons.storefront_outlined;
       case TemplateModule.inventory: return Icons.inventory_2_outlined;
-      case TemplateModule.communication: return Icons.chat_bubble_outline;
       case TemplateModule.roles: return Icons.badge_outlined;
       case TemplateModule.location: return Icons.location_on_outlined;
       case TemplateModule.ticketing: return Icons.confirmation_number_outlined;
-      case TemplateModule.customFields: return Icons.edit_note_outlined;
-      case TemplateModule.announcements: return Icons.campaign_outlined;
     }
   }
 
@@ -1016,13 +1001,10 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
       case TemplateModule.timeline: return '/event/$eventId/timeline';
       case TemplateModule.vendor: return '/event/$eventId/vendors';
       case TemplateModule.inventory: return '/event/$eventId/inventory';
-      case TemplateModule.communication: return '/event/$eventId/chat';
       case TemplateModule.roles: return '/event/$eventId/roles';
       case TemplateModule.expenses: return '/event/$eventId/expenses';
       case TemplateModule.location: return '/event/$eventId/venues';
       case TemplateModule.ticketing: return '/event/$eventId/ticketing';
-      case TemplateModule.customFields: return '/event/$eventId/custom-fields';
-      case TemplateModule.announcements: return '/event/$eventId/announcements';
     }
   }
 

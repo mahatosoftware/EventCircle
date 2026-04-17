@@ -1,231 +1,209 @@
 {
-   "schemaVersion" : 2,
-   "version" : 4,
-   "templates" : [
+   "schemaVersion": 2,
+   "version": 4,
+   "templates": [
       {
-         "templateId" : "sys_housewarming_v1",
-         "timelineBlueprints" : [
+         "templateId": "sys_housewarming_v1",
+         "timelineBlueprints": [
             {
-               "phase" : "eventDay",
-               "id" : "sys_housewarming_timeline_puja",
-               "title" : "Housewarming Rituals",
-               "dayNumber" : 1,
-               "description" : "Initial blessings and rituals.",
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "09:00 AM"
+               "phase": "eventDay",
+               "id": "sys_housewarming_timeline_puja",
+               "title": "Housewarming Rituals",
+               "dayNumber": 1,
+               "description": "Initial blessings and rituals.",
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "09:00 AM"
             }
          ],
-         "description" : "Welcome friends and family to your new home.",
-         "roleBlueprints" : [
+         "description": "Welcome friends and family to your new home.",
+         "roleBlueprints": [
             {
-               "name" : "Admin",
-               "moduleAccess" : {
-                  "guests" : "full",
-                  "timeline" : "full",
-                  "inventory" : "full",
-                  "ticketing" : "full",
-                  "announcements" : "full",
-                  "roles" : "full",
-                  "users" : "full",
-                  "tasks" : "full",
-                  "auditLog" : "full",
-                  "contribution" : "full",
-                  "chat" : "full",
-                  "customFields" : "full",
-                  "budget" : "full",
-                  "location" : "full",
-                  "vendors" : "full"
+               "name": "Admin",
+               "moduleAccess": {
+                  "guests": "full",
+                  "timeline": "full",
+                  "inventory": "full",
+                  "ticketing": "full",
+                  "roles": "full",
+                  "users": "full",
+                  "tasks": "full",
+                  "auditLog": "full",
+                  "contribution": "full",
+                  "budget": "full",
+                  "location": "full",
+                  "vendors": "full"
                },
-               "id" : "sys_role_admin",
-               "description" : "Full access to all modules."
+               "id": "sys_role_admin",
+               "description": "Full access to all modules."
             },
             {
-               "description" : "Manage most event details.",
-               "id" : "sys_role_organizer",
-               "name" : "Organizer",
-               "moduleAccess" : {
-                  "contribution" : "edit",
-                  "customFields" : "view",
-                  "chat" : "full",
-                  "budget" : "edit",
-                  "location" : "edit",
-                  "vendors" : "edit",
-                  "tasks" : "edit",
-                  "auditLog" : "view",
-                  "roles" : "none",
-                  "users" : "view",
-                  "ticketing" : "edit",
-                  "announcements" : "edit",
-                  "timeline" : "edit",
-                  "inventory" : "edit",
-                  "guests" : "edit"
+               "description": "Manage most event details.",
+               "id": "sys_role_organizer",
+               "name": "Organizer",
+               "moduleAccess": {
+                  "contribution": "edit",
+                  "budget": "edit",
+                  "location": "edit",
+                  "vendors": "edit",
+                  "tasks": "edit",
+                  "auditLog": "view",
+                  "roles": "none",
+                  "users": "view",
+                  "ticketing": "edit",
+                  "timeline": "edit",
+                  "inventory": "edit",
+                  "guests": "edit"
                }
             },
             {
-               "description" : "Manage tasks and timeline.",
-               "id" : "sys_role_coordinator",
-               "moduleAccess" : {
-                  "timeline" : "edit",
-                  "inventory" : "view",
-                  "guests" : "view",
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "edit",
-                  "tasks" : "edit",
-                  "auditLog" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "contribution" : "none",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "budget" : "view"
+               "description": "Manage tasks and timeline.",
+               "id": "sys_role_coordinator",
+               "moduleAccess": {
+                  "timeline": "edit",
+                  "inventory": "view",
+                  "guests": "view",
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none",
+                  "tasks": "edit",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "vendors": "view",
+                  "location": "view",
+                  "budget": "view"
                },
-               "name" : "Coordinator"
+               "name": "Coordinator"
             },
             {
-               "description" : "Update task progress.",
-               "name" : "Volunteer",
-               "moduleAccess" : {
-                  "tasks" : "update",
-                  "auditLog" : "none",
-                  "chat" : "full",
-                  "customFields" : "none",
-                  "contribution" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none",
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none"
+               "description": "Update task progress.",
+               "name": "Volunteer",
+               "moduleAccess": {
+                  "tasks": "update",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none",
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "view",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none"
                },
-               "id" : "sys_role_volunteer"
+               "id": "sys_role_volunteer"
             },
             {
-               "description" : "Regular participant.",
-               "id" : "sys_role_participant",
-               "name" : "Participant",
-               "moduleAccess" : {
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "guests" : "none",
-                  "contribution" : "view",
-                  "customFields" : "none",
-                  "chat" : "edit",
-                  "budget" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "tasks" : "none",
-                  "auditLog" : "none"
+               "description": "Regular participant.",
+               "id": "sys_role_participant",
+               "name": "Participant",
+               "moduleAccess": {
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "guests": "none",
+                  "contribution": "view",
+                  "budget": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "tasks": "none",
+                  "auditLog": "none"
                }
             },
             {
-               "id" : "sys_role_guest",
-               "name" : "Guest",
-               "moduleAccess" : {
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none",
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "chat" : "none",
-                  "customFields" : "none",
-                  "contribution" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "budget" : "none"
+               "id": "sys_role_guest",
+               "name": "Guest",
+               "moduleAccess": {
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "budget": "none"
                },
-               "description" : "Limited viewing access."
+               "description": "Limited viewing access."
             },
             {
-               "id" : "sys_role_viewer",
-               "name" : "Viewer",
-               "moduleAccess" : {
-                  "ticketing" : "view",
-                  "announcements" : "view",
-                  "roles" : "view",
-                  "users" : "view",
-                  "guests" : "view",
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "customFields" : "view",
-                  "chat" : "view",
-                  "contribution" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "budget" : "view",
-                  "tasks" : "view",
-                  "auditLog" : "view"
+               "id": "sys_role_viewer",
+               "name": "Viewer",
+               "moduleAccess": {
+                  "ticketing": "view",
+                  "roles": "view",
+                  "users": "view",
+                  "guests": "view",
+                  "timeline": "view",
+                  "inventory": "view",
+                  "contribution": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "budget": "view",
+                  "tasks": "view",
+                  "auditLog": "view"
                },
-               "description" : "Read-only access."
+               "description": "Read-only access."
             }
          ],
-         "templateName" : "Housewarming Ceremony",
-         "category" : "personal",
-         "version" : 2,
-         "budgetBlueprints" : [
+         "templateName": "Housewarming Ceremony",
+         "category": "personal",
+         "version": 2,
+         "budgetBlueprints": [
             {
-               "title" : "Refreshments/Dinner",
-               "estimatedCost" : 0,
-               "isMandatory" : true,
-               "id" : "sys_housewarming_budget_food",
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "category" : "Food"
+               "title": "Refreshments/Dinner",
+               "estimatedCost": 0,
+               "isMandatory": true,
+               "id": "sys_housewarming_budget_food",
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "category": "Food"
             }
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "phase" : "preEvent",
-               "title" : "Book Priest (for Puja)",
-               "id" : "sys_housewarming_task_priest",
-               "dependsOn" : [],
-               "status" : "pending",
-               "eventId" : "blueprint_dummy",
-               "role" : "Organizer",
-               "description" : "If having a religious ceremony, book the officiant.",
-               "dueOffset" : "T-20 days"
+               "phase": "preEvent",
+               "title": "Book Priest (for Puja)",
+               "id": "sys_housewarming_task_priest",
+               "dependsOn": [],
+               "status": "pending",
+               "eventId": "blueprint_dummy",
+               "role": "Organizer",
+               "description": "If having a religious ceremony, book the officiant.",
+               "dueOffset": "T-20 days"
             },
             {
-               "status" : "pending",
-               "phase" : "preEvent",
-               "dueOffset" : "T-2 days",
-               "role" : "Setup Team",
-               "id" : "sys_housewarming_task_cleanup",
-               "dependsOn" : [],
-               "title" : "New House Deep Clean",
-               "description" : "Ensure the house is ready for guests.",
-               "eventId" : "blueprint_dummy"
+               "status": "pending",
+               "phase": "preEvent",
+               "dueOffset": "T-2 days",
+               "role": "Setup Team",
+               "id": "sys_housewarming_task_cleanup",
+               "dependsOn": [],
+               "title": "New House Deep Clean",
+               "description": "Ensure the house is ready for guests.",
+               "eventId": "blueprint_dummy"
             }
          ],
-         "tags" : [
+         "tags": [
             "housewarming",
             "new home",
             "puja",
             "party",
             "griha pravesh"
          ],
-         "defaultFields" : {
-            "contributionType" : "none",
-            "amount" : 0,
-            "enabledModules" : [
+         "defaultFields": {
+            "contributionType": "none",
+            "amount": 0,
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
                "guestManagement",
-               "communication",
                "location",
                "roles",
                "userManagement"

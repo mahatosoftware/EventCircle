@@ -1,222 +1,200 @@
 {
-   "schemaVersion" : 2,
-   "version" : 4,
-   "templates" : [
+   "schemaVersion": 2,
+   "version": 4,
+   "templates": [
       {
-         "defaultFields" : {
-            "amount" : 0,
-            "enabledModules" : [
+         "defaultFields": {
+            "amount": 0,
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
                "guestManagement",
-               "communication",
                "roles",
                "userManagement"
             ],
-            "contributionType" : "none"
+            "contributionType": "none"
          },
-         "version" : 2,
-         "tags" : [
+         "version": 2,
+         "tags": [
             "retirement",
             "farewell",
             "career",
             "party",
             "office"
          ],
-         "budgetBlueprints" : [
+         "budgetBlueprints": [
             {
-               "eventId" : "blueprint_dummy",
-               "actualCost" : 0,
-               "estimatedCost" : 0,
-               "title" : "Retirement Memento/Gift",
-               "id" : "sys_retirement_budget_memento",
-               "isMandatory" : true,
-               "category" : "Miscellaneous"
+               "eventId": "blueprint_dummy",
+               "actualCost": 0,
+               "estimatedCost": 0,
+               "title": "Retirement Memento/Gift",
+               "id": "sys_retirement_budget_memento",
+               "isMandatory": true,
+               "category": "Miscellaneous"
             }
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "eventId" : "blueprint_dummy",
-               "role" : "Media",
-               "description" : "Gather photos and memories for a presentation.",
-               "dueOffset" : "T-15 days",
-               "phase" : "preEvent",
-               "title" : "Prepare Video/Speech Tribute",
-               "id" : "sys_retirement_task_tribute",
-               "status" : "pending",
-               "dependsOn" : []
+               "eventId": "blueprint_dummy",
+               "role": "Media",
+               "description": "Gather photos and memories for a presentation.",
+               "dueOffset": "T-15 days",
+               "phase": "preEvent",
+               "title": "Prepare Video/Speech Tribute",
+               "id": "sys_retirement_task_tribute",
+               "status": "pending",
+               "dependsOn": []
             }
          ],
-         "templateName" : "Retirement Party",
-         "roleBlueprints" : [
+         "templateName": "Retirement Party",
+         "roleBlueprints": [
             {
-               "id" : "sys_role_admin",
-               "name" : "Admin",
-               "moduleAccess" : {
-                  "auditLog" : "full",
-                  "tasks" : "full",
-                  "location" : "full",
-                  "vendors" : "full",
-                  "budget" : "full",
-                  "chat" : "full",
-                  "customFields" : "full",
-                  "contribution" : "full",
-                  "guests" : "full",
-                  "inventory" : "full",
-                  "timeline" : "full",
-                  "announcements" : "full",
-                  "ticketing" : "full",
-                  "users" : "full",
-                  "roles" : "full"
+               "id": "sys_role_admin",
+               "name": "Admin",
+               "moduleAccess": {
+                  "auditLog": "full",
+                  "tasks": "full",
+                  "location": "full",
+                  "vendors": "full",
+                  "budget": "full",
+                  "contribution": "full",
+                  "guests": "full",
+                  "inventory": "full",
+                  "timeline": "full",
+                  "ticketing": "full",
+                  "users": "full",
+                  "roles": "full"
                },
-               "description" : "Full access to all modules."
+               "description": "Full access to all modules."
             },
             {
-               "description" : "Manage most event details.",
-               "id" : "sys_role_organizer",
-               "moduleAccess" : {
-                  "roles" : "none",
-                  "users" : "view",
-                  "ticketing" : "edit",
-                  "announcements" : "edit",
-                  "timeline" : "edit",
-                  "inventory" : "edit",
-                  "guests" : "edit",
-                  "chat" : "full",
-                  "customFields" : "view",
-                  "contribution" : "edit",
-                  "location" : "edit",
-                  "vendors" : "edit",
-                  "budget" : "edit",
-                  "tasks" : "edit",
-                  "auditLog" : "view"
+               "description": "Manage most event details.",
+               "id": "sys_role_organizer",
+               "moduleAccess": {
+                  "roles": "none",
+                  "users": "view",
+                  "ticketing": "edit",
+                  "timeline": "edit",
+                  "inventory": "edit",
+                  "guests": "edit",
+                  "contribution": "edit",
+                  "location": "edit",
+                  "vendors": "edit",
+                  "budget": "edit",
+                  "tasks": "edit",
+                  "auditLog": "view"
                },
-               "name" : "Organizer"
+               "name": "Organizer"
             },
             {
-               "description" : "Manage tasks and timeline.",
-               "moduleAccess" : {
-                  "auditLog" : "none",
-                  "tasks" : "edit",
-                  "budget" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "contribution" : "none",
-                  "chat" : "full",
-                  "customFields" : "none",
-                  "guests" : "view",
-                  "inventory" : "view",
-                  "timeline" : "edit",
-                  "announcements" : "edit",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none"
+               "description": "Manage tasks and timeline.",
+               "moduleAccess": {
+                  "auditLog": "none",
+                  "tasks": "edit",
+                  "budget": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "contribution": "none",
+                  "guests": "view",
+                  "inventory": "view",
+                  "timeline": "edit",
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none"
                },
-               "name" : "Coordinator",
-               "id" : "sys_role_coordinator"
+               "name": "Coordinator",
+               "id": "sys_role_coordinator"
             },
             {
-               "id" : "sys_role_volunteer",
-               "name" : "Volunteer",
-               "moduleAccess" : {
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "guests" : "none",
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "budget" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "contribution" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "update"
+               "id": "sys_role_volunteer",
+               "name": "Volunteer",
+               "moduleAccess": {
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "guests": "none",
+                  "inventory": "view",
+                  "timeline": "view",
+                  "vendors": "none",
+                  "location": "view",
+                  "budget": "none",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "update"
                },
-               "description" : "Update task progress."
+               "description": "Update task progress."
             },
             {
-               "moduleAccess" : {
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none",
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "contribution" : "view",
-                  "chat" : "edit",
-                  "customFields" : "none",
-                  "budget" : "none",
-                  "location" : "view",
-                  "vendors" : "none"
+               "moduleAccess": {
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "contribution": "view",
+                  "budget": "none",
+                  "location": "view",
+                  "vendors": "none"
                },
-               "name" : "Participant",
-               "id" : "sys_role_participant",
-               "description" : "Regular participant."
+               "name": "Participant",
+               "id": "sys_role_participant",
+               "description": "Regular participant."
             },
             {
-               "id" : "sys_role_guest",
-               "moduleAccess" : {
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "contribution" : "none",
-                  "customFields" : "none",
-                  "chat" : "none",
-                  "budget" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none"
+               "id": "sys_role_guest",
+               "moduleAccess": {
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "budget": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none"
                },
-               "name" : "Guest",
-               "description" : "Limited viewing access."
+               "name": "Guest",
+               "description": "Limited viewing access."
             },
             {
-               "id" : "sys_role_viewer",
-               "name" : "Viewer",
-               "moduleAccess" : {
-                  "budget" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "contribution" : "view",
-                  "chat" : "view",
-                  "customFields" : "view",
-                  "auditLog" : "view",
-                  "tasks" : "view",
-                  "announcements" : "view",
-                  "ticketing" : "view",
-                  "users" : "view",
-                  "roles" : "view",
-                  "guests" : "view",
-                  "inventory" : "view",
-                  "timeline" : "view"
+               "id": "sys_role_viewer",
+               "name": "Viewer",
+               "moduleAccess": {
+                  "budget": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "contribution": "view",
+                  "auditLog": "view",
+                  "tasks": "view",
+                  "ticketing": "view",
+                  "users": "view",
+                  "roles": "view",
+                  "guests": "view",
+                  "inventory": "view",
+                  "timeline": "view"
                },
-               "description" : "Read-only access."
+               "description": "Read-only access."
             }
          ],
-         "category" : "personal",
-         "description" : "Celebrate a successful career and the start of a new chapter.",
-         "templateId" : "sys_retirement_v1",
-         "timelineBlueprints" : [
+         "category": "personal",
+         "description": "Celebrate a successful career and the start of a new chapter.",
+         "templateId": "sys_retirement_v1",
+         "timelineBlueprints": [
             {
-               "phase" : "eventDay",
-               "description" : "Colleagues and family sharing memories.",
-               "dayNumber" : 1,
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "07:00 PM",
-               "id" : "sys_retirement_timeline_speech",
-               "title" : "Specials Speeches & Tributes"
+               "phase": "eventDay",
+               "description": "Colleagues and family sharing memories.",
+               "dayNumber": 1,
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "07:00 PM",
+               "id": "sys_retirement_timeline_speech",
+               "title": "Specials Speeches & Tributes"
             }
          ]
       }

@@ -207,8 +207,6 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
         template.roleBlueprints.length +
         template.venueBlueprints.length +
         template.ticketBlueprints.length +
-        template.customFieldBlueprints.length +
-        template.announcementBlueprints.length +
         template.budgetBlueprints.length;
   }
 
@@ -273,16 +271,6 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
     for (final ticket in template.ticketBlueprints) {
       final id = uuid.v4();
       queueWrite(db.collection('events').doc(eventId).collection('tickets'), id, ticket.copyWith(id: id, eventId: eventId).toJson());
-    }
-    // Custom Fields
-    for (final field in template.customFieldBlueprints) {
-      final id = uuid.v4();
-      queueWrite(db.collection('events').doc(eventId).collection('customFields'), id, field.copyWith(id: id, eventId: eventId).toJson());
-    }
-    // Announcements
-    for (final announcement in template.announcementBlueprints) {
-      final id = uuid.v4();
-      queueWrite(db.collection('events').doc(eventId).collection('announcements'), id, announcement.copyWith(id: id, eventId: eventId, createdAt: DateTime.now()).toJson());
     }
     // Budget
     for (final item in template.budgetBlueprints) {
@@ -1091,12 +1079,9 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
       case TemplateModule.timeline: return Icons.schedule_outlined;
       case TemplateModule.vendor: return Icons.storefront_outlined;
       case TemplateModule.inventory: return Icons.inventory_2_outlined;
-      case TemplateModule.communication: return Icons.chat_bubble_outline;
       case TemplateModule.roles: return Icons.badge_outlined;
       case TemplateModule.location: return Icons.location_on_outlined;
       case TemplateModule.ticketing: return Icons.confirmation_number_outlined;
-      case TemplateModule.customFields: return Icons.edit_note_outlined;
-      case TemplateModule.announcements: return Icons.campaign_outlined;
     }
   }
 
@@ -1120,18 +1105,12 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
         return '${_selectedTemplate!.vendorBlueprints.length} vendor roles';
       case TemplateModule.inventory:
         return '${_selectedTemplate!.inventoryBlueprints.length} items';
-      case TemplateModule.communication:
-        return 'Group messaging enabled';
       case TemplateModule.roles:
         return '${_selectedTemplate!.roleBlueprints.length} roles pre-defined';
       case TemplateModule.location:
         return 'Venue ground blueprints';
       case TemplateModule.ticketing:
         return '${_selectedTemplate!.ticketBlueprints.length} ticket tiers';
-      case TemplateModule.customFields:
-        return '${_selectedTemplate!.customFieldBlueprints.length} fields active';
-      case TemplateModule.announcements:
-        return '${_selectedTemplate!.announcementBlueprints.length} alerts ready';
     }
   }
 }

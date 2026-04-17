@@ -1,229 +1,207 @@
 {
-   "schemaVersion" : 2,
-   "templates" : [
+   "schemaVersion": 2,
+   "templates": [
       {
-         "roleBlueprints" : [
+         "roleBlueprints": [
             {
-               "id" : "sys_role_admin",
-               "name" : "Admin",
-               "moduleAccess" : {
-                  "tasks" : "full",
-                  "auditLog" : "full",
-                  "chat" : "full",
-                  "customFields" : "full",
-                  "contribution" : "full",
-                  "location" : "full",
-                  "vendors" : "full",
-                  "budget" : "full",
-                  "timeline" : "full",
-                  "inventory" : "full",
-                  "guests" : "full",
-                  "roles" : "full",
-                  "users" : "full",
-                  "ticketing" : "full",
-                  "announcements" : "full"
+               "id": "sys_role_admin",
+               "name": "Admin",
+               "moduleAccess": {
+                  "tasks": "full",
+                  "auditLog": "full",
+                  "contribution": "full",
+                  "location": "full",
+                  "vendors": "full",
+                  "budget": "full",
+                  "timeline": "full",
+                  "inventory": "full",
+                  "guests": "full",
+                  "roles": "full",
+                  "users": "full",
+                  "ticketing": "full"
                },
-               "description" : "Full access to all modules."
+               "description": "Full access to all modules."
             },
             {
-               "moduleAccess" : {
-                  "contribution" : "edit",
-                  "customFields" : "view",
-                  "chat" : "full",
-                  "budget" : "edit",
-                  "vendors" : "edit",
-                  "location" : "edit",
-                  "tasks" : "edit",
-                  "auditLog" : "view",
-                  "ticketing" : "edit",
-                  "announcements" : "edit",
-                  "roles" : "none",
-                  "users" : "view",
-                  "guests" : "edit",
-                  "timeline" : "edit",
-                  "inventory" : "edit"
+               "moduleAccess": {
+                  "contribution": "edit",
+                  "budget": "edit",
+                  "vendors": "edit",
+                  "location": "edit",
+                  "tasks": "edit",
+                  "auditLog": "view",
+                  "ticketing": "edit",
+                  "roles": "none",
+                  "users": "view",
+                  "guests": "edit",
+                  "timeline": "edit",
+                  "inventory": "edit"
                },
-               "name" : "Organizer",
-               "id" : "sys_role_organizer",
-               "description" : "Manage most event details."
+               "name": "Organizer",
+               "id": "sys_role_organizer",
+               "description": "Manage most event details."
             },
             {
-               "name" : "Coordinator",
-               "moduleAccess" : {
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "edit",
-                  "ticketing" : "none",
-                  "inventory" : "view",
-                  "timeline" : "edit",
-                  "guests" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "budget" : "view",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "contribution" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "edit"
+               "name": "Coordinator",
+               "moduleAccess": {
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "inventory": "view",
+                  "timeline": "edit",
+                  "guests": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "budget": "view",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "edit"
                },
-               "id" : "sys_role_coordinator",
-               "description" : "Manage tasks and timeline."
+               "id": "sys_role_coordinator",
+               "description": "Manage tasks and timeline."
             },
             {
-               "description" : "Update task progress.",
-               "name" : "Volunteer",
-               "moduleAccess" : {
-                  "guests" : "none",
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "update",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "contribution" : "none"
+               "description": "Update task progress.",
+               "name": "Volunteer",
+               "moduleAccess": {
+                  "guests": "none",
+                  "inventory": "view",
+                  "timeline": "view",
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "auditLog": "none",
+                  "tasks": "update",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none",
+                  "contribution": "none"
                },
-               "id" : "sys_role_volunteer"
+               "id": "sys_role_volunteer"
             },
             {
-               "name" : "Participant",
-               "moduleAccess" : {
-                  "auditLog" : "none",
-                  "tasks" : "none",
-                  "budget" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "contribution" : "view",
-                  "customFields" : "none",
-                  "chat" : "edit",
-                  "inventory" : "none",
-                  "timeline" : "view",
-                  "guests" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none"
+               "name": "Participant",
+               "moduleAccess": {
+                  "auditLog": "none",
+                  "tasks": "none",
+                  "budget": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "contribution": "view",
+                  "inventory": "none",
+                  "timeline": "view",
+                  "guests": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none"
                },
-               "id" : "sys_role_participant",
-               "description" : "Regular participant."
+               "id": "sys_role_participant",
+               "description": "Regular participant."
             },
             {
-               "description" : "Limited viewing access.",
-               "id" : "sys_role_guest",
-               "moduleAccess" : {
-                  "chat" : "none",
-                  "customFields" : "none",
-                  "contribution" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none",
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "guests" : "none"
+               "description": "Limited viewing access.",
+               "id": "sys_role_guest",
+               "moduleAccess": {
+                  "contribution": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none",
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "guests": "none"
                },
-               "name" : "Guest"
+               "name": "Guest"
             },
             {
-               "moduleAccess" : {
-                  "announcements" : "view",
-                  "ticketing" : "view",
-                  "users" : "view",
-                  "roles" : "view",
-                  "guests" : "view",
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "budget" : "view",
-                  "chat" : "view",
-                  "customFields" : "view",
-                  "contribution" : "view",
-                  "auditLog" : "view",
-                  "tasks" : "view"
+               "moduleAccess": {
+                  "ticketing": "view",
+                  "users": "view",
+                  "roles": "view",
+                  "guests": "view",
+                  "inventory": "view",
+                  "timeline": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "budget": "view",
+                  "contribution": "view",
+                  "auditLog": "view",
+                  "tasks": "view"
                },
-               "name" : "Viewer",
-               "id" : "sys_role_viewer",
-               "description" : "Read-only access."
+               "name": "Viewer",
+               "id": "sys_role_viewer",
+               "description": "Read-only access."
             }
          ],
-         "templateName" : "Summer Garden Party",
-         "category" : "personal",
-         "defaultFields" : {
-            "amount" : 0,
-            "enabledModules" : [
+         "templateName": "Summer Garden Party",
+         "category": "personal",
+         "defaultFields": {
+            "amount": 0,
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
                "guestManagement",
-               "communication",
                "location",
                "roles",
                "userManagement"
             ],
-            "contributionType" : "voluntary"
+            "contributionType": "voluntary"
          },
-         "templateId" : "sys_garden_party_v1",
-         "timelineBlueprints" : [
+         "templateId": "sys_garden_party_v1",
+         "timelineBlueprints": [
             {
-               "phase" : "eventDay",
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "05:00 PM",
-               "description" : "Main interaction and relaxed activities.",
-               "dayNumber" : 1,
-               "title" : "Garden Socializing",
-               "id" : "sys_sgp_timeline_social"
+               "phase": "eventDay",
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "05:00 PM",
+               "description": "Main interaction and relaxed activities.",
+               "dayNumber": 1,
+               "title": "Garden Socializing",
+               "id": "sys_sgp_timeline_social"
             }
          ],
-         "version" : 2,
-         "description" : "Relaxed outdoor social gathering featuring fresh food, games, and nature.",
-         "budgetBlueprints" : [
+         "version": 2,
+         "description": "Relaxed outdoor social gathering featuring fresh food, games, and nature.",
+         "budgetBlueprints": [
             {
-               "category" : "Food",
-               "eventId" : "blueprint_dummy",
-               "actualCost" : 0,
-               "isMandatory" : true,
-               "id" : "sys_sgp_budget_bbq",
-               "estimatedCost" : 0,
-               "title" : "BBQ & Refreshments"
+               "category": "Food",
+               "eventId": "blueprint_dummy",
+               "actualCost": 0,
+               "isMandatory": true,
+               "id": "sys_sgp_budget_bbq",
+               "estimatedCost": 0,
+               "title": "BBQ & Refreshments"
             }
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "dueOffset" : "T-3 days",
-               "role" : "Organizer",
-               "status" : "pending",
-               "phase" : "preEvent",
-               "description" : "Ensure a backup indoor or tent plan.",
-               "eventId" : "blueprint_dummy",
-               "dependsOn" : [],
-               "id" : "sys_sgp_task_weather",
-               "title" : "Monitor Weather & Plan B"
+               "dueOffset": "T-3 days",
+               "role": "Organizer",
+               "status": "pending",
+               "phase": "preEvent",
+               "description": "Ensure a backup indoor or tent plan.",
+               "eventId": "blueprint_dummy",
+               "dependsOn": [],
+               "id": "sys_sgp_task_weather",
+               "title": "Monitor Weather & Plan B"
             },
             {
-               "status" : "pending",
-               "phase" : "preEvent",
-               "dueOffset" : "T-1 day",
-               "role" : "Decoration",
-               "id" : "sys_sgp_task_bugs",
-               "dependsOn" : [],
-               "title" : "Pest Control & Decor",
-               "description" : "Ensure the garden is ready (mosquitoes, lighting).",
-               "eventId" : "blueprint_dummy"
+               "status": "pending",
+               "phase": "preEvent",
+               "dueOffset": "T-1 day",
+               "role": "Decoration",
+               "id": "sys_sgp_task_bugs",
+               "dependsOn": [],
+               "title": "Pest Control & Decor",
+               "description": "Ensure the garden is ready (mosquitoes, lighting).",
+               "eventId": "blueprint_dummy"
             }
          ],
-         "tags" : [
+         "tags": [
             "garden party",
             "summer",
             "outdoor",
@@ -232,5 +210,5 @@
          ]
       }
    ],
-   "version" : 4
+   "version": 4
 }

@@ -1,39 +1,39 @@
 {
-   "version" : 4,
-   "templates" : [
+   "version": 4,
+   "templates": [
       {
-         "templateId" : "sys_raja_parba_v1",
-         "timelineBlueprints" : [
+         "templateId": "sys_raja_parba_v1",
+         "timelineBlueprints": [
             {
-               "dayNumber" : 1,
-               "description" : "The festive swinging ceremony begins.",
-               "timeOrOffset" : "08:30 AM",
-               "eventId" : "blueprint_dummy",
-               "id" : "sys_raja_timeline_doli",
-               "title" : "Raja Doli Opening",
-               "phase" : "eventDay"
+               "dayNumber": 1,
+               "description": "The festive swinging ceremony begins.",
+               "timeOrOffset": "08:30 AM",
+               "eventId": "blueprint_dummy",
+               "id": "sys_raja_timeline_doli",
+               "title": "Raja Doli Opening",
+               "phase": "eventDay"
             },
             {
-               "title" : "Indoor Games Session",
-               "id" : "sys_raja_timeline_games",
-               "timeOrOffset" : "11:00 AM",
-               "eventId" : "blueprint_dummy",
-               "dayNumber" : 1,
-               "description" : "Card games, Ludo, and community bonding.",
-               "phase" : "eventDay"
+               "title": "Indoor Games Session",
+               "id": "sys_raja_timeline_games",
+               "timeOrOffset": "11:00 AM",
+               "eventId": "blueprint_dummy",
+               "dayNumber": 1,
+               "description": "Card games, Ludo, and community bonding.",
+               "phase": "eventDay"
             },
             {
-               "phase" : "eventDay",
-               "timeOrOffset" : "01:30 PM",
-               "eventId" : "blueprint_dummy",
-               "dayNumber" : 1,
-               "description" : "Traditional distribution of sweet betel leaves.",
-               "title" : "Raja Paan Ceremony",
-               "id" : "sys_raja_timeline_paan"
+               "phase": "eventDay",
+               "timeOrOffset": "01:30 PM",
+               "eventId": "blueprint_dummy",
+               "dayNumber": 1,
+               "description": "Traditional distribution of sweet betel leaves.",
+               "title": "Raja Paan Ceremony",
+               "id": "sys_raja_timeline_paan"
             }
          ],
-         "description" : "Celebrate the festival of swings, pithas, and womanhood with Raja Doli and traditional Podapitha.",
-         "tags" : [
+         "description": "Celebrate the festival of swings, pithas, and womanhood with Raja Doli and traditional Podapitha.",
+         "tags": [
             "raja",
             "parba",
             "odisha",
@@ -43,251 +43,229 @@
             "womanhood",
             "poda pitha"
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "id" : "sys_raja_task_setup_swings",
-               "status" : "pending",
-               "phase" : "preEvent",
-               "title" : "Setup Raja Doli (Swings)",
-               "description" : "Arrange ropes and decorated swings for children and women.",
-               "dueOffset" : "T-3 days",
-               "eventId" : "blueprint_dummy",
-               "role" : "Setup Team"
+               "id": "sys_raja_task_setup_swings",
+               "status": "pending",
+               "phase": "preEvent",
+               "title": "Setup Raja Doli (Swings)",
+               "description": "Arrange ropes and decorated swings for children and women.",
+               "dueOffset": "T-3 days",
+               "eventId": "blueprint_dummy",
+               "role": "Setup Team"
             },
             {
-               "dueOffset" : "T-1 day",
-               "role" : "Food Manager",
-               "status" : "pending",
-               "phase" : "preEvent",
-               "description" : "Prepare traditional rice cakes for the 3-day festival.",
-               "eventId" : "blueprint_dummy",
-               "id" : "sys_raja_task_pithas",
-               "title" : "Prepare Odia Pithas (Poda/Manda/Kakara)"
+               "dueOffset": "T-1 day",
+               "role": "Food Manager",
+               "status": "pending",
+               "phase": "preEvent",
+               "description": "Prepare traditional rice cakes for the 3-day festival.",
+               "eventId": "blueprint_dummy",
+               "id": "sys_raja_task_pithas",
+               "title": "Prepare Odia Pithas (Poda/Manda/Kakara)"
             },
             {
-               "dueOffset" : "T-1 day",
-               "description" : "Arrange for traditional sweet paan for the celebration.",
-               "role" : "Food Manager",
-               "eventId" : "blueprint_dummy",
-               "status" : "pending",
-               "id" : "sys_raja_task_procure_paan",
-               "title" : "Procure Raja Paan (Betel Leaves)",
-               "phase" : "preEvent"
+               "dueOffset": "T-1 day",
+               "description": "Arrange for traditional sweet paan for the celebration.",
+               "role": "Food Manager",
+               "eventId": "blueprint_dummy",
+               "status": "pending",
+               "id": "sys_raja_task_procure_paan",
+               "title": "Procure Raja Paan (Betel Leaves)",
+               "phase": "preEvent"
             },
             {
-               "title" : "Organize indoor games (Cards/Ludo)",
-               "id" : "sys_raja_task_indoor_games",
-               "eventId" : "blueprint_dummy",
-               "description" : "Set up areas for traditional indoor games as people avoid walking on the earth.",
-               "phase" : "eventDay",
-               "status" : "pending",
-               "role" : "Event Coordinator",
-               "dueOffset" : "Morning 10:00 AM"
+               "title": "Organize indoor games (Cards/Ludo)",
+               "id": "sys_raja_task_indoor_games",
+               "eventId": "blueprint_dummy",
+               "description": "Set up areas for traditional indoor games as people avoid walking on the earth.",
+               "phase": "eventDay",
+               "status": "pending",
+               "role": "Event Coordinator",
+               "dueOffset": "Morning 10:00 AM"
             },
             {
-               "role" : "Food Manager",
-               "dueOffset" : "Afternoon 02:00 PM",
-               "phase" : "eventDay",
-               "status" : "pending",
-               "eventId" : "blueprint_dummy",
-               "description" : "Serve traditional delicacies and paan to all attendees.",
-               "title" : "Distribute Pithas and Raja Paan",
-               "id" : "sys_raja_task_distribution"
+               "role": "Food Manager",
+               "dueOffset": "Afternoon 02:00 PM",
+               "phase": "eventDay",
+               "status": "pending",
+               "eventId": "blueprint_dummy",
+               "description": "Serve traditional delicacies and paan to all attendees.",
+               "title": "Distribute Pithas and Raja Paan",
+               "id": "sys_raja_task_distribution"
             }
          ],
-         "budgetBlueprints" : [
+         "budgetBlueprints": [
             {
-               "id" : "sys_raja_budget_pithas_food",
-               "isMandatory" : true,
-               "category" : "Food",
-               "estimatedCost" : 0,
-               "title" : "Traditional Pithas and Sweet Paan",
-               "eventId" : "blueprint_dummy"
+               "id": "sys_raja_budget_pithas_food",
+               "isMandatory": true,
+               "category": "Food",
+               "estimatedCost": 0,
+               "title": "Traditional Pithas and Sweet Paan",
+               "eventId": "blueprint_dummy"
             },
             {
-               "eventId" : "blueprint_dummy",
-               "estimatedCost" : 0,
-               "title" : "Swings (Doli) setup and decoration",
-               "category" : "Decoration",
-               "isMandatory" : true,
-               "id" : "sys_raja_budget_swings"
+               "eventId": "blueprint_dummy",
+               "estimatedCost": 0,
+               "title": "Swings (Doli) setup and decoration",
+               "category": "Decoration",
+               "isMandatory": true,
+               "id": "sys_raja_budget_swings"
             }
          ],
-         "templateName" : "Raja Parba",
-         "roleBlueprints" : [
+         "templateName": "Raja Parba",
+         "roleBlueprints": [
             {
-               "name" : "Admin",
-               "moduleAccess" : {
-                  "users" : "full",
-                  "roles" : "full",
-                  "announcements" : "full",
-                  "ticketing" : "full",
-                  "inventory" : "full",
-                  "timeline" : "full",
-                  "guests" : "full",
-                  "vendors" : "full",
-                  "location" : "full",
-                  "budget" : "full",
-                  "customFields" : "full",
-                  "chat" : "full",
-                  "contribution" : "full",
-                  "auditLog" : "full",
-                  "tasks" : "full"
+               "name": "Admin",
+               "moduleAccess": {
+                  "users": "full",
+                  "roles": "full",
+                  "ticketing": "full",
+                  "inventory": "full",
+                  "timeline": "full",
+                  "guests": "full",
+                  "vendors": "full",
+                  "location": "full",
+                  "budget": "full",
+                  "contribution": "full",
+                  "auditLog": "full",
+                  "tasks": "full"
                },
-               "id" : "sys_role_admin",
-               "description" : "Full access to all modules."
+               "id": "sys_role_admin",
+               "description": "Full access to all modules."
             },
             {
-               "description" : "Manage most event details.",
-               "id" : "sys_role_organizer",
-               "moduleAccess" : {
-                  "auditLog" : "view",
-                  "tasks" : "edit",
-                  "vendors" : "edit",
-                  "location" : "edit",
-                  "budget" : "edit",
-                  "customFields" : "view",
-                  "chat" : "full",
-                  "contribution" : "edit",
-                  "guests" : "edit",
-                  "inventory" : "edit",
-                  "timeline" : "edit",
-                  "announcements" : "edit",
-                  "ticketing" : "edit",
-                  "users" : "view",
-                  "roles" : "none"
+               "description": "Manage most event details.",
+               "id": "sys_role_organizer",
+               "moduleAccess": {
+                  "auditLog": "view",
+                  "tasks": "edit",
+                  "vendors": "edit",
+                  "location": "edit",
+                  "budget": "edit",
+                  "contribution": "edit",
+                  "guests": "edit",
+                  "inventory": "edit",
+                  "timeline": "edit",
+                  "ticketing": "edit",
+                  "users": "view",
+                  "roles": "none"
                },
-               "name" : "Organizer"
+               "name": "Organizer"
             },
             {
-               "name" : "Coordinator",
-               "moduleAccess" : {
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "edit",
-                  "ticketing" : "none",
-                  "inventory" : "view",
-                  "timeline" : "edit",
-                  "guests" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "budget" : "view",
-                  "chat" : "full",
-                  "customFields" : "none",
-                  "contribution" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "edit"
+               "name": "Coordinator",
+               "moduleAccess": {
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "inventory": "view",
+                  "timeline": "edit",
+                  "guests": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "budget": "view",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "edit"
                },
-               "id" : "sys_role_coordinator",
-               "description" : "Manage tasks and timeline."
+               "id": "sys_role_coordinator",
+               "description": "Manage tasks and timeline."
             },
             {
-               "description" : "Update task progress.",
-               "name" : "Volunteer",
-               "moduleAccess" : {
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none",
-                  "tasks" : "update",
-                  "auditLog" : "none",
-                  "contribution" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "budget" : "none",
-                  "vendors" : "none",
-                  "location" : "view"
+               "description": "Update task progress.",
+               "name": "Volunteer",
+               "moduleAccess": {
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "view",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "tasks": "update",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "budget": "none",
+                  "vendors": "none",
+                  "location": "view"
                },
-               "id" : "sys_role_volunteer"
+               "id": "sys_role_volunteer"
             },
             {
-               "description" : "Regular participant.",
-               "id" : "sys_role_participant",
-               "moduleAccess" : {
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "guests" : "none",
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "contribution" : "view",
-                  "customFields" : "none",
-                  "chat" : "edit",
-                  "budget" : "none",
-                  "vendors" : "none",
-                  "location" : "view"
+               "description": "Regular participant.",
+               "id": "sys_role_participant",
+               "moduleAccess": {
+                  "timeline": "view",
+                  "inventory": "none",
+                  "guests": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none",
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "contribution": "view",
+                  "budget": "none",
+                  "vendors": "none",
+                  "location": "view"
                },
-               "name" : "Participant"
+               "name": "Participant"
             },
             {
-               "description" : "Limited viewing access.",
-               "moduleAccess" : {
-                  "vendors" : "none",
-                  "location" : "view",
-                  "budget" : "none",
-                  "customFields" : "none",
-                  "chat" : "none",
-                  "contribution" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "guests" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view"
+               "description": "Limited viewing access.",
+               "moduleAccess": {
+                  "vendors": "none",
+                  "location": "view",
+                  "budget": "none",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "none",
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "guests": "none",
+                  "inventory": "none",
+                  "timeline": "view"
                },
-               "name" : "Guest",
-               "id" : "sys_role_guest"
+               "name": "Guest",
+               "id": "sys_role_guest"
             },
             {
-               "description" : "Read-only access.",
-               "id" : "sys_role_viewer",
-               "name" : "Viewer",
-               "moduleAccess" : {
-                  "contribution" : "view",
-                  "customFields" : "view",
-                  "chat" : "view",
-                  "budget" : "view",
-                  "location" : "view",
-                  "vendors" : "view",
-                  "tasks" : "view",
-                  "auditLog" : "view",
-                  "ticketing" : "view",
-                  "announcements" : "view",
-                  "roles" : "view",
-                  "users" : "view",
-                  "guests" : "view",
-                  "timeline" : "view",
-                  "inventory" : "view"
+               "description": "Read-only access.",
+               "id": "sys_role_viewer",
+               "name": "Viewer",
+               "moduleAccess": {
+                  "contribution": "view",
+                  "budget": "view",
+                  "location": "view",
+                  "vendors": "view",
+                  "tasks": "view",
+                  "auditLog": "view",
+                  "ticketing": "view",
+                  "roles": "view",
+                  "users": "view",
+                  "guests": "view",
+                  "timeline": "view",
+                  "inventory": "view"
                }
             }
          ],
-         "defaultFields" : {
-            "enabledModules" : [
+         "defaultFields": {
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
                "guestManagement",
-               "communication",
                "location",
                "roles",
                "inventory",
                "userManagement",
                "contribution"
             ],
-            "amount" : 0,
-            "contributionType" : "variable"
+            "amount": 0,
+            "contributionType": "variable"
          },
-         "category" : "communityAndCultural"
+         "category": "communityAndCultural"
       }
    ],
-   "schemaVersion" : 2
+   "schemaVersion": 2
 }

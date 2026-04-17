@@ -308,12 +308,9 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
       case TemplateModule.timeline: return Icons.schedule_outlined;
       case TemplateModule.vendor: return Icons.storefront_outlined;
       case TemplateModule.inventory: return Icons.inventory_2_outlined;
-      case TemplateModule.communication: return Icons.chat_bubble_outline;
       case TemplateModule.roles: return Icons.badge_outlined;
       case TemplateModule.location: return Icons.location_on_outlined;
       case TemplateModule.ticketing: return Icons.confirmation_number_outlined;
-      case TemplateModule.customFields: return Icons.edit_note_outlined;
-      case TemplateModule.announcements: return Icons.campaign_outlined;
     }
   }
 
@@ -388,7 +385,6 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
       }
       config['contributionSettings'] = contributionSettings;
     }
-    config['communicationEnabled'] = _selectedModules[TemplateModule.communication]!;
 
     final keywords = _parseKeywords(_keywordsController.text);
 
@@ -411,8 +407,6 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
       roleBlueprints: _selectedModules[TemplateModule.roles]! ? List<RoleDefinitionModel>.from(_roleDefinitions) : [],
       venueBlueprints: [],
       ticketBlueprints: _selectedModules[TemplateModule.ticketing]! ? EventTemplateService.getSuggestedTickets(dummyEventId, _category) : [],
-      customFieldBlueprints: _selectedModules[TemplateModule.customFields]! ? EventTemplateService.getSuggestedCustomFields(dummyEventId, _category) : [],
-      announcementBlueprints: _selectedModules[TemplateModule.announcements]! ? EventTemplateService.getSuggestedAnnouncements(dummyEventId, _category) : [],
       budgetBlueprints: _selectedModules[TemplateModule.budget]! ? EventTemplateService.getSuggestedBudget(dummyEventId, _category) : [],
       createdAt: DateTime.now(),
     );
@@ -446,9 +440,6 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
     if (_selectedModules[TemplateModule.timeline] == true) modules.add(EventModules.timeline);
     if (_selectedModules[TemplateModule.location] == true) modules.add(EventModules.location);
     if (_selectedModules[TemplateModule.ticketing] == true) modules.add(EventModules.ticketing);
-    if (_selectedModules[TemplateModule.announcements] == true) modules.add(EventModules.announcements);
-    if (_selectedModules[TemplateModule.customFields] == true) modules.add(EventModules.customFields);
-    if (_selectedModules[TemplateModule.communication] == true) modules.add(EventModules.chat);
     return modules;
   }
 
@@ -476,12 +467,6 @@ class _CreateTemplateScreenState extends ConsumerState<CreateTemplateScreen> {
         return 'Venues & Location';
       case EventModules.ticketing:
         return 'Ticketing';
-      case EventModules.announcements:
-        return 'Announcements';
-      case EventModules.customFields:
-        return 'Custom Fields';
-      case EventModules.chat:
-        return 'Communication & Chat';
       default:
         return module;
     }

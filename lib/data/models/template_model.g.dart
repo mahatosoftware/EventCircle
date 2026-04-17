@@ -57,29 +57,14 @@ _$TemplateModelImpl _$$TemplateModelImplFromJson(
           ?.map((e) => TicketModel.fromJson(e as Map<String, dynamic>))
           .toList() ??
       const [],
-  customFieldBlueprints:
-      (json['customFieldBlueprints'] as List<dynamic>?)
-          ?.map(
-            (e) =>
-                CustomFieldDefinitionModel.fromJson(e as Map<String, dynamic>),
-          )
-          .toList() ??
-      const [],
-  announcementBlueprints:
-      (json['announcementBlueprints'] as List<dynamic>?)
-          ?.map((e) => AnnouncementModel.fromJson(e as Map<String, dynamic>))
-          .toList() ??
-      const [],
   budgetBlueprints:
       (json['budgetBlueprints'] as List<dynamic>?)
           ?.map((e) => BudgetItemModel.fromJson(e as Map<String, dynamic>))
           .toList() ??
       const [],
-  enabledModules:
-      (json['enabledModules'] as List<dynamic>?)
-          ?.map((e) => $enumDecode(_$TemplateModuleEnumMap, e))
-          .toList() ??
-      const [],
+  enabledModules: json['enabledModules'] == null
+      ? const []
+      : _enabledModulesFromJson(json['enabledModules']),
   usageCount: (json['usageCount'] as num?)?.toInt() ?? 0,
   rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
   isPublic: json['isPublic'] as bool? ?? true,
@@ -107,8 +92,6 @@ Map<String, dynamic> _$$TemplateModelImplToJson(_$TemplateModelImpl instance) =>
       'roleBlueprints': instance.roleBlueprints,
       'venueBlueprints': instance.venueBlueprints,
       'ticketBlueprints': instance.ticketBlueprints,
-      'customFieldBlueprints': instance.customFieldBlueprints,
-      'announcementBlueprints': instance.announcementBlueprints,
       'budgetBlueprints': instance.budgetBlueprints,
       'enabledModules': instance.enabledModules
           .map((e) => _$TemplateModuleEnumMap[e]!)
@@ -158,11 +141,8 @@ const _$TemplateModuleEnumMap = {
   TemplateModule.timeline: 'timeline',
   TemplateModule.vendor: 'vendor',
   TemplateModule.inventory: 'inventory',
-  TemplateModule.communication: 'communication',
   TemplateModule.roles: 'roles',
   TemplateModule.expenses: 'expenses',
   TemplateModule.location: 'location',
   TemplateModule.ticketing: 'ticketing',
-  TemplateModule.customFields: 'customFields',
-  TemplateModule.announcements: 'announcements',
 };

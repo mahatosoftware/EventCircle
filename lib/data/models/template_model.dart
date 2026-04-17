@@ -6,8 +6,8 @@ import 'vendor_model.dart';
 import 'inventory_model.dart';
 import 'role_definition_model.dart';
 import 'venue_ticketing_model.dart';
-import 'custom_announcement_model.dart';
 import 'budget_model.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'template_model.freezed.dart';
 part 'template_model.g.dart';
@@ -21,13 +21,10 @@ enum TemplateModule {
   timeline('SCHEDULE / TIMELINE'),
   vendor('VENDOR'),
   inventory('ITEMS / PROCUREMENT'),
-  communication('COMMUNICATION'),
   roles('ROLES & PERMISSIONS'),
   expenses('EXPENSE TRACKING'),
   location('LOCATION '),
-  ticketing('TICKETING'),
-  customFields('CUSTOM FIELDS'),
-  announcements('ANNOUNCEMENT');
+  ticketing('TICKETING');
 
   final String displayName;
   const TemplateModule(this.displayName);
@@ -51,10 +48,8 @@ class TemplateModel with _$TemplateModel {
     @Default([]) List<RoleDefinitionModel> roleBlueprints,
     @Default([]) List<LocationModel> venueBlueprints,
     @Default([]) List<TicketModel> ticketBlueprints,
-    @Default([]) List<CustomFieldDefinitionModel> customFieldBlueprints,
-    @Default([]) List<AnnouncementModel> announcementBlueprints,
     @Default([]) List<BudgetItemModel> budgetBlueprints,
-    @Default([]) List<TemplateModule> enabledModules,
+    @JsonKey(fromJson: _enabledModulesFromJson) @Default([]) List<TemplateModule> enabledModules,
     @Default(0) int usageCount,
     @Default(0.0) double rating,
     @Default(true) bool isPublic,
@@ -115,18 +110,6 @@ extension TemplateModelJson on TemplateModel {
     } catch (_) { data['ticketBlueprints'] = []; }
 
     try {
-      data['customFieldBlueprints'] = customFieldBlueprints.map((e) {
-        try { return e.toJson(); } catch (_) { return null; }
-      }).whereType<Map<String, dynamic>>().toList();
-    } catch (_) { data['customFieldBlueprints'] = []; }
-
-    try {
-      data['announcementBlueprints'] = announcementBlueprints.map((e) {
-        try { return e.toJson(); } catch (_) { return null; }
-      }).whereType<Map<String, dynamic>>().toList();
-    } catch (_) { data['announcementBlueprints'] = []; }
-
-    try {
       data['budgetBlueprints'] = budgetBlueprints.map((e) {
         try { return e.toJson(); } catch (_) { return null; }
       }).whereType<Map<String, dynamic>>().toList();
@@ -134,4 +117,17 @@ extension TemplateModelJson on TemplateModel {
 
     return data;
   }
+}
+List<TemplateModule> _enabledModulesFromJson(dynamic json) {
+  if (json is! List) return [];
+  return json
+      .map((e) {
+        if (e is! String) return null;
+        for (final entry in _$TemplateModuleEnumMap.entries) {
+          if (entry.value == e) return entry.key;
+        }
+        return null;
+      })
+      .whereType<TemplateModule>()
+      .toList();
 }

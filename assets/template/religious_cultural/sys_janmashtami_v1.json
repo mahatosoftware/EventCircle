@@ -1,231 +1,209 @@
 {
-   "version" : 4,
-   "templates" : [
+   "version": 4,
+   "templates": [
       {
-         "templateName" : "Janmashtami",
-         "roleBlueprints" : [
+         "templateName": "Janmashtami",
+         "roleBlueprints": [
             {
-               "description" : "Full access to all modules.",
-               "id" : "sys_role_admin",
-               "name" : "Admin",
-               "moduleAccess" : {
-                  "timeline" : "full",
-                  "inventory" : "full",
-                  "guests" : "full",
-                  "roles" : "full",
-                  "users" : "full",
-                  "ticketing" : "full",
-                  "announcements" : "full",
-                  "tasks" : "full",
-                  "auditLog" : "full",
-                  "contribution" : "full",
-                  "customFields" : "full",
-                  "chat" : "full",
-                  "budget" : "full",
-                  "vendors" : "full",
-                  "location" : "full"
+               "description": "Full access to all modules.",
+               "id": "sys_role_admin",
+               "name": "Admin",
+               "moduleAccess": {
+                  "timeline": "full",
+                  "inventory": "full",
+                  "guests": "full",
+                  "roles": "full",
+                  "users": "full",
+                  "ticketing": "full",
+                  "tasks": "full",
+                  "auditLog": "full",
+                  "contribution": "full",
+                  "budget": "full",
+                  "vendors": "full",
+                  "location": "full"
                }
             },
             {
-               "id" : "sys_role_organizer",
-               "moduleAccess" : {
-                  "tasks" : "edit",
-                  "auditLog" : "view",
-                  "contribution" : "edit",
-                  "chat" : "full",
-                  "customFields" : "view",
-                  "budget" : "edit",
-                  "location" : "edit",
-                  "vendors" : "edit",
-                  "timeline" : "edit",
-                  "inventory" : "edit",
-                  "guests" : "edit",
-                  "roles" : "none",
-                  "users" : "view",
-                  "ticketing" : "edit",
-                  "announcements" : "edit"
+               "id": "sys_role_organizer",
+               "moduleAccess": {
+                  "tasks": "edit",
+                  "auditLog": "view",
+                  "contribution": "edit",
+                  "budget": "edit",
+                  "location": "edit",
+                  "vendors": "edit",
+                  "timeline": "edit",
+                  "inventory": "edit",
+                  "guests": "edit",
+                  "roles": "none",
+                  "users": "view",
+                  "ticketing": "edit"
                },
-               "name" : "Organizer",
-               "description" : "Manage most event details."
+               "name": "Organizer",
+               "description": "Manage most event details."
             },
             {
-               "name" : "Coordinator",
-               "moduleAccess" : {
-                  "tasks" : "edit",
-                  "auditLog" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "contribution" : "none",
-                  "location" : "view",
-                  "vendors" : "view",
-                  "budget" : "view",
-                  "guests" : "view",
-                  "timeline" : "edit",
-                  "inventory" : "view",
-                  "ticketing" : "none",
-                  "announcements" : "edit",
-                  "roles" : "none",
-                  "users" : "none"
+               "name": "Coordinator",
+               "moduleAccess": {
+                  "tasks": "edit",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "location": "view",
+                  "vendors": "view",
+                  "budget": "view",
+                  "guests": "view",
+                  "timeline": "edit",
+                  "inventory": "view",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none"
                },
-               "id" : "sys_role_coordinator",
-               "description" : "Manage tasks and timeline."
+               "id": "sys_role_coordinator",
+               "description": "Manage tasks and timeline."
             },
             {
-               "description" : "Update task progress.",
-               "moduleAccess" : {
-                  "tasks" : "update",
-                  "auditLog" : "none",
-                  "contribution" : "none",
-                  "chat" : "full",
-                  "customFields" : "none",
-                  "budget" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none"
+               "description": "Update task progress.",
+               "moduleAccess": {
+                  "tasks": "update",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "budget": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "view",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none"
                },
-               "name" : "Volunteer",
-               "id" : "sys_role_volunteer"
+               "name": "Volunteer",
+               "id": "sys_role_volunteer"
             },
             {
-               "description" : "Regular participant.",
-               "name" : "Participant",
-               "moduleAccess" : {
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none",
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "contribution" : "view",
-                  "customFields" : "none",
-                  "chat" : "edit",
-                  "budget" : "none",
-                  "location" : "view",
-                  "vendors" : "none"
+               "description": "Regular participant.",
+               "name": "Participant",
+               "moduleAccess": {
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "contribution": "view",
+                  "budget": "none",
+                  "location": "view",
+                  "vendors": "none"
                },
-               "id" : "sys_role_participant"
+               "id": "sys_role_participant"
             },
             {
-               "name" : "Guest",
-               "moduleAccess" : {
-                  "auditLog" : "none",
-                  "tasks" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "budget" : "none",
-                  "chat" : "none",
-                  "customFields" : "none",
-                  "contribution" : "none",
-                  "guests" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none"
+               "name": "Guest",
+               "moduleAccess": {
+                  "auditLog": "none",
+                  "tasks": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "budget": "none",
+                  "contribution": "none",
+                  "guests": "none",
+                  "inventory": "none",
+                  "timeline": "view",
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none"
                },
-               "id" : "sys_role_guest",
-               "description" : "Limited viewing access."
+               "id": "sys_role_guest",
+               "description": "Limited viewing access."
             },
             {
-               "description" : "Read-only access.",
-               "moduleAccess" : {
-                  "tasks" : "view",
-                  "auditLog" : "view",
-                  "contribution" : "view",
-                  "chat" : "view",
-                  "customFields" : "view",
-                  "budget" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "guests" : "view",
-                  "roles" : "view",
-                  "users" : "view",
-                  "ticketing" : "view",
-                  "announcements" : "view"
+               "description": "Read-only access.",
+               "moduleAccess": {
+                  "tasks": "view",
+                  "auditLog": "view",
+                  "contribution": "view",
+                  "budget": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "timeline": "view",
+                  "inventory": "view",
+                  "guests": "view",
+                  "roles": "view",
+                  "users": "view",
+                  "ticketing": "view"
                },
-               "name" : "Viewer",
-               "id" : "sys_role_viewer"
+               "name": "Viewer",
+               "id": "sys_role_viewer"
             }
          ],
-         "defaultFields" : {
-            "contributionType" : "variable",
-            "enabledModules" : [
+         "defaultFields": {
+            "contributionType": "variable",
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
                "guestManagement",
-               "communication",
                "location",
                "roles",
                "inventory",
                "userManagement",
                "contribution"
             ],
-            "amount" : 0
+            "amount": 0
          },
-         "category" : "communityAndCultural",
-         "description" : "Celebrate the birth of Lord Krishna with Jhulan, Dahi Handi competitions, and midnight Maha Aarti.",
-         "templateId" : "sys_janmashtami_v1",
-         "timelineBlueprints" : [
+         "category": "communityAndCultural",
+         "description": "Celebrate the birth of Lord Krishna with Jhulan, Dahi Handi competitions, and midnight Maha Aarti.",
+         "templateId": "sys_janmashtami_v1",
+         "timelineBlueprints": [
             {
-               "description" : "Opening the decorated Krishna swing for early visitors.",
-               "dayNumber" : 1,
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "11:00 AM",
-               "id" : "sys_janmashtami_timeline_setup",
-               "title" : "Jhula Unveiling & Decoration",
-               "phase" : "eventDay"
+               "description": "Opening the decorated Krishna swing for early visitors.",
+               "dayNumber": 1,
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "11:00 AM",
+               "id": "sys_janmashtami_timeline_setup",
+               "title": "Jhula Unveiling & Decoration",
+               "phase": "eventDay"
             },
             {
-               "phase" : "eventDay",
-               "timeOrOffset" : "05:00 PM",
-               "eventId" : "blueprint_dummy",
-               "dayNumber" : 1,
-               "description" : "Performances and parade by children.",
-               "title" : "Kids Fancy Dress (Krishna/Radha)",
-               "id" : "sys_janmashtami_timeline_fancy_dress"
+               "phase": "eventDay",
+               "timeOrOffset": "05:00 PM",
+               "eventId": "blueprint_dummy",
+               "dayNumber": 1,
+               "description": "Performances and parade by children.",
+               "title": "Kids Fancy Dress (Krishna/Radha)",
+               "id": "sys_janmashtami_timeline_fancy_dress"
             },
             {
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "07:00 PM",
-               "description" : "Competitive breaking of the earthen butter pot.",
-               "dayNumber" : 1,
-               "title" : "Dahi Handi Breaking Ceremony",
-               "id" : "sys_janmashtami_timeline_dahi_handi",
-               "phase" : "eventDay"
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "07:00 PM",
+               "description": "Competitive breaking of the earthen butter pot.",
+               "dayNumber": 1,
+               "title": "Dahi Handi Breaking Ceremony",
+               "id": "sys_janmashtami_timeline_dahi_handi",
+               "phase": "eventDay"
             },
             {
-               "title" : "Bhajan Sandhya & Kirtans",
-               "id" : "sys_janmashtami_timeline_bhajans",
-               "timeOrOffset" : "09:00 PM",
-               "eventId" : "blueprint_dummy",
-               "dayNumber" : 1,
-               "description" : "Devotional songs leading up to the birth ritual.",
-               "phase" : "eventDay"
+               "title": "Bhajan Sandhya & Kirtans",
+               "id": "sys_janmashtami_timeline_bhajans",
+               "timeOrOffset": "09:00 PM",
+               "eventId": "blueprint_dummy",
+               "dayNumber": 1,
+               "description": "Devotional songs leading up to the birth ritual.",
+               "phase": "eventDay"
             },
             {
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "12:00 AM",
-               "dayNumber" : 1,
-               "description" : "Grand Aarti and celebration of Krishna's birth.",
-               "title" : "Midnight Birth Celebration & Aarti",
-               "id" : "sys_janmashtami_timeline_birth",
-               "phase" : "eventDay"
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "12:00 AM",
+               "dayNumber": 1,
+               "description": "Grand Aarti and celebration of Krishna's birth.",
+               "title": "Midnight Birth Celebration & Aarti",
+               "id": "sys_janmashtami_timeline_birth",
+               "phase": "eventDay"
             }
          ],
-         "tags" : [
+         "tags": [
             "janmashtami",
             "krishna",
             "festival",
@@ -236,144 +214,144 @@
             "midnight",
             "tradition"
          ],
-         "budgetBlueprints" : [
+         "budgetBlueprints": [
             {
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "isMandatory" : true,
-               "id" : "sys_janmashtami_budget_idol_jhula",
-               "title" : "Idol, Jhula, and Peacock Feathers",
-               "estimatedCost" : 0,
-               "category" : "Miscellaneous"
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "isMandatory": true,
+               "id": "sys_janmashtami_budget_idol_jhula",
+               "title": "Idol, Jhula, and Peacock Feathers",
+               "estimatedCost": 0,
+               "category": "Miscellaneous"
             },
             {
-               "category" : "Miscellaneous",
-               "eventId" : "blueprint_dummy",
-               "actualCost" : 0,
-               "estimatedCost" : 0,
-               "title" : "Dahi Handi Equipment and Prizes",
-               "isMandatory" : true,
-               "id" : "sys_janmashtami_budget_dahi_handi_setup"
+               "category": "Miscellaneous",
+               "eventId": "blueprint_dummy",
+               "actualCost": 0,
+               "estimatedCost": 0,
+               "title": "Dahi Handi Equipment and Prizes",
+               "isMandatory": true,
+               "id": "sys_janmashtami_budget_dahi_handi_setup"
             },
             {
-               "title" : "Flowers and Lighting Decoration",
-               "estimatedCost" : 0,
-               "id" : "sys_janmashtami_budget_decoration",
-               "isMandatory" : true,
-               "eventId" : "blueprint_dummy",
-               "actualCost" : 0,
-               "category" : "Decoration"
+               "title": "Flowers and Lighting Decoration",
+               "estimatedCost": 0,
+               "id": "sys_janmashtami_budget_decoration",
+               "isMandatory": true,
+               "eventId": "blueprint_dummy",
+               "actualCost": 0,
+               "category": "Decoration"
             },
             {
-               "title" : "Maha Prasad (Chappan Bhog) and Makhan Mishri",
-               "estimatedCost" : 0,
-               "id" : "sys_janmashtami_budget_food_prasad",
-               "isMandatory" : true,
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "category" : "Food"
+               "title": "Maha Prasad (Chappan Bhog) and Makhan Mishri",
+               "estimatedCost": 0,
+               "id": "sys_janmashtami_budget_food_prasad",
+               "isMandatory": true,
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "category": "Food"
             },
             {
-               "category" : "Miscellaneous",
-               "isMandatory" : false,
-               "id" : "sys_janmashtami_budget_bhajan_group",
-               "title" : "Bhajan Group / Sound System",
-               "estimatedCost" : 0,
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy"
+               "category": "Miscellaneous",
+               "isMandatory": false,
+               "id": "sys_janmashtami_budget_bhajan_group",
+               "title": "Bhajan Group / Sound System",
+               "estimatedCost": 0,
+               "actualCost": 0,
+               "eventId": "blueprint_dummy"
             }
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "title" : "Procure Krishna idol and decorative Jhula",
-               "phase" : "preEvent",
-               "status" : "pending",
-               "dependsOn" : [],
-               "id" : "sys_janmashtami_task_procure_idol_jhula",
-               "role" : "Logistics",
-               "eventId" : "blueprint_dummy",
-               "dueOffset" : "T-7 days",
-               "description" : "Purchase or arrange a beautiful idol of Lord Krishna and a decorated swing (Jhula)."
+               "title": "Procure Krishna idol and decorative Jhula",
+               "phase": "preEvent",
+               "status": "pending",
+               "dependsOn": [],
+               "id": "sys_janmashtami_task_procure_idol_jhula",
+               "role": "Logistics",
+               "eventId": "blueprint_dummy",
+               "dueOffset": "T-7 days",
+               "description": "Purchase or arrange a beautiful idol of Lord Krishna and a decorated swing (Jhula)."
             },
             {
-               "status" : "pending",
-               "phase" : "preEvent",
-               "dueOffset" : "T-5 days",
-               "role" : "Setup Team",
-               "dependsOn" : [],
-               "id" : "sys_janmashtami_task_setup_dahi_handi",
-               "title" : "Set up Dahi Handi (pot and ropes)",
-               "description" : "Arrange for the earthen pot (Handi), strong ropes, and a high-altitude hanging mechanism.",
-               "eventId" : "blueprint_dummy"
+               "status": "pending",
+               "phase": "preEvent",
+               "dueOffset": "T-5 days",
+               "role": "Setup Team",
+               "dependsOn": [],
+               "id": "sys_janmashtami_task_setup_dahi_handi",
+               "title": "Set up Dahi Handi (pot and ropes)",
+               "description": "Arrange for the earthen pot (Handi), strong ropes, and a high-altitude hanging mechanism.",
+               "eventId": "blueprint_dummy"
             },
             {
-               "phase" : "preEvent",
-               "title" : "Organize Krishna/Radha fancy dress",
-               "id" : "sys_janmashtami_task_organize_kids_dressup",
-               "dependsOn" : [],
-               "status" : "pending",
-               "eventId" : "blueprint_dummy",
-               "role" : "Program Coordinator",
-               "description" : "Coordinate a dress-up competition or parade for children in Krishna/Radha costumes.",
-               "dueOffset" : "T-10 days"
+               "phase": "preEvent",
+               "title": "Organize Krishna/Radha fancy dress",
+               "id": "sys_janmashtami_task_organize_kids_dressup",
+               "dependsOn": [],
+               "status": "pending",
+               "eventId": "blueprint_dummy",
+               "role": "Program Coordinator",
+               "description": "Coordinate a dress-up competition or parade for children in Krishna/Radha costumes.",
+               "dueOffset": "T-10 days"
             },
             {
-               "dependsOn" : [],
-               "id" : "sys_janmashtami_task_prepare_makhan_mishri",
-               "title" : "Prepare Makhan Mishri and Maha Prasad",
-               "description" : "Prepare fresh butter, mishri, and Chappan Bhog offerings for the puja.",
-               "eventId" : "blueprint_dummy",
-               "status" : "pending",
-               "phase" : "preEvent",
-               "dueOffset" : "T-1 day",
-               "role" : "Food Manager"
+               "dependsOn": [],
+               "id": "sys_janmashtami_task_prepare_makhan_mishri",
+               "title": "Prepare Makhan Mishri and Maha Prasad",
+               "description": "Prepare fresh butter, mishri, and Chappan Bhog offerings for the puja.",
+               "eventId": "blueprint_dummy",
+               "status": "pending",
+               "phase": "preEvent",
+               "dueOffset": "T-1 day",
+               "role": "Food Manager"
             },
             {
-               "dueOffset" : "Morning 10:00 AM",
-               "description" : "Complete decorations with flowers, peacock feathers, and festive lights around the swing.",
-               "role" : "Decoration",
-               "eventId" : "blueprint_dummy",
-               "status" : "pending",
-               "dependsOn" : [],
-               "id" : "sys_janmashtami_task_decorate_jhula_area",
-               "title" : "Decorate the Jhula and Puja area",
-               "phase" : "eventDay"
+               "dueOffset": "Morning 10:00 AM",
+               "description": "Complete decorations with flowers, peacock feathers, and festive lights around the swing.",
+               "role": "Decoration",
+               "eventId": "blueprint_dummy",
+               "status": "pending",
+               "dependsOn": [],
+               "id": "sys_janmashtami_task_decorate_jhula_area",
+               "title": "Decorate the Jhula and Puja area",
+               "phase": "eventDay"
             },
             {
-               "description" : "Lead the Dahi Handi breaking ceremony and manage the crowd flow.",
-               "eventId" : "blueprint_dummy",
-               "id" : "sys_janmashtami_task_conduct_dahi_handi",
-               "dependsOn" : [],
-               "title" : "Conduct Dahi Handi competition",
-               "dueOffset" : "Evening 06:00 PM",
-               "role" : "Event Coordinator",
-               "status" : "pending",
-               "phase" : "eventDay"
+               "description": "Lead the Dahi Handi breaking ceremony and manage the crowd flow.",
+               "eventId": "blueprint_dummy",
+               "id": "sys_janmashtami_task_conduct_dahi_handi",
+               "dependsOn": [],
+               "title": "Conduct Dahi Handi competition",
+               "dueOffset": "Evening 06:00 PM",
+               "role": "Event Coordinator",
+               "status": "pending",
+               "phase": "eventDay"
             },
             {
-               "dueOffset" : "Midnight 12:00 AM",
-               "description" : "Perform the ceremonial bath and aarti for Lord Krishna at midnight.",
-               "role" : "Organizer",
-               "eventId" : "blueprint_dummy",
-               "dependsOn" : [],
-               "status" : "pending",
-               "id" : "sys_janmashtami_task_midnight_aarti",
-               "title" : "Midnight Birth Ritual and Maha Aarti",
-               "phase" : "eventDay"
+               "dueOffset": "Midnight 12:00 AM",
+               "description": "Perform the ceremonial bath and aarti for Lord Krishna at midnight.",
+               "role": "Organizer",
+               "eventId": "blueprint_dummy",
+               "dependsOn": [],
+               "status": "pending",
+               "id": "sys_janmashtami_task_midnight_aarti",
+               "title": "Midnight Birth Ritual and Maha Aarti",
+               "phase": "eventDay"
             },
             {
-               "eventId" : "blueprint_dummy",
-               "role" : "Logistics",
-               "description" : "Distribute Maha Prasad to all guests and clean the event premises.",
-               "dueOffset" : "T+1 day",
-               "title" : "Distribute Prasad and cleanup",
-               "phase" : "postEvent",
-               "id" : "sys_janmashtami_task_prasad_distribution",
-               "status" : "pending",
-               "dependsOn" : []
+               "eventId": "blueprint_dummy",
+               "role": "Logistics",
+               "description": "Distribute Maha Prasad to all guests and clean the event premises.",
+               "dueOffset": "T+1 day",
+               "title": "Distribute Prasad and cleanup",
+               "phase": "postEvent",
+               "id": "sys_janmashtami_task_prasad_distribution",
+               "status": "pending",
+               "dependsOn": []
             }
          ]
       }
    ],
-   "schemaVersion" : 2
+   "schemaVersion": 2
 }

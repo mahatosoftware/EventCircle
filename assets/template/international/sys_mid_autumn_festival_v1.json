@@ -1,11 +1,11 @@
 {
-   "schemaVersion" : 2,
-   "version" : 4,
-   "templates" : [
+   "schemaVersion": 2,
+   "version": 4,
+   "templates": [
       {
-         "defaultFields" : {
-            "amount" : 0,
-            "enabledModules" : [
+         "defaultFields": {
+            "amount": 0,
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
@@ -14,264 +14,240 @@
                "roles",
                "userManagement"
             ],
-            "contributionType" : "voluntary"
+            "contributionType": "voluntary"
          },
-         "category" : "communityAndCultural",
-         "templateName" : "Mid-Autumn Festival",
-         "roleBlueprints" : [
+         "category": "communityAndCultural",
+         "templateName": "Mid-Autumn Festival",
+         "roleBlueprints": [
             {
-               "description" : "Full access to all modules.",
-               "moduleAccess" : {
-                  "contribution" : "full",
-                  "chat" : "full",
-                  "customFields" : "full",
-                  "budget" : "full",
-                  "location" : "full",
-                  "vendors" : "full",
-                  "tasks" : "full",
-                  "auditLog" : "full",
-                  "ticketing" : "full",
-                  "announcements" : "full",
-                  "roles" : "full",
-                  "users" : "full",
-                  "guests" : "full",
-                  "timeline" : "full",
-                  "inventory" : "full"
+               "description": "Full access to all modules.",
+               "moduleAccess": {
+                  "contribution": "full",
+                  "budget": "full",
+                  "location": "full",
+                  "vendors": "full",
+                  "tasks": "full",
+                  "auditLog": "full",
+                  "ticketing": "full",
+                  "roles": "full",
+                  "users": "full",
+                  "guests": "full",
+                  "timeline": "full",
+                  "inventory": "full"
                },
-               "name" : "Admin",
-               "id" : "sys_role_admin"
+               "name": "Admin",
+               "id": "sys_role_admin"
             },
             {
-               "description" : "Manage most event details.",
-               "moduleAccess" : {
-                  "users" : "view",
-                  "roles" : "none",
-                  "announcements" : "edit",
-                  "ticketing" : "edit",
-                  "inventory" : "edit",
-                  "timeline" : "edit",
-                  "guests" : "edit",
-                  "location" : "edit",
-                  "vendors" : "edit",
-                  "budget" : "edit",
-                  "chat" : "full",
-                  "customFields" : "view",
-                  "contribution" : "edit",
-                  "auditLog" : "view",
-                  "tasks" : "edit"
+               "description": "Manage most event details.",
+               "moduleAccess": {
+                  "users": "view",
+                  "roles": "none",
+                  "ticketing": "edit",
+                  "inventory": "edit",
+                  "timeline": "edit",
+                  "guests": "edit",
+                  "location": "edit",
+                  "vendors": "edit",
+                  "budget": "edit",
+                  "contribution": "edit",
+                  "auditLog": "view",
+                  "tasks": "edit"
                },
-               "name" : "Organizer",
-               "id" : "sys_role_organizer"
+               "name": "Organizer",
+               "id": "sys_role_organizer"
             },
             {
-               "name" : "Coordinator",
-               "moduleAccess" : {
-                  "tasks" : "edit",
-                  "auditLog" : "none",
-                  "contribution" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "budget" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "guests" : "view",
-                  "timeline" : "edit",
-                  "inventory" : "view",
-                  "ticketing" : "none",
-                  "announcements" : "edit",
-                  "roles" : "none",
-                  "users" : "none"
+               "name": "Coordinator",
+               "moduleAccess": {
+                  "tasks": "edit",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "budget": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "guests": "view",
+                  "timeline": "edit",
+                  "inventory": "view",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none"
                },
-               "id" : "sys_role_coordinator",
-               "description" : "Manage tasks and timeline."
+               "id": "sys_role_coordinator",
+               "description": "Manage tasks and timeline."
             },
             {
-               "moduleAccess" : {
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none",
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "contribution" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "budget" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "tasks" : "update",
-                  "auditLog" : "none"
+               "moduleAccess": {
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "view",
+                  "contribution": "none",
+                  "budget": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "tasks": "update",
+                  "auditLog": "none"
                },
-               "name" : "Volunteer",
-               "id" : "sys_role_volunteer",
-               "description" : "Update task progress."
+               "name": "Volunteer",
+               "id": "sys_role_volunteer",
+               "description": "Update task progress."
             },
             {
-               "description" : "Regular participant.",
-               "id" : "sys_role_participant",
-               "moduleAccess" : {
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "customFields" : "none",
-                  "chat" : "edit",
-                  "contribution" : "view",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "budget" : "none",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "guests" : "none",
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view"
+               "description": "Regular participant.",
+               "id": "sys_role_participant",
+               "moduleAccess": {
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "contribution": "view",
+                  "vendors": "none",
+                  "location": "view",
+                  "budget": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "guests": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none"
                },
-               "name" : "Participant"
+               "name": "Participant"
             },
             {
-               "id" : "sys_role_guest",
-               "moduleAccess" : {
-                  "auditLog" : "none",
-                  "tasks" : "none",
-                  "budget" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "contribution" : "none",
-                  "customFields" : "none",
-                  "chat" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view",
-                  "guests" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none"
+               "id": "sys_role_guest",
+               "moduleAccess": {
+                  "auditLog": "none",
+                  "tasks": "none",
+                  "budget": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "contribution": "none",
+                  "inventory": "none",
+                  "timeline": "view",
+                  "guests": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none"
                },
-               "name" : "Guest",
-               "description" : "Limited viewing access."
+               "name": "Guest",
+               "description": "Limited viewing access."
             },
             {
-               "description" : "Read-only access.",
-               "moduleAccess" : {
-                  "auditLog" : "view",
-                  "tasks" : "view",
-                  "budget" : "view",
-                  "location" : "view",
-                  "vendors" : "view",
-                  "contribution" : "view",
-                  "customFields" : "view",
-                  "chat" : "view",
-                  "guests" : "view",
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "announcements" : "view",
-                  "ticketing" : "view",
-                  "users" : "view",
-                  "roles" : "view"
+               "description": "Read-only access.",
+               "moduleAccess": {
+                  "auditLog": "view",
+                  "tasks": "view",
+                  "budget": "view",
+                  "location": "view",
+                  "vendors": "view",
+                  "contribution": "view",
+                  "guests": "view",
+                  "inventory": "view",
+                  "timeline": "view",
+                  "ticketing": "view",
+                  "users": "view",
+                  "roles": "view"
                },
-               "name" : "Viewer",
-               "id" : "sys_role_viewer"
+               "name": "Viewer",
+               "id": "sys_role_viewer"
             },
             {
-               "name" : "Society Admin",
-               "moduleAccess" : {
-                  "announcements" : "edit",
-                  "users" : "view",
-                  "roles" : "view"
+               "name": "Society Admin",
+               "moduleAccess": {
+                  "users": "view",
+                  "roles": "view"
                },
-               "id" : "sys_role_society_admin",
-               "description" : "Board coordination."
+               "id": "sys_role_society_admin",
+               "description": "Board coordination."
             },
             {
-               "description" : "Overall execution lead.",
-               "id" : "sys_role_coord",
-               "name" : "Event Coordinator",
-               "moduleAccess" : {
-                  "users" : "none",
-                  "roles" : "none",
-                  "chat" : "full",
-                  "timeline" : "full",
-                  "tasks" : "full"
+               "description": "Overall execution lead.",
+               "id": "sys_role_coord",
+               "name": "Event Coordinator",
+               "moduleAccess": {
+                  "users": "none",
+                  "roles": "none",
+                  "timeline": "full",
+                  "tasks": "full"
                }
             },
             {
-               "description" : "Manage funds.",
-               "name" : "Treasurer",
-               "moduleAccess" : {
-                  "users" : "none",
-                  "budget" : "full",
-                  "contribution" : "full",
-                  "roles" : "none"
+               "description": "Manage funds.",
+               "name": "Treasurer",
+               "moduleAccess": {
+                  "users": "none",
+                  "budget": "full",
+                  "contribution": "full",
+                  "roles": "none"
                },
-               "id" : "sys_role_treasurer"
+               "id": "sys_role_treasurer"
             },
             {
-               "name" : "Security Coordinator",
-               "moduleAccess" : {
-                  "roles" : "none",
-                  "chat" : "edit",
-                  "location" : "view",
-                  "users" : "none"
+               "name": "Security Coordinator",
+               "moduleAccess": {
+                  "roles": "none",
+                  "location": "view",
+                  "users": "none"
                },
-               "id" : "sys_role_security",
-               "description" : "Crowd control."
+               "id": "sys_role_security",
+               "description": "Crowd control."
             }
          ],
-         "tags" : [
+         "tags": [
             "mid-autumn",
             "festival",
             "mooncake",
             "lanterns",
             "harvest"
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "dueOffset" : "T-15 days",
-               "description" : "Order traditional or creative mooncakes early.",
-               "role" : "Food Manager",
-               "eventId" : "blueprint_dummy",
-               "dependsOn" : [],
-               "status" : "pending",
-               "id" : "sys_maf_task_mooncakes",
-               "title" : "Secure Mooncakes",
-               "phase" : "preEvent"
+               "dueOffset": "T-15 days",
+               "description": "Order traditional or creative mooncakes early.",
+               "role": "Food Manager",
+               "eventId": "blueprint_dummy",
+               "dependsOn": [],
+               "status": "pending",
+               "id": "sys_maf_task_mooncakes",
+               "title": "Secure Mooncakes",
+               "phase": "preEvent"
             },
             {
-               "phase" : "preEvent",
-               "status" : "pending",
-               "role" : "Kids Coordinator",
-               "dueOffset" : "T-5 days",
-               "title" : "Buy/Make Lanterns for Kids",
-               "dependsOn" : [],
-               "id" : "sys_maf_task_lanterns",
-               "eventId" : "blueprint_dummy",
-               "description" : "Ensure kids have lanterns for the night walk."
+               "phase": "preEvent",
+               "status": "pending",
+               "role": "Kids Coordinator",
+               "dueOffset": "T-5 days",
+               "title": "Buy/Make Lanterns for Kids",
+               "dependsOn": [],
+               "id": "sys_maf_task_lanterns",
+               "eventId": "blueprint_dummy",
+               "description": "Ensure kids have lanterns for the night walk."
             }
          ],
-         "budgetBlueprints" : [
+         "budgetBlueprints": [
             {
-               "eventId" : "blueprint_dummy",
-               "actualCost" : 0,
-               "estimatedCost" : 0,
-               "title" : "Mooncakes & Tea",
-               "isMandatory" : true,
-               "id" : "sys_maf_budget_mooncakes",
-               "category" : "Food"
+               "eventId": "blueprint_dummy",
+               "actualCost": 0,
+               "estimatedCost": 0,
+               "title": "Mooncakes & Tea",
+               "isMandatory": true,
+               "id": "sys_maf_budget_mooncakes",
+               "category": "Food"
             }
          ],
-         "version" : 2,
-         "description" : "Harvest festival featuring mooncakes, lantern walks, and family appreciation.",
-         "templateId" : "sys_mid_autumn_v1",
-         "timelineBlueprints" : [
+         "version": 2,
+         "description": "Harvest festival featuring mooncakes, lantern walks, and family appreciation.",
+         "templateId": "sys_mid_autumn_v1",
+         "timelineBlueprints": [
             {
-               "timeOrOffset" : "07:30 PM",
-               "eventId" : "blueprint_dummy",
-               "dayNumber" : 1,
-               "description" : "Communal evening activities.",
-               "title" : "Lantern Lighting & Night Walk",
-               "id" : "sys_maf_timeline_lighting",
-               "phase" : "eventDay"
+               "timeOrOffset": "07:30 PM",
+               "eventId": "blueprint_dummy",
+               "dayNumber": 1,
+               "description": "Communal evening activities.",
+               "title": "Lantern Lighting & Night Walk",
+               "id": "sys_maf_timeline_lighting",
+               "phase": "eventDay"
             }
          ]
       }

@@ -1,8 +1,8 @@
 {
-   "version" : 4,
-   "templates" : [
+   "version": 4,
+   "templates": [
       {
-         "tags" : [
+         "tags": [
             "birthday",
             "party",
             "celebration",
@@ -12,396 +12,371 @@
             "rsvp",
             "games"
          ],
-         "budgetBlueprints" : [
+         "budgetBlueprints": [
             {
-               "eventId" : "blueprint_dummy",
-               "actualCost" : 0,
-               "title" : "Dress outfit",
-               "estimatedCost" : 0,
-               "id" : "sys_birthday_budget_dress_outfit",
-               "isMandatory" : true,
-               "category" : "Miscellaneous"
+               "eventId": "blueprint_dummy",
+               "actualCost": 0,
+               "title": "Dress outfit",
+               "estimatedCost": 0,
+               "id": "sys_birthday_budget_dress_outfit",
+               "isMandatory": true,
+               "category": "Miscellaneous"
             },
             {
-               "title" : "Photography",
-               "estimatedCost" : 0,
-               "id" : "sys_birthday_budget_photography",
-               "isMandatory" : true,
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "category" : "Miscellaneous"
+               "title": "Photography",
+               "estimatedCost": 0,
+               "id": "sys_birthday_budget_photography",
+               "isMandatory": true,
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "category": "Miscellaneous"
             },
             {
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "estimatedCost" : 0,
-               "title" : "Catering",
-               "id" : "sys_birthday_budget_catering",
-               "isMandatory" : true,
-               "category" : "Food"
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "estimatedCost": 0,
+               "title": "Catering",
+               "id": "sys_birthday_budget_catering",
+               "isMandatory": true,
+               "category": "Food"
             },
             {
-               "isMandatory" : true,
-               "id" : "sys_birthday_budget_venue_rental",
-               "title" : "Venue rental",
-               "estimatedCost" : 0,
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "category" : "Venue"
+               "isMandatory": true,
+               "id": "sys_birthday_budget_venue_rental",
+               "title": "Venue rental",
+               "estimatedCost": 0,
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "category": "Venue"
             },
             {
-               "id" : "sys_birthday_budget_stage_lighting",
-               "isMandatory" : true,
-               "title" : "Stage and lighting",
-               "estimatedCost" : 0,
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "category" : "Decoration"
+               "id": "sys_birthday_budget_stage_lighting",
+               "isMandatory": true,
+               "title": "Stage and lighting",
+               "estimatedCost": 0,
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "category": "Decoration"
             },
             {
-               "category" : "Food",
-               "title" : "Cake",
-               "estimatedCost" : 0,
-               "id" : "sys_birthday_budget_cake",
-               "isMandatory" : true,
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy"
+               "category": "Food",
+               "title": "Cake",
+               "estimatedCost": 0,
+               "id": "sys_birthday_budget_cake",
+               "isMandatory": true,
+               "actualCost": 0,
+               "eventId": "blueprint_dummy"
             },
             {
-               "title" : "Return gift",
-               "estimatedCost" : 0,
-               "id" : "sys_birthday_budget_return_gift",
-               "isMandatory" : true,
-               "eventId" : "blueprint_dummy",
-               "actualCost" : 0,
-               "category" : "Miscellaneous"
+               "title": "Return gift",
+               "estimatedCost": 0,
+               "id": "sys_birthday_budget_return_gift",
+               "isMandatory": true,
+               "eventId": "blueprint_dummy",
+               "actualCost": 0,
+               "category": "Miscellaneous"
             },
             {
-               "id" : "sys_birthday_budget_snacks",
-               "isMandatory" : true,
-               "title" : "Snacks",
-               "estimatedCost" : 0,
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "category" : "Food"
+               "id": "sys_birthday_budget_snacks",
+               "isMandatory": true,
+               "title": "Snacks",
+               "estimatedCost": 0,
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "category": "Food"
             }
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "dueOffset" : "T-25 days",
-               "role" : "Organizer",
-               "status" : "pending",
-               "phase" : "preEvent",
-               "description" : "Book and confirm the venue.",
-               "eventId" : "blueprint_dummy",
-               "dependsOn" : [],
-               "id" : "sys_birthday_task_book_venue",
-               "title" : "Book venue"
+               "dueOffset": "T-25 days",
+               "role": "Organizer",
+               "status": "pending",
+               "phase": "preEvent",
+               "description": "Book and confirm the venue.",
+               "eventId": "blueprint_dummy",
+               "dependsOn": [],
+               "id": "sys_birthday_task_book_venue",
+               "title": "Book venue"
             },
             {
-               "title" : "Finalize catering menu",
-               "dependsOn" : [],
-               "id" : "sys_birthday_task_finalize_catering_menu",
-               "eventId" : "blueprint_dummy",
-               "description" : "Confirm food items and quantities.",
-               "phase" : "preEvent",
-               "status" : "pending",
-               "role" : "Food Manager",
-               "dueOffset" : "T-10 days"
+               "title": "Finalize catering menu",
+               "dependsOn": [],
+               "id": "sys_birthday_task_finalize_catering_menu",
+               "eventId": "blueprint_dummy",
+               "description": "Confirm food items and quantities.",
+               "phase": "preEvent",
+               "status": "pending",
+               "role": "Food Manager",
+               "dueOffset": "T-10 days"
             },
             {
-               "title" : "Finalize guest list",
-               "id" : "sys_birthday_task_finalize_guest_list",
-               "dependsOn" : [],
-               "eventId" : "blueprint_dummy",
-               "description" : "Finalize the list of guests to be invited.",
-               "phase" : "preEvent",
-               "status" : "pending",
-               "role" : "Organizer",
-               "dueOffset" : "T-30 days"
+               "title": "Finalize guest list",
+               "id": "sys_birthday_task_finalize_guest_list",
+               "dependsOn": [],
+               "eventId": "blueprint_dummy",
+               "description": "Finalize the list of guests to be invited.",
+               "phase": "preEvent",
+               "status": "pending",
+               "role": "Organizer",
+               "dueOffset": "T-30 days"
             },
             {
-               "id" : "sys_birthday_task_send_invitations",
-               "dependsOn" : [],
-               "status" : "pending",
-               "phase" : "preEvent",
-               "title" : "Send invitations",
-               "description" : "Send invites to the guest list.",
-               "dueOffset" : "T-15 days",
-               "eventId" : "blueprint_dummy",
-               "role" : "Communication"
+               "id": "sys_birthday_task_send_invitations",
+               "dependsOn": [],
+               "status": "pending",
+               "phase": "preEvent",
+               "title": "Send invitations",
+               "description": "Send invites to the guest list.",
+               "dueOffset": "T-15 days",
+               "eventId": "blueprint_dummy",
+               "role": "Communication"
             },
             {
-               "role" : "Setup Team",
-               "dueOffset" : "Event Morning",
-               "phase" : "eventDay",
-               "status" : "pending",
-               "eventId" : "blueprint_dummy",
-               "description" : "Set up the venue and complete decorations.",
-               "title" : "Venue setup and decoration",
-               "dependsOn" : [],
-               "id" : "sys_birthday_task_venue_setup_decoration"
+               "role": "Setup Team",
+               "dueOffset": "Event Morning",
+               "phase": "eventDay",
+               "status": "pending",
+               "eventId": "blueprint_dummy",
+               "description": "Set up the venue and complete decorations.",
+               "title": "Venue setup and decoration",
+               "dependsOn": [],
+               "id": "sys_birthday_task_venue_setup_decoration"
             },
             {
-               "status" : "pending",
-               "phase" : "eventDay",
-               "dueOffset" : "Event Start",
-               "role" : "Host",
-               "id" : "sys_birthday_task_guest_greeting_management",
-               "dependsOn" : [],
-               "title" : "Guest greeting and management",
-               "description" : "Greet guests and help manage arrivals.",
-               "eventId" : "blueprint_dummy"
+               "status": "pending",
+               "phase": "eventDay",
+               "dueOffset": "Event Start",
+               "role": "Host",
+               "id": "sys_birthday_task_guest_greeting_management",
+               "dependsOn": [],
+               "title": "Guest greeting and management",
+               "description": "Greet guests and help manage arrivals.",
+               "eventId": "blueprint_dummy"
             },
             {
-               "id" : "sys_birthday_task_clear_vendor_payments",
-               "dependsOn" : [],
-               "status" : "pending",
-               "title" : "Clear vendor payments",
-               "phase" : "postEvent",
-               "description" : "Settle all pending vendor invoices.",
-               "dueOffset" : "T+3 days",
-               "eventId" : "blueprint_dummy",
-               "role" : "Treasurer"
+               "id": "sys_birthday_task_clear_vendor_payments",
+               "dependsOn": [],
+               "status": "pending",
+               "title": "Clear vendor payments",
+               "phase": "postEvent",
+               "description": "Settle all pending vendor invoices.",
+               "dueOffset": "T+3 days",
+               "eventId": "blueprint_dummy",
+               "role": "Treasurer"
             },
             {
-               "role" : "Logistics",
-               "dueOffset" : "T+1 day",
-               "phase" : "postEvent",
-               "status" : "pending",
-               "eventId" : "blueprint_dummy",
-               "description" : "Clean up and hand over the venue.",
-               "title" : "Venue handover and cleanup",
-               "id" : "sys_birthday_task_venue_handover_cleanup",
-               "dependsOn" : []
+               "role": "Logistics",
+               "dueOffset": "T+1 day",
+               "phase": "postEvent",
+               "status": "pending",
+               "eventId": "blueprint_dummy",
+               "description": "Clean up and hand over the venue.",
+               "title": "Venue handover and cleanup",
+               "id": "sys_birthday_task_venue_handover_cleanup",
+               "dependsOn": []
             }
          ],
-         "version" : 3,
-         "description" : "Plan a birthday celebration with tasks grouped by phase.",
-         "templateId" : "sys_birthday_v1",
-         "defaultFields" : {
-            "enabledModules" : [
+         "version": 3,
+         "description": "Plan a birthday celebration with tasks grouped by phase.",
+         "templateId": "sys_birthday_v1",
+         "defaultFields": {
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
                "guestManagement",
-               "communication",
                "roles",
                "userManagement"
             ],
-            "amount" : 0,
-            "contributionType" : "none"
+            "amount": 0,
+            "contributionType": "none"
          },
-         "category" : "socialAndPersonal",
-         "templateName" : "Birthday",
-         "roleBlueprints" : [
+         "category": "socialAndPersonal",
+         "templateName": "Birthday",
+         "roleBlueprints": [
             {
-               "name" : "Admin",
-               "moduleAccess" : {
-                  "inventory" : "full",
-                  "timeline" : "full",
-                  "guests" : "full",
-                  "users" : "full",
-                  "roles" : "full",
-                  "announcements" : "full",
-                  "ticketing" : "full",
-                  "auditLog" : "full",
-                  "tasks" : "full",
-                  "location" : "full",
-                  "vendors" : "full",
-                  "budget" : "full",
-                  "chat" : "full",
-                  "customFields" : "full",
-                  "contribution" : "full"
+               "name": "Admin",
+               "moduleAccess": {
+                  "inventory": "full",
+                  "timeline": "full",
+                  "guests": "full",
+                  "users": "full",
+                  "roles": "full",
+                  "ticketing": "full",
+                  "auditLog": "full",
+                  "tasks": "full",
+                  "location": "full",
+                  "vendors": "full",
+                  "budget": "full",
+                  "contribution": "full"
                },
-               "id" : "sys_role_admin",
-               "description" : "Full access to all modules."
+               "id": "sys_role_admin",
+               "description": "Full access to all modules."
             },
             {
-               "id" : "sys_role_organizer",
-               "moduleAccess" : {
-                  "tasks" : "edit",
-                  "auditLog" : "view",
-                  "customFields" : "view",
-                  "chat" : "full",
-                  "contribution" : "edit",
-                  "vendors" : "edit",
-                  "location" : "edit",
-                  "budget" : "edit",
-                  "timeline" : "edit",
-                  "inventory" : "edit",
-                  "guests" : "edit",
-                  "roles" : "none",
-                  "users" : "view",
-                  "ticketing" : "edit",
-                  "announcements" : "edit"
+               "id": "sys_role_organizer",
+               "moduleAccess": {
+                  "tasks": "edit",
+                  "auditLog": "view",
+                  "contribution": "edit",
+                  "vendors": "edit",
+                  "location": "edit",
+                  "budget": "edit",
+                  "timeline": "edit",
+                  "inventory": "edit",
+                  "guests": "edit",
+                  "roles": "none",
+                  "users": "view",
+                  "ticketing": "edit"
                },
-               "name" : "Organizer",
-               "description" : "Manage most event details."
+               "name": "Organizer",
+               "description": "Manage most event details."
             },
             {
-               "name" : "Coordinator",
-               "moduleAccess" : {
-                  "budget" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "contribution" : "none",
-                  "chat" : "full",
-                  "customFields" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "edit",
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "edit",
-                  "ticketing" : "none",
-                  "inventory" : "view",
-                  "timeline" : "edit",
-                  "guests" : "view"
+               "name": "Coordinator",
+               "moduleAccess": {
+                  "budget": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "edit",
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "inventory": "view",
+                  "timeline": "edit",
+                  "guests": "view"
                },
-               "id" : "sys_role_coordinator",
-               "description" : "Manage tasks and timeline."
+               "id": "sys_role_coordinator",
+               "description": "Manage tasks and timeline."
             },
             {
-               "description" : "Update task progress.",
-               "id" : "sys_role_volunteer",
-               "moduleAccess" : {
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "guests" : "none",
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "tasks" : "update",
-                  "auditLog" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "contribution" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none"
+               "description": "Update task progress.",
+               "id": "sys_role_volunteer",
+               "moduleAccess": {
+                  "timeline": "view",
+                  "inventory": "view",
+                  "guests": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none",
+                  "tasks": "update",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none"
                },
-               "name" : "Volunteer"
+               "name": "Volunteer"
             },
             {
-               "description" : "Regular participant.",
-               "moduleAccess" : {
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view",
-                  "guests" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none",
-                  "chat" : "edit",
-                  "customFields" : "none",
-                  "contribution" : "view",
-                  "auditLog" : "none",
-                  "tasks" : "none"
+               "description": "Regular participant.",
+               "moduleAccess": {
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "inventory": "none",
+                  "timeline": "view",
+                  "guests": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none",
+                  "contribution": "view",
+                  "auditLog": "none",
+                  "tasks": "none"
                },
-               "name" : "Participant",
-               "id" : "sys_role_participant"
+               "name": "Participant",
+               "id": "sys_role_participant"
             },
             {
-               "description" : "Limited viewing access.",
-               "moduleAccess" : {
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "guests" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none",
-                  "chat" : "none",
-                  "customFields" : "none",
-                  "contribution" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "none"
+               "description": "Limited viewing access.",
+               "moduleAccess": {
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "guests": "none",
+                  "inventory": "none",
+                  "timeline": "view",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "none"
                },
-               "name" : "Guest",
-               "id" : "sys_role_guest"
+               "name": "Guest",
+               "id": "sys_role_guest"
             },
             {
-               "name" : "Viewer",
-               "moduleAccess" : {
-                  "roles" : "view",
-                  "users" : "view",
-                  "ticketing" : "view",
-                  "announcements" : "view",
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "guests" : "view",
-                  "customFields" : "view",
-                  "chat" : "view",
-                  "contribution" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "budget" : "view",
-                  "tasks" : "view",
-                  "auditLog" : "view"
+               "name": "Viewer",
+               "moduleAccess": {
+                  "roles": "view",
+                  "users": "view",
+                  "ticketing": "view",
+                  "timeline": "view",
+                  "inventory": "view",
+                  "guests": "view",
+                  "contribution": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "budget": "view",
+                  "tasks": "view",
+                  "auditLog": "view"
                },
-               "id" : "sys_role_viewer",
-               "description" : "Read-only access."
+               "id": "sys_role_viewer",
+               "description": "Read-only access."
             },
             {
-               "id" : "sys_role_host",
-               "name" : "Host",
-               "moduleAccess" : {
-                  "users" : "view",
-                  "timeline" : "view",
-                  "chat" : "full",
-                  "roles" : "none",
-                  "guests" : "view",
-                  "announcements" : "edit"
+               "id": "sys_role_host",
+               "name": "Host",
+               "moduleAccess": {
+                  "users": "view",
+                  "timeline": "view",
+                  "roles": "none",
+                  "guests": "view"
                },
-               "description" : "Greeting guests and main hosting."
+               "description": "Greeting guests and main hosting."
             },
             {
-               "description" : "Collaborate on planning.",
-               "id" : "sys_role_family",
-               "name" : "Family Member",
-               "moduleAccess" : {
-                  "tasks" : "edit",
-                  "guests" : "edit",
-                  "chat" : "full",
-                  "roles" : "none",
-                  "users" : "none",
-                  "budget" : "edit"
+               "description": "Collaborate on planning.",
+               "id": "sys_role_family",
+               "name": "Family Member",
+               "moduleAccess": {
+                  "tasks": "edit",
+                  "guests": "edit",
+                  "roles": "none",
+                  "users": "none",
+                  "budget": "edit"
                }
             },
             {
-               "id" : "sys_role_vendor",
-               "name" : "Vendor",
-               "moduleAccess" : {
-                  "location" : "view",
-                  "users" : "none",
-                  "roles" : "none",
-                  "timeline" : "view",
-                  "tasks" : "view"
+               "id": "sys_role_vendor",
+               "name": "Vendor",
+               "moduleAccess": {
+                  "location": "view",
+                  "users": "none",
+                  "roles": "none",
+                  "timeline": "view",
+                  "tasks": "view"
                },
-               "description" : "Service providers."
+               "description": "Service providers."
             },
             {
-               "id" : "sys_role_planner",
-               "name" : "Event Planner",
-               "moduleAccess" : {
-                  "timeline" : "full",
-                  "tasks" : "full",
-                  "roles" : "none",
-                  "budget" : "edit",
-                  "vendors" : "full",
-                  "users" : "none"
+               "id": "sys_role_planner",
+               "name": "Event Planner",
+               "moduleAccess": {
+                  "timeline": "full",
+                  "tasks": "full",
+                  "roles": "none",
+                  "budget": "edit",
+                  "vendors": "full",
+                  "users": "none"
                },
-               "description" : "Professional coordinator."
+               "description": "Professional coordinator."
             }
          ]
       }
    ],
-   "schemaVersion" : 2
+   "schemaVersion": 2
 }

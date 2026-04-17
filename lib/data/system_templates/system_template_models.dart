@@ -8,8 +8,7 @@ import '../models/timeline_model.dart';
 import '../models/vendor_model.dart';
 import '../models/inventory_model.dart';
 import '../models/role_definition_model.dart';
-import '../models/venue_ticketing_model.dart';
-import '../models/custom_announcement_model.dart';
+ import '../models/venue_ticketing_model.dart';
 
 class SystemTemplatePack {
   final int schemaVersion;
@@ -60,8 +59,6 @@ class SystemTemplateDefinition {
   final List<RoleDefinitionModel> roleBlueprints;
   final List<LocationModel> venueBlueprints;
   final List<TicketModel> ticketBlueprints;
-  final List<CustomFieldDefinitionModel> customFieldBlueprints;
-  final List<AnnouncementModel> announcementBlueprints;
   final List<BudgetItemModel> budgetBlueprints;
   final int version;
   final String? contentHash;
@@ -82,8 +79,6 @@ class SystemTemplateDefinition {
     required this.roleBlueprints,
     required this.venueBlueprints,
     required this.ticketBlueprints,
-    required this.customFieldBlueprints,
-    required this.announcementBlueprints,
     required this.budgetBlueprints,
     required this.version,
     this.contentHash,
@@ -108,8 +103,6 @@ class SystemTemplateDefinition {
     final roleBlueprints = _roleBlueprintsFromJsonValue(json['roleBlueprints']);
     final venueBlueprints = _venueBlueprintsFromJsonValue(json['venueBlueprints']);
     final ticketBlueprints = _ticketBlueprintsFromJsonValue(json['ticketBlueprints']);
-    final customFieldBlueprints = _customFieldBlueprintsFromJsonValue(json['customFieldBlueprints']);
-    final announcementBlueprints = _announcementBlueprintsFromJsonValue(json['announcementBlueprints']);
     final budgetBlueprints = _budgetBlueprintsFromJsonValue(json['budgetBlueprints']);
     final version = (json['version'] as num?)?.toInt() ?? 1;
     final templateCode = (json['templateCode'] as String?)?.trim();
@@ -145,8 +138,6 @@ class SystemTemplateDefinition {
       roleBlueprints: roleBlueprints,
       venueBlueprints: venueBlueprints,
       ticketBlueprints: ticketBlueprints,
-      customFieldBlueprints: customFieldBlueprints,
-      announcementBlueprints: announcementBlueprints,
       budgetBlueprints: budgetBlueprints,
       version: version,
       contentHash: contentHash,
@@ -178,8 +169,6 @@ class SystemTemplateDefinition {
       roleBlueprints: roleBlueprints,
       venueBlueprints: venueBlueprints,
       ticketBlueprints: ticketBlueprints,
-      customFieldBlueprints: customFieldBlueprints,
-      announcementBlueprints: announcementBlueprints,
       budgetBlueprints: budgetBlueprints,
       enabledModules: enabledModules,
       version: version,
@@ -318,26 +307,3 @@ List<TicketModel> _ticketBlueprintsFromJsonValue(dynamic value) {
   return out;
 }
 
-List<CustomFieldDefinitionModel> _customFieldBlueprintsFromJsonValue(dynamic value) {
-  if (value is! List) return const [];
-  final out = <CustomFieldDefinitionModel>[];
-  for (final v in value) {
-    if (v is! Map<String, dynamic>) continue;
-    try {
-      out.add(CustomFieldDefinitionModel.fromJson(v));
-    } catch (_) {}
-  }
-  return out;
-}
-
-List<AnnouncementModel> _announcementBlueprintsFromJsonValue(dynamic value) {
-  if (value is! List) return const [];
-  final out = <AnnouncementModel>[];
-  for (final v in value) {
-    if (v is! Map<String, dynamic>) continue;
-    try {
-      out.add(AnnouncementModel.fromJson(v));
-    } catch (_) {}
-  }
-  return out;
-}

@@ -22,9 +22,6 @@ import '../presentation/screens/vendors_screen.dart';
 import '../presentation/screens/inventory_screen.dart';
 import '../presentation/screens/venues_screen.dart';
 import '../presentation/screens/ticketing_screen.dart';
-import '../presentation/screens/custom_fields_screen.dart';
-import '../presentation/screens/announcements_screen.dart';
-import '../presentation/screens/chat_screen.dart';
 import '../presentation/screens/roles_screen.dart';
 import '../presentation/screens/event_users_screen.dart';
 import '../presentation/screens/audit_log_screen.dart';
@@ -222,27 +219,6 @@ final routerProvider = Provider<GoRouter>((ref) {
             builder: (context, state) {
               final eventId = state.pathParameters['eventId']!;
               return TicketingScreen(eventId: eventId);
-            },
-          ),
-          GoRoute(
-            path: '/event/:eventId/custom-fields',
-            builder: (context, state) {
-              final eventId = state.pathParameters['eventId']!;
-              return CustomFieldsScreen(eventId: eventId);
-            },
-          ),
-          GoRoute(
-            path: '/event/:eventId/announcements',
-            builder: (context, state) {
-              final eventId = state.pathParameters['eventId']!;
-              return AnnouncementsScreen(eventId: eventId);
-            },
-          ),
-          GoRoute(
-            path: '/event/:eventId/chat',
-            builder: (context, state) {
-              final eventId = state.pathParameters['eventId']!;
-              return ChatScreen(eventId: eventId);
             },
           ),
           GoRoute(

@@ -200,15 +200,6 @@ class RolesScreen extends ConsumerWidget {
         case TemplateModule.ticketing:
           out.add(EventModules.ticketing);
           break;
-        case TemplateModule.announcements:
-          out.add(EventModules.announcements);
-          break;
-        case TemplateModule.customFields:
-          out.add(EventModules.customFields);
-          break;
-        case TemplateModule.communication:
-          out.add(EventModules.chat);
-          break;
         default:
           break;
       }

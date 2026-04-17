@@ -1,11 +1,11 @@
 {
-   "version" : 4,
-   "templates" : [
+   "version": 4,
+   "templates": [
       {
-         "category" : "communityAndCultural",
-         "defaultFields" : {
-            "amount" : 0,
-            "enabledModules" : [
+         "category": "communityAndCultural",
+         "defaultFields": {
+            "amount": 0,
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
@@ -14,245 +14,221 @@
                "media",
                "userManagement"
             ],
-            "contributionType" : "voluntary"
+            "contributionType": "voluntary"
          },
-         "roleBlueprints" : [
+         "roleBlueprints": [
             {
-               "description" : "Full access to all modules.",
-               "id" : "sys_role_admin",
-               "moduleAccess" : {
-                  "auditLog" : "full",
-                  "tasks" : "full",
-                  "budget" : "full",
-                  "vendors" : "full",
-                  "location" : "full",
-                  "contribution" : "full",
-                  "chat" : "full",
-                  "customFields" : "full",
-                  "guests" : "full",
-                  "inventory" : "full",
-                  "timeline" : "full",
-                  "announcements" : "full",
-                  "ticketing" : "full",
-                  "users" : "full",
-                  "roles" : "full"
+               "description": "Full access to all modules.",
+               "id": "sys_role_admin",
+               "moduleAccess": {
+                  "auditLog": "full",
+                  "tasks": "full",
+                  "budget": "full",
+                  "vendors": "full",
+                  "location": "full",
+                  "contribution": "full",
+                  "guests": "full",
+                  "inventory": "full",
+                  "timeline": "full",
+                  "ticketing": "full",
+                  "users": "full",
+                  "roles": "full"
                },
-               "name" : "Admin"
+               "name": "Admin"
             },
             {
-               "description" : "Manage most event details.",
-               "id" : "sys_role_organizer",
-               "name" : "Organizer",
-               "moduleAccess" : {
-                  "contribution" : "edit",
-                  "customFields" : "view",
-                  "chat" : "full",
-                  "budget" : "edit",
-                  "location" : "edit",
-                  "vendors" : "edit",
-                  "tasks" : "edit",
-                  "auditLog" : "view",
-                  "roles" : "none",
-                  "users" : "view",
-                  "ticketing" : "edit",
-                  "announcements" : "edit",
-                  "timeline" : "edit",
-                  "inventory" : "edit",
-                  "guests" : "edit"
+               "description": "Manage most event details.",
+               "id": "sys_role_organizer",
+               "name": "Organizer",
+               "moduleAccess": {
+                  "contribution": "edit",
+                  "budget": "edit",
+                  "location": "edit",
+                  "vendors": "edit",
+                  "tasks": "edit",
+                  "auditLog": "view",
+                  "roles": "none",
+                  "users": "view",
+                  "ticketing": "edit",
+                  "timeline": "edit",
+                  "inventory": "edit",
+                  "guests": "edit"
                }
             },
             {
-               "moduleAccess" : {
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "edit",
-                  "ticketing" : "none",
-                  "inventory" : "view",
-                  "timeline" : "edit",
-                  "guests" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "budget" : "view",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "contribution" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "edit"
+               "moduleAccess": {
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "inventory": "view",
+                  "timeline": "edit",
+                  "guests": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "budget": "view",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "edit"
                },
-               "name" : "Coordinator",
-               "id" : "sys_role_coordinator",
-               "description" : "Manage tasks and timeline."
+               "name": "Coordinator",
+               "id": "sys_role_coordinator",
+               "description": "Manage tasks and timeline."
             },
             {
-               "description" : "Update task progress.",
-               "id" : "sys_role_volunteer",
-               "name" : "Volunteer",
-               "moduleAccess" : {
-                  "tasks" : "update",
-                  "auditLog" : "none",
-                  "chat" : "full",
-                  "customFields" : "none",
-                  "contribution" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "budget" : "none",
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "guests" : "none",
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view"
+               "description": "Update task progress.",
+               "id": "sys_role_volunteer",
+               "name": "Volunteer",
+               "moduleAccess": {
+                  "tasks": "update",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "budget": "none",
+                  "timeline": "view",
+                  "inventory": "view",
+                  "guests": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none"
                }
             },
             {
-               "description" : "Regular participant.",
-               "id" : "sys_role_participant",
-               "moduleAccess" : {
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "guests" : "none",
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "chat" : "edit",
-                  "customFields" : "none",
-                  "contribution" : "view",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "budget" : "none"
+               "description": "Regular participant.",
+               "id": "sys_role_participant",
+               "moduleAccess": {
+                  "timeline": "view",
+                  "inventory": "none",
+                  "guests": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none",
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "contribution": "view",
+                  "vendors": "none",
+                  "location": "view",
+                  "budget": "none"
                },
-               "name" : "Participant"
+               "name": "Participant"
             },
             {
-               "description" : "Limited viewing access.",
-               "moduleAccess" : {
-                  "vendors" : "none",
-                  "location" : "view",
-                  "budget" : "none",
-                  "customFields" : "none",
-                  "chat" : "none",
-                  "contribution" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "guests" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view"
+               "description": "Limited viewing access.",
+               "moduleAccess": {
+                  "vendors": "none",
+                  "location": "view",
+                  "budget": "none",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "none",
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "guests": "none",
+                  "inventory": "none",
+                  "timeline": "view"
                },
-               "name" : "Guest",
-               "id" : "sys_role_guest"
+               "name": "Guest",
+               "id": "sys_role_guest"
             },
             {
-               "description" : "Read-only access.",
-               "name" : "Viewer",
-               "moduleAccess" : {
-                  "guests" : "view",
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "announcements" : "view",
-                  "ticketing" : "view",
-                  "users" : "view",
-                  "roles" : "view",
-                  "auditLog" : "view",
-                  "tasks" : "view",
-                  "budget" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "contribution" : "view",
-                  "customFields" : "view",
-                  "chat" : "view"
+               "description": "Read-only access.",
+               "name": "Viewer",
+               "moduleAccess": {
+                  "guests": "view",
+                  "inventory": "view",
+                  "timeline": "view",
+                  "ticketing": "view",
+                  "users": "view",
+                  "roles": "view",
+                  "auditLog": "view",
+                  "tasks": "view",
+                  "budget": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "contribution": "view"
                },
-               "id" : "sys_role_viewer"
+               "id": "sys_role_viewer"
             },
             {
-               "description" : "Board coordination.",
-               "name" : "Society Admin",
-               "moduleAccess" : {
-                  "users" : "view",
-                  "roles" : "view",
-                  "announcements" : "edit"
+               "description": "Board coordination.",
+               "name": "Society Admin",
+               "moduleAccess": {
+                  "users": "view",
+                  "roles": "view"
                },
-               "id" : "sys_role_society_admin"
+               "id": "sys_role_society_admin"
             },
             {
-               "id" : "sys_role_coord",
-               "moduleAccess" : {
-                  "timeline" : "full",
-                  "chat" : "full",
-                  "roles" : "none",
-                  "users" : "none",
-                  "tasks" : "full"
+               "id": "sys_role_coord",
+               "moduleAccess": {
+                  "timeline": "full",
+                  "roles": "none",
+                  "users": "none",
+                  "tasks": "full"
                },
-               "name" : "Event Coordinator",
-               "description" : "Overall execution lead."
+               "name": "Event Coordinator",
+               "description": "Overall execution lead."
             },
             {
-               "description" : "Manage funds.",
-               "name" : "Treasurer",
-               "moduleAccess" : {
-                  "budget" : "full",
-                  "users" : "none",
-                  "contribution" : "full",
-                  "roles" : "none"
+               "description": "Manage funds.",
+               "name": "Treasurer",
+               "moduleAccess": {
+                  "budget": "full",
+                  "users": "none",
+                  "contribution": "full",
+                  "roles": "none"
                },
-               "id" : "sys_role_treasurer"
+               "id": "sys_role_treasurer"
             },
             {
-               "description" : "Crowd control.",
-               "id" : "sys_role_security",
-               "name" : "Security Coordinator",
-               "moduleAccess" : {
-                  "users" : "none",
-                  "location" : "view",
-                  "roles" : "none",
-                  "chat" : "edit"
+               "description": "Crowd control.",
+               "id": "sys_role_security",
+               "name": "Security Coordinator",
+               "moduleAccess": {
+                  "users": "none",
+                  "location": "view",
+                  "roles": "none"
                }
             }
          ],
-         "templateName" : "Rio Carnival Event",
-         "budgetBlueprints" : [
+         "templateName": "Rio Carnival Event",
+         "budgetBlueprints": [
             {
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "isMandatory" : true,
-               "id" : "sys_rio_budget_floats",
-               "title" : "Float Materials & Artist Fees",
-               "estimatedCost" : 0,
-               "category" : "Miscellaneous"
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "isMandatory": true,
+               "id": "sys_rio_budget_floats",
+               "title": "Float Materials & Artist Fees",
+               "estimatedCost": 0,
+               "category": "Miscellaneous"
             }
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "title" : "Coordinate Parade Floats & Props",
-               "id" : "sys_rio_task_floats",
-               "dependsOn" : [],
-               "eventId" : "blueprint_dummy",
-               "description" : "Ensure the grand display items are ready.",
-               "phase" : "preEvent",
-               "status" : "pending",
-               "role" : "Logistics",
-               "dueOffset" : "T-30 days"
+               "title": "Coordinate Parade Floats & Props",
+               "id": "sys_rio_task_floats",
+               "dependsOn": [],
+               "eventId": "blueprint_dummy",
+               "description": "Ensure the grand display items are ready.",
+               "phase": "preEvent",
+               "status": "pending",
+               "role": "Logistics",
+               "dueOffset": "T-30 days"
             },
             {
-               "status" : "pending",
-               "dependsOn" : [],
-               "id" : "sys_rio_task_samba",
-               "title" : "Secure Samba Dancers & Band",
-               "phase" : "preEvent",
-               "dueOffset" : "T-20 days",
-               "description" : "Arrange professional performers for the main event.",
-               "role" : "Program Coordinator",
-               "eventId" : "blueprint_dummy"
+               "status": "pending",
+               "dependsOn": [],
+               "id": "sys_rio_task_samba",
+               "title": "Secure Samba Dancers & Band",
+               "phase": "preEvent",
+               "dueOffset": "T-20 days",
+               "description": "Arrange professional performers for the main event.",
+               "role": "Program Coordinator",
+               "eventId": "blueprint_dummy"
             }
          ],
-         "tags" : [
+         "tags": [
             "rio carnival",
             "brazil",
             "festival",
@@ -260,21 +236,21 @@
             "parade",
             "costumes"
          ],
-         "timelineBlueprints" : [
+         "timelineBlueprints": [
             {
-               "phase" : "eventDay",
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "09:00 PM",
-               "description" : "The peak of the event festivities.",
-               "dayNumber" : 1,
-               "title" : "Main Sambadrome Style Parade",
-               "id" : "sys_rio_timeline_grand"
+               "phase": "eventDay",
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "09:00 PM",
+               "description": "The peak of the event festivities.",
+               "dayNumber": 1,
+               "title": "Main Sambadrome Style Parade",
+               "id": "sys_rio_timeline_grand"
             }
          ],
-         "templateId" : "sys_rio_carnival_v1",
-         "version" : 2,
-         "description" : "Grand Brazilian festival featuring large scale parades, Samba music, and elaborate costumes."
+         "templateId": "sys_rio_carnival_v1",
+         "version": 2,
+         "description": "Grand Brazilian festival featuring large scale parades, Samba music, and elaborate costumes."
       }
    ],
-   "schemaVersion" : 2
+   "schemaVersion": 2
 }

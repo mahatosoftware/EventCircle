@@ -1,268 +1,243 @@
 {
-   "schemaVersion" : 2,
-   "version" : 4,
-   "templates" : [
+   "schemaVersion": 2,
+   "version": 4,
+   "templates": [
       {
-         "tags" : [
+         "tags": [
             "society",
             "annual day",
             "community",
             "cultural",
             "celebration"
          ],
-         "budgetBlueprints" : [
+         "budgetBlueprints": [
             {
-               "category" : "Venue",
-               "estimatedCost" : 0,
-               "title" : "Stage & Tent Setup",
-               "id" : "sys_society_budget_tent",
-               "isMandatory" : true,
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy"
+               "category": "Venue",
+               "estimatedCost": 0,
+               "title": "Stage & Tent Setup",
+               "id": "sys_society_budget_tent",
+               "isMandatory": true,
+               "actualCost": 0,
+               "eventId": "blueprint_dummy"
             }
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "phase" : "preEvent",
-               "title" : "Secure Local Permits",
-               "status" : "pending",
-               "dependsOn" : [],
-               "id" : "sys_society_task_permits",
-               "role" : "Logistics",
-               "eventId" : "blueprint_dummy",
-               "dueOffset" : "T-15 days",
-               "description" : "Obtain necessary permissions for loudspeakers/events."
+               "phase": "preEvent",
+               "title": "Secure Local Permits",
+               "status": "pending",
+               "dependsOn": [],
+               "id": "sys_society_task_permits",
+               "role": "Logistics",
+               "eventId": "blueprint_dummy",
+               "dueOffset": "T-15 days",
+               "description": "Obtain necessary permissions for loudspeakers/events."
             }
          ],
-         "version" : 3,
-         "defaultFields" : {
-            "enabledModules" : [
+         "version": 3,
+         "defaultFields": {
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
                "guestManagement",
-               "communication",
                "roles",
                "inventory",
                "contribution",
                "userManagement"
             ],
-            "amount" : 0,
-            "contributionType" : "fixed"
+            "amount": 0,
+            "contributionType": "fixed"
          },
-         "timelineBlueprints" : [
+         "timelineBlueprints": [
             {
-               "title" : "Award Ceremony",
-               "phase" : "eventDay",
-               "id" : "sys_society_timeline_award",
-               "timeOrOffset" : "07:00 PM",
-               "eventId" : "blueprint_dummy",
-               "description" : "Recognizing society members.",
-               "dayNumber" : 1
+               "title": "Award Ceremony",
+               "phase": "eventDay",
+               "id": "sys_society_timeline_award",
+               "timeOrOffset": "07:00 PM",
+               "eventId": "blueprint_dummy",
+               "description": "Recognizing society members.",
+               "dayNumber": 1
             }
          ],
-         "templateId" : "sys_society_annual_day_v1",
-         "description" : "Celebration of the housing society's achievements with cultural performances.",
-         "category" : "communityAndCultural",
-         "templateName" : "Society Annual Day",
-         "roleBlueprints" : [
+         "templateId": "sys_society_annual_day_v1",
+         "description": "Celebration of the housing society's achievements with cultural performances.",
+         "category": "communityAndCultural",
+         "templateName": "Society Annual Day",
+         "roleBlueprints": [
             {
-               "id" : "sys_role_admin",
-               "name" : "Admin",
-               "moduleAccess" : {
-                  "auditLog" : "full",
-                  "tasks" : "full",
-                  "vendors" : "full",
-                  "location" : "full",
-                  "budget" : "full",
-                  "chat" : "full",
-                  "customFields" : "full",
-                  "contribution" : "full",
-                  "guests" : "full",
-                  "inventory" : "full",
-                  "timeline" : "full",
-                  "announcements" : "full",
-                  "ticketing" : "full",
-                  "users" : "full",
-                  "roles" : "full"
+               "id": "sys_role_admin",
+               "name": "Admin",
+               "moduleAccess": {
+                  "auditLog": "full",
+                  "tasks": "full",
+                  "vendors": "full",
+                  "location": "full",
+                  "budget": "full",
+                  "contribution": "full",
+                  "guests": "full",
+                  "inventory": "full",
+                  "timeline": "full",
+                  "ticketing": "full",
+                  "users": "full",
+                  "roles": "full"
                },
-               "description" : "Full access to all modules."
+               "description": "Full access to all modules."
             },
             {
-               "moduleAccess" : {
-                  "guests" : "edit",
-                  "timeline" : "edit",
-                  "inventory" : "edit",
-                  "ticketing" : "edit",
-                  "announcements" : "edit",
-                  "roles" : "none",
-                  "users" : "view",
-                  "tasks" : "edit",
-                  "auditLog" : "view",
-                  "customFields" : "view",
-                  "chat" : "full",
-                  "contribution" : "edit",
-                  "location" : "edit",
-                  "vendors" : "edit",
-                  "budget" : "edit"
+               "moduleAccess": {
+                  "guests": "edit",
+                  "timeline": "edit",
+                  "inventory": "edit",
+                  "ticketing": "edit",
+                  "roles": "none",
+                  "users": "view",
+                  "tasks": "edit",
+                  "auditLog": "view",
+                  "contribution": "edit",
+                  "location": "edit",
+                  "vendors": "edit",
+                  "budget": "edit"
                },
-               "name" : "Organizer",
-               "id" : "sys_role_organizer",
-               "description" : "Manage most event details."
+               "name": "Organizer",
+               "id": "sys_role_organizer",
+               "description": "Manage most event details."
             },
             {
-               "name" : "Coordinator",
-               "moduleAccess" : {
-                  "announcements" : "edit",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "guests" : "view",
-                  "inventory" : "view",
-                  "timeline" : "edit",
-                  "budget" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "contribution" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "auditLog" : "none",
-                  "tasks" : "edit"
+               "name": "Coordinator",
+               "moduleAccess": {
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "guests": "view",
+                  "inventory": "view",
+                  "timeline": "edit",
+                  "budget": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "edit"
                },
-               "id" : "sys_role_coordinator",
-               "description" : "Manage tasks and timeline."
+               "id": "sys_role_coordinator",
+               "description": "Manage tasks and timeline."
             },
             {
-               "description" : "Update task progress.",
-               "id" : "sys_role_volunteer",
-               "moduleAccess" : {
-                  "tasks" : "update",
-                  "auditLog" : "none",
-                  "contribution" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "budget" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "guests" : "none",
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view"
+               "description": "Update task progress.",
+               "id": "sys_role_volunteer",
+               "moduleAccess": {
+                  "tasks": "update",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "budget": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "timeline": "view",
+                  "inventory": "view",
+                  "guests": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none"
                },
-               "name" : "Volunteer"
+               "name": "Volunteer"
             },
             {
-               "name" : "Participant",
-               "moduleAccess" : {
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none",
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "chat" : "edit",
-                  "customFields" : "none",
-                  "contribution" : "view",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none"
+               "name": "Participant",
+               "moduleAccess": {
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "contribution": "view",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none"
                },
-               "id" : "sys_role_participant",
-               "description" : "Regular participant."
+               "id": "sys_role_participant",
+               "description": "Regular participant."
             },
             {
-               "description" : "Limited viewing access.",
-               "moduleAccess" : {
-                  "auditLog" : "none",
-                  "tasks" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none",
-                  "customFields" : "none",
-                  "chat" : "none",
-                  "contribution" : "none",
-                  "guests" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none"
+               "description": "Limited viewing access.",
+               "moduleAccess": {
+                  "auditLog": "none",
+                  "tasks": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none",
+                  "contribution": "none",
+                  "guests": "none",
+                  "inventory": "none",
+                  "timeline": "view",
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none"
                },
-               "name" : "Guest",
-               "id" : "sys_role_guest"
+               "name": "Guest",
+               "id": "sys_role_guest"
             },
             {
-               "description" : "Read-only access.",
-               "id" : "sys_role_viewer",
-               "moduleAccess" : {
-                  "guests" : "view",
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "announcements" : "view",
-                  "ticketing" : "view",
-                  "users" : "view",
-                  "roles" : "view",
-                  "auditLog" : "view",
-                  "tasks" : "view",
-                  "location" : "view",
-                  "vendors" : "view",
-                  "budget" : "view",
-                  "customFields" : "view",
-                  "chat" : "view",
-                  "contribution" : "view"
+               "description": "Read-only access.",
+               "id": "sys_role_viewer",
+               "moduleAccess": {
+                  "guests": "view",
+                  "inventory": "view",
+                  "timeline": "view",
+                  "ticketing": "view",
+                  "users": "view",
+                  "roles": "view",
+                  "auditLog": "view",
+                  "tasks": "view",
+                  "location": "view",
+                  "vendors": "view",
+                  "budget": "view",
+                  "contribution": "view"
                },
-               "name" : "Viewer"
+               "name": "Viewer"
             },
             {
-               "description" : "Board coordination.",
-               "name" : "Society Admin",
-               "moduleAccess" : {
-                  "roles" : "view",
-                  "users" : "view",
-                  "announcements" : "edit"
+               "description": "Board coordination.",
+               "name": "Society Admin",
+               "moduleAccess": {
+                  "roles": "view",
+                  "users": "view"
                },
-               "id" : "sys_role_society_admin"
+               "id": "sys_role_society_admin"
             },
             {
-               "description" : "Overall execution lead.",
-               "moduleAccess" : {
-                  "timeline" : "full",
-                  "chat" : "full",
-                  "roles" : "none",
-                  "users" : "none",
-                  "tasks" : "full"
+               "description": "Overall execution lead.",
+               "moduleAccess": {
+                  "timeline": "full",
+                  "roles": "none",
+                  "users": "none",
+                  "tasks": "full"
                },
-               "name" : "Event Coordinator",
-               "id" : "sys_role_coord"
+               "name": "Event Coordinator",
+               "id": "sys_role_coord"
             },
             {
-               "description" : "Manage funds.",
-               "name" : "Treasurer",
-               "moduleAccess" : {
-                  "roles" : "none",
-                  "contribution" : "full",
-                  "budget" : "full",
-                  "users" : "none"
+               "description": "Manage funds.",
+               "name": "Treasurer",
+               "moduleAccess": {
+                  "roles": "none",
+                  "contribution": "full",
+                  "budget": "full",
+                  "users": "none"
                },
-               "id" : "sys_role_treasurer"
+               "id": "sys_role_treasurer"
             },
             {
-               "id" : "sys_role_security",
-               "name" : "Security Coordinator",
-               "moduleAccess" : {
-                  "location" : "view",
-                  "users" : "none",
-                  "roles" : "none",
-                  "chat" : "edit"
+               "id": "sys_role_security",
+               "name": "Security Coordinator",
+               "moduleAccess": {
+                  "location": "view",
+                  "users": "none",
+                  "roles": "none"
                },
-               "description" : "Crowd control."
+               "description": "Crowd control."
             }
          ]
       }

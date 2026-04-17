@@ -40,12 +40,9 @@ mixin _$TemplateModel {
       throw _privateConstructorUsedError;
   List<LocationModel> get venueBlueprints => throw _privateConstructorUsedError;
   List<TicketModel> get ticketBlueprints => throw _privateConstructorUsedError;
-  List<CustomFieldDefinitionModel> get customFieldBlueprints =>
-      throw _privateConstructorUsedError;
-  List<AnnouncementModel> get announcementBlueprints =>
-      throw _privateConstructorUsedError;
   List<BudgetItemModel> get budgetBlueprints =>
       throw _privateConstructorUsedError;
+  @JsonKey(fromJson: _enabledModulesFromJson)
   List<TemplateModule> get enabledModules => throw _privateConstructorUsedError;
   int get usageCount => throw _privateConstructorUsedError;
   double get rating => throw _privateConstructorUsedError;
@@ -87,9 +84,8 @@ abstract class $TemplateModelCopyWith<$Res> {
     List<RoleDefinitionModel> roleBlueprints,
     List<LocationModel> venueBlueprints,
     List<TicketModel> ticketBlueprints,
-    List<CustomFieldDefinitionModel> customFieldBlueprints,
-    List<AnnouncementModel> announcementBlueprints,
     List<BudgetItemModel> budgetBlueprints,
+    @JsonKey(fromJson: _enabledModulesFromJson)
     List<TemplateModule> enabledModules,
     int usageCount,
     double rating,
@@ -130,8 +126,6 @@ class _$TemplateModelCopyWithImpl<$Res, $Val extends TemplateModel>
     Object? roleBlueprints = null,
     Object? venueBlueprints = null,
     Object? ticketBlueprints = null,
-    Object? customFieldBlueprints = null,
-    Object? announcementBlueprints = null,
     Object? budgetBlueprints = null,
     Object? enabledModules = null,
     Object? usageCount = null,
@@ -203,14 +197,6 @@ class _$TemplateModelCopyWithImpl<$Res, $Val extends TemplateModel>
                 ? _value.ticketBlueprints
                 : ticketBlueprints // ignore: cast_nullable_to_non_nullable
                       as List<TicketModel>,
-            customFieldBlueprints: null == customFieldBlueprints
-                ? _value.customFieldBlueprints
-                : customFieldBlueprints // ignore: cast_nullable_to_non_nullable
-                      as List<CustomFieldDefinitionModel>,
-            announcementBlueprints: null == announcementBlueprints
-                ? _value.announcementBlueprints
-                : announcementBlueprints // ignore: cast_nullable_to_non_nullable
-                      as List<AnnouncementModel>,
             budgetBlueprints: null == budgetBlueprints
                 ? _value.budgetBlueprints
                 : budgetBlueprints // ignore: cast_nullable_to_non_nullable
@@ -274,9 +260,8 @@ abstract class _$$TemplateModelImplCopyWith<$Res>
     List<RoleDefinitionModel> roleBlueprints,
     List<LocationModel> venueBlueprints,
     List<TicketModel> ticketBlueprints,
-    List<CustomFieldDefinitionModel> customFieldBlueprints,
-    List<AnnouncementModel> announcementBlueprints,
     List<BudgetItemModel> budgetBlueprints,
+    @JsonKey(fromJson: _enabledModulesFromJson)
     List<TemplateModule> enabledModules,
     int usageCount,
     double rating,
@@ -316,8 +301,6 @@ class __$$TemplateModelImplCopyWithImpl<$Res>
     Object? roleBlueprints = null,
     Object? venueBlueprints = null,
     Object? ticketBlueprints = null,
-    Object? customFieldBlueprints = null,
-    Object? announcementBlueprints = null,
     Object? budgetBlueprints = null,
     Object? enabledModules = null,
     Object? usageCount = null,
@@ -389,14 +372,6 @@ class __$$TemplateModelImplCopyWithImpl<$Res>
             ? _value._ticketBlueprints
             : ticketBlueprints // ignore: cast_nullable_to_non_nullable
                   as List<TicketModel>,
-        customFieldBlueprints: null == customFieldBlueprints
-            ? _value._customFieldBlueprints
-            : customFieldBlueprints // ignore: cast_nullable_to_non_nullable
-                  as List<CustomFieldDefinitionModel>,
-        announcementBlueprints: null == announcementBlueprints
-            ? _value._announcementBlueprints
-            : announcementBlueprints // ignore: cast_nullable_to_non_nullable
-                  as List<AnnouncementModel>,
         budgetBlueprints: null == budgetBlueprints
             ? _value._budgetBlueprints
             : budgetBlueprints // ignore: cast_nullable_to_non_nullable
@@ -453,9 +428,8 @@ class _$TemplateModelImpl implements _TemplateModel {
     final List<RoleDefinitionModel> roleBlueprints = const [],
     final List<LocationModel> venueBlueprints = const [],
     final List<TicketModel> ticketBlueprints = const [],
-    final List<CustomFieldDefinitionModel> customFieldBlueprints = const [],
-    final List<AnnouncementModel> announcementBlueprints = const [],
     final List<BudgetItemModel> budgetBlueprints = const [],
+    @JsonKey(fromJson: _enabledModulesFromJson)
     final List<TemplateModule> enabledModules = const [],
     this.usageCount = 0,
     this.rating = 0.0,
@@ -472,8 +446,6 @@ class _$TemplateModelImpl implements _TemplateModel {
        _roleBlueprints = roleBlueprints,
        _venueBlueprints = venueBlueprints,
        _ticketBlueprints = ticketBlueprints,
-       _customFieldBlueprints = customFieldBlueprints,
-       _announcementBlueprints = announcementBlueprints,
        _budgetBlueprints = budgetBlueprints,
        _enabledModules = enabledModules;
 
@@ -580,26 +552,6 @@ class _$TemplateModelImpl implements _TemplateModel {
     return EqualUnmodifiableListView(_ticketBlueprints);
   }
 
-  final List<CustomFieldDefinitionModel> _customFieldBlueprints;
-  @override
-  @JsonKey()
-  List<CustomFieldDefinitionModel> get customFieldBlueprints {
-    if (_customFieldBlueprints is EqualUnmodifiableListView)
-      return _customFieldBlueprints;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_customFieldBlueprints);
-  }
-
-  final List<AnnouncementModel> _announcementBlueprints;
-  @override
-  @JsonKey()
-  List<AnnouncementModel> get announcementBlueprints {
-    if (_announcementBlueprints is EqualUnmodifiableListView)
-      return _announcementBlueprints;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_announcementBlueprints);
-  }
-
   final List<BudgetItemModel> _budgetBlueprints;
   @override
   @JsonKey()
@@ -612,7 +564,7 @@ class _$TemplateModelImpl implements _TemplateModel {
 
   final List<TemplateModule> _enabledModules;
   @override
-  @JsonKey()
+  @JsonKey(fromJson: _enabledModulesFromJson)
   List<TemplateModule> get enabledModules {
     if (_enabledModules is EqualUnmodifiableListView) return _enabledModules;
     // ignore: implicit_dynamic_type
@@ -638,7 +590,7 @@ class _$TemplateModelImpl implements _TemplateModel {
 
   @override
   String toString() {
-    return 'TemplateModel(id: $id, title: $title, description: $description, category: $category, contributionType: $contributionType, createdBy: $createdBy, tags: $tags, config: $config, taskBlueprints: $taskBlueprints, timelineBlueprints: $timelineBlueprints, vendorBlueprints: $vendorBlueprints, inventoryBlueprints: $inventoryBlueprints, roleBlueprints: $roleBlueprints, venueBlueprints: $venueBlueprints, ticketBlueprints: $ticketBlueprints, customFieldBlueprints: $customFieldBlueprints, announcementBlueprints: $announcementBlueprints, budgetBlueprints: $budgetBlueprints, enabledModules: $enabledModules, usageCount: $usageCount, rating: $rating, isPublic: $isPublic, version: $version, templateCode: $templateCode, createdAt: $createdAt)';
+    return 'TemplateModel(id: $id, title: $title, description: $description, category: $category, contributionType: $contributionType, createdBy: $createdBy, tags: $tags, config: $config, taskBlueprints: $taskBlueprints, timelineBlueprints: $timelineBlueprints, vendorBlueprints: $vendorBlueprints, inventoryBlueprints: $inventoryBlueprints, roleBlueprints: $roleBlueprints, venueBlueprints: $venueBlueprints, ticketBlueprints: $ticketBlueprints, budgetBlueprints: $budgetBlueprints, enabledModules: $enabledModules, usageCount: $usageCount, rating: $rating, isPublic: $isPublic, version: $version, templateCode: $templateCode, createdAt: $createdAt)';
   }
 
   @override
@@ -687,14 +639,6 @@ class _$TemplateModelImpl implements _TemplateModel {
               _ticketBlueprints,
             ) &&
             const DeepCollectionEquality().equals(
-              other._customFieldBlueprints,
-              _customFieldBlueprints,
-            ) &&
-            const DeepCollectionEquality().equals(
-              other._announcementBlueprints,
-              _announcementBlueprints,
-            ) &&
-            const DeepCollectionEquality().equals(
               other._budgetBlueprints,
               _budgetBlueprints,
             ) &&
@@ -733,8 +677,6 @@ class _$TemplateModelImpl implements _TemplateModel {
     const DeepCollectionEquality().hash(_roleBlueprints),
     const DeepCollectionEquality().hash(_venueBlueprints),
     const DeepCollectionEquality().hash(_ticketBlueprints),
-    const DeepCollectionEquality().hash(_customFieldBlueprints),
-    const DeepCollectionEquality().hash(_announcementBlueprints),
     const DeepCollectionEquality().hash(_budgetBlueprints),
     const DeepCollectionEquality().hash(_enabledModules),
     usageCount,
@@ -776,9 +718,8 @@ abstract class _TemplateModel implements TemplateModel {
     final List<RoleDefinitionModel> roleBlueprints,
     final List<LocationModel> venueBlueprints,
     final List<TicketModel> ticketBlueprints,
-    final List<CustomFieldDefinitionModel> customFieldBlueprints,
-    final List<AnnouncementModel> announcementBlueprints,
     final List<BudgetItemModel> budgetBlueprints,
+    @JsonKey(fromJson: _enabledModulesFromJson)
     final List<TemplateModule> enabledModules,
     final int usageCount,
     final double rating,
@@ -822,12 +763,9 @@ abstract class _TemplateModel implements TemplateModel {
   @override
   List<TicketModel> get ticketBlueprints;
   @override
-  List<CustomFieldDefinitionModel> get customFieldBlueprints;
-  @override
-  List<AnnouncementModel> get announcementBlueprints;
-  @override
   List<BudgetItemModel> get budgetBlueprints;
   @override
+  @JsonKey(fromJson: _enabledModulesFromJson)
   List<TemplateModule> get enabledModules;
   @override
   int get usageCount;

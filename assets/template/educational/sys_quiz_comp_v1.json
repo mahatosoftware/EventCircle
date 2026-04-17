@@ -1,213 +1,189 @@
 {
-   "version" : 4,
-   "templates" : [
+   "version": 4,
+   "templates": [
       {
-         "roleBlueprints" : [
+         "roleBlueprints": [
             {
-               "description" : "Full access to all modules.",
-               "moduleAccess" : {
-                  "users" : "full",
-                  "roles" : "full",
-                  "announcements" : "full",
-                  "ticketing" : "full",
-                  "inventory" : "full",
-                  "timeline" : "full",
-                  "guests" : "full",
-                  "budget" : "full",
-                  "location" : "full",
-                  "vendors" : "full",
-                  "contribution" : "full",
-                  "chat" : "full",
-                  "customFields" : "full",
-                  "auditLog" : "full",
-                  "tasks" : "full"
+               "description": "Full access to all modules.",
+               "moduleAccess": {
+                  "users": "full",
+                  "roles": "full",
+                  "ticketing": "full",
+                  "inventory": "full",
+                  "timeline": "full",
+                  "guests": "full",
+                  "budget": "full",
+                  "location": "full",
+                  "vendors": "full",
+                  "contribution": "full",
+                  "auditLog": "full",
+                  "tasks": "full"
                },
-               "name" : "Admin",
-               "id" : "sys_role_admin"
+               "name": "Admin",
+               "id": "sys_role_admin"
             },
             {
-               "description" : "Manage most event details.",
-               "name" : "Organizer",
-               "moduleAccess" : {
-                  "customFields" : "view",
-                  "chat" : "full",
-                  "contribution" : "edit",
-                  "vendors" : "edit",
-                  "location" : "edit",
-                  "budget" : "edit",
-                  "tasks" : "edit",
-                  "auditLog" : "view",
-                  "ticketing" : "edit",
-                  "announcements" : "edit",
-                  "roles" : "none",
-                  "users" : "view",
-                  "guests" : "edit",
-                  "timeline" : "edit",
-                  "inventory" : "edit"
+               "description": "Manage most event details.",
+               "name": "Organizer",
+               "moduleAccess": {
+                  "contribution": "edit",
+                  "vendors": "edit",
+                  "location": "edit",
+                  "budget": "edit",
+                  "tasks": "edit",
+                  "auditLog": "view",
+                  "ticketing": "edit",
+                  "roles": "none",
+                  "users": "view",
+                  "guests": "edit",
+                  "timeline": "edit",
+                  "inventory": "edit"
                },
-               "id" : "sys_role_organizer"
+               "id": "sys_role_organizer"
             },
             {
-               "moduleAccess" : {
-                  "guests" : "view",
-                  "timeline" : "edit",
-                  "inventory" : "view",
-                  "ticketing" : "none",
-                  "announcements" : "edit",
-                  "roles" : "none",
-                  "users" : "none",
-                  "tasks" : "edit",
-                  "auditLog" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "contribution" : "none",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "budget" : "view"
+               "moduleAccess": {
+                  "guests": "view",
+                  "timeline": "edit",
+                  "inventory": "view",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "tasks": "edit",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "vendors": "view",
+                  "location": "view",
+                  "budget": "view"
                },
-               "name" : "Coordinator",
-               "id" : "sys_role_coordinator",
-               "description" : "Manage tasks and timeline."
+               "name": "Coordinator",
+               "id": "sys_role_coordinator",
+               "description": "Manage tasks and timeline."
             },
             {
-               "name" : "Volunteer",
-               "moduleAccess" : {
-                  "budget" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "contribution" : "none",
-                  "chat" : "full",
-                  "customFields" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "update",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "guests" : "none",
-                  "inventory" : "view",
-                  "timeline" : "view"
+               "name": "Volunteer",
+               "moduleAccess": {
+                  "budget": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "update",
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "guests": "none",
+                  "inventory": "view",
+                  "timeline": "view"
                },
-               "id" : "sys_role_volunteer",
-               "description" : "Update task progress."
+               "id": "sys_role_volunteer",
+               "description": "Update task progress."
             },
             {
-               "description" : "Regular participant.",
-               "moduleAccess" : {
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "contribution" : "view",
-                  "chat" : "edit",
-                  "customFields" : "none",
-                  "budget" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none"
+               "description": "Regular participant.",
+               "moduleAccess": {
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "contribution": "view",
+                  "budget": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none"
                },
-               "name" : "Participant",
-               "id" : "sys_role_participant"
+               "name": "Participant",
+               "id": "sys_role_participant"
             },
             {
-               "description" : "Limited viewing access.",
-               "id" : "sys_role_guest",
-               "name" : "Guest",
-               "moduleAccess" : {
-                  "contribution" : "none",
-                  "customFields" : "none",
-                  "chat" : "none",
-                  "budget" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "guests" : "none"
+               "description": "Limited viewing access.",
+               "id": "sys_role_guest",
+               "name": "Guest",
+               "moduleAccess": {
+                  "contribution": "none",
+                  "budget": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "guests": "none"
                }
             },
             {
-               "moduleAccess" : {
-                  "announcements" : "view",
-                  "ticketing" : "view",
-                  "users" : "view",
-                  "roles" : "view",
-                  "guests" : "view",
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "budget" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "contribution" : "view",
-                  "customFields" : "view",
-                  "chat" : "view",
-                  "auditLog" : "view",
-                  "tasks" : "view"
+               "moduleAccess": {
+                  "ticketing": "view",
+                  "users": "view",
+                  "roles": "view",
+                  "guests": "view",
+                  "inventory": "view",
+                  "timeline": "view",
+                  "budget": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "contribution": "view",
+                  "auditLog": "view",
+                  "tasks": "view"
                },
-               "name" : "Viewer",
-               "id" : "sys_role_viewer",
-               "description" : "Read-only access."
+               "name": "Viewer",
+               "id": "sys_role_viewer",
+               "description": "Read-only access."
             },
             {
-               "description" : "Institutional oversight.",
-               "moduleAccess" : {
-                  "roles" : "full",
-                  "budget" : "view",
-                  "users" : "full",
-                  "announcements" : "edit"
+               "description": "Institutional oversight.",
+               "moduleAccess": {
+                  "roles": "full",
+                  "budget": "view",
+                  "users": "full"
                },
-               "name" : "Principal/Admin",
-               "id" : "sys_role_principal"
+               "name": "Principal/Admin",
+               "id": "sys_role_principal"
             },
             {
-               "id" : "sys_role_teacher",
-               "moduleAccess" : {
-                  "chat" : "full",
-                  "timeline" : "edit",
-                  "roles" : "none",
-                  "users" : "none",
-                  "tasks" : "edit"
+               "id": "sys_role_teacher",
+               "moduleAccess": {
+                  "timeline": "edit",
+                  "roles": "none",
+                  "users": "none",
+                  "tasks": "edit"
                },
-               "name" : "Teacher Coordinator",
-               "description" : "Academic lead."
+               "name": "Teacher Coordinator",
+               "description": "Academic lead."
             },
             {
-               "description" : "Performing students.",
-               "moduleAccess" : {
-                  "roles" : "none",
-                  "chat" : "edit",
-                  "timeline" : "view",
-                  "users" : "none"
+               "description": "Performing students.",
+               "moduleAccess": {
+                  "roles": "none",
+                  "timeline": "view",
+                  "users": "none"
                },
-               "name" : "Student Participant",
-               "id" : "sys_role_student"
+               "name": "Student Participant",
+               "id": "sys_role_student"
             },
             {
-               "id" : "sys_role_judge",
-               "moduleAccess" : {
-                  "users" : "none",
-                  "timeline" : "view",
-                  "roles" : "none",
-                  "tasks" : "view"
+               "id": "sys_role_judge",
+               "moduleAccess": {
+                  "users": "none",
+                  "timeline": "view",
+                  "roles": "none",
+                  "tasks": "view"
                },
-               "name" : "Judge",
-               "description" : "Evaluating competitions."
+               "name": "Judge",
+               "description": "Evaluating competitions."
             }
          ],
-         "templateName" : "Quiz Competition",
-         "category" : "educational",
-         "defaultFields" : {
-            "contributionType" : "fixed",
-            "enabledModules" : [
+         "templateName": "Quiz Competition",
+         "category": "educational",
+         "defaultFields": {
+            "contributionType": "fixed",
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
@@ -216,47 +192,47 @@
                "roles",
                "userManagement"
             ],
-            "amount" : 0
+            "amount": 0
          },
-         "templateId" : "sys_quiz_comp_v1",
-         "timelineBlueprints" : [
+         "templateId": "sys_quiz_comp_v1",
+         "timelineBlueprints": [
             {
-               "phase" : "eventDay",
-               "id" : "sys_quiz_timeline_final",
-               "title" : "Grand Finale Round",
-               "dayNumber" : 1,
-               "description" : "Final series of questions for top teams.",
-               "timeOrOffset" : "04:30 PM",
-               "eventId" : "blueprint_dummy"
+               "phase": "eventDay",
+               "id": "sys_quiz_timeline_final",
+               "title": "Grand Finale Round",
+               "dayNumber": 1,
+               "description": "Final series of questions for top teams.",
+               "timeOrOffset": "04:30 PM",
+               "eventId": "blueprint_dummy"
             }
          ],
-         "version" : 2,
-         "description" : "Educational activity designed to test knowledge through a series of questions.",
-         "budgetBlueprints" : [
+         "version": 2,
+         "description": "Educational activity designed to test knowledge through a series of questions.",
+         "budgetBlueprints": [
             {
-               "title" : "Quiz Trophies & Certificates",
-               "estimatedCost" : 0,
-               "id" : "sys_quiz_budget_prizes",
-               "isMandatory" : true,
-               "eventId" : "blueprint_dummy",
-               "actualCost" : 0,
-               "category" : "Miscellaneous"
+               "title": "Quiz Trophies & Certificates",
+               "estimatedCost": 0,
+               "id": "sys_quiz_budget_prizes",
+               "isMandatory": true,
+               "eventId": "blueprint_dummy",
+               "actualCost": 0,
+               "category": "Miscellaneous"
             }
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "title" : "Finalize Quiz Questions",
-               "id" : "sys_quiz_task_questions",
-               "dependsOn" : [],
-               "eventId" : "blueprint_dummy",
-               "description" : "Prepare rounds like visual, rapid fire, and core topics.",
-               "phase" : "preEvent",
-               "status" : "pending",
-               "role" : "Organizer",
-               "dueOffset" : "T-3 days"
+               "title": "Finalize Quiz Questions",
+               "id": "sys_quiz_task_questions",
+               "dependsOn": [],
+               "eventId": "blueprint_dummy",
+               "description": "Prepare rounds like visual, rapid fire, and core topics.",
+               "phase": "preEvent",
+               "status": "pending",
+               "role": "Organizer",
+               "dueOffset": "T-3 days"
             }
          ],
-         "tags" : [
+         "tags": [
             "quiz",
             "knowledge",
             "academic",
@@ -265,5 +241,5 @@
          ]
       }
    ],
-   "schemaVersion" : 2
+   "schemaVersion": 2
 }

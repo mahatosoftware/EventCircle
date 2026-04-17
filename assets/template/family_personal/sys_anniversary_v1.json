@@ -1,250 +1,228 @@
 {
-   "schemaVersion" : 2,
-   "version" : 11,
-   "templates" : [
+   "schemaVersion": 2,
+   "version": 4,
+   "templates": [
       {
-         "roleBlueprints" : [
+         "roleBlueprints": [
             {
-               "description" : "Full access to all modules.",
-               "id" : "sys_role_admin",
-               "name" : "Admin",
-               "moduleAccess" : {
-                  "announcements" : "full",
-                  "ticketing" : "full",
-                  "users" : "full",
-                  "roles" : "full",
-                  "guests" : "full",
-                  "inventory" : "full",
-                  "timeline" : "full",
-                  "budget" : "full",
-                  "vendors" : "full",
-                  "location" : "full",
-                  "contribution" : "full",
-                  "chat" : "full",
-                  "customFields" : "full",
-                  "auditLog" : "full",
-                  "tasks" : "full"
+               "description": "Full access to all modules.",
+               "id": "sys_role_admin",
+               "name": "Admin",
+               "moduleAccess": {
+                  "ticketing": "full",
+                  "users": "full",
+                  "roles": "full",
+                  "guests": "full",
+                  "inventory": "full",
+                  "timeline": "full",
+                  "budget": "full",
+                  "vendors": "full",
+                  "location": "full",
+                  "contribution": "full",
+                  "auditLog": "full",
+                  "tasks": "full"
                }
             },
             {
-               "id" : "sys_role_organizer",
-               "moduleAccess" : {
-                  "location" : "edit",
-                  "vendors" : "edit",
-                  "budget" : "edit",
-                  "customFields" : "view",
-                  "chat" : "full",
-                  "contribution" : "edit",
-                  "auditLog" : "view",
-                  "tasks" : "edit",
-                  "announcements" : "edit",
-                  "ticketing" : "edit",
-                  "users" : "view",
-                  "roles" : "none",
-                  "guests" : "edit",
-                  "inventory" : "edit",
-                  "timeline" : "edit"
+               "id": "sys_role_organizer",
+               "moduleAccess": {
+                  "location": "edit",
+                  "vendors": "edit",
+                  "budget": "edit",
+                  "contribution": "edit",
+                  "auditLog": "view",
+                  "tasks": "edit",
+                  "ticketing": "edit",
+                  "users": "view",
+                  "roles": "none",
+                  "guests": "edit",
+                  "inventory": "edit",
+                  "timeline": "edit"
                },
-               "name" : "Organizer",
-               "description" : "Manage most event details."
+               "name": "Organizer",
+               "description": "Manage most event details."
             },
             {
-               "moduleAccess" : {
-                  "guests" : "view",
-                  "timeline" : "edit",
-                  "inventory" : "view",
-                  "ticketing" : "none",
-                  "announcements" : "edit",
-                  "roles" : "none",
-                  "users" : "none",
-                  "tasks" : "edit",
-                  "auditLog" : "none",
-                  "contribution" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "budget" : "view",
-                  "location" : "view",
-                  "vendors" : "view"
+               "moduleAccess": {
+                  "guests": "view",
+                  "timeline": "edit",
+                  "inventory": "view",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "tasks": "edit",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "budget": "view",
+                  "location": "view",
+                  "vendors": "view"
                },
-               "name" : "Coordinator",
-               "id" : "sys_role_coordinator",
-               "description" : "Manage tasks and timeline."
+               "name": "Coordinator",
+               "id": "sys_role_coordinator",
+               "description": "Manage tasks and timeline."
             },
             {
-               "name" : "Volunteer",
-               "moduleAccess" : {
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none",
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "chat" : "full",
-                  "customFields" : "none",
-                  "contribution" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "budget" : "none",
-                  "tasks" : "update",
-                  "auditLog" : "none"
+               "name": "Volunteer",
+               "moduleAccess": {
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "view",
+                  "contribution": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "budget": "none",
+                  "tasks": "update",
+                  "auditLog": "none"
                },
-               "id" : "sys_role_volunteer",
-               "description" : "Update task progress."
+               "id": "sys_role_volunteer",
+               "description": "Update task progress."
             },
             {
-               "description" : "Regular participant.",
-               "name" : "Participant",
-               "moduleAccess" : {
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "contribution" : "view",
-                  "customFields" : "none",
-                  "chat" : "edit",
-                  "budget" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none"
+               "description": "Regular participant.",
+               "name": "Participant",
+               "moduleAccess": {
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "contribution": "view",
+                  "budget": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none"
                },
-               "id" : "sys_role_participant"
+               "id": "sys_role_participant"
             },
             {
-               "name" : "Guest",
-               "moduleAccess" : {
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "customFields" : "none",
-                  "chat" : "none",
-                  "contribution" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none",
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none"
+               "name": "Guest",
+               "moduleAccess": {
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none",
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none"
                },
-               "id" : "sys_role_guest",
-               "description" : "Limited viewing access."
+               "id": "sys_role_guest",
+               "description": "Limited viewing access."
             },
             {
-               "description" : "Read-only access.",
-               "moduleAccess" : {
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "guests" : "view",
-                  "roles" : "view",
-                  "users" : "view",
-                  "ticketing" : "view",
-                  "announcements" : "view",
-                  "tasks" : "view",
-                  "auditLog" : "view",
-                  "customFields" : "view",
-                  "chat" : "view",
-                  "contribution" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "budget" : "view"
+               "description": "Read-only access.",
+               "moduleAccess": {
+                  "timeline": "view",
+                  "inventory": "view",
+                  "guests": "view",
+                  "roles": "view",
+                  "users": "view",
+                  "ticketing": "view",
+                  "tasks": "view",
+                  "auditLog": "view",
+                  "contribution": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "budget": "view"
                },
-               "name" : "Viewer",
-               "id" : "sys_role_viewer"
+               "name": "Viewer",
+               "id": "sys_role_viewer"
             }
          ],
-         "templateName" : "Anniversary Celebration",
-         "category" : "personal",
-         "defaultFields" : {
-            "amount" : 0,
-            "enabledModules" : [
+         "templateName": "Anniversary Celebration",
+         "category": "personal",
+         "defaultFields": {
+            "amount": 0,
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
                "guestManagement",
-               "communication",
                "location",
                "roles",
                "userManagement"
             ],
-            "contributionType" : "none"
+            "contributionType": "none"
          },
-         "version" : 3,
-         "description" : "Celebrate years of togetherness with a special gathering or party.",
-         "templateId" : "sys_anniversary_v1",
-         "timelineBlueprints" : [
+         "version": 3,
+         "description": "Celebrate years of togetherness with a special gathering or party.",
+         "templateId": "sys_anniversary_v1",
+         "timelineBlueprints": [
             {
-               "phase" : "eventDay",
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "08:00 PM",
-               "description" : "Main celebration highlight.",
-               "dayNumber" : 1,
-               "title" : "Cake Cutting Ceremony",
-               "id" : "sys_anniversary_timeline_cake"
+               "phase": "eventDay",
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "08:00 PM",
+               "description": "Main celebration highlight.",
+               "dayNumber": 1,
+               "title": "Cake Cutting Ceremony",
+               "id": "sys_anniversary_timeline_cake"
             }
          ],
-         "budgetBlueprints" : [
+         "budgetBlueprints": [
             {
-               "estimatedCost" : 0,
-               "title" : "Food & Drinks",
-               "isMandatory" : true,
-               "id" : "sys_anniversary_budget_food",
-               "eventId" : "blueprint_dummy",
-               "actualCost" : 0,
-               "category" : "Food"
+               "estimatedCost": 0,
+               "title": "Food & Drinks",
+               "isMandatory": true,
+               "id": "sys_anniversary_budget_food",
+               "eventId": "blueprint_dummy",
+               "actualCost": 0,
+               "category": "Food"
             },
             {
-               "isMandatory" : true,
-               "id" : "sys_anniversary_budget_cake",
-               "title" : "Cake",
-               "estimatedCost" : 0,
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "category" : "Food"
+               "isMandatory": true,
+               "id": "sys_anniversary_budget_cake",
+               "title": "Cake",
+               "estimatedCost": 0,
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "category": "Food"
             }
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "title" : "Select Party Venue",
-               "phase" : "preEvent",
-               "id" : "sys_anniversary_task_venue",
-               "dependsOn" : [],
-               "status" : "pending",
-               "eventId" : "blueprint_dummy",
-               "role" : "Organizer",
-               "description" : "Book a restaurant, hall, or plan for home setup.",
-               "dueOffset" : "T-30 days"
+               "title": "Select Party Venue",
+               "phase": "preEvent",
+               "id": "sys_anniversary_task_venue",
+               "dependsOn": [],
+               "status": "pending",
+               "eventId": "blueprint_dummy",
+               "role": "Organizer",
+               "description": "Book a restaurant, hall, or plan for home setup.",
+               "dueOffset": "T-30 days"
             },
             {
-               "description" : "Purchase or organize special gift for the couple.",
-               "dueOffset" : "T-10 days",
-               "eventId" : "blueprint_dummy",
-               "role" : "Organizer",
-               "id" : "sys_anniversary_task_gift",
-               "dependsOn" : [],
-               "status" : "pending",
-               "phase" : "preEvent",
-               "title" : "Arrange Anniversary Gift"
+               "description": "Purchase or organize special gift for the couple.",
+               "dueOffset": "T-10 days",
+               "eventId": "blueprint_dummy",
+               "role": "Organizer",
+               "id": "sys_anniversary_task_gift",
+               "dependsOn": [],
+               "status": "pending",
+               "phase": "preEvent",
+               "title": "Arrange Anniversary Gift"
             },
             {
-               "status" : "pending",
-               "phase" : "preEvent",
-               "dueOffset" : "T-7 days",
-               "role" : "Food Manager",
-               "id" : "sys_anniversary_task_cake",
-               "dependsOn" : [],
-               "title" : "Order Anniversary Cake",
-               "description" : "Finalize cake design and flavor.",
-               "eventId" : "blueprint_dummy"
+               "status": "pending",
+               "phase": "preEvent",
+               "dueOffset": "T-7 days",
+               "role": "Food Manager",
+               "id": "sys_anniversary_task_cake",
+               "dependsOn": [],
+               "title": "Order Anniversary Cake",
+               "description": "Finalize cake design and flavor.",
+               "eventId": "blueprint_dummy"
             }
          ],
-         "tags" : [
+         "tags": [
             "anniversary",
             "celebration",
             "milestone",
@@ -252,6 +230,5 @@
             "party"
          ]
       }
-   ],
-   "version" : 4
+   ]
 }

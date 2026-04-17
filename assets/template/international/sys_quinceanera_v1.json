@@ -1,59 +1,58 @@
 {
-   "schemaVersion" : 2,
-   "templates" : [
+   "schemaVersion": 2,
+   "templates": [
       {
-         "defaultFields" : {
-            "enabledModules" : [
+         "defaultFields": {
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
                "guestManagement",
-               "communication",
                "location",
                "roles",
                "inventory",
                "userManagement"
             ],
-            "amount" : 0,
-            "contributionType" : "none"
+            "amount": 0,
+            "contributionType": "none"
          },
-         "version" : 2,
-         "taskBlueprints" : [
+         "version": 2,
+         "taskBlueprints": [
             {
-               "title" : "Secure Quinceañera Gown",
-               "phase" : "preEvent",
-               "id" : "sys_quin_task_gown",
-               "dependsOn" : [],
-               "status" : "pending",
-               "eventId" : "blueprint_dummy",
-               "role" : "Organizer",
-               "description" : "Ensure the formal celebratory dress is ready and fitted.",
-               "dueOffset" : "T-90 days"
+               "title": "Secure Quincea\u00f1era Gown",
+               "phase": "preEvent",
+               "id": "sys_quin_task_gown",
+               "dependsOn": [],
+               "status": "pending",
+               "eventId": "blueprint_dummy",
+               "role": "Organizer",
+               "description": "Ensure the formal celebratory dress is ready and fitted.",
+               "dueOffset": "T-90 days"
             },
             {
-               "status" : "pending",
-               "phase" : "preEvent",
-               "dueOffset" : "T-60 days",
-               "role" : "Host",
-               "id" : "sys_quin_task_court",
-               "dependsOn" : [],
-               "title" : "Finalize Court of Honor (Damas y Chambelanes)",
-               "description" : "Coordinate roles for the celebratory entourage.",
-               "eventId" : "blueprint_dummy"
+               "status": "pending",
+               "phase": "preEvent",
+               "dueOffset": "T-60 days",
+               "role": "Host",
+               "id": "sys_quin_task_court",
+               "dependsOn": [],
+               "title": "Finalize Court of Honor (Damas y Chambelanes)",
+               "description": "Coordinate roles for the celebratory entourage.",
+               "eventId": "blueprint_dummy"
             }
          ],
-         "budgetBlueprints" : [
+         "budgetBlueprints": [
             {
-               "category" : "Venue",
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "title" : "Event Hall & Decor",
-               "estimatedCost" : 0,
-               "isMandatory" : true,
-               "id" : "sys_quin_budget_hall"
+               "category": "Venue",
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "title": "Event Hall & Decor",
+               "estimatedCost": 0,
+               "isMandatory": true,
+               "id": "sys_quin_budget_hall"
             }
          ],
-         "tags" : [
+         "tags": [
             "quinceanera",
             "birthday",
             "mexican",
@@ -61,178 +60,157 @@
             "formal",
             "party"
          ],
-         "roleBlueprints" : [
+         "roleBlueprints": [
             {
-               "moduleAccess" : {
-                  "inventory" : "full",
-                  "timeline" : "full",
-                  "guests" : "full",
-                  "users" : "full",
-                  "roles" : "full",
-                  "announcements" : "full",
-                  "ticketing" : "full",
-                  "auditLog" : "full",
-                  "tasks" : "full",
-                  "budget" : "full",
-                  "vendors" : "full",
-                  "location" : "full",
-                  "contribution" : "full",
-                  "chat" : "full",
-                  "customFields" : "full"
+               "moduleAccess": {
+                  "inventory": "full",
+                  "timeline": "full",
+                  "guests": "full",
+                  "users": "full",
+                  "roles": "full",
+                  "ticketing": "full",
+                  "auditLog": "full",
+                  "tasks": "full",
+                  "budget": "full",
+                  "vendors": "full",
+                  "location": "full",
+                  "contribution": "full"
                },
-               "name" : "Admin",
-               "id" : "sys_role_admin",
-               "description" : "Full access to all modules."
+               "name": "Admin",
+               "id": "sys_role_admin",
+               "description": "Full access to all modules."
             },
             {
-               "description" : "Manage most event details.",
-               "name" : "Organizer",
-               "moduleAccess" : {
-                  "inventory" : "edit",
-                  "timeline" : "edit",
-                  "guests" : "edit",
-                  "users" : "view",
-                  "roles" : "none",
-                  "announcements" : "edit",
-                  "ticketing" : "edit",
-                  "auditLog" : "view",
-                  "tasks" : "edit",
-                  "budget" : "edit",
-                  "location" : "edit",
-                  "vendors" : "edit",
-                  "contribution" : "edit",
-                  "customFields" : "view",
-                  "chat" : "full"
+               "description": "Manage most event details.",
+               "name": "Organizer",
+               "moduleAccess": {
+                  "inventory": "edit",
+                  "timeline": "edit",
+                  "guests": "edit",
+                  "users": "view",
+                  "roles": "none",
+                  "ticketing": "edit",
+                  "auditLog": "view",
+                  "tasks": "edit",
+                  "budget": "edit",
+                  "location": "edit",
+                  "vendors": "edit",
+                  "contribution": "edit"
                },
-               "id" : "sys_role_organizer"
+               "id": "sys_role_organizer"
             },
             {
-               "description" : "Manage tasks and timeline.",
-               "id" : "sys_role_coordinator",
-               "name" : "Coordinator",
-               "moduleAccess" : {
-                  "tasks" : "edit",
-                  "auditLog" : "none",
-                  "contribution" : "none",
-                  "chat" : "full",
-                  "customFields" : "none",
-                  "budget" : "view",
-                  "location" : "view",
-                  "vendors" : "view",
-                  "timeline" : "edit",
-                  "inventory" : "view",
-                  "guests" : "view",
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "edit"
+               "description": "Manage tasks and timeline.",
+               "id": "sys_role_coordinator",
+               "name": "Coordinator",
+               "moduleAccess": {
+                  "tasks": "edit",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "budget": "view",
+                  "location": "view",
+                  "vendors": "view",
+                  "timeline": "edit",
+                  "inventory": "view",
+                  "guests": "view",
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none"
                }
             },
             {
-               "id" : "sys_role_volunteer",
-               "moduleAccess" : {
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "guests" : "none",
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "contribution" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "update"
+               "id": "sys_role_volunteer",
+               "moduleAccess": {
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "guests": "none",
+                  "inventory": "view",
+                  "timeline": "view",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "update"
                },
-               "name" : "Volunteer",
-               "description" : "Update task progress."
+               "name": "Volunteer",
+               "description": "Update task progress."
             },
             {
-               "description" : "Regular participant.",
-               "name" : "Participant",
-               "moduleAccess" : {
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "guests" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view",
-                  "budget" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "contribution" : "view",
-                  "chat" : "edit",
-                  "customFields" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "none"
+               "description": "Regular participant.",
+               "name": "Participant",
+               "moduleAccess": {
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "guests": "none",
+                  "inventory": "none",
+                  "timeline": "view",
+                  "budget": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "contribution": "view",
+                  "auditLog": "none",
+                  "tasks": "none"
                },
-               "id" : "sys_role_participant"
+               "id": "sys_role_participant"
             },
             {
-               "moduleAccess" : {
-                  "contribution" : "none",
-                  "customFields" : "none",
-                  "chat" : "none",
-                  "budget" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "guests" : "none"
+               "moduleAccess": {
+                  "contribution": "none",
+                  "budget": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "guests": "none"
                },
-               "name" : "Guest",
-               "id" : "sys_role_guest",
-               "description" : "Limited viewing access."
+               "name": "Guest",
+               "id": "sys_role_guest",
+               "description": "Limited viewing access."
             },
             {
-               "id" : "sys_role_viewer",
-               "name" : "Viewer",
-               "moduleAccess" : {
-                  "customFields" : "view",
-                  "chat" : "view",
-                  "contribution" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "budget" : "view",
-                  "tasks" : "view",
-                  "auditLog" : "view",
-                  "ticketing" : "view",
-                  "announcements" : "view",
-                  "roles" : "view",
-                  "users" : "view",
-                  "guests" : "view",
-                  "timeline" : "view",
-                  "inventory" : "view"
+               "id": "sys_role_viewer",
+               "name": "Viewer",
+               "moduleAccess": {
+                  "contribution": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "budget": "view",
+                  "tasks": "view",
+                  "auditLog": "view",
+                  "ticketing": "view",
+                  "roles": "view",
+                  "users": "view",
+                  "guests": "view",
+                  "timeline": "view",
+                  "inventory": "view"
                },
-               "description" : "Read-only access."
+               "description": "Read-only access."
             }
          ],
-         "templateName" : "Quinceañera",
-         "category" : "personal",
-         "templateId" : "sys_quinceanera_v1",
-         "timelineBlueprints" : [
+         "templateName": "Quincea\u00f1era",
+         "category": "personal",
+         "templateId": "sys_quinceanera_v1",
+         "timelineBlueprints": [
             {
-               "id" : "sys_quin_timeline_waltz",
-               "phase" : "eventDay",
-               "title" : "The Grand Waltz (El Vals)",
-               "dayNumber" : 1,
-               "description" : "The main celebratory dance.",
-               "timeOrOffset" : "09:00 PM",
-               "eventId" : "blueprint_dummy"
+               "id": "sys_quin_timeline_waltz",
+               "phase": "eventDay",
+               "title": "The Grand Waltz (El Vals)",
+               "dayNumber": 1,
+               "description": "The main celebratory dance.",
+               "timeOrOffset": "09:00 PM",
+               "eventId": "blueprint_dummy"
             }
          ],
-         "description" : "Celebration of a girl's 15th birthday, marking her transition from childhood to maturity."
+         "description": "Celebration of a girl's 15th birthday, marking her transition from childhood to maturity."
       }
    ],
-   "version" : 4
+   "version": 4
 }

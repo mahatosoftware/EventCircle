@@ -1,253 +1,231 @@
 {
-   "schemaVersion" : 2,
-   "version" : 4,
-   "templates" : [
+   "schemaVersion": 2,
+   "version": 4,
+   "templates": [
       {
-         "category" : "communityAndCultural",
-         "defaultFields" : {
-            "amount" : 0,
-            "enabledModules" : [
+         "category": "communityAndCultural",
+         "defaultFields": {
+            "amount": 0,
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
                "guestManagement",
-               "communication",
                "location",
                "roles",
                "inventory",
                "userManagement",
                "contribution"
             ],
-            "contributionType" : "variable"
+            "contributionType": "variable"
          },
-         "roleBlueprints" : [
+         "roleBlueprints": [
             {
-               "description" : "Full access to all modules.",
-               "id" : "sys_role_admin",
-               "moduleAccess" : {
-                  "announcements" : "full",
-                  "ticketing" : "full",
-                  "users" : "full",
-                  "roles" : "full",
-                  "guests" : "full",
-                  "inventory" : "full",
-                  "timeline" : "full",
-                  "budget" : "full",
-                  "location" : "full",
-                  "vendors" : "full",
-                  "contribution" : "full",
-                  "chat" : "full",
-                  "customFields" : "full",
-                  "auditLog" : "full",
-                  "tasks" : "full"
+               "description": "Full access to all modules.",
+               "id": "sys_role_admin",
+               "moduleAccess": {
+                  "ticketing": "full",
+                  "users": "full",
+                  "roles": "full",
+                  "guests": "full",
+                  "inventory": "full",
+                  "timeline": "full",
+                  "budget": "full",
+                  "location": "full",
+                  "vendors": "full",
+                  "contribution": "full",
+                  "auditLog": "full",
+                  "tasks": "full"
                },
-               "name" : "Admin"
+               "name": "Admin"
             },
             {
-               "id" : "sys_role_organizer",
-               "name" : "Organizer",
-               "moduleAccess" : {
-                  "contribution" : "edit",
-                  "chat" : "full",
-                  "customFields" : "view",
-                  "budget" : "edit",
-                  "location" : "edit",
-                  "vendors" : "edit",
-                  "tasks" : "edit",
-                  "auditLog" : "view",
-                  "roles" : "none",
-                  "users" : "view",
-                  "ticketing" : "edit",
-                  "announcements" : "edit",
-                  "timeline" : "edit",
-                  "inventory" : "edit",
-                  "guests" : "edit"
+               "id": "sys_role_organizer",
+               "name": "Organizer",
+               "moduleAccess": {
+                  "contribution": "edit",
+                  "budget": "edit",
+                  "location": "edit",
+                  "vendors": "edit",
+                  "tasks": "edit",
+                  "auditLog": "view",
+                  "roles": "none",
+                  "users": "view",
+                  "ticketing": "edit",
+                  "timeline": "edit",
+                  "inventory": "edit",
+                  "guests": "edit"
                },
-               "description" : "Manage most event details."
+               "description": "Manage most event details."
             },
             {
-               "moduleAccess" : {
-                  "guests" : "view",
-                  "timeline" : "edit",
-                  "inventory" : "view",
-                  "ticketing" : "none",
-                  "announcements" : "edit",
-                  "roles" : "none",
-                  "users" : "none",
-                  "tasks" : "edit",
-                  "auditLog" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "contribution" : "none",
-                  "location" : "view",
-                  "vendors" : "view",
-                  "budget" : "view"
+               "moduleAccess": {
+                  "guests": "view",
+                  "timeline": "edit",
+                  "inventory": "view",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "tasks": "edit",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "location": "view",
+                  "vendors": "view",
+                  "budget": "view"
                },
-               "name" : "Coordinator",
-               "id" : "sys_role_coordinator",
-               "description" : "Manage tasks and timeline."
+               "name": "Coordinator",
+               "id": "sys_role_coordinator",
+               "description": "Manage tasks and timeline."
             },
             {
-               "description" : "Update task progress.",
-               "id" : "sys_role_volunteer",
-               "name" : "Volunteer",
-               "moduleAccess" : {
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "guests" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "update",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none",
-                  "chat" : "full",
-                  "customFields" : "none",
-                  "contribution" : "none"
+               "description": "Update task progress.",
+               "id": "sys_role_volunteer",
+               "name": "Volunteer",
+               "moduleAccess": {
+                  "inventory": "view",
+                  "timeline": "view",
+                  "guests": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "auditLog": "none",
+                  "tasks": "update",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none",
+                  "contribution": "none"
                }
             },
             {
-               "description" : "Regular participant.",
-               "name" : "Participant",
-               "moduleAccess" : {
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view",
-                  "guests" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none",
-                  "chat" : "edit",
-                  "customFields" : "none",
-                  "contribution" : "view",
-                  "auditLog" : "none",
-                  "tasks" : "none"
+               "description": "Regular participant.",
+               "name": "Participant",
+               "moduleAccess": {
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "inventory": "none",
+                  "timeline": "view",
+                  "guests": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none",
+                  "contribution": "view",
+                  "auditLog": "none",
+                  "tasks": "none"
                },
-               "id" : "sys_role_participant"
+               "id": "sys_role_participant"
             },
             {
-               "id" : "sys_role_guest",
-               "name" : "Guest",
-               "moduleAccess" : {
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "contribution" : "none",
-                  "chat" : "none",
-                  "customFields" : "none",
-                  "budget" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "guests" : "none",
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view"
+               "id": "sys_role_guest",
+               "name": "Guest",
+               "moduleAccess": {
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "budget": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "guests": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none"
                },
-               "description" : "Limited viewing access."
+               "description": "Limited viewing access."
             },
             {
-               "description" : "Read-only access.",
-               "id" : "sys_role_viewer",
-               "name" : "Viewer",
-               "moduleAccess" : {
-                  "contribution" : "view",
-                  "chat" : "view",
-                  "customFields" : "view",
-                  "budget" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "tasks" : "view",
-                  "auditLog" : "view",
-                  "ticketing" : "view",
-                  "announcements" : "view",
-                  "roles" : "view",
-                  "users" : "view",
-                  "guests" : "view",
-                  "timeline" : "view",
-                  "inventory" : "view"
+               "description": "Read-only access.",
+               "id": "sys_role_viewer",
+               "name": "Viewer",
+               "moduleAccess": {
+                  "contribution": "view",
+                  "budget": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "tasks": "view",
+                  "auditLog": "view",
+                  "ticketing": "view",
+                  "roles": "view",
+                  "users": "view",
+                  "guests": "view",
+                  "timeline": "view",
+                  "inventory": "view"
                }
             }
          ],
-         "templateName" : "Ratha Yatra",
-         "taskBlueprints" : [
+         "templateName": "Ratha Yatra",
+         "taskBlueprints": [
             {
-               "phase" : "preEvent",
-               "status" : "pending",
-               "role" : "Setup Team",
-               "dueOffset" : "T-7 days",
-               "title" : "Prepare/Decorate Chariots",
-               "id" : "sys_ratha_task_prepare_chariots",
-               "eventId" : "blueprint_dummy",
-               "description" : "Construct or decorate the Rathas for the deities."
+               "phase": "preEvent",
+               "status": "pending",
+               "role": "Setup Team",
+               "dueOffset": "T-7 days",
+               "title": "Prepare/Decorate Chariots",
+               "id": "sys_ratha_task_prepare_chariots",
+               "eventId": "blueprint_dummy",
+               "description": "Construct or decorate the Rathas for the deities."
             },
             {
-               "status" : "pending",
-               "id" : "sys_ratha_task_poda_pitha",
-               "title" : "Batch prepare Poda Pitha",
-               "phase" : "preEvent",
-               "dueOffset" : "T-1 day",
-               "description" : "Bake traditional Poda Pitha for offerings and distribution.",
-               "role" : "Food Manager",
-               "eventId" : "blueprint_dummy"
+               "status": "pending",
+               "id": "sys_ratha_task_poda_pitha",
+               "title": "Batch prepare Poda Pitha",
+               "phase": "preEvent",
+               "dueOffset": "T-1 day",
+               "description": "Bake traditional Poda Pitha for offerings and distribution.",
+               "role": "Food Manager",
+               "eventId": "blueprint_dummy"
             },
             {
-               "phase" : "eventDay",
-               "status" : "pending",
-               "role" : "Organizer",
-               "dueOffset" : "Morning 09:00 AM",
-               "title" : "Pahandi Rituals",
-               "id" : "sys_ratha_task_pahandi",
-               "eventId" : "blueprint_dummy",
-               "description" : "Coordinate the ceremonial procession of Lord Jagannath, Balabhadra, and Subhadra to the chariots."
+               "phase": "eventDay",
+               "status": "pending",
+               "role": "Organizer",
+               "dueOffset": "Morning 09:00 AM",
+               "title": "Pahandi Rituals",
+               "id": "sys_ratha_task_pahandi",
+               "eventId": "blueprint_dummy",
+               "description": "Coordinate the ceremonial procession of Lord Jagannath, Balabhadra, and Subhadra to the chariots."
             },
             {
-               "status" : "pending",
-               "phase" : "eventDay",
-               "dueOffset" : "Afternoon 02:00 PM",
-               "role" : "Organizer",
-               "id" : "sys_ratha_task_chhera_pahanra",
-               "title" : "Chhera Pahanra (Sweeping ritual)",
-               "description" : "Coordinate the symbolic sweeping of the chariots.",
-               "eventId" : "blueprint_dummy"
+               "status": "pending",
+               "phase": "eventDay",
+               "dueOffset": "Afternoon 02:00 PM",
+               "role": "Organizer",
+               "id": "sys_ratha_task_chhera_pahanra",
+               "title": "Chhera Pahanra (Sweeping ritual)",
+               "description": "Coordinate the symbolic sweeping of the chariots.",
+               "eventId": "blueprint_dummy"
             },
             {
-               "dueOffset" : "Afternoon 04:00 PM",
-               "role" : "Logistics",
-               "status" : "pending",
-               "phase" : "eventDay",
-               "description" : "Manage the crowd flow and ropes for pulling the chariots to the destination.",
-               "eventId" : "blueprint_dummy",
-               "id" : "sys_ratha_task_pulling_chariots",
-               "title" : "Chariot Pulling"
+               "dueOffset": "Afternoon 04:00 PM",
+               "role": "Logistics",
+               "status": "pending",
+               "phase": "eventDay",
+               "description": "Manage the crowd flow and ropes for pulling the chariots to the destination.",
+               "eventId": "blueprint_dummy",
+               "id": "sys_ratha_task_pulling_chariots",
+               "title": "Chariot Pulling"
             }
          ],
-         "budgetBlueprints" : [
+         "budgetBlueprints": [
             {
-               "estimatedCost" : 0,
-               "title" : "Chariot Decoration and Materials",
-               "id" : "sys_ratha_budget_decoration",
-               "isMandatory" : true,
-               "eventId" : "blueprint_dummy",
-               "category" : "Decoration"
+               "estimatedCost": 0,
+               "title": "Chariot Decoration and Materials",
+               "id": "sys_ratha_budget_decoration",
+               "isMandatory": true,
+               "eventId": "blueprint_dummy",
+               "category": "Decoration"
             },
             {
-               "category" : "Food",
-               "eventId" : "blueprint_dummy",
-               "id" : "sys_ratha_budget_prasad",
-               "isMandatory" : true,
-               "title" : "Poda Pitha and Chapan Bhog Prasad",
-               "estimatedCost" : 0
+               "category": "Food",
+               "eventId": "blueprint_dummy",
+               "id": "sys_ratha_budget_prasad",
+               "isMandatory": true,
+               "title": "Poda Pitha and Chapan Bhog Prasad",
+               "estimatedCost": 0
             }
          ],
-         "tags" : [
+         "tags": [
             "ratha yatra",
             "jagannath",
             "chariot",
@@ -257,37 +235,37 @@
             "puri",
             "poda pitha"
          ],
-         "templateId" : "sys_ratha_yatra_v1",
-         "timelineBlueprints" : [
+         "templateId": "sys_ratha_yatra_v1",
+         "timelineBlueprints": [
             {
-               "timeOrOffset" : "09:30 AM",
-               "eventId" : "blueprint_dummy",
-               "dayNumber" : 1,
-               "description" : "Deities moving to the chariots.",
-               "title" : "Pahandi Bije",
-               "id" : "sys_ratha_timeline_pahandi",
-               "phase" : "eventDay"
+               "timeOrOffset": "09:30 AM",
+               "eventId": "blueprint_dummy",
+               "dayNumber": 1,
+               "description": "Deities moving to the chariots.",
+               "title": "Pahandi Bije",
+               "id": "sys_ratha_timeline_pahandi",
+               "phase": "eventDay"
             },
             {
-               "phase" : "eventDay",
-               "id" : "sys_ratha_timeline_chhera_pahanra",
-               "title" : "Chhera Pahanra",
-               "dayNumber" : 1,
-               "description" : "Ceremonial sweeping of the decks.",
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "02:30 PM"
+               "phase": "eventDay",
+               "id": "sys_ratha_timeline_chhera_pahanra",
+               "title": "Chhera Pahanra",
+               "dayNumber": 1,
+               "description": "Ceremonial sweeping of the decks.",
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "02:30 PM"
             },
             {
-               "timeOrOffset" : "04:30 PM",
-               "eventId" : "blueprint_dummy",
-               "description" : "The chariot procession begins.",
-               "dayNumber" : 1,
-               "title" : "Ratha Tana (Pulling)",
-               "id" : "sys_ratha_timeline_pulling",
-               "phase" : "eventDay"
+               "timeOrOffset": "04:30 PM",
+               "eventId": "blueprint_dummy",
+               "description": "The chariot procession begins.",
+               "dayNumber": 1,
+               "title": "Ratha Tana (Pulling)",
+               "id": "sys_ratha_timeline_pulling",
+               "phase": "eventDay"
             }
          ],
-         "description" : "Organize the Chariot Festival of Lord Jagannath with Pahandi rituals, chariot pulling, and Poda Pitha distribution."
+         "description": "Organize the Chariot Festival of Lord Jagannath with Pahandi rituals, chariot pulling, and Poda Pitha distribution."
       }
    ]
 }

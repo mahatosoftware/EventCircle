@@ -1,270 +1,247 @@
 {
-   "schemaVersion" : 2,
-   "version" : 4,
-   "templates" : [
+   "schemaVersion": 2,
+   "version": 4,
+   "templates": [
       {
-         "defaultFields" : {
-            "enabledModules" : [
+         "defaultFields": {
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
                "guestManagement",
-               "communication",
                "location",
                "roles",
                "userManagement"
             ],
-            "amount" : 0,
-            "contributionType" : "none"
+            "amount": 0,
+            "contributionType": "none"
          },
-         "category" : "corporate",
-         "templateName" : "Office Party",
-         "roleBlueprints" : [
+         "category": "corporate",
+         "templateName": "Office Party",
+         "roleBlueprints": [
             {
-               "id" : "sys_role_admin",
-               "moduleAccess" : {
-                  "tasks" : "full",
-                  "auditLog" : "full",
-                  "chat" : "full",
-                  "customFields" : "full",
-                  "contribution" : "full",
-                  "location" : "full",
-                  "vendors" : "full",
-                  "budget" : "full",
-                  "timeline" : "full",
-                  "inventory" : "full",
-                  "guests" : "full",
-                  "roles" : "full",
-                  "users" : "full",
-                  "ticketing" : "full",
-                  "announcements" : "full"
+               "id": "sys_role_admin",
+               "moduleAccess": {
+                  "tasks": "full",
+                  "auditLog": "full",
+                  "contribution": "full",
+                  "location": "full",
+                  "vendors": "full",
+                  "budget": "full",
+                  "timeline": "full",
+                  "inventory": "full",
+                  "guests": "full",
+                  "roles": "full",
+                  "users": "full",
+                  "ticketing": "full"
                },
-               "name" : "Admin",
-               "description" : "Full access to all modules."
+               "name": "Admin",
+               "description": "Full access to all modules."
             },
             {
-               "id" : "sys_role_organizer",
-               "name" : "Organizer",
-               "moduleAccess" : {
-                  "roles" : "none",
-                  "users" : "view",
-                  "ticketing" : "edit",
-                  "announcements" : "edit",
-                  "timeline" : "edit",
-                  "inventory" : "edit",
-                  "guests" : "edit",
-                  "contribution" : "edit",
-                  "chat" : "full",
-                  "customFields" : "view",
-                  "budget" : "edit",
-                  "vendors" : "edit",
-                  "location" : "edit",
-                  "tasks" : "edit",
-                  "auditLog" : "view"
+               "id": "sys_role_organizer",
+               "name": "Organizer",
+               "moduleAccess": {
+                  "roles": "none",
+                  "users": "view",
+                  "ticketing": "edit",
+                  "timeline": "edit",
+                  "inventory": "edit",
+                  "guests": "edit",
+                  "contribution": "edit",
+                  "budget": "edit",
+                  "vendors": "edit",
+                  "location": "edit",
+                  "tasks": "edit",
+                  "auditLog": "view"
                },
-               "description" : "Manage most event details."
+               "description": "Manage most event details."
             },
             {
-               "id" : "sys_role_coordinator",
-               "name" : "Coordinator",
-               "moduleAccess" : {
-                  "auditLog" : "none",
-                  "tasks" : "edit",
-                  "budget" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "contribution" : "none",
-                  "chat" : "full",
-                  "customFields" : "none",
-                  "guests" : "view",
-                  "inventory" : "view",
-                  "timeline" : "edit",
-                  "announcements" : "edit",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none"
+               "id": "sys_role_coordinator",
+               "name": "Coordinator",
+               "moduleAccess": {
+                  "auditLog": "none",
+                  "tasks": "edit",
+                  "budget": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "contribution": "none",
+                  "guests": "view",
+                  "inventory": "view",
+                  "timeline": "edit",
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none"
                },
-               "description" : "Manage tasks and timeline."
+               "description": "Manage tasks and timeline."
             },
             {
-               "id" : "sys_role_volunteer",
-               "name" : "Volunteer",
-               "moduleAccess" : {
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "guests" : "none",
-                  "budget" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "contribution" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "auditLog" : "none",
-                  "tasks" : "update"
+               "id": "sys_role_volunteer",
+               "name": "Volunteer",
+               "moduleAccess": {
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "inventory": "view",
+                  "timeline": "view",
+                  "guests": "none",
+                  "budget": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "update"
                },
-               "description" : "Update task progress."
+               "description": "Update task progress."
             },
             {
-               "id" : "sys_role_participant",
-               "name" : "Participant",
-               "moduleAccess" : {
-                  "budget" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "contribution" : "view",
-                  "customFields" : "none",
-                  "chat" : "edit",
-                  "auditLog" : "none",
-                  "tasks" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "guests" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view"
+               "id": "sys_role_participant",
+               "name": "Participant",
+               "moduleAccess": {
+                  "budget": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "contribution": "view",
+                  "auditLog": "none",
+                  "tasks": "none",
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "guests": "none",
+                  "inventory": "none",
+                  "timeline": "view"
                },
-               "description" : "Regular participant."
+               "description": "Regular participant."
             },
             {
-               "id" : "sys_role_guest",
-               "moduleAccess" : {
-                  "inventory" : "none",
-                  "timeline" : "view",
-                  "guests" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none",
-                  "chat" : "none",
-                  "customFields" : "none",
-                  "contribution" : "none"
+               "id": "sys_role_guest",
+               "moduleAccess": {
+                  "inventory": "none",
+                  "timeline": "view",
+                  "guests": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "auditLog": "none",
+                  "tasks": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none",
+                  "contribution": "none"
                },
-               "name" : "Guest",
-               "description" : "Limited viewing access."
+               "name": "Guest",
+               "description": "Limited viewing access."
             },
             {
-               "name" : "Viewer",
-               "moduleAccess" : {
-                  "announcements" : "view",
-                  "ticketing" : "view",
-                  "users" : "view",
-                  "roles" : "view",
-                  "guests" : "view",
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "budget" : "view",
-                  "location" : "view",
-                  "vendors" : "view",
-                  "contribution" : "view",
-                  "customFields" : "view",
-                  "chat" : "view",
-                  "auditLog" : "view",
-                  "tasks" : "view"
+               "name": "Viewer",
+               "moduleAccess": {
+                  "ticketing": "view",
+                  "users": "view",
+                  "roles": "view",
+                  "guests": "view",
+                  "inventory": "view",
+                  "timeline": "view",
+                  "budget": "view",
+                  "location": "view",
+                  "vendors": "view",
+                  "contribution": "view",
+                  "auditLog": "view",
+                  "tasks": "view"
                },
-               "id" : "sys_role_viewer",
-               "description" : "Read-only access."
+               "id": "sys_role_viewer",
+               "description": "Read-only access."
             },
             {
-               "description" : "Corporate execution lead.",
-               "moduleAccess" : {
-                  "tasks" : "full",
-                  "roles" : "none",
-                  "budget" : "edit",
-                  "users" : "view",
-                  "vendors" : "full"
+               "description": "Corporate execution lead.",
+               "moduleAccess": {
+                  "tasks": "full",
+                  "roles": "none",
+                  "budget": "edit",
+                  "users": "view",
+                  "vendors": "full"
                },
-               "name" : "Event Manager",
-               "id" : "sys_role_manager"
+               "name": "Event Manager",
+               "id": "sys_role_manager"
             },
             {
-               "description" : "Department coordination.",
-               "id" : "sys_role_hr",
-               "name" : "HR Coordinator",
-               "moduleAccess" : {
-                  "users" : "view",
-                  "roles" : "none",
-                  "guests" : "edit",
-                  "announcements" : "edit"
+               "description": "Department coordination.",
+               "id": "sys_role_hr",
+               "name": "HR Coordinator",
+               "moduleAccess": {
+                  "users": "view",
+                  "roles": "none",
+                  "guests": "edit"
                }
             },
             {
-               "moduleAccess" : {
-                  "users" : "none",
-                  "location" : "view",
-                  "roles" : "none",
-                  "timeline" : "view"
+               "moduleAccess": {
+                  "users": "none",
+                  "location": "view",
+                  "roles": "none",
+                  "timeline": "view"
                },
-               "name" : "Speaker",
-               "id" : "sys_role_speaker",
-               "description" : "Session presenter."
+               "name": "Speaker",
+               "id": "sys_role_speaker",
+               "description": "Session presenter."
             },
             {
-               "id" : "sys_role_sponsor",
-               "name" : "Sponsor Manager",
-               "moduleAccess" : {
-                  "users" : "view",
-                  "vendors" : "edit",
-                  "location" : "view",
-                  "roles" : "none"
+               "id": "sys_role_sponsor",
+               "name": "Sponsor Manager",
+               "moduleAccess": {
+                  "users": "view",
+                  "vendors": "edit",
+                  "location": "view",
+                  "roles": "none"
                },
-               "description" : "Branding lead."
+               "description": "Branding lead."
             }
          ],
-         "tags" : [
+         "tags": [
             "office",
             "corporate",
             "party",
             "team building",
             "celebration"
          ],
-         "budgetBlueprints" : [
+         "budgetBlueprints": [
             {
-               "category" : "Food",
-               "eventId" : "blueprint_dummy",
-               "actualCost" : 0,
-               "estimatedCost" : 0,
-               "title" : "Catering & Snacks",
-               "isMandatory" : true,
-               "id" : "sys_office_budget_food"
+               "category": "Food",
+               "eventId": "blueprint_dummy",
+               "actualCost": 0,
+               "estimatedCost": 0,
+               "title": "Catering & Snacks",
+               "isMandatory": true,
+               "id": "sys_office_budget_food"
             }
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "role" : "Organizer",
-               "eventId" : "blueprint_dummy",
-               "dueOffset" : "T-10 days",
-               "description" : "Select a theme and decoration style.",
-               "title" : "Finalize Party Theme",
-               "phase" : "preEvent",
-               "dependsOn" : [],
-               "status" : "pending",
-               "id" : "sys_office_task_theme"
+               "role": "Organizer",
+               "eventId": "blueprint_dummy",
+               "dueOffset": "T-10 days",
+               "description": "Select a theme and decoration style.",
+               "title": "Finalize Party Theme",
+               "phase": "preEvent",
+               "dependsOn": [],
+               "status": "pending",
+               "id": "sys_office_task_theme"
             }
          ],
-         "templateId" : "sys_office_party_v1",
-         "timelineBlueprints" : [
+         "templateId": "sys_office_party_v1",
+         "timelineBlueprints": [
             {
-               "id" : "sys_office_timeline_awards",
-               "phase" : "eventDay",
-               "title" : "Recognition & Rewards",
-               "dayNumber" : 1,
-               "description" : "Brief ceremony for employee recognition.",
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "03:00 PM"
+               "id": "sys_office_timeline_awards",
+               "phase": "eventDay",
+               "title": "Recognition & Rewards",
+               "dayNumber": 1,
+               "description": "Brief ceremony for employee recognition.",
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "03:00 PM"
             }
          ],
-         "description" : "Casual gathering or celebration for team members within the office or at a venue.",
-         "version" : 2
+         "description": "Casual gathering or celebration for team members within the office or at a venue.",
+         "version": 2
       }
    ]
 }

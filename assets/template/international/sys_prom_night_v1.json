@@ -1,237 +1,215 @@
 {
-   "templates" : [
+   "templates": [
       {
-         "defaultFields" : {
-            "contributionType" : "fixed",
-            "amount" : 0,
-            "enabledModules" : [
+         "defaultFields": {
+            "contributionType": "fixed",
+            "amount": 0,
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
                "guestManagement",
-               "communication",
                "location",
                "roles",
                "inventory",
                "userManagement"
             ]
          },
-         "tags" : [
+         "tags": [
             "prom",
             "formal",
             "dance",
             "academic",
             "party"
          ],
-         "budgetBlueprints" : [
+         "budgetBlueprints": [
             {
-               "category" : "Venue",
-               "isMandatory" : true,
-               "id" : "sys_prom_budget_venue",
-               "title" : "Ballroom/Hall Rental",
-               "estimatedCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "actualCost" : 0
+               "category": "Venue",
+               "isMandatory": true,
+               "id": "sys_prom_budget_venue",
+               "title": "Ballroom/Hall Rental",
+               "estimatedCost": 0,
+               "eventId": "blueprint_dummy",
+               "actualCost": 0
             }
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "role" : "Organizer",
-               "eventId" : "blueprint_dummy",
-               "dueOffset" : "T-15 days",
-               "description" : "Prepare voting method for and coronation.",
-               "title" : "Organize Prom King/Queen Vote",
-               "phase" : "preEvent",
-               "status" : "pending",
-               "dependsOn" : [],
-               "id" : "sys_prom_task_king"
+               "role": "Organizer",
+               "eventId": "blueprint_dummy",
+               "dueOffset": "T-15 days",
+               "description": "Prepare voting method for and coronation.",
+               "title": "Organize Prom King/Queen Vote",
+               "phase": "preEvent",
+               "status": "pending",
+               "dependsOn": [],
+               "id": "sys_prom_task_king"
             },
             {
-               "eventId" : "blueprint_dummy",
-               "description" : "Secure limousine or group cars.",
-               "title" : "Arrange Group Transportation",
-               "id" : "sys_prom_task_limo",
-               "dependsOn" : [],
-               "role" : "Logistics",
-               "dueOffset" : "T-30 days",
-               "phase" : "preEvent",
-               "status" : "pending"
+               "eventId": "blueprint_dummy",
+               "description": "Secure limousine or group cars.",
+               "title": "Arrange Group Transportation",
+               "id": "sys_prom_task_limo",
+               "dependsOn": [],
+               "role": "Logistics",
+               "dueOffset": "T-30 days",
+               "phase": "preEvent",
+               "status": "pending"
             }
          ],
-         "version" : 2,
-         "category" : "personal",
-         "templateName" : "Prom Night",
-         "roleBlueprints" : [
+         "version": 2,
+         "category": "personal",
+         "templateName": "Prom Night",
+         "roleBlueprints": [
             {
-               "description" : "Full access to all modules.",
-               "name" : "Admin",
-               "moduleAccess" : {
-                  "contribution" : "full",
-                  "chat" : "full",
-                  "customFields" : "full",
-                  "budget" : "full",
-                  "vendors" : "full",
-                  "location" : "full",
-                  "tasks" : "full",
-                  "auditLog" : "full",
-                  "ticketing" : "full",
-                  "announcements" : "full",
-                  "roles" : "full",
-                  "users" : "full",
-                  "guests" : "full",
-                  "timeline" : "full",
-                  "inventory" : "full"
+               "description": "Full access to all modules.",
+               "name": "Admin",
+               "moduleAccess": {
+                  "contribution": "full",
+                  "budget": "full",
+                  "vendors": "full",
+                  "location": "full",
+                  "tasks": "full",
+                  "auditLog": "full",
+                  "ticketing": "full",
+                  "roles": "full",
+                  "users": "full",
+                  "guests": "full",
+                  "timeline": "full",
+                  "inventory": "full"
                },
-               "id" : "sys_role_admin"
+               "id": "sys_role_admin"
             },
             {
-               "id" : "sys_role_organizer",
-               "moduleAccess" : {
-                  "auditLog" : "view",
-                  "tasks" : "edit",
-                  "location" : "edit",
-                  "vendors" : "edit",
-                  "budget" : "edit",
-                  "customFields" : "view",
-                  "chat" : "full",
-                  "contribution" : "edit",
-                  "guests" : "edit",
-                  "inventory" : "edit",
-                  "timeline" : "edit",
-                  "announcements" : "edit",
-                  "ticketing" : "edit",
-                  "users" : "view",
-                  "roles" : "none"
+               "id": "sys_role_organizer",
+               "moduleAccess": {
+                  "auditLog": "view",
+                  "tasks": "edit",
+                  "location": "edit",
+                  "vendors": "edit",
+                  "budget": "edit",
+                  "contribution": "edit",
+                  "guests": "edit",
+                  "inventory": "edit",
+                  "timeline": "edit",
+                  "ticketing": "edit",
+                  "users": "view",
+                  "roles": "none"
                },
-               "name" : "Organizer",
-               "description" : "Manage most event details."
+               "name": "Organizer",
+               "description": "Manage most event details."
             },
             {
-               "moduleAccess" : {
-                  "ticketing" : "none",
-                  "announcements" : "edit",
-                  "roles" : "none",
-                  "users" : "none",
-                  "guests" : "view",
-                  "timeline" : "edit",
-                  "inventory" : "view",
-                  "contribution" : "none",
-                  "chat" : "full",
-                  "customFields" : "none",
-                  "budget" : "view",
-                  "vendors" : "view",
-                  "location" : "view",
-                  "tasks" : "edit",
-                  "auditLog" : "none"
+               "moduleAccess": {
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "guests": "view",
+                  "timeline": "edit",
+                  "inventory": "view",
+                  "contribution": "none",
+                  "budget": "view",
+                  "vendors": "view",
+                  "location": "view",
+                  "tasks": "edit",
+                  "auditLog": "none"
                },
-               "name" : "Coordinator",
-               "id" : "sys_role_coordinator",
-               "description" : "Manage tasks and timeline."
+               "name": "Coordinator",
+               "id": "sys_role_coordinator",
+               "description": "Manage tasks and timeline."
             },
             {
-               "description" : "Update task progress.",
-               "name" : "Volunteer",
-               "moduleAccess" : {
-                  "tasks" : "update",
-                  "auditLog" : "none",
-                  "contribution" : "none",
-                  "chat" : "full",
-                  "customFields" : "none",
-                  "budget" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none"
+               "description": "Update task progress.",
+               "name": "Volunteer",
+               "moduleAccess": {
+                  "tasks": "update",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "budget": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "view",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none"
                },
-               "id" : "sys_role_volunteer"
+               "id": "sys_role_volunteer"
             },
             {
-               "id" : "sys_role_participant",
-               "moduleAccess" : {
-                  "auditLog" : "none",
-                  "tasks" : "none",
-                  "budget" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "contribution" : "view",
-                  "chat" : "edit",
-                  "customFields" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view",
-                  "guests" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none"
+               "id": "sys_role_participant",
+               "moduleAccess": {
+                  "auditLog": "none",
+                  "tasks": "none",
+                  "budget": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "contribution": "view",
+                  "inventory": "none",
+                  "timeline": "view",
+                  "guests": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none"
                },
-               "name" : "Participant",
-               "description" : "Regular participant."
+               "name": "Participant",
+               "description": "Regular participant."
             },
             {
-               "id" : "sys_role_guest",
-               "name" : "Guest",
-               "moduleAccess" : {
-                  "vendors" : "none",
-                  "location" : "view",
-                  "budget" : "none",
-                  "customFields" : "none",
-                  "chat" : "none",
-                  "contribution" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view",
-                  "guests" : "none"
+               "id": "sys_role_guest",
+               "name": "Guest",
+               "moduleAccess": {
+                  "vendors": "none",
+                  "location": "view",
+                  "budget": "none",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "inventory": "none",
+                  "timeline": "view",
+                  "guests": "none"
                },
-               "description" : "Limited viewing access."
+               "description": "Limited viewing access."
             },
             {
-               "description" : "Read-only access.",
-               "id" : "sys_role_viewer",
-               "name" : "Viewer",
-               "moduleAccess" : {
-                  "auditLog" : "view",
-                  "tasks" : "view",
-                  "location" : "view",
-                  "vendors" : "view",
-                  "budget" : "view",
-                  "customFields" : "view",
-                  "chat" : "view",
-                  "contribution" : "view",
-                  "guests" : "view",
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "announcements" : "view",
-                  "ticketing" : "view",
-                  "users" : "view",
-                  "roles" : "view"
+               "description": "Read-only access.",
+               "id": "sys_role_viewer",
+               "name": "Viewer",
+               "moduleAccess": {
+                  "auditLog": "view",
+                  "tasks": "view",
+                  "location": "view",
+                  "vendors": "view",
+                  "budget": "view",
+                  "contribution": "view",
+                  "guests": "view",
+                  "inventory": "view",
+                  "timeline": "view",
+                  "ticketing": "view",
+                  "users": "view",
+                  "roles": "view"
                }
             }
          ],
-         "timelineBlueprints" : [
+         "timelineBlueprints": [
             {
-               "phase" : "eventDay",
-               "description" : "Defining moment of the night.",
-               "dayNumber" : 1,
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "10:30 PM",
-               "id" : "sys_prom_timeline_coronation",
-               "title" : "Coronation & Slow Dance"
+               "phase": "eventDay",
+               "description": "Defining moment of the night.",
+               "dayNumber": 1,
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "10:30 PM",
+               "id": "sys_prom_timeline_coronation",
+               "title": "Coronation & Slow Dance"
             }
          ],
-         "templateId" : "sys_prom_night_v1",
-         "description" : "Formal dance event for high school or college students featuring formal dress and dance."
+         "templateId": "sys_prom_night_v1",
+         "description": "Formal dance event for high school or college students featuring formal dress and dance."
       }
    ],
-   "version" : 4,
-   "schemaVersion" : 2
+   "version": 4,
+   "schemaVersion": 2
 }

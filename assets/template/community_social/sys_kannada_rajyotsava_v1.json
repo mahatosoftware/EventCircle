@@ -1,378 +1,356 @@
 {
-   "templates" : [
+   "templates": [
       {
-         "roleBlueprints" : [
+         "roleBlueprints": [
             {
-               "description" : "Full access to all modules.",
-               "name" : "Admin",
-               "moduleAccess" : {
-                  "chat" : "full",
-                  "customFields" : "full",
-                  "contribution" : "full",
-                  "location" : "full",
-                  "vendors" : "full",
-                  "budget" : "full",
-                  "tasks" : "full",
-                  "auditLog" : "full",
-                  "ticketing" : "full",
-                  "announcements" : "full",
-                  "roles" : "full",
-                  "users" : "full",
-                  "guests" : "full",
-                  "timeline" : "full",
-                  "inventory" : "full"
+               "description": "Full access to all modules.",
+               "name": "Admin",
+               "moduleAccess": {
+                  "contribution": "full",
+                  "location": "full",
+                  "vendors": "full",
+                  "budget": "full",
+                  "tasks": "full",
+                  "auditLog": "full",
+                  "ticketing": "full",
+                  "roles": "full",
+                  "users": "full",
+                  "guests": "full",
+                  "timeline": "full",
+                  "inventory": "full"
                },
-               "id" : "sys_role_admin"
+               "id": "sys_role_admin"
             },
             {
-               "name" : "Organizer",
-               "moduleAccess" : {
-                  "ticketing" : "edit",
-                  "announcements" : "edit",
-                  "roles" : "none",
-                  "users" : "view",
-                  "guests" : "edit",
-                  "timeline" : "edit",
-                  "inventory" : "edit",
-                  "contribution" : "edit",
-                  "customFields" : "view",
-                  "chat" : "full",
-                  "budget" : "edit",
-                  "vendors" : "edit",
-                  "location" : "edit",
-                  "tasks" : "edit",
-                  "auditLog" : "view"
+               "name": "Organizer",
+               "moduleAccess": {
+                  "ticketing": "edit",
+                  "roles": "none",
+                  "users": "view",
+                  "guests": "edit",
+                  "timeline": "edit",
+                  "inventory": "edit",
+                  "contribution": "edit",
+                  "budget": "edit",
+                  "vendors": "edit",
+                  "location": "edit",
+                  "tasks": "edit",
+                  "auditLog": "view"
                },
-               "id" : "sys_role_organizer",
-               "description" : "Manage most event details."
+               "id": "sys_role_organizer",
+               "description": "Manage most event details."
             },
             {
-               "description" : "Manage tasks and timeline.",
-               "id" : "sys_role_coordinator",
-               "moduleAccess" : {
-                  "budget" : "view",
-                  "location" : "view",
-                  "vendors" : "view",
-                  "contribution" : "none",
-                  "chat" : "full",
-                  "customFields" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "edit",
-                  "announcements" : "edit",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "guests" : "view",
-                  "inventory" : "view",
-                  "timeline" : "edit"
+               "description": "Manage tasks and timeline.",
+               "id": "sys_role_coordinator",
+               "moduleAccess": {
+                  "budget": "view",
+                  "location": "view",
+                  "vendors": "view",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "edit",
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "guests": "view",
+                  "inventory": "view",
+                  "timeline": "edit"
                },
-               "name" : "Coordinator"
+               "name": "Coordinator"
             },
             {
-               "description" : "Update task progress.",
-               "id" : "sys_role_volunteer",
-               "name" : "Volunteer",
-               "moduleAccess" : {
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "guests" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "update",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "budget" : "none",
-                  "chat" : "full",
-                  "customFields" : "none",
-                  "contribution" : "none"
+               "description": "Update task progress.",
+               "id": "sys_role_volunteer",
+               "name": "Volunteer",
+               "moduleAccess": {
+                  "inventory": "view",
+                  "timeline": "view",
+                  "guests": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "auditLog": "none",
+                  "tasks": "update",
+                  "vendors": "none",
+                  "location": "view",
+                  "budget": "none",
+                  "contribution": "none"
                }
             },
             {
-               "description" : "Regular participant.",
-               "name" : "Participant",
-               "moduleAccess" : {
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view",
-                  "guests" : "none",
-                  "budget" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "contribution" : "view",
-                  "customFields" : "none",
-                  "chat" : "edit",
-                  "auditLog" : "none",
-                  "tasks" : "none"
+               "description": "Regular participant.",
+               "name": "Participant",
+               "moduleAccess": {
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "inventory": "none",
+                  "timeline": "view",
+                  "guests": "none",
+                  "budget": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "contribution": "view",
+                  "auditLog": "none",
+                  "tasks": "none"
                },
-               "id" : "sys_role_participant"
+               "id": "sys_role_participant"
             },
             {
-               "description" : "Limited viewing access.",
-               "moduleAccess" : {
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none",
-                  "customFields" : "none",
-                  "chat" : "none",
-                  "contribution" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "users" : "none",
-                  "roles" : "none",
-                  "guests" : "none",
-                  "inventory" : "none",
-                  "timeline" : "view"
+               "description": "Limited viewing access.",
+               "moduleAccess": {
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "none",
+                  "ticketing": "none",
+                  "users": "none",
+                  "roles": "none",
+                  "guests": "none",
+                  "inventory": "none",
+                  "timeline": "view"
                },
-               "name" : "Guest",
-               "id" : "sys_role_guest"
+               "name": "Guest",
+               "id": "sys_role_guest"
             },
             {
-               "description" : "Read-only access.",
-               "id" : "sys_role_viewer",
-               "moduleAccess" : {
-                  "ticketing" : "view",
-                  "announcements" : "view",
-                  "roles" : "view",
-                  "users" : "view",
-                  "guests" : "view",
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "contribution" : "view",
-                  "chat" : "view",
-                  "customFields" : "view",
-                  "budget" : "view",
-                  "location" : "view",
-                  "vendors" : "view",
-                  "tasks" : "view",
-                  "auditLog" : "view"
+               "description": "Read-only access.",
+               "id": "sys_role_viewer",
+               "moduleAccess": {
+                  "ticketing": "view",
+                  "roles": "view",
+                  "users": "view",
+                  "guests": "view",
+                  "timeline": "view",
+                  "inventory": "view",
+                  "contribution": "view",
+                  "budget": "view",
+                  "location": "view",
+                  "vendors": "view",
+                  "tasks": "view",
+                  "auditLog": "view"
                },
-               "name" : "Viewer"
+               "name": "Viewer"
             }
          ],
-         "templateName" : "Kannada Rajyotsava",
-         "category" : "communityAndCultural",
-         "defaultFields" : {
-            "enabledModules" : [
+         "templateName": "Kannada Rajyotsava",
+         "category": "communityAndCultural",
+         "defaultFields": {
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
                "guestManagement",
-               "communication",
                "location",
                "roles",
                "inventory",
                "userManagement",
                "contribution"
             ],
-            "amount" : 0,
-            "contributionType" : "variable"
+            "amount": 0,
+            "contributionType": "variable"
          },
-         "description" : "Celebrate Karnataka Formation Day with flag hoisting, state anthem, and traditional Kannada cultural programs.",
-         "timelineBlueprints" : [
+         "description": "Celebrate Karnataka Formation Day with flag hoisting, state anthem, and traditional Kannada cultural programs.",
+         "timelineBlueprints": [
             {
-               "phase" : "eventDay",
-               "title" : "Flag Hoisting & Naada Geethe",
-               "id" : "sys_rajyotsava_timeline_flag_hoisting",
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "09:00 AM",
-               "dayNumber" : 1,
-               "description" : "Opening ceremony with the state flag and anthem."
+               "phase": "eventDay",
+               "title": "Flag Hoisting & Naada Geethe",
+               "id": "sys_rajyotsava_timeline_flag_hoisting",
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "09:00 AM",
+               "dayNumber": 1,
+               "description": "Opening ceremony with the state flag and anthem."
             },
             {
-               "phase" : "eventDay",
-               "title" : "Inaugural Speech & Lamp Lighting",
-               "id" : "sys_rajyotsava_timeline_inauguration",
-               "timeOrOffset" : "09:30 AM",
-               "eventId" : "blueprint_dummy",
-               "description" : "Welcome address and keynote about Karnataka heritage.",
-               "dayNumber" : 1
+               "phase": "eventDay",
+               "title": "Inaugural Speech & Lamp Lighting",
+               "id": "sys_rajyotsava_timeline_inauguration",
+               "timeOrOffset": "09:30 AM",
+               "eventId": "blueprint_dummy",
+               "description": "Welcome address and keynote about Karnataka heritage.",
+               "dayNumber": 1
             },
             {
-               "phase" : "eventDay",
-               "id" : "sys_rajyotsava_timeline_cultural_start",
-               "title" : "Traditional Folk Performances",
-               "dayNumber" : 1,
-               "description" : "Dollu Kunitha, folk songs, and regional dances.",
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "10:30 AM"
+               "phase": "eventDay",
+               "id": "sys_rajyotsava_timeline_cultural_start",
+               "title": "Traditional Folk Performances",
+               "dayNumber": 1,
+               "description": "Dollu Kunitha, folk songs, and regional dances.",
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "10:30 AM"
             },
             {
-               "phase" : "eventDay",
-               "title" : "Rajyotsava Awards Ceremony",
-               "id" : "sys_rajyotsava_timeline_awards",
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "12:00 PM",
-               "description" : "Recognizing community members for excellence.",
-               "dayNumber" : 1
+               "phase": "eventDay",
+               "title": "Rajyotsava Awards Ceremony",
+               "id": "sys_rajyotsava_timeline_awards",
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "12:00 PM",
+               "description": "Recognizing community members for excellence.",
+               "dayNumber": 1
             },
             {
-               "phase" : "eventDay",
-               "dayNumber" : 1,
-               "description" : "Community dining with traditional dishes.",
-               "timeOrOffset" : "01:00 PM",
-               "eventId" : "blueprint_dummy",
-               "id" : "sys_rajyotsava_timeline_lunch",
-               "title" : "Grand Karnataka Lunch"
+               "phase": "eventDay",
+               "dayNumber": 1,
+               "description": "Community dining with traditional dishes.",
+               "timeOrOffset": "01:00 PM",
+               "eventId": "blueprint_dummy",
+               "id": "sys_rajyotsava_timeline_lunch",
+               "title": "Grand Karnataka Lunch"
             }
          ],
-         "templateId" : "sys_kannada_rajyotsava_v1",
-         "taskBlueprints" : [
+         "templateId": "sys_kannada_rajyotsava_v1",
+         "taskBlueprints": [
             {
-               "description" : "Purchase Karnataka state flags, buntings, and yellow/red decoration materials.",
-               "eventId" : "blueprint_dummy",
-               "id" : "sys_rajyotsava_task_procure_flags_decor",
-               "dependsOn" : [],
-               "title" : "Procure Rajyotsava flags and yellow-red decor",
-               "dueOffset" : "T-5 days",
-               "role" : "Decoration",
-               "status" : "pending",
-               "phase" : "preEvent"
+               "description": "Purchase Karnataka state flags, buntings, and yellow/red decoration materials.",
+               "eventId": "blueprint_dummy",
+               "id": "sys_rajyotsava_task_procure_flags_decor",
+               "dependsOn": [],
+               "title": "Procure Rajyotsava flags and yellow-red decor",
+               "dueOffset": "T-5 days",
+               "role": "Decoration",
+               "status": "pending",
+               "phase": "preEvent"
             },
             {
-               "id" : "sys_rajyotsava_task_book_traditional_performers",
-               "dependsOn" : [],
-               "status" : "pending",
-               "phase" : "preEvent",
-               "title" : "Book traditional performers (Dollu Kunitha, etc.)",
-               "description" : "Hire artists for Dollu Kunitha, Yakshagana, or Kannada folk music.",
-               "dueOffset" : "T-15 days",
-               "eventId" : "blueprint_dummy",
-               "role" : "Program Coordinator"
+               "id": "sys_rajyotsava_task_book_traditional_performers",
+               "dependsOn": [],
+               "status": "pending",
+               "phase": "preEvent",
+               "title": "Book traditional performers (Dollu Kunitha, etc.)",
+               "description": "Hire artists for Dollu Kunitha, Yakshagana, or Kannada folk music.",
+               "dueOffset": "T-15 days",
+               "eventId": "blueprint_dummy",
+               "role": "Program Coordinator"
             },
             {
-               "eventId" : "blueprint_dummy",
-               "description" : "Invite prominent speakers and finalize the list for Rajyotsava awards if applicable.",
-               "title" : "Finalize speakers and award guests",
-               "dependsOn" : [],
-               "id" : "sys_rajyotsava_task_finalize_speakers_guests",
-               "role" : "Organizer",
-               "dueOffset" : "T-10 days",
-               "phase" : "preEvent",
-               "status" : "pending"
+               "eventId": "blueprint_dummy",
+               "description": "Invite prominent speakers and finalize the list for Rajyotsava awards if applicable.",
+               "title": "Finalize speakers and award guests",
+               "dependsOn": [],
+               "id": "sys_rajyotsava_task_finalize_speakers_guests",
+               "role": "Organizer",
+               "dueOffset": "T-10 days",
+               "phase": "preEvent",
+               "status": "pending"
             },
             {
-               "id" : "sys_rajyotsava_task_plan_karnataka_menu",
-               "dependsOn" : [],
-               "title" : "Plan traditional Karnataka-themed menu",
-               "description" : "Finalize menu featuring Bisi Bele Bath, Holige, and other Karnataka delicacies.",
-               "eventId" : "blueprint_dummy",
-               "status" : "pending",
-               "phase" : "preEvent",
-               "dueOffset" : "T-7 days",
-               "role" : "Food Manager"
+               "id": "sys_rajyotsava_task_plan_karnataka_menu",
+               "dependsOn": [],
+               "title": "Plan traditional Karnataka-themed menu",
+               "description": "Finalize menu featuring Bisi Bele Bath, Holige, and other Karnataka delicacies.",
+               "eventId": "blueprint_dummy",
+               "status": "pending",
+               "phase": "preEvent",
+               "dueOffset": "T-7 days",
+               "role": "Food Manager"
             },
             {
-               "description" : "Arrange the main stage with the state flag and ensure the state anthem audio is ready.",
-               "dueOffset" : "Morning 07:30 AM",
-               "eventId" : "blueprint_dummy",
-               "role" : "Setup Team",
-               "id" : "sys_rajyotsava_task_flag_hoisting_setup",
-               "dependsOn" : [],
-               "status" : "pending",
-               "phase" : "eventDay",
-               "title" : "Set up flag hoisting and anthem audio"
+               "description": "Arrange the main stage with the state flag and ensure the state anthem audio is ready.",
+               "dueOffset": "Morning 07:30 AM",
+               "eventId": "blueprint_dummy",
+               "role": "Setup Team",
+               "id": "sys_rajyotsava_task_flag_hoisting_setup",
+               "dependsOn": [],
+               "status": "pending",
+               "phase": "eventDay",
+               "title": "Set up flag hoisting and anthem audio"
             },
             {
-               "description" : "Lead the community in the flag hoisting and singing of 'Jaya Bharata Jananiya Tanujate'.",
-               "dueOffset" : "Morning 09:00 AM",
-               "eventId" : "blueprint_dummy",
-               "role" : "Organizer",
-               "id" : "sys_rajyotsava_task_conduct_anthem_ceremony",
-               "status" : "pending",
-               "dependsOn" : [],
-               "title" : "Conduct flag hoisting and sing Naada Geethe",
-               "phase" : "eventDay"
+               "description": "Lead the community in the flag hoisting and singing of 'Jaya Bharata Jananiya Tanujate'.",
+               "dueOffset": "Morning 09:00 AM",
+               "eventId": "blueprint_dummy",
+               "role": "Organizer",
+               "id": "sys_rajyotsava_task_conduct_anthem_ceremony",
+               "status": "pending",
+               "dependsOn": [],
+               "title": "Conduct flag hoisting and sing Naada Geethe",
+               "phase": "eventDay"
             },
             {
-               "role" : "Program Coordinator",
-               "eventId" : "blueprint_dummy",
-               "dueOffset" : "Morning 10:30 AM",
-               "description" : "Manage the sequence of folk dances, music, and the recognition ceremony.",
-               "title" : "Orchestrate cultural programs and awards",
-               "phase" : "eventDay",
-               "dependsOn" : [],
-               "status" : "pending",
-               "id" : "sys_rajyotsava_task_orchestrate_cultural_programs"
+               "role": "Program Coordinator",
+               "eventId": "blueprint_dummy",
+               "dueOffset": "Morning 10:30 AM",
+               "description": "Manage the sequence of folk dances, music, and the recognition ceremony.",
+               "title": "Orchestrate cultural programs and awards",
+               "phase": "eventDay",
+               "dependsOn": [],
+               "status": "pending",
+               "id": "sys_rajyotsava_task_orchestrate_cultural_programs"
             },
             {
-               "status" : "pending",
-               "phase" : "eventDay",
-               "dueOffset" : "Afternoon 01:00 PM",
-               "role" : "Food Manager",
-               "id" : "sys_rajyotsava_task_serve_traditional_feast",
-               "dependsOn" : [],
-               "title" : "Serve traditional Karnataka feast",
-               "description" : "Coordinate the serving of authentic regional food to all participants.",
-               "eventId" : "blueprint_dummy"
+               "status": "pending",
+               "phase": "eventDay",
+               "dueOffset": "Afternoon 01:00 PM",
+               "role": "Food Manager",
+               "id": "sys_rajyotsava_task_serve_traditional_feast",
+               "dependsOn": [],
+               "title": "Serve traditional Karnataka feast",
+               "description": "Coordinate the serving of authentic regional food to all participants.",
+               "eventId": "blueprint_dummy"
             },
             {
-               "eventId" : "blueprint_dummy",
-               "role" : "Organizer",
-               "description" : "Complete artist payments and ensure the venue is cleaned up.",
-               "dueOffset" : "T+2 days",
-               "phase" : "postEvent",
-               "title" : "Settle performer honorariums and cleanup",
-               "id" : "sys_rajyotsava_task_settle_honorarium",
-               "dependsOn" : [],
-               "status" : "pending"
+               "eventId": "blueprint_dummy",
+               "role": "Organizer",
+               "description": "Complete artist payments and ensure the venue is cleaned up.",
+               "dueOffset": "T+2 days",
+               "phase": "postEvent",
+               "title": "Settle performer honorariums and cleanup",
+               "id": "sys_rajyotsava_task_settle_honorarium",
+               "dependsOn": [],
+               "status": "pending"
             }
          ],
-         "budgetBlueprints" : [
+         "budgetBlueprints": [
             {
-               "estimatedCost" : 0,
-               "title" : "Flags, Buntings, and Yellow-Red Decor",
-               "isMandatory" : true,
-               "id" : "sys_rajyotsava_budget_flags_decor",
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "category" : "Decoration"
+               "estimatedCost": 0,
+               "title": "Flags, Buntings, and Yellow-Red Decor",
+               "isMandatory": true,
+               "id": "sys_rajyotsava_budget_flags_decor",
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "category": "Decoration"
             },
             {
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "title" : "Cultural Groups and Artists Honorarium",
-               "estimatedCost" : 0,
-               "id" : "sys_rajyotsava_budget_artists_performers",
-               "isMandatory" : true,
-               "category" : "Miscellaneous"
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "title": "Cultural Groups and Artists Honorarium",
+               "estimatedCost": 0,
+               "id": "sys_rajyotsava_budget_artists_performers",
+               "isMandatory": true,
+               "category": "Miscellaneous"
             },
             {
-               "isMandatory" : true,
-               "id" : "sys_rajyotsava_budget_sound_stage",
-               "title" : "Stage, Sound System, and Lighting",
-               "estimatedCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "actualCost" : 0,
-               "category" : "Venue"
+               "isMandatory": true,
+               "id": "sys_rajyotsava_budget_sound_stage",
+               "title": "Stage, Sound System, and Lighting",
+               "estimatedCost": 0,
+               "eventId": "blueprint_dummy",
+               "actualCost": 0,
+               "category": "Venue"
             },
             {
-               "estimatedCost" : 0,
-               "title" : "Traditional Karnataka Meal Catering",
-               "id" : "sys_rajyotsava_budget_food_catering",
-               "isMandatory" : true,
-               "actualCost" : 0,
-               "eventId" : "blueprint_dummy",
-               "category" : "Food"
+               "estimatedCost": 0,
+               "title": "Traditional Karnataka Meal Catering",
+               "id": "sys_rajyotsava_budget_food_catering",
+               "isMandatory": true,
+               "actualCost": 0,
+               "eventId": "blueprint_dummy",
+               "category": "Food"
             },
             {
-               "title" : "Awards, Plaques, and Certificates",
-               "estimatedCost" : 0,
-               "isMandatory" : false,
-               "id" : "sys_rajyotsava_budget_awards_plaques",
-               "eventId" : "blueprint_dummy",
-               "actualCost" : 0,
-               "category" : "Miscellaneous"
+               "title": "Awards, Plaques, and Certificates",
+               "estimatedCost": 0,
+               "isMandatory": false,
+               "id": "sys_rajyotsava_budget_awards_plaques",
+               "eventId": "blueprint_dummy",
+               "actualCost": 0,
+               "category": "Miscellaneous"
             }
          ],
-         "tags" : [
+         "tags": [
             "rajyotsava",
             "karnataka",
             "kannada",
@@ -383,6 +361,6 @@
          ]
       }
    ],
-   "version" : 4,
-   "schemaVersion" : 2
+   "version": 4,
+   "schemaVersion": 2
 }

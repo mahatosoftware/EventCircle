@@ -1,263 +1,238 @@
 {
-   "version" : 4,
-   "templates" : [
+   "version": 4,
+   "templates": [
       {
-         "roleBlueprints" : [
+         "roleBlueprints": [
             {
-               "name" : "Admin",
-               "moduleAccess" : {
-                  "auditLog" : "full",
-                  "tasks" : "full",
-                  "budget" : "full",
-                  "location" : "full",
-                  "vendors" : "full",
-                  "contribution" : "full",
-                  "customFields" : "full",
-                  "chat" : "full",
-                  "inventory" : "full",
-                  "timeline" : "full",
-                  "guests" : "full",
-                  "users" : "full",
-                  "roles" : "full",
-                  "announcements" : "full",
-                  "ticketing" : "full"
+               "name": "Admin",
+               "moduleAccess": {
+                  "auditLog": "full",
+                  "tasks": "full",
+                  "budget": "full",
+                  "location": "full",
+                  "vendors": "full",
+                  "contribution": "full",
+                  "inventory": "full",
+                  "timeline": "full",
+                  "guests": "full",
+                  "users": "full",
+                  "roles": "full",
+                  "ticketing": "full"
                },
-               "id" : "sys_role_admin",
-               "description" : "Full access to all modules."
+               "id": "sys_role_admin",
+               "description": "Full access to all modules."
             },
             {
-               "description" : "Manage most event details.",
-               "moduleAccess" : {
-                  "inventory" : "edit",
-                  "timeline" : "edit",
-                  "guests" : "edit",
-                  "users" : "view",
-                  "roles" : "none",
-                  "announcements" : "edit",
-                  "ticketing" : "edit",
-                  "auditLog" : "view",
-                  "tasks" : "edit",
-                  "budget" : "edit",
-                  "location" : "edit",
-                  "vendors" : "edit",
-                  "contribution" : "edit",
-                  "customFields" : "view",
-                  "chat" : "full"
+               "description": "Manage most event details.",
+               "moduleAccess": {
+                  "inventory": "edit",
+                  "timeline": "edit",
+                  "guests": "edit",
+                  "users": "view",
+                  "roles": "none",
+                  "ticketing": "edit",
+                  "auditLog": "view",
+                  "tasks": "edit",
+                  "budget": "edit",
+                  "location": "edit",
+                  "vendors": "edit",
+                  "contribution": "edit"
                },
-               "name" : "Organizer",
-               "id" : "sys_role_organizer"
+               "name": "Organizer",
+               "id": "sys_role_organizer"
             },
             {
-               "id" : "sys_role_coordinator",
-               "name" : "Coordinator",
-               "moduleAccess" : {
-                  "tasks" : "edit",
-                  "auditLog" : "none",
-                  "customFields" : "none",
-                  "chat" : "full",
-                  "contribution" : "none",
-                  "location" : "view",
-                  "vendors" : "view",
-                  "budget" : "view",
-                  "timeline" : "edit",
-                  "inventory" : "view",
-                  "guests" : "view",
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "edit"
+               "id": "sys_role_coordinator",
+               "name": "Coordinator",
+               "moduleAccess": {
+                  "tasks": "edit",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "location": "view",
+                  "vendors": "view",
+                  "budget": "view",
+                  "timeline": "edit",
+                  "inventory": "view",
+                  "guests": "view",
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none"
                },
-               "description" : "Manage tasks and timeline."
+               "description": "Manage tasks and timeline."
             },
             {
-               "id" : "sys_role_volunteer",
-               "name" : "Volunteer",
-               "moduleAccess" : {
-                  "budget" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "contribution" : "none",
-                  "chat" : "full",
-                  "customFields" : "none",
-                  "auditLog" : "none",
-                  "tasks" : "update",
-                  "users" : "none",
-                  "roles" : "none",
-                  "announcements" : "view",
-                  "ticketing" : "none",
-                  "inventory" : "view",
-                  "timeline" : "view",
-                  "guests" : "none"
+               "id": "sys_role_volunteer",
+               "name": "Volunteer",
+               "moduleAccess": {
+                  "budget": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "contribution": "none",
+                  "auditLog": "none",
+                  "tasks": "update",
+                  "users": "none",
+                  "roles": "none",
+                  "ticketing": "none",
+                  "inventory": "view",
+                  "timeline": "view",
+                  "guests": "none"
                },
-               "description" : "Update task progress."
+               "description": "Update task progress."
             },
             {
-               "description" : "Regular participant.",
-               "moduleAccess" : {
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "contribution" : "view",
-                  "customFields" : "none",
-                  "chat" : "edit",
-                  "budget" : "none",
-                  "vendors" : "none",
-                  "location" : "view",
-                  "guests" : "none",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view",
-                  "roles" : "none",
-                  "users" : "none"
+               "description": "Regular participant.",
+               "moduleAccess": {
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "contribution": "view",
+                  "budget": "none",
+                  "vendors": "none",
+                  "location": "view",
+                  "guests": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "ticketing": "none",
+                  "roles": "none",
+                  "users": "none"
                },
-               "name" : "Participant",
-               "id" : "sys_role_participant"
+               "name": "Participant",
+               "id": "sys_role_participant"
             },
             {
-               "id" : "sys_role_guest",
-               "name" : "Guest",
-               "moduleAccess" : {
-                  "tasks" : "none",
-                  "auditLog" : "none",
-                  "chat" : "none",
-                  "customFields" : "none",
-                  "contribution" : "none",
-                  "location" : "view",
-                  "vendors" : "none",
-                  "budget" : "none",
-                  "timeline" : "view",
-                  "inventory" : "none",
-                  "guests" : "none",
-                  "roles" : "none",
-                  "users" : "none",
-                  "ticketing" : "none",
-                  "announcements" : "view"
+               "id": "sys_role_guest",
+               "name": "Guest",
+               "moduleAccess": {
+                  "tasks": "none",
+                  "auditLog": "none",
+                  "contribution": "none",
+                  "location": "view",
+                  "vendors": "none",
+                  "budget": "none",
+                  "timeline": "view",
+                  "inventory": "none",
+                  "guests": "none",
+                  "roles": "none",
+                  "users": "none",
+                  "ticketing": "none"
                },
-               "description" : "Limited viewing access."
+               "description": "Limited viewing access."
             },
             {
-               "description" : "Read-only access.",
-               "name" : "Viewer",
-               "moduleAccess" : {
-                  "timeline" : "view",
-                  "inventory" : "view",
-                  "guests" : "view",
-                  "roles" : "view",
-                  "users" : "view",
-                  "ticketing" : "view",
-                  "announcements" : "view",
-                  "tasks" : "view",
-                  "auditLog" : "view",
-                  "chat" : "view",
-                  "customFields" : "view",
-                  "contribution" : "view",
-                  "location" : "view",
-                  "vendors" : "view",
-                  "budget" : "view"
+               "description": "Read-only access.",
+               "name": "Viewer",
+               "moduleAccess": {
+                  "timeline": "view",
+                  "inventory": "view",
+                  "guests": "view",
+                  "roles": "view",
+                  "users": "view",
+                  "ticketing": "view",
+                  "tasks": "view",
+                  "auditLog": "view",
+                  "contribution": "view",
+                  "location": "view",
+                  "vendors": "view",
+                  "budget": "view"
                },
-               "id" : "sys_role_viewer"
+               "id": "sys_role_viewer"
             },
             {
-               "moduleAccess" : {
-                  "announcements" : "edit",
-                  "budget" : "view",
-                  "users" : "full",
-                  "roles" : "full"
+               "moduleAccess": {
+                  "budget": "view",
+                  "users": "full",
+                  "roles": "full"
                },
-               "name" : "Principal/Admin",
-               "id" : "sys_role_principal",
-               "description" : "Institutional oversight."
+               "name": "Principal/Admin",
+               "id": "sys_role_principal",
+               "description": "Institutional oversight."
             },
             {
-               "description" : "Academic lead.",
-               "id" : "sys_role_teacher",
-               "moduleAccess" : {
-                  "tasks" : "edit",
-                  "roles" : "none",
-                  "timeline" : "edit",
-                  "chat" : "full",
-                  "users" : "none"
+               "description": "Academic lead.",
+               "id": "sys_role_teacher",
+               "moduleAccess": {
+                  "tasks": "edit",
+                  "roles": "none",
+                  "timeline": "edit",
+                  "users": "none"
                },
-               "name" : "Teacher Coordinator"
+               "name": "Teacher Coordinator"
             },
             {
-               "moduleAccess" : {
-                  "roles" : "none",
-                  "timeline" : "view",
-                  "chat" : "edit",
-                  "users" : "none"
+               "moduleAccess": {
+                  "roles": "none",
+                  "timeline": "view",
+                  "users": "none"
                },
-               "name" : "Student Participant",
-               "id" : "sys_role_student",
-               "description" : "Performing students."
+               "name": "Student Participant",
+               "id": "sys_role_student",
+               "description": "Performing students."
             },
             {
-               "description" : "Evaluating competitions.",
-               "id" : "sys_role_judge",
-               "name" : "Judge",
-               "moduleAccess" : {
-                  "tasks" : "view",
-                  "timeline" : "view",
-                  "roles" : "none",
-                  "users" : "none"
+               "description": "Evaluating competitions.",
+               "id": "sys_role_judge",
+               "name": "Judge",
+               "moduleAccess": {
+                  "tasks": "view",
+                  "timeline": "view",
+                  "roles": "none",
+                  "users": "none"
                }
             }
          ],
-         "templateName" : "College Fest",
-         "category" : "educational",
-         "defaultFields" : {
-            "contributionType" : "fixed",
-            "amount" : 0,
-            "enabledModules" : [
+         "templateName": "College Fest",
+         "category": "educational",
+         "defaultFields": {
+            "contributionType": "fixed",
+            "amount": 0,
+            "enabledModules": [
                "task",
                "budget",
                "timeline",
                "guestManagement",
-               "communication",
                "roles",
                "inventory",
                "userManagement"
             ]
          },
-         "version" : 2,
-         "description" : "Multi-day festival with cultural, technical, and sports competitions for college students.",
-         "templateId" : "sys_college_fest_v1",
-         "timelineBlueprints" : [
+         "version": 2,
+         "description": "Multi-day festival with cultural, technical, and sports competitions for college students.",
+         "templateId": "sys_college_fest_v1",
+         "timelineBlueprints": [
             {
-               "title" : "Professional Concert Show",
-               "id" : "sys_fest_timeline_proshow",
-               "eventId" : "blueprint_dummy",
-               "timeOrOffset" : "07:30 PM",
-               "dayNumber" : 2,
-               "description" : "Main festival highlight.",
-               "phase" : "eventDay"
+               "title": "Professional Concert Show",
+               "id": "sys_fest_timeline_proshow",
+               "eventId": "blueprint_dummy",
+               "timeOrOffset": "07:30 PM",
+               "dayNumber": 2,
+               "description": "Main festival highlight.",
+               "phase": "eventDay"
             }
          ],
-         "taskBlueprints" : [
+         "taskBlueprints": [
             {
-               "id" : "sys_fest_task_sponsorship",
-               "dependsOn" : [],
-               "title" : "Secure Brand Sponsorships",
-               "description" : "Pitch to local businesses and brands.",
-               "eventId" : "blueprint_dummy",
-               "status" : "pending",
-               "phase" : "preEvent",
-               "dueOffset" : "T-60 days",
-               "role" : "Finance Coordinator"
+               "id": "sys_fest_task_sponsorship",
+               "dependsOn": [],
+               "title": "Secure Brand Sponsorships",
+               "description": "Pitch to local businesses and brands.",
+               "eventId": "blueprint_dummy",
+               "status": "pending",
+               "phase": "preEvent",
+               "dueOffset": "T-60 days",
+               "role": "Finance Coordinator"
             }
          ],
-         "budgetBlueprints" : [
+         "budgetBlueprints": [
             {
-               "category" : "Miscellaneous",
-               "eventId" : "blueprint_dummy",
-               "actualCost" : 0,
-               "id" : "sys_fest_budget_concert",
-               "isMandatory" : true,
-               "title" : "Artist/Live Concert Fee",
-               "estimatedCost" : 0
+               "category": "Miscellaneous",
+               "eventId": "blueprint_dummy",
+               "actualCost": 0,
+               "id": "sys_fest_budget_concert",
+               "isMandatory": true,
+               "title": "Artist/Live Concert Fee",
+               "estimatedCost": 0
             }
          ],
-         "tags" : [
+         "tags": [
             "college fest",
             "celebration",
             "academic",
@@ -266,5 +241,5 @@
          ]
       }
    ],
-   "schemaVersion" : 2
+   "schemaVersion": 2
 }
