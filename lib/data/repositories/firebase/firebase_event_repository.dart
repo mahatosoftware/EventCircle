@@ -20,7 +20,7 @@ class FirebaseEventRepository implements EventRepository {
   Stream<List<EventModel>> getEvents() {
     return _firestore
         .collection(_collection)
-        .orderBy('createdAt', descending: true)
+        .orderBy('startDate', descending: false)
         .snapshots()
         .map((snapshot) {
       return snapshot.docs.map(_fromDoc).toList();
@@ -39,7 +39,7 @@ class FirebaseEventRepository implements EventRepository {
     void emit() {
       final merged = <String, EventModel>{...participantEvents, ...organizerEvents};
       final list = merged.values.toList()
-        ..sort((a, b) => b.createdAt.compareTo(a.createdAt));
+        ..sort((a, b) => (a.startDate ?? a.createdAt).compareTo(b.startDate ?? b.createdAt));
       if (!controller.isClosed) controller.add(list);
     }
 

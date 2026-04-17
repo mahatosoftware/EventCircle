@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
 import '../models/template_model.dart';
@@ -7,6 +8,7 @@ import '../system_templates/system_template_source.dart';
 import 'template_firestore_dao.dart';
 import 'template_version_manager.dart';
 import '../constants/system_template_constants.dart';
+import '../system_templates/system_template_models.dart';
 
 class TemplateSyncService {
   final SystemTemplateSource source;
@@ -41,8 +43,54 @@ class TemplateSyncService {
     return hasUpdate;
   }
 
+  Future<String> syncSingleTemplate({
+    required SystemTemplateDefinition def,
+    required int packVersion,
+    required int packSchemaVersion,
+    String? remoteHash,
+    bool force = false,
+  }) async {
+    try {
+      final incoming = def.toTemplateModel(systemCreatedBy: systemTemplateCreatedBy);
+      final localHash = incoming.config?['contentHash'];
+
+      // Skip if not forced AND hash matches
+      if (!force && remoteHash != null && remoteHash == localHash) {
+        return 'skipped_hash';
+      }
+
+      // Needs update or creation
+      final existing = await dao.getTemplateById(incoming.id);
+
+      if (existing != null && existing.createdBy != systemTemplateCreatedBy) {
+        debugPrint('TemplateSyncService: Skip "${incoming.id}" (not a system template).');
+        return 'skipped_owner';
+      }
+
+      final isNew = existing == null;
+      final toWrite = _mergePreservingStats(incoming, existing);
+
+      await dao.upsertTemplate(
+        toWrite,
+        additionalFields: {
+          'isSystem': true,
+          'systemPackVersion': packVersion,
+          'systemSchemaVersion': packSchemaVersion,
+          'lastSyncedAt': FieldValue.serverTimestamp(),
+          'contentHash': localHash,
+        },
+      );
+
+      return isNew ? 'created' : 'updated';
+    } catch (e, st) {
+      debugPrint('TemplateSyncService: CRITICAL FAILURE for "${def.templateId}": $e\n$st');
+      return 'failed';
+    }
+  }
+
   Future<void> syncTemplates({
     bool force = false,
+    bool smartSync = false,
     void Function(int current, int total)? onProgress,
   }) async {
     final pack = await source.loadPack();
@@ -52,9 +100,21 @@ class TemplateSyncService {
     }
 
     final installed = await versionManager.getInstalledVersion();
-    final shouldSync = force || pack.version > installed;
+    
+    // 1. Fetch EVERYTHING from remote first to know what's truly missing
+    debugPrint('TemplateSyncService: Fetching remote system templates...');
+    final remoteTemplatesList = await dao.getAllSystemTemplates();
+    final remoteMap = {for (var t in remoteTemplatesList) t.id: t};
+
+    final hasContentChanges = pack.templates.any((def) {
+      final remote = remoteMap[def.templateId];
+      return remote == null || (def.contentHash != null && remote.config?['contentHash'] != def.contentHash);
+    });
+
+    final shouldSync = force || smartSync || pack.version > installed || hasContentChanges;
+
     if (!shouldSync) {
-      debugPrint('TemplateSyncService: Already up to date (installed=$installed, asset=${pack.version}).');
+      debugPrint('TemplateSyncService: Already up to date (installed=$installed, asset=${pack.version}, remoteCount=${remoteMap.length}).');
       return;
     }
 
@@ -64,54 +124,107 @@ class TemplateSyncService {
       return;
     }
 
+    debugPrint('TemplateSyncService: Sync start (asset version=${pack.version}, local=${pack.templates.length}, remote=${remoteMap.length}, force=$force, smartSync=$smartSync)');
+    
     int created = 0;
     int updated = 0;
     int skipped = 0;
     int failed = 0;
 
-    debugPrint('TemplateSyncService: Sync start (installed=$installed, asset=${pack.version}, templates=${pack.templates.length})');
-
-    int current = 0;
+    final toUpsert = <TemplateModel>[];
     final total = pack.templates.length;
 
-    final results = await Future.wait(pack.templates.map((def) async {
+    // 2. Process locally to prepare the batch
+    for (int i = 0; i < pack.templates.length; i++) {
+      final def = pack.templates[i];
       try {
         final incoming = def.toTemplateModel(systemCreatedBy: systemTemplateCreatedBy);
-        final existing = await dao.getTemplateById(incoming.id);
+        final existing = remoteMap[incoming.id];
+        final isNew = existing == null;
 
-        if (existing != null && existing.createdBy != systemTemplateCreatedBy) {
-          debugPrint('TemplateSyncService: Skip "${incoming.id}" (existing createdBy=${existing.createdBy})');
-          _reportProgress(++current, total, onProgress);
-          return 'skipped';
+        final localHash = def.contentHash;
+        final remoteHash = existing?.config?['contentHash'] as String?;
+
+        // Skip if hash matches and not forced
+        if (!force && remoteHash != null && remoteHash == localHash) {
+          skipped++;
+          _reportProgress(i + 1, total, onProgress);
+          continue;
         }
 
-        final toWrite = _mergePreservingStats(incoming, existing);
-        await dao.upsertTemplate(
-          toWrite,
-          additionalFields: {
-            'isSystem': true,
-            'systemPackVersion': pack.version,
-            'systemSchemaVersion': pack.schemaVersion,
-          },
-        );
-        _reportProgress(++current, total, onProgress);
-        return existing == null ? 'created' : 'updated';
-      } catch (e, st) {
-        debugPrint('TemplateSyncService: Failed to sync template "${def.templateId}": $e\n$st');
-        _reportProgress(++current, total, onProgress);
-        return 'failed';
-      }
-    }));
+        // Check ownership
+        if (existing != null && existing.createdBy != systemTemplateCreatedBy) {
+          debugPrint('TemplateSyncService: Skip "${incoming.id}" (not a system template owner).');
+          skipped++;
+          _reportProgress(i + 1, total, onProgress);
+          continue;
+        }
 
-    for (final res in results) {
-      if (res == 'created') created++;
-      else if (res == 'updated') updated++;
-      else if (res == 'skipped') skipped++;
-      else failed++;
+        // Proactive validation
+        try {
+          incoming.toJson();
+        } catch (e) {
+          debugPrint('TemplateSyncService: [ERROR] VALIDATION FAILED for "${def.templateId}": $e');
+          failed++;
+          _reportProgress(i + 1, total, onProgress);
+          continue;
+        }
+
+        final merged = _mergePreservingStats(incoming, existing);
+        toUpsert.add(merged);
+        
+        if (isNew) created++; else updated++;
+        debugPrint('TemplateSyncService: [SYNC] Queued "${def.templateName}" (${def.templateId})');
+        _reportProgress(i + 1, total, onProgress);
+      } catch (e) {
+        debugPrint('TemplateSyncService: [ERROR] Failed to process "${def.templateId}": $e');
+        failed++;
+        _reportProgress(i + 1, total, onProgress);
+      }
+    }
+
+    // 3. Commit all changes in chunks (Firestore limit is 500 per batch)
+    if (toUpsert.isNotEmpty) {
+      const int chunkSize = 400; // Safe margin
+      for (int i = 0; i < toUpsert.length; i += chunkSize) {
+        final end = (i + chunkSize < toUpsert.length) ? i + chunkSize : toUpsert.length;
+        final chunk = toUpsert.sublist(i, end);
+        
+        debugPrint('TemplateSyncService: Committing chunk ${ (i ~/ chunkSize) + 1} (${chunk.length} templates)...');
+        try {
+          await dao.upsertTemplatesBatch(
+            chunk,
+            additionalFields: {
+              'isSystem': true,
+              'systemPackVersion': pack.version,
+              'systemSchemaVersion': pack.schemaVersion,
+              'lastSyncedAt': FieldValue.serverTimestamp(),
+            },
+          );
+        } catch (e) {
+          debugPrint('TemplateSyncService: [FATAL ERROR] Batch commit failed for chunk ${ (i ~/ chunkSize) + 1}: $e');
+          rethrow;
+        }
+      }
+    }
+
+    // 4. Cleanup orphans (one batch of deletes if you like, but let's keep it simple for now as it's less frequent)
+    int deleted = 0;
+    try {
+      final localIds = pack.templates.map((t) => t.templateId).toSet();
+      final toDelete = remoteMap.keys.where((id) => !localIds.contains(id)).toList();
+      
+      if (toDelete.isNotEmpty) {
+        debugPrint('TemplateSyncService: Cleaning up ${toDelete.length} orphaned templates...');
+        await Future.wait(toDelete.map((id) => dao.deleteTemplate(id)));
+        deleted = toDelete.length;
+      }
+    } catch (e) {
+      debugPrint('TemplateSyncService: Cleanup error: $e');
     }
 
     await versionManager.setInstalledVersion(pack.version);
-    debugPrint('TemplateSyncService: Sync done (created=$created updated=$updated skipped=$skipped failed=$failed version=${pack.version})');
+    debugPrint('TemplateSyncService: Sync operation summary - Created: $created, Updated: $updated, Deleted: $deleted, Skipped: $skipped, Failed: $failed');
   }
 
   void _reportProgress(int current, int total, void Function(int, int)? onProgress) {

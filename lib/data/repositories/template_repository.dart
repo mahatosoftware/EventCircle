@@ -7,7 +7,7 @@ class TemplateRepository {
 
   TemplateRepository(this._firestore);
 
-  Stream<List<TemplateModel>> getPublicTemplates() {
+  Stream<List<TemplateModel>> getSearchableTemplates(String? userId) {
     return _firestore
         .collection('templates')
         .where('isPublic', isEqualTo: true)
@@ -15,6 +15,11 @@ class TemplateRepository {
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map((doc) => TemplateModel.fromJson({...doc.data(), 'id': doc.id}))
+            .where((t) {
+              final isSystem = t.createdBy == '__system__';
+              final isMine = userId != null && t.createdBy == userId;
+              return isSystem || isMine;
+            })
             .toList());
   }
 
@@ -43,5 +48,11 @@ class TemplateRepository {
     await _firestore.collection('templates').doc(templateId).update({
       'usageCount': FieldValue.increment(1),
     });
+  }
+
+  Future<TemplateModel?> getTemplateById(String id) async {
+    final doc = await _firestore.collection('templates').doc(id).get();
+    if (!doc.exists) return null;
+    return TemplateModel.fromJson({...doc.data()!, 'id': doc.id});
   }
 }

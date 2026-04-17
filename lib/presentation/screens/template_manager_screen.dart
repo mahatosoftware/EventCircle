@@ -34,10 +34,9 @@ class _TemplateManagerScreenState extends ConsumerState<TemplateManagerScreen> {
     final installed = await versionManager.getInstalledVersion();
 
     if (pack != null) {
-      final remotes = <String, TemplateModel?>{};
-      for (final templateDef in pack.templates) {
-        remotes[templateDef.templateId] = await dao.getTemplateById(templateDef.templateId);
-      }
+      final remoteList = await dao.getAllSystemTemplates();
+      final remotes = {for (var t in remoteList) t.id: t};
+      
       if (mounted) {
         setState(() {
           _pack = pack;
@@ -48,16 +47,17 @@ class _TemplateManagerScreenState extends ConsumerState<TemplateManagerScreen> {
     }
   }
 
-  Future<void> _sync() async {
+  Future<void> _sync({bool force = true, bool smartSync = false}) async {
     setState(() {
       _isSyncing = true;
-      _statusMessage = 'Starting sync...';
+      _statusMessage = smartSync ? 'Syncing new & updated templates...' : 'Starting full force-sync...';
     });
-
+    
     try {
       final syncService = ref.read(templateSyncServiceProvider);
       await syncService.syncTemplates(
-        force: true,
+        force: force,
+        smartSync: smartSync,
         onProgress: (current, total) {
           if (mounted) {
             setState(() {
@@ -70,10 +70,51 @@ class _TemplateManagerScreenState extends ConsumerState<TemplateManagerScreen> {
       setState(() {
         _statusMessage = 'Sync completed successfully!';
       });
-    } catch (e) {
+    } catch (e, st) {
+      debugPrint('Full Sync Error: $e\n$st');
       if (mounted) {
         setState(() {
           _statusMessage = 'Sync failed: $e';
+        });
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isSyncing = false;
+        });
+      }
+    }
+  }
+
+  Future<void> _syncOne(SystemTemplateDefinition def) async {
+    setState(() {
+      _isSyncing = true;
+      _statusMessage = 'Syncing ${def.templateName}...';
+    });
+
+    try {
+      final syncService = ref.read(templateSyncServiceProvider);
+      final result = await syncService.syncSingleTemplate(
+        def: def,
+        packVersion: _pack?.version ?? 1,
+        packSchemaVersion: _pack?.schemaVersion ?? 1,
+        force: true,
+      );
+
+      await _loadData();
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Template "${def.templateName}" $result')),
+        );
+        setState(() {
+          _statusMessage = 'Individual sync complete: $result';
+        });
+      }
+    } catch (e, st) {
+      debugPrint('Sync Error: $e\n$st');
+      if (mounted) {
+        setState(() {
+          _statusMessage = 'Individual sync failed: $e';
         });
       }
     } finally {
@@ -127,47 +168,73 @@ class _TemplateManagerScreenState extends ConsumerState<TemplateManagerScreen> {
                       _buildInfoRow('Local Recorded Version', _installedVersion.toString()),
                       const Divider(height: 32),
                       if (_statusMessage != null)
-                        Container(
-                          padding: const EdgeInsets.all(12),
-                          margin: const EdgeInsets.only(bottom: 16),
-                          decoration: BoxDecoration(
-                            color: _statusMessage!.contains('failed') ? Colors.red.withAlpha(25) : Colors.green.withAlpha(25),
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: _statusMessage!.contains('failed') ? Colors.red.withAlpha(50) : Colors.green.withAlpha(50)),
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                _statusMessage!.contains('failed') ? Icons.error_outline : Icons.check_circle_outline,
-                                color: _statusMessage!.contains('failed') ? Colors.red : Colors.green,
-                                size: 20,
-                              ),
-                              const SizedBox(width: 12),
-                              Expanded(
-                                child: Text(
-                                  _statusMessage!,
-                                  style: TextStyle(
-                                    color: _statusMessage!.contains('failed') ? Colors.red : Colors.green,
-                                    fontWeight: FontWeight.w500,
+                        Builder(builder: (context) {
+                          final msg = _statusMessage!;
+                          final isError = msg.toLowerCase().contains('failed');
+                          return Container(
+                            padding: const EdgeInsets.all(12),
+                            margin: const EdgeInsets.only(bottom: 16),
+                            decoration: BoxDecoration(
+                              color: isError ? Colors.red.withAlpha(25) : Colors.green.withAlpha(25),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(color: isError ? Colors.red.withAlpha(50) : Colors.green.withAlpha(50)),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  isError ? Icons.error_outline : Icons.check_circle_outline,
+                                  color: isError ? Colors.red : Colors.green,
+                                  size: 20,
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Text(
+                                    msg,
+                                    style: TextStyle(
+                                      color: isError ? Colors.red : Colors.green,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                 ),
+                              ],
+                            ),
+                          );
+                        }),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: SizedBox(
+                              height: 50,
+                              child: ElevatedButton.icon(
+                                onPressed: _isSyncing ? null : () => _sync(force: true),
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Theme.of(context).primaryColor,
+                                  foregroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                ),
+                                icon: _isSyncing 
+                                    ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
+                                    : const Icon(Icons.sync),
+                                label: Text(_isSyncing ? 'Syncing...' : 'Force Sync All'),
                               ),
-                            ],
+                            ),
                           ),
-                        ),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 50,
-                        child: ElevatedButton.icon(
-                          onPressed: _isSyncing ? null : _sync,
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: SizedBox(
+                              height: 50,
+                              child: OutlinedButton.icon(
+                                onPressed: _isSyncing ? null : () => _sync(force: false, smartSync: true),
+                                style: OutlinedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                  side: BorderSide(color: Theme.of(context).primaryColor),
+                                ),
+                                icon: const Icon(Icons.bolt_outlined),
+                                label: const Text('Sync New & Updates'),
+                              ),
+                            ),
                           ),
-                          icon: _isSyncing 
-                              ? const SizedBox(width: 18, height: 18, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
-                              : const Icon(Icons.sync),
-                          label: Text(_isSyncing ? 'Syncing...' : 'Force Sync All Templates'),
-                        ),
+                        ],
                       ),
                     ],
                   ),
@@ -242,11 +309,38 @@ class _TemplateManagerScreenState extends ConsumerState<TemplateManagerScreen> {
                                   children: [
                                     const Icon(Icons.info_outline, size: 16, color: Colors.orange),
                                     const SizedBox(width: 8),
-                                    Text(
-                                      remote == null ? 'Missing in Firestore' : 'Newer version available in assets',
-                                      style: const TextStyle(color: Colors.orange, fontSize: 13, fontWeight: FontWeight.w500),
+                                    Expanded(
+                                      child: Text(
+                                        remote == null ? 'Missing in Firestore' : 'Newer version available in assets',
+                                        style: const TextStyle(color: Colors.orange, fontSize: 13, fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                    TextButton.icon(
+                                      onPressed: _isSyncing ? null : () => _syncOne(def),
+                                      icon: const Icon(Icons.sync, size: 16),
+                                      label: const Text('Sync Now'),
+                                      style: TextButton.styleFrom(
+                                        foregroundColor: Colors.blue,
+                                        visualDensity: VisualDensity.compact,
+                                      ),
                                     ),
                                   ],
+                                ),
+                              ),
+                            if (!needsUpdate)
+                              Padding(
+                                padding: const EdgeInsets.only(top: 16),
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: TextButton.icon(
+                                    onPressed: _isSyncing ? null : () => _syncOne(def),
+                                    icon: const Icon(Icons.refresh, size: 16),
+                                    label: const Text('Force Re-sync'),
+                                    style: TextButton.styleFrom(
+                                      foregroundColor: Colors.grey,
+                                      visualDensity: VisualDensity.compact,
+                                    ),
+                                  ),
                                 ),
                               ),
                           ],

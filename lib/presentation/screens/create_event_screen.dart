@@ -138,22 +138,38 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
     });
   }
 
-  Future<void> _pickDateRange() async {
+  Future<void> _pickDateTime({required bool isStart}) async {
     final now = DateTime.now();
-    final range = await showDateRangePicker(
+    final initial = (isStart ? _startDate : _endDate) ?? now;
+    
+    final date = await showDatePicker(
       context: context,
+      initialDate: initial,
       firstDate: now,
       lastDate: now.add(const Duration(days: 365)),
-      initialDateRange: _startDate != null && _endDate != null
-          ? DateTimeRange(start: _startDate!, end: _endDate!)
-          : null,
     );
-    if (range != null) {
-      setState(() {
-        _startDate = range.start;
-        _endDate = range.end;
-      });
-    }
+
+    if (date == null) return;
+
+    if (!mounted) return;
+    final time = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.fromDateTime(initial),
+    );
+
+    if (time == null) return;
+
+    setState(() {
+      final combined = DateTime(date.year, date.month, date.day, time.hour, time.minute);
+      if (isStart) {
+        _startDate = combined;
+        if (_endDate == null) {
+          _endDate = combined.add(const Duration(hours: 2));
+        }
+      } else {
+        _endDate = combined;
+      }
+    });
   }
 
   void _setSubmitStatus(String? status) {
@@ -405,10 +421,7 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
       _setSubmitStatus('Creating event…');
       await _commitBatch(initBatch, label: 'init');
 
-      // 2) Import template blueprints in chunked batches (avoids Firestore batch-size limit + UI freezes).
-      if (template != null) {
-        await _importTemplateBlueprints(db: db, eventId: newEvent.id, template: template);
-      }
+      // 2) Blueprints will be imported lazily in EventDashboardScreen on first open.
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Event created successfully')));
@@ -833,34 +846,50 @@ class _CreateEventScreenState extends ConsumerState<CreateEventScreen> {
                 validator: (v) => v == null ? 'Required' : null,
               ),
               const SizedBox(height: 16),
+              TextFormField(
+                controller: _amountController,
+                decoration: InputDecoration(
+                  labelText: 'Target / Amount',
+                  prefixIcon: Icon(_selectedCurrencyItem != null 
+                       ? Icons.payments_outlined
+                       : Icons.currency_rupee),
+                  prefixText: _selectedCurrencyItem?.symbol != null ? '${_selectedCurrencyItem!.symbol} ' : null,
+                ),
+                keyboardType: TextInputType.number,
+              ),
+              const SizedBox(height: 16),
               Row(
                 children: [
-                   Expanded(
-                    child: TextFormField(
-                      controller: _amountController,
-                      decoration: InputDecoration(
-                        labelText: 'Target / Amount',
-                        prefixIcon: Icon(_selectedCurrencyItem != null 
-                             ? Icons.payments_outlined
-                             : Icons.currency_rupee),
-                        prefixText: _selectedCurrencyItem?.symbol != null ? '${_selectedCurrencyItem!.symbol} ' : null,
+                  Expanded(
+                    child: InkWell(
+                      onTap: () => _pickDateTime(isStart: true),
+                      child: InputDecorator(
+                        decoration: const InputDecoration(
+                          labelText: 'Starts',
+                          prefixIcon: Icon(Icons.calendar_today_outlined),
+                        ),
+                        child: Text(
+                          _startDate == null 
+                            ? 'Select Start' 
+                            : DateFormat('MMM dd, HH:mm').format(_startDate!),
+                          style: const TextStyle(fontSize: 13),
+                        ),
                       ),
-                      keyboardType: TextInputType.number,
                     ),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: InkWell(
-                      onTap: _pickDateRange,
+                      onTap: () => _pickDateTime(isStart: false),
                       child: InputDecorator(
                         decoration: const InputDecoration(
-                          labelText: 'Event Period',
-                          prefixIcon: Icon(Icons.date_range_outlined),
+                          labelText: 'Ends',
+                          prefixIcon: Icon(Icons.event_available_outlined),
                         ),
                         child: Text(
-                          _startDate == null 
-                            ? 'Select Dates' 
-                            : '${DateFormat('MMM dd').format(_startDate!)} - ${DateFormat('MMM dd').format(_endDate!)}',
+                          _endDate == null 
+                            ? 'Select End' 
+                            : DateFormat('MMM dd, HH:mm').format(_endDate!),
                           style: const TextStyle(fontSize: 13),
                         ),
                       ),

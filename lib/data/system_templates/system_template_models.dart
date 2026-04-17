@@ -22,7 +22,7 @@ class SystemTemplatePack {
     required this.templates,
   });
 
-  static SystemTemplatePack fromJson(Map<String, dynamic> json) {
+  static SystemTemplatePack fromJson(Map<String, dynamic> json, {String? contentHash}) {
     final schemaVersion = (json['schemaVersion'] as num?)?.toInt() ?? 1;
     final version = (json['version'] as num?)?.toInt() ?? 0;
     final rawTemplates = json['templates'];
@@ -30,7 +30,7 @@ class SystemTemplatePack {
     if (rawTemplates is List) {
       for (final t in rawTemplates) {
         if (t is Map<String, dynamic>) {
-          templates.add(SystemTemplateDefinition.fromJson(t));
+          templates.add(SystemTemplateDefinition.fromJson(t, contentHash: contentHash));
         }
       }
     }
@@ -38,6 +38,7 @@ class SystemTemplatePack {
   }
 
   static SystemTemplatePack fromJsonString(String raw) {
+    // Note: We don't hash here yet because AssetSystemTemplateSource handles individual file hashing.
     final decoded = jsonDecode(raw);
     if (decoded is! Map<String, dynamic>) {
       throw const FormatException('System templates JSON root is not an object');
@@ -63,6 +64,7 @@ class SystemTemplateDefinition {
   final List<AnnouncementModel> announcementBlueprints;
   final List<BudgetItemModel> budgetBlueprints;
   final int version;
+  final String? contentHash;
   final String? templateCode;
   final List<String> tags;
   final bool isPublic;
@@ -84,15 +86,17 @@ class SystemTemplateDefinition {
     required this.announcementBlueprints,
     required this.budgetBlueprints,
     required this.version,
-    required this.templateCode,
+    this.contentHash,
+    this.templateCode,
     required this.tags,
     required this.isPublic,
   });
 
-  static SystemTemplateDefinition fromJson(Map<String, dynamic> json) {
+  static SystemTemplateDefinition fromJson(Map<String, dynamic> json, {String? contentHash}) {
     final templateId = (json['templateId'] as String?)?.trim();
     final templateName = (json['templateName'] as String?)?.trim();
-    final category = _eventCategoryFromJsonValue(json['category']);
+    final categoryValue = json['category'];
+    final category = _eventCategoryFromJsonValue(categoryValue);
     final description = (json['description'] as String?)?.trim() ?? '';
     final defaultFields = (json['defaultFields'] is Map<String, dynamic>)
         ? (json['defaultFields'] as Map<String, dynamic>)
@@ -125,7 +129,7 @@ class SystemTemplateDefinition {
       throw const FormatException('System template is missing templateName');
     }
     if (category == null) {
-      throw FormatException('System template "$templateId" has invalid category');
+      throw FormatException('System template "$templateId" has invalid category: $categoryValue');
     }
 
     return SystemTemplateDefinition(
@@ -133,7 +137,7 @@ class SystemTemplateDefinition {
       templateName: templateName,
       category: category,
       description: description,
-      defaultFields: defaultFields,
+      defaultFields: {...defaultFields, if (contentHash != null) 'contentHash': contentHash},
       taskBlueprints: taskBlueprints,
       timelineBlueprints: timelineBlueprints,
       vendorBlueprints: vendorBlueprints,
@@ -145,6 +149,7 @@ class SystemTemplateDefinition {
       announcementBlueprints: announcementBlueprints,
       budgetBlueprints: budgetBlueprints,
       version: version,
+      contentHash: contentHash,
       templateCode: templateCode,
       tags: tags,
       isPublic: isPublic,

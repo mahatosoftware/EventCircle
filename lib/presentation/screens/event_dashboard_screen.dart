@@ -12,6 +12,10 @@ import '../../data/models/event_model.dart';
 import '../../data/models/template_model.dart';
 import '../../data/models/payment_model.dart';
 import '../../data/models/event_role_model.dart';
+import '../../data/models/event_module.dart';
+import 'package:uuid/uuid.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../providers/template_provider.dart';
 
 class EventDashboardScreen extends ConsumerStatefulWidget {
   final String eventId;
@@ -25,6 +29,9 @@ class EventDashboardScreen extends ConsumerStatefulWidget {
 class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
   final Stopwatch _firstLoadStopwatch = Stopwatch();
   bool _loggedFirstEvent = false;
+  bool _isSyncing = false;
+  String? _syncStatus;
+  bool _hasStartedSync = false;
 
   @override
   void initState() {
@@ -44,6 +51,10 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
 
     final event = eventAsync.value ?? widget.initialEvent;
     final dashboard = dashboardAsync.value;
+
+    if (event != null) {
+      _checkAndRunLazySync(event);
+    }
 
     if (eventAsync.hasError && event == null) {
       return Scaffold(
@@ -156,15 +167,282 @@ class _EventDashboardScreenState extends ConsumerState<EventDashboardScreen> {
             ],
           ),
         ),
-        body: TabBarView(
+        body: Stack(
           children: [
-            _buildOverviewTab(context, event, dashboard),
-            _buildLogisticsTab(context, enabledModules, dashboard),
-            _buildTransparencyTab(context, event, dashboard),
+            TabBarView(
+              children: [
+                _buildOverviewTab(context, event, dashboard),
+                _buildLogisticsTab(context, enabledModules, dashboard),
+                _buildTransparencyTab(context, event, dashboard),
+              ],
+            ),
+            if (_isSyncing) _buildSyncingOverlay(context),
           ],
         ),
       ),
     );
+  }
+
+  Widget _buildSyncingOverlay(BuildContext context) {
+    return Container(
+      color: Colors.white.withAlpha(220),
+      width: double.infinity,
+      height: double.infinity,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const CircularProgressIndicator(),
+            const SizedBox(height: 24),
+            const Text(
+              'Setting up your event...',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            if (_syncStatus != null) ...[
+              const SizedBox(height: 8),
+              Text(
+                _syncStatus!,
+                style: TextStyle(color: Colors.grey.shade600),
+              ),
+            ],
+            const SizedBox(height: 12),
+            const Text(
+              'This happens only on first open',
+              style: TextStyle(fontSize: 12, color: Colors.grey),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _checkAndRunLazySync(EventModel event) async {
+    if (_hasStartedSync) return;
+    _hasStartedSync = true;
+
+    if (event.templateId == null) return;
+
+    try {
+       // Check if ALREADY synced by looking for a marker
+       final syncMarker = await FirebaseFirestore.instance
+           .collection('events')
+           .doc(widget.eventId)
+           .collection('sync_metadata')
+           .doc('status')
+           .get();
+          
+       if (syncMarker.exists) return;
+
+       if (!mounted) return;
+       _runLazySync(event);
+    } catch (_) {
+       // If check fails, we reset so it can try again on next build
+       _hasStartedSync = false;
+    }
+  }
+
+  Future<void> _runLazySync(EventModel event) async {
+    if (!mounted) return;
+    setState(() {
+      _isSyncing = true;
+      _syncStatus = 'Fetching template...';
+    });
+
+    try {
+      final template = await ref.read(templateByIdProvider(event.templateId!).future);
+      if (template == null) {
+        throw Exception('Template not found');
+      }
+
+      await _importTemplateBlueprints(
+        db: FirebaseFirestore.instance,
+        eventId: widget.eventId,
+        template: template,
+        event: event,
+      );
+
+      // Successfully synced! Save the marker doc.
+      await FirebaseFirestore.instance
+          .collection('events')
+          .doc(widget.eventId)
+          .collection('sync_metadata')
+          .doc('status')
+          .set({
+            'syncedAt': FieldValue.serverTimestamp(),
+            'templateId': event.templateId,
+          });
+
+      if (mounted) {
+        setState(() {
+          _isSyncing = false;
+          _syncStatus = null;
+        });
+      }
+    } catch (e) {
+      debugPrint('EventDashboardScreen lazy sync failed: $e');
+      if (mounted) {
+        setState(() {
+          _isSyncing = false;
+          _syncStatus = null;
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to setup event blueprints: $e')),
+        );
+      }
+    }
+  }
+
+  Future<void> _commitBatch(
+    WriteBatch batch, {
+    required String label,
+  }) async {
+    debugPrint('EventDashboard: Committing batch ($label)...');
+    await batch.commit().timeout(const Duration(seconds: 45));
+    debugPrint('EventDashboard: Batch committed ($label).');
+  }
+
+  int _blueprintWriteCount(TemplateModel template) {
+    return template.taskBlueprints.length +
+        template.timelineBlueprints.length +
+        template.vendorBlueprints.length +
+        template.inventoryBlueprints.length +
+        template.roleBlueprints.length +
+        template.venueBlueprints.length +
+        template.ticketBlueprints.length +
+        template.customFieldBlueprints.length +
+        template.announcementBlueprints.length +
+        template.budgetBlueprints.length;
+  }
+
+  Future<void> _importTemplateBlueprints({
+    required FirebaseFirestore db,
+    required String eventId,
+    required TemplateModel template,
+    required EventModel event,
+  }) async {
+    final uuid = const Uuid();
+    final total = _blueprintWriteCount(template);
+    if (total == 0) return;
+
+    setState(() => _syncStatus = 'Preparing modules…');
+    
+    final actions = <void Function(WriteBatch batch)>[];
+    void queueWrite(CollectionReference col, String id, Map<String, dynamic> data) {
+      actions.add((batch) => batch.set(col.doc(id), data));
+    }
+
+    // Tasks
+    for (final task in template.taskBlueprints) {
+      final id = uuid.v4();
+      queueWrite(db.collection('tasks'), id, task.copyWith(id: id, eventId: eventId).toJson());
+    }
+    // Timeline
+    final baseDate = event.startDate ?? DateTime.now();
+    for (final item in template.timelineBlueprints) {
+      final id = uuid.v4();
+      
+      // Attempt to parse startTime from timeOrOffset if missing
+      DateTime? startTime = item.startTime;
+      if (startTime == null) {
+        try {
+          var raw = item.timeOrOffset.trim().toUpperCase();
+          // Ensure space before AM/PM if missing for common formats
+          if (RegExp(r'\d[AP]M$').hasMatch(raw)) {
+            raw = raw.replaceFirst(RegExp(r'([AP]M)$'), r' $1');
+          }
+
+          DateFormat format;
+          if (raw.contains(RegExp(r'[AP]M'))) {
+             format = DateFormat('hh:mm a');
+          } else {
+             format = DateFormat('HH:mm');
+          }
+          final parsed = format.parse(raw);
+          // Apply to the specific day
+          final itemDate = baseDate.add(Duration(days: (item.dayNumber - 1).clamp(0, 365)));
+          startTime = DateTime(itemDate.year, itemDate.month, itemDate.day, parsed.hour, parsed.minute);
+        } catch (_) {}
+      }
+
+      queueWrite(db.collection('events').doc(eventId).collection('timeline'), id, item.copyWith(
+        id: id, 
+        eventId: eventId,
+        startTime: startTime,
+      ).toJson());
+    }
+    // Vendors
+    for (final vendor in template.vendorBlueprints) {
+      final id = uuid.v4();
+      queueWrite(db.collection('events').doc(eventId).collection('vendors'), id, vendor.copyWith(id: id, eventId: eventId).toJson());
+    }
+    // Inventory
+    for (final item in template.inventoryBlueprints) {
+      final id = uuid.v4();
+      queueWrite(db.collection('events').doc(eventId).collection('inventory'), id, item.copyWith(id: id, eventId: eventId).toJson());
+    }
+    // Roles
+    for (final def in template.roleBlueprints) {
+      if (def.name.trim().toLowerCase() == 'owner') continue;
+      
+      final id = uuid.v4();
+      final role = EventRoleModel(
+        id: id,
+        eventId: eventId,
+        name: def.name,
+        description: def.description,
+        moduleAccess: def.moduleAccess,
+        userIds: const [],
+      );
+      queueWrite(db.collection('events').doc(eventId).collection('roles'), id, role.toJson());
+    }
+    // Venues
+    for (final venue in template.venueBlueprints) {
+      final id = uuid.v4();
+      queueWrite(db.collection('events').doc(eventId).collection('venues'), id, venue.copyWith(id: id, eventId: eventId).toJson());
+    }
+    // Tickets
+    for (final ticket in template.ticketBlueprints) {
+      final id = uuid.v4();
+      queueWrite(db.collection('events').doc(eventId).collection('tickets'), id, ticket.copyWith(id: id, eventId: eventId).toJson());
+    }
+    // Custom Fields
+    for (final field in template.customFieldBlueprints) {
+      final id = uuid.v4();
+      queueWrite(db.collection('events').doc(eventId).collection('customFields'), id, field.copyWith(id: id, eventId: eventId).toJson());
+    }
+    // Announcements
+    for (final announcement in template.announcementBlueprints) {
+      final id = uuid.v4();
+      queueWrite(db.collection('events').doc(eventId).collection('announcements'), id, announcement.copyWith(id: id, eventId: eventId, createdAt: DateTime.now()).toJson());
+    }
+    // Budget
+    for (final item in template.budgetBlueprints) {
+      final id = uuid.v4();
+      queueWrite(db.collection('events').doc(eventId).collection('budget'), id, item.copyWith(id: id, eventId: eventId).toJson());
+    }
+
+    const chunkSize = 300; 
+    final List<Future<void>> commitFutures = [];
+    int batchCount = (actions.length / chunkSize).ceil();
+    int finishedBatches = 0;
+
+    for (int i = 0; i < actions.length; i += chunkSize) {
+      final end = (i + chunkSize < actions.length) ? i + chunkSize : actions.length;
+      final chunk = actions.sublist(i, end);
+      final batch = db.batch();
+      for (final action in chunk) {
+        action(batch);
+      }
+      
+      final label = 'Batch ${(i ~/ chunkSize) + 1}/$batchCount';
+      commitFutures.add(_commitBatch(batch, label: label).then((_) {
+        finishedBatches++;
+        if (mounted) setState(() => _syncStatus = 'Setup $finishedBatches/$batchCount…');
+      }));
+    }
+
+    if (mounted) setState(() => _syncStatus = 'Committing ${commitFutures.length} batches…');
+    await Future.wait(commitFutures);
   }
 
   Widget _buildOverviewTab(

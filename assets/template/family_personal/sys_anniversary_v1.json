@@ -1,5 +1,6 @@
 {
    "schemaVersion" : 2,
+   "version" : 11,
    "templates" : [
       {
          "roleBlueprints" : [
@@ -174,7 +175,7 @@
             ],
             "contributionType" : "none"
          },
-         "version" : 2,
+         "version" : 3,
          "description" : "Celebrate years of togetherness with a special gathering or party.",
          "templateId" : "sys_anniversary_v1",
          "timelineBlueprints" : [

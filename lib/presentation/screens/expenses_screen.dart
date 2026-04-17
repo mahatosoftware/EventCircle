@@ -109,7 +109,7 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen> with SingleTick
                     child: expenses.isEmpty
                         ? _buildNoData(context, 'No expenses recorded yet', Icons.receipt_outlined)
                         : ListView.builder(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            padding: const EdgeInsets.fromLTRB(16, 0, 16, 80),
                             itemCount: expenses.length,
                             itemBuilder: (context, index) {
                               final users = ref.watch(eventUsersWithDetailsProvider(widget.eventId)).value;
@@ -155,7 +155,7 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen> with SingleTick
                     _buildBudgetSummary(budget),
                     Expanded(
                       child: ListView.builder(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 80),
                         itemCount: budget.length,
                         itemBuilder: (context, index) => _buildBudgetTile(context, budget[index], ref),
                       ),
@@ -220,7 +220,7 @@ class _ExpensesScreenState extends ConsumerState<ExpensesScreen> with SingleTick
     }
 
     return ListView(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
       children: [
         Text(
           'VOLUNTEER PAYOUTS',

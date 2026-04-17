@@ -1,6 +1,6 @@
 {
    "schemaVersion" : 2,
-   "version" : 4,
+   "version" : 11,
    "templates" : [
       {
          "templateName" : "Wedding Ceremony",
@@ -161,7 +161,8 @@
             }
          ],
          "category" : "personal",
-         "description" : "Comprehensive wedding planning from pre-wedding rituals to the main ceremony and reception.",
+         "version" : 4,
+         "description" : "Comprehensive planning for a wedding ceremony and reception.",
          "timelineBlueprints" : [
             {
                "id" : "sys_wedding_timeline_arrival",

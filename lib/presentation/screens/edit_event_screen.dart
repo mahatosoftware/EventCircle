@@ -47,24 +47,38 @@ class _EditEventScreenState extends ConsumerState<EditEventScreen> {
     _endDate = event.endDate;
   }
 
-  Future<void> _pickDateRange() async {
+  Future<void> _pickDateTime({required bool isStart}) async {
     final now = DateTime.now();
-    final firstDate = DateTime(2000);
-    final lastDate = DateTime(now.year + 5, 12, 31);
-
-    final range = await showDateRangePicker(
+    final initial = (isStart ? _startDate : _endDate) ?? now;
+    
+    final date = await showDatePicker(
       context: context,
-      firstDate: firstDate,
-      lastDate: lastDate,
-      initialDateRange: _startDate != null && _endDate != null
-          ? DateTimeRange(start: _startDate!, end: _endDate!)
-          : null,
+      initialDate: initial,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(now.year + 5),
     );
 
-    if (range == null) return;
+    if (date == null) return;
+
+    if (!mounted) return;
+    final time = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.fromDateTime(initial),
+    );
+
+    if (time == null) return;
+
     setState(() {
-      _startDate = range.start;
-      _endDate = range.end;
+      final combined = DateTime(date.year, date.month, date.day, time.hour, time.minute);
+      if (isStart) {
+        _startDate = combined;
+        // Auto-set end date to 2 hours after start if not set
+        if (_endDate == null) {
+          _endDate = combined.add(const Duration(hours: 2));
+        }
+      } else {
+        _endDate = combined;
+      }
     });
   }
 
@@ -185,35 +199,55 @@ class _EditEventScreenState extends ConsumerState<EditEventScreen> {
                   TextFormField(
                     controller: _locationController,
                     decoration: const InputDecoration(
-                      labelText: 'Venue',
+                      labelText: 'Venue (Optional)',
                       prefixIcon: Icon(Icons.location_on_outlined),
                     ),
+                  ),
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: _amountController,
+                    decoration: const InputDecoration(
+                      labelText: 'Amount',
+                      prefixIcon: Icon(Icons.currency_rupee),
+                    ),
+                    keyboardType: const TextInputType.numberWithOptions(decimal: true),
                     validator: (v) => v?.trim().isEmpty ?? true ? 'Required' : null,
                   ),
                   const SizedBox(height: 16),
                   Row(
                     children: [
                       Expanded(
-                        child: TextFormField(
-                          controller: _amountController,
-                          decoration: const InputDecoration(
-                            labelText: 'Amount',
-                            prefixIcon: Icon(Icons.currency_rupee),
+                        child: InkWell(
+                          onTap: () => _pickDateTime(isStart: true),
+                          child: InputDecorator(
+                            decoration: const InputDecoration(
+                              labelText: 'Starts',
+                              prefixIcon: Icon(Icons.calendar_today_outlined),
+                            ),
+                            child: Text(
+                              _startDate == null 
+                                ? 'Select Start' 
+                                : DateFormat('MMM dd, HH:mm').format(_startDate!),
+                              style: const TextStyle(fontSize: 13),
+                            ),
                           ),
-                          keyboardType: const TextInputType.numberWithOptions(decimal: true),
-                          validator: (v) => v?.trim().isEmpty ?? true ? 'Required' : null,
                         ),
                       ),
                       const SizedBox(width: 16),
                       Expanded(
                         child: InkWell(
-                          onTap: _pickDateRange,
+                          onTap: () => _pickDateTime(isStart: false),
                           child: InputDecorator(
                             decoration: const InputDecoration(
-                              labelText: 'Dates',
-                              prefixIcon: Icon(Icons.date_range_outlined),
+                              labelText: 'Ends',
+                              prefixIcon: Icon(Icons.event_available_outlined),
                             ),
-                            child: Text(dateText, style: const TextStyle(fontSize: 13)),
+                            child: Text(
+                              _endDate == null 
+                                ? 'Select End' 
+                                : DateFormat('MMM dd, HH:mm').format(_endDate!),
+                              style: const TextStyle(fontSize: 13),
+                            ),
                           ),
                         ),
                       ),
@@ -229,7 +263,7 @@ class _EditEventScreenState extends ConsumerState<EditEventScreen> {
                                 _startDate = null;
                                 _endDate = null;
                               }),
-                      child: const Text('Clear dates'),
+                      child: const Text('Clear schedule'),
                     ),
                   ),
                 ],

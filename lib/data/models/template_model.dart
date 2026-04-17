@@ -70,16 +70,68 @@ extension TemplateModelJson on TemplateModel {
   /// Firestore-safe JSON (deep serialization for blueprint lists).
   Map<String, dynamic> toDeepJson() {
     final data = toJson();
-    data['taskBlueprints'] = taskBlueprints.map((e) => e.toJson()).toList();
-    data['timelineBlueprints'] = timelineBlueprints.map((e) => e.toJson()).toList();
-    data['vendorBlueprints'] = vendorBlueprints.map((e) => e.toJson()).toList();
-    data['inventoryBlueprints'] = inventoryBlueprints.map((e) => e.toJson()).toList();
-    data['roleBlueprints'] = roleBlueprints.map((e) => e.toJson()).toList();
-    data['venueBlueprints'] = venueBlueprints.map((e) => e.toJson()).toList();
-    data['ticketBlueprints'] = ticketBlueprints.map((e) => e.toJson()).toList();
-    data['customFieldBlueprints'] = customFieldBlueprints.map((e) => e.toJson()).toList();
-    data['announcementBlueprints'] = announcementBlueprints.map((e) => e.toJson()).toList();
-    data['budgetBlueprints'] = budgetBlueprints.map((e) => e.toJson()).toList();
+    
+    // Safety wrap for all lists that require nested toJson
+    try {
+      data['taskBlueprints'] = taskBlueprints.map((e) {
+        try { return e.toJson(); } catch (_) { return null; }
+      }).whereType<Map<String, dynamic>>().toList();
+    } catch (_) { data['taskBlueprints'] = []; }
+
+    try {
+      data['timelineBlueprints'] = timelineBlueprints.map((e) {
+        try { return e.toJson(); } catch (_) { return null; }
+      }).whereType<Map<String, dynamic>>().toList();
+    } catch (_) { data['timelineBlueprints'] = []; }
+
+    try {
+      data['vendorBlueprints'] = vendorBlueprints.map((e) {
+        try { return e.toJson(); } catch (_) { return null; }
+      }).whereType<Map<String, dynamic>>().toList();
+    } catch (_) { data['vendorBlueprints'] = []; }
+
+    try {
+      data['inventoryBlueprints'] = inventoryBlueprints.map((e) {
+        try { return e.toJson(); } catch (_) { return null; }
+      }).whereType<Map<String, dynamic>>().toList();
+    } catch (_) { data['inventoryBlueprints'] = []; }
+
+    try {
+      data['roleBlueprints'] = roleBlueprints.map((e) {
+        try { return e.toJson(); } catch (_) { return null; }
+      }).whereType<Map<String, dynamic>>().toList();
+    } catch (_) { data['roleBlueprints'] = []; }
+
+    try {
+      data['venueBlueprints'] = venueBlueprints.map((e) {
+        try { return e.toJson(); } catch (_) { return null; }
+      }).whereType<Map<String, dynamic>>().toList();
+    } catch (_) { data['venueBlueprints'] = []; }
+
+    try {
+      data['ticketBlueprints'] = ticketBlueprints.map((e) {
+        try { return e.toJson(); } catch (_) { return null; }
+      }).whereType<Map<String, dynamic>>().toList();
+    } catch (_) { data['ticketBlueprints'] = []; }
+
+    try {
+      data['customFieldBlueprints'] = customFieldBlueprints.map((e) {
+        try { return e.toJson(); } catch (_) { return null; }
+      }).whereType<Map<String, dynamic>>().toList();
+    } catch (_) { data['customFieldBlueprints'] = []; }
+
+    try {
+      data['announcementBlueprints'] = announcementBlueprints.map((e) {
+        try { return e.toJson(); } catch (_) { return null; }
+      }).whereType<Map<String, dynamic>>().toList();
+    } catch (_) { data['announcementBlueprints'] = []; }
+
+    try {
+      data['budgetBlueprints'] = budgetBlueprints.map((e) {
+        try { return e.toJson(); } catch (_) { return null; }
+      }).whereType<Map<String, dynamic>>().toList();
+    } catch (_) { data['budgetBlueprints'] = []; }
+
     return data;
   }
 }

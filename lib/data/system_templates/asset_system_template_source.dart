@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
@@ -33,7 +34,14 @@ class AssetSystemTemplateSource implements SystemTemplateSource {
       for (final path in templatePaths) {
         try {
           final raw = await rootBundle.loadString(path);
-          final pack = SystemTemplatePack.fromJsonString(raw);
+          
+          // Calculate content hash for delta sync
+          final hash = sha256.convert(utf8.encode(raw)).toString();
+          
+          final decoded = jsonDecode(raw);
+          if (decoded is! Map<String, dynamic>) continue;
+
+          final pack = SystemTemplatePack.fromJson(decoded, contentHash: hash);
           
           allTemplates.addAll(pack.templates);
           

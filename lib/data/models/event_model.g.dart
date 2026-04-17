@@ -124,6 +124,9 @@ const _$EventCategoryEnumMap = {
   EventCategory.religiousAndSpiritual: 'religiousAndSpiritual',
   EventCategory.charityAndFundraising: 'charityAndFundraising',
   EventCategory.commercialAndExhibition: 'commercialAndExhibition',
+  EventCategory.travel: 'travel',
+  EventCategory.kids: 'kids',
+  EventCategory.personal: 'personal',
 };
 
 const _$ContributionTypeEnumMap = {

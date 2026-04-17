@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../models/template_model.dart';
@@ -35,5 +36,42 @@ class TemplateFirestoreDao {
   }) async {
     final data = template.toDeepJson()..addAll(additionalFields);
     await _col.doc(template.id).set(data, SetOptions(merge: true));
+  }
+
+  Future<List<String>> getSystemTemplateIds() async {
+    final snap = await _col.where('isSystem', isEqualTo: true).get();
+    return snap.docs.map((d) => d.id).toList();
+  }
+
+  Future<void> deleteTemplate(String templateId) async {
+    await _col.doc(templateId).delete();
+  }
+
+  Future<Map<String, String?>> getSystemTemplateHashes() async {
+    final snap = await _col.where('isSystem', isEqualTo: true).get();
+    return {
+      for (var doc in snap.docs) doc.id: doc.data()['contentHash'] as String?,
+    };
+  }
+
+  Future<List<TemplateModel>> getAllSystemTemplates() async {
+    final snap = await _col.where('isSystem', isEqualTo: true).get();
+    return snap.docs
+        .map((doc) => TemplateModel.fromJson({...doc.data(), 'id': doc.id}))
+        .toList();
+  }
+
+  Future<void> upsertTemplatesBatch(List<TemplateModel> templates, {Map<String, dynamic>? additionalFields}) async {
+    final batch = firestore.batch();
+    for (final template in templates) {
+      try {
+        final data = template.toDeepJson()..addAll(additionalFields ?? {});
+        batch.set(_col.doc(template.id), data, SetOptions(merge: true));
+      } catch (e) {
+        debugPrint('TemplateFirestoreDao: Failed to serialize template "${template.id}": $e');
+        rethrow;
+      }
+    }
+    await batch.commit();
   }
 }
